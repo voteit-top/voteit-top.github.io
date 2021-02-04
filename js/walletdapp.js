@@ -275,7 +275,7 @@
       {
          signIn:function()
          {
-           if(addr.length > 0)
+           if(this.addr.length > 0)
            {
               signinUser(this.addr, function(ret){
                 if(ret.result)
