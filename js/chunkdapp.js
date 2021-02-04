@@ -408,6 +408,11 @@ var carousel = new bootstrap.Carousel(myCarousel)
 			},
 		  }
 		})
+		
+  function claimReward()
+  {
+	  tongjiv.tjClaimReward();
+  }
   function itemName(itemId)
   {
     if(itemId < presetranks.length && presetranks[itemId])
