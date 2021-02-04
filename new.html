@@ -141,18 +141,18 @@
 	  </div>
 	</nav>
 
-	<div id="v_tongji" v-if="show" class="container">
+	<div class="container">
 	  <div class="row">
-		<div class="col-sm-4">
-			<div class="card text-white mb-3 tongjih" style="background-color:#4682B4">
+		<div  id="v_tongji" class="col-sm-4">
+			<div class="card text-white mb-1 tongjih" style="background-color:#4682B4">
 			  <div class="card-body">
-				<p class="card-title">Total Votes：{{totalvotes}}</p>
-				<p class="card-title">My Votes：{{myvotes}}</p>
-				<p class="card-title">Total Items：{{totalitems}}</p>
-				<p class="card-text">Total Rewards：{{totalrewards}} VOTEIT</p>
-        <p class="card-text">Rewards(1Vote/day): ~{{estimateReward}} VOTEIT</p>
-        
-				<p><span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></p>
+				<p class="fs-6 mb-1">Total Votes：{{totalvotes}}</p>
+				<p class="fs-6 mb-1">My Votes：{{myvotes}}</p>
+				<p class="fs-6 mb-1">Total Items：{{totalitems}}</p>
+				<p class="fs-6 mb-1">Total Rewards：{{totalrewards}} VOTEIT</p>
+				<p class="fs-6">Rewards(1Vote/day): ~{{estimateReward}} VOTEIT</p>
+                <button type="button" onclick="claimReward()" class="btn btn-primary">Claim Rewards</button>
+				<span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 				
 			  </div>
 			</div>		
@@ -187,7 +187,7 @@
 				  <div class="carousel-caption text-start">
 					
 					<h3>NO VOTE,NO REWARD</h3>
-					<p><a class="btn btn-lg btn-primary" href="#" v-on:click="tjClaimReward" role="button">CLAIM REWARDS</a></p>
+					<p><a class="btn btn-lg btn-primary" href="#" onclick="claimReward()" role="button">CLAIM REWARDS</a></p>
 				  </div>
 				</div>
 			  </div>
@@ -202,15 +202,11 @@
 			</a>
 		  </div>
      <nav>
-      <ul class="pagination pagination-sm">
+      <ul id="signindays" class="pagination pagination-sm">
         <li class="page-item disabled">
-        <span class="page-link">Signin days</span>
+        <span class="page-link">Signin rewards</span>
         </li>
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">1</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+<li class="page-link" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a href="" :title="'day'+(idx+1)">{{dr}}</a></li>
       </ul>
     </nav>
 		</div>
