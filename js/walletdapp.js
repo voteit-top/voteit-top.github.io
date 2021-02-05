@@ -268,7 +268,7 @@
 			{
       addr:'',
       total:0,
-      contDays:5,
+      contDays:0,
       alleventv:null,
       daysreward:[5,10,15,20,25,30,50,10,15,20,25,30,35,60,100],	   
 			},
