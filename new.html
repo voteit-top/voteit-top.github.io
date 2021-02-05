@@ -203,10 +203,10 @@
 		  </div>
      <nav>
       <ul id="signindays" class="pagination pagination-sm">
-        <li class="page-item disabled">
-        <span class="page-link"><a href="" v-on:click="claimSignReward">Signin rewards</a></span>
+        <li class="page-link">
+        <a href="" v-on:click="claimSignReward">Signin rewards</a>
         </li>
-<li class="page-link" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a href="" :title="'day'+(idx+1)">{{dr}}</a></li>
+	<li class="page-link" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a href="" :title="'day'+(idx+1)">{{dr}}</a></li>
       </ul>
     </nav>
 		</div>
