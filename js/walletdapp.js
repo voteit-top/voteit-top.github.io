@@ -312,7 +312,7 @@
 			}			
 		}		
 	}
-	async function claimSigninReward(){
+	async function claimSigninReward(callback){
 			if(!tronlinkWeb)
 			{
 				tronlinkNotConnected();
