@@ -268,13 +268,16 @@
 			{
       addr:'',
       total:0,
-      contDays:0,
+      contDays:5,
+      alleventv:null,
       daysreward:[5,10,15,20,25,30,50,10,15,20,25,30,35,60,100],	   
 			},
       methods:
       {
 		 claimSignReward:function()
 		 {
+			 if(alleventv)
+			      alleventv.pushWaitingEvent("Signin Rewards");
 			 claimSigninReward(function(ret){
 					if(ret.result)
 					{
