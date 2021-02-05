@@ -32,8 +32,6 @@
 					readUserOrders();
           let addr = tlweb.defaultAddress.base58
           if(addr){
-            vue_signdays.addr = addr;
-            vue_signdays.signIn();
             walletv.wallet = (addr.substring(0,5) + "..." + addr.substring(addr.length-5));
             var balobj = setInterval(async ()=>{
               if(!walletv.tlconnected)
