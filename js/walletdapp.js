@@ -32,8 +32,8 @@
 					readUserOrders();
           let addr = tlweb.defaultAddress.base58
           if(addr){
-	    vue_signdays.addr = addr;
-	    getUserSignInfo();		  
+			vue_signdays.addr = addr;
+			vue_signdays.getSignInfo();
             walletv.wallet = (addr.substring(0,5) + "..." + addr.substring(addr.length-5));
             var balobj = setInterval(async ()=>{
               if(!walletv.tlconnected)
@@ -278,17 +278,20 @@
 			 claimSigninReward(function(ret){
 					if(ret.result)
 					{
-					  getUserSignInfo(vue_signdays.addr, function(ret1)
-						{
-						  if(ret1.result)
-						  {
-							vue_signdays.contDays = ret1.retobj.contDays;
-						  }
-						});
-						
+						vue_signdays.getSignInfo();
 					}
 				})
 		 },
+		 getSignInfo:function()
+		 {
+		  getUserSignInfo(vue_signdays.addr, function(ret1)
+			{
+			  if(ret1.result)
+			  {
+				vue_signdays.contDays = big2numer(ret1.retobj.contDays);
+			  }
+			});			 
+		 }
       }
 	});
 		
