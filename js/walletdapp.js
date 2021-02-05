@@ -279,6 +279,7 @@
 			 if(alleventv)
 			      alleventv.pushWaitingEvent("Signin Rewards");
 			 claimSigninReward(function(ret){
+				       alleventv.pushClaimEvent(ret);
 					if(ret.result)
 					{
 						vue_signdays.getSignInfo();
