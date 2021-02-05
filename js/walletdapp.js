@@ -313,25 +313,32 @@
 		}		
 	}
 	async function claimSigninReward(){
-		try{
-			let contract = await localTronweb.contract().at(signincontract);
-			let ret = await contract.claimSigninReward().send({
-													feeLimit:100_000_000,
-													callValue:0,
-													tokenId:0,
-													tokenValue:0,
-												  shouldPollResponse:false});
-			console.log(ret);
-			if(callback)
+			if(!tronlinkWeb)
 			{
-			callback({result:true, retobj:ret});
+				tronlinkNotConnected();
 			}
-		}
-		catch(error)
-		{
-			if(callback)
+			else
 			{
-				callback({result:false, retobj:error});
+			try{
+				let contract = await tronlinkWeb.contract().at(signincontract);
+				let ret = await contract.claimSigninReward().send({
+														feeLimit:100_000_000,
+														callValue:0,
+														tokenId:0,
+														tokenValue:0,
+													  shouldPollResponse:false});
+				console.log(ret);
+				if(callback)
+				{
+				callback({result:true, retobj:ret});
+				}
+			}
+			catch(error)
+			{
+				if(callback)
+				{
+					callback({result:false, retobj:error});
+				}
 			}
 		}
 	}
