@@ -271,26 +271,24 @@
 			},
       methods:
       {
-         signIn:function()
-         {
-           if(this.addr.length > 0)
-           {
-              signinUser(this.addr, function(ret){
-                if(ret.result)
-                {
-                  getUserSignInfo(vue_signdays.addr, function(ret1)
-                    {
-                      if(ret1.result)
-                      {
-                        console.log(ret1.retobj);
-                      }
-                    });
-                }
-              });
-           }
-         }
+		 claimSignReward:function()
+		 {
+			 claimSigninReward(function(ret){
+					if(ret.result)
+					{
+					  getUserSignInfo(vue_signdays.addr, function(ret1)
+						{
+						  if(ret1.result)
+						  {
+							vue_signdays.contDays = ret1.retobj.contDays;
+						  }
+						});
+						
+					}
+				})
+		 },
       }
-		});
+	});
 		
 	async function signinUser(addr, callback){
 		try{
