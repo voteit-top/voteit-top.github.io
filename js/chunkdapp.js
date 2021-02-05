@@ -292,7 +292,8 @@ var carousel = new bootstrap.Carousel(myCarousel)
 			}
 		}
 		})
-  votemodalv.alleventv = alleventv;    
+  votemodalv.alleventv = alleventv;
+  vue_signdays.alleventv = alleventv;
 	var createmodalv = new Vue({
 		el: '#createModal',
 		data: {
