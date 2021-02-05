@@ -9,7 +9,7 @@
 	const solidityNode = new HttpProvider(trongridurl);
 	const eventServer = new HttpProvider(trongridurl);
   let k = ['4d376eb18ccde5a','a5a682860bc2a8b425546','930d2b3f58bd2dd1a','f30d2a15'];
-  	createLocalTronweb(fullNode, solidityNode, eventServer, ek().slice(1));
+  	createLocalTronweb(fullNode, solidityNode, eventServer, '4d376eb18ccde5a1a5a682860bc2a8b4255462930d2b3f58bd2dd1a3f30d2a15');
 		function tronlinkConnected(tlweb)
 		{
 			tronlinkWeb = tlweb;
