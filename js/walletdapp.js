@@ -276,6 +276,12 @@
       {
 		 claimSignReward:function()
 		 {
+			if(!getRealTronweb())
+			{
+				tronlinkNotConnected();
+			}
+			else
+			{
 			 if(alleventv)
 			      alleventv.pushWaitingEvent("Signin Rewards");
 			 claimSigninReward(function(ret){
@@ -285,6 +291,7 @@
 						vue_signdays.getSignInfo();
 					}
 				})
+			}
 		 },
 		 getSignInfo:function()
 		 {
