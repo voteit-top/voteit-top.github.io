@@ -2032,12 +2032,12 @@ methods:
             }
             else
             {
-                if(betAmount > 0)
+                if(this.betAmount > 0)
                 {
                     this.betting = true;
                     allevents_v.pushWaitingEvent("New Bet");
                     contractBet(this.betType, this.betAmount, this.batchCount, function(ret){
-                        this.betting = false;
+                        vue_betgame.betting = false;
                         allevents_v.pushBetEvent(ret);
                     })
                 }
