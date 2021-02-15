@@ -1941,7 +1941,33 @@ async function contractBet(betType, betAmount, batchcnt, callback)
     }
 
 }
-
+async function contractGetBetDetail(bidx, callback)
+{
+       if(tronlinkWeb)
+       {
+   			try{
+   				let contract = await tronlinkWeb.contract().at(betcontract);
+   				let addr = tronlinkWeb.defaultAddress.base58;
+   				let ret = await contract.getBetDetail(bidx).call({
+   														feeLimit:100_000_000,
+   														callValue:0,
+   														tokenId:'',
+   														tokenValue:0,
+   													  shouldPollResponse:false});
+   				if(callback)
+   				{
+   				callback({result:true, retobj:ret});
+   				}
+   			}
+   			catch(error)
+   			{
+   				if(callback)
+   				{
+   					callback({result:false, retobj:error});
+   				}
+   			}
+       }
+}
 async function contractGetMyBets(callback)
 {
     if(tronlinkWeb)
@@ -2042,6 +2068,19 @@ methods:
                     })
                 }
             }
+        },
+        addMyBet:function(bet)
+        {
+            if(!bet)
+                return;
+            for(let i=0;i<this.myBets.length;i++)
+            {
+                if(this.myBets[i].bn == bet.betBN)
+                {
+                    return;
+                }
+            }
+            this.myBets.push({bn:bet.betBN, amount:bet.betAmount, btype:betTypeToStr(bet.betType)});
         }
     }
 });
@@ -2125,7 +2164,13 @@ setInterval(async ()=>{
     vue_dex.tokenBalance = walletv.tokenBalance;
 
     contractGetMyBets(function(ret){
-            console.log(ret);
+            let i=0;
+            for(;i<ret.length;i++)
+            {
+                contractGetBetDetail(big2numer(ret[i]), function(ret1){
+                    vue_betgame.addMyBet(ret1);
+                })
+            }
             });
 		},3000);
 readBuyPrices();
