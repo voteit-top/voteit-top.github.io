@@ -2035,10 +2035,10 @@ methods:
                 if(this.betAmount > 0)
                 {
                     this.betting = true;
-                    allevents_v.pushWaitingEvent("New Bet");
+                    alleventv.pushWaitingEvent("New Bet");
                     contractBet(this.betType, this.betAmount, this.batchCount, function(ret){
-                        vue_betgame.betting = false;
-                        allevents_v.pushBetEvent(ret);
+                        this.betting = false;
+                        alleventv.pushBetEvent(ret);
                     })
                 }
             }
