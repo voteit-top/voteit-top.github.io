@@ -12,8 +12,8 @@
 	<script src="https://cdn.jsdelivr.net/gh/peterolson/BigInteger.js/BigInteger.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/tronweb@3.2.1/dist/TronWeb.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sunweb@1.1.0/dist/SunWeb.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteit@0.1.5/presetranks.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteitimgs@0.0.1/voteitdetails.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteit@0.1.7/presetranks.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteitimgs@0.0.2/voteitdetails.js"></script>
 	<script src="https://kit.fontawesome.com/f4c2f140bb.js" crossorigin="anonymous"></script>
 	<style>
 		.rankh
@@ -110,7 +110,7 @@
 		  <ul id="v_wallet" class="navbar-nav">
       <div class="rtdapp-stub text-muted"><img title="We are running in Dappchain.." alt="Tron DappChain Sun network" src="./img/dappchain.png"></div>
 		  <li class="nav-item">
-			  <a class="nav-link"  href="#dex" onclick="showDex()">VOTEIT/TRX EXCHANGE</a>
+			  <a class="nav-link"  href="#dex" onclick="showDex()">VOTEIT<i class="fas fa-exchange-alt"></i>TRX</a>
 			</li>	
         <li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="#" id="navbarhelper" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -151,7 +151,7 @@
 				<p class="fs-6 mb-1">Total Items：{{totalitems}}</p>
 				<p class="fs-6 mb-1">Total Rewards：{{totalrewards}}</p>
 				<p class="fs-6 mb-1">Rewards(1Vote/day): ~{{estimateReward}}</p>
-                <button type="button" onclick="claimReward()" class="btn btn-primary">Claim Rewards</button>
+                <button type="button" onclick="btnClaimReward()" class="btn btn-primary">Claim Rewards</button>
 				<span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>				
 			  </div>
 			</div>		
@@ -186,7 +186,7 @@
 				  <div class="carousel-caption text-start">
 					
 					<h3>NO VOTE,NO REWARD</h3>
-					<p><a class="btn btn-lg btn-primary" href="#" onclick="claimReward()" role="button">CLAIM REWARDS</a></p>
+					<p><a class="btn btn-lg btn-primary" href="#" onclick="btnClaimReward()" role="button">CLAIM REWARDS</a></p>
 				  </div>
 				</div>
 			  </div>
@@ -309,7 +309,7 @@
           <li class="list-group-item" v-for="(sorder,index) in sellorders"><div class="row"><div :id="index" onclick="clickSellItem(this)" class="col-6">{{sorder.dprice}}</div><div class="col-6">{{sorder.amount/1000000}}</div></div></li>
         </ul>
         <div class="row">
-          <div class="col-6"><p class="fs-5 text-warning">Last price:{{lastPrice/1000000}}</p></div><div class="col-6"><p class="fs-5 text-warning">Total orders:{{totalOrders}}</p></div></div>
+          <div class="col-6"><p class="fs-5 text-warning">Last price:{{lastPrice/1000000}}Trx</p></div><div class="col-6"><p class="fs-5 text-warning">Total orders:{{totalOrders}}</p></div></div>
         
         <ul class="list-group">
         <li class="list-group-item list-group-item-success"><div class="row"><div class="col-6">Buy Price(Trx)</div><div class="col-6">Amount(VOTEIT)</div></div></li>
@@ -317,7 +317,7 @@
         </ul>
       <div class="row">
       <div class="col-6">
-        <div class="mb-3 row">
+        <div>
           <label class="col-form-label text-info fs-5 nowrap">TRX balance:<span>{{trxBalance}}</span></label>
         </div>
         <div class="mb-3 row">
@@ -336,8 +336,7 @@
       </div>
       
       <div class="col-6">
-      
-        <div class="mb-3 row">
+        <div>
           <label class="col-form-label  text-info fs-5 nowrap">VOTEIT balance:<span>{{tokenBalance}}</span></label>
         </div>
         <div class="mb-3 row">
@@ -356,7 +355,97 @@
       </div>
       <p class="text-warning">{{indicator}}</p>
       </div>
-    </div>      
+    </div>
+        <div id="v_betgame" class="container vhide1">
+            <div class="row">
+                <div class="col-2">
+                    Block Number
+                </div>
+                <div class="col-6">
+                    Block ID
+                </div>
+                <div class="col-4">
+                    Result
+                </div>
+            </div>
+            <div class="row border-top" v-for="pbn in pastBN">
+                <div class="col-2">
+                    {{pbn.bn}}
+                </div>
+                <div class="col-6">
+                    {{pbn.bid}}
+                </div>
+                <div class="col-4">
+                    {{pbn.result}}
+                </div>
+            </div>
+            <div class="row border">
+                <div class="text-primary col-2">
+                    {{blockNumber}}
+                </div>
+                <div class="text-primary col-6">
+                    {{"......"+blockID.slice(-35)}}
+                </div>
+                <div class="text-primary col-4">
+                    {{result}}
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <label class="col-form-label  text-info fs-5 nowrap">VOTEIT balance:<span>{{tokenBalance}}</span></label>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Bet Amount:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" v-model="betAmount">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Bet Type:</label>
+                        <div class="col-sm-8">
+                        <select id="betTypeselect" v-model="betTypeSelected" class="form-select" aria-label="Default Bet Type">
+                            <option v-for='item in betTypes' :value="item.id">{{item.name}}</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Batch</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" v-model="batchCount">
+                        </div>
+                    </div>
+                    <div  class="text-center"><button class="btn btn-danger mb-3" v-on:click="bet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-4">
+                            Block Number
+                        </div>
+                        <div class="col-4">
+                            Amount
+                        </div>
+                        <div class="col-4">
+                            Bet
+                        </div>
+                    </div>
+                    <div class="row" v-for="mb in myBets">
+                        <div class="col-3">
+                            {{mb.bn}}
+                        </div>
+                        <div class="col-3">
+                            {{mb.amount}}
+                        </div>
+                        <div class="col-3">
+                            {{mb.btype}}
+                        </div>
+                        <div class="col-3">
+                            {{mb.result}}
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
     </div>
     <div id="allevents_v" class="col-sm-3">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -536,10 +625,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/contractdapp.js"></script>
-<script src="./js/walletdapp.js"></script>
-<script src="./js/itemdetails.js"></script>
-<script src="./js/chunkdapp.js"></script>
+<script src="./js/chunkall.js?v=211"></script>
 <script>
     
 </script>
