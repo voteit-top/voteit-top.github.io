@@ -1923,7 +1923,7 @@ async function contractBet(betType, betAmount, batchcnt, callback)
 
 }
 
-async function contractGetMyBets()
+async function contractGetMyBets(callback)
 {
     if(tronlinkWeb)
     {
