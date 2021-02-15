@@ -1474,6 +1474,25 @@ function showItem(id)
 				this.myEvents.unshift(evt);
 				this.switchMineTab();	
 			},
+			pushBetEvent:function(amount, btype, ret)
+			{
+			  this.waiting = false;
+			  let evt = {};
+			  evt.name = 'New bet '+betTypeToStr(btype);
+			  evt.param2 = amount;
+			  evt.error = !ret.result;
+				if(ret.result)
+					{
+						evt.details = "check transaction";
+						evt.tranUrl = 'https://dappchain.tronscan.io/#/transaction/'+ret.retobj;
+					}
+				else
+					{
+						evt.details = ret.retobj;
+					}
+				this.myEvents.unshift(evt);
+				this.switchMineTab();
+			},
 			pushVoteEvent:function(name, amount, ret)
 			{
 				this.waiting = false;
@@ -2000,9 +2019,42 @@ data:
     betType:0,
     totalBet:0,
     totalAmount:0,
-    totalWin:0
-}
+    totalWin:0,
+    tokenBalance:0,
+},
+methods:
+    {
+        confirmBet:function()
+        {
+            if(!getRealTronweb())
+            {
+                tronlinkNotConnected();
+            }
+            else
+            {
+                if(betAmount > 0)
+                {
+                    this.betting = true;
+                    allevents_v.pushWaitingEvent("New Bet");
+                    contractBet(this.betType, this.betAmount, this.batchCount, function(ret){
+                        this.betting = false;
+                        allevents_v.pushBetEvent(ret);
+                    })
+                }
+            }
+        }
+    }
 });
+
+function betTypeToStr(btype)
+{
+    for(let i=0;i<vue_betgame.betTypes.length;i++)
+    {
+        if(btype == vue_betgame.betTypes[i].id)
+            return vue_betgame.betTypes[i].name;
+    }
+    return '';
+}
 function getBlockResult(bid)
 {
     let result ="";
