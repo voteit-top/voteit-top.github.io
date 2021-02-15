@@ -2036,7 +2036,7 @@ methods:
                 {
                     this.betting = true;
                     alleventv.pushWaitingEvent("New Bet");
-                    contractBet(this.betType, this.betAmount, this.batchCount, function(ret){
+                    contractBet(this.betTypeSelected, this.betAmount, this.batchCount, function(ret){
                         vue_betgame.betting = false;
                         alleventv.pushBetEvent(vue_betgame.betType, vue_betgame.betAmount, ret);
                     })
