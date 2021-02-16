@@ -1274,14 +1274,15 @@ function showItem(id)
 		vue_itemdetail.googleurl = encodeURI('https://www.google.com/search?q='+vue_itemdetail.name);
 		vue_itemdetail.wikiurl = encodeURI('https://en.wikipedia.org/wiki/'+vue_itemdetail.name); 
 		vue_itemdetail.show = true;
-    vue_itemdetail.desc ='';
-    vue_itemdetail.imgs = [];
-    vue_itemdetail.originals=[];
-    
-    showEle('v_ranks', false);
-    showEle('voteitdex',false);
-    showEle('v_itemdetail',true);
-    alleventv.mode = 2;
+        vue_itemdetail.desc ='';
+        vue_itemdetail.imgs = [];
+        vue_itemdetail.originals=[];
+
+        showEle('v_ranks', false);
+        showEle('voteitdex',false);
+        showEle('v_betgame', false);
+        showEle('v_itemdetail',true);
+        alleventv.mode = 2;
 		if(rankItemDetails[id])
 		{
 			vue_itemdetail.desc = rankItemDetails[id].desc;
@@ -2658,10 +2659,11 @@ function readSellPrices()
 	  let ic = urltail.indexOf('cate=');
 	  if(ic != -1)
 	  {
-      alleventv.mode = 1;
-		  showEle('v_ranks', true);
-      showEle('voteitdex',false);
-      showEle('v_itemdetail',false);
+          alleventv.mode = 1;
+          showEle('v_ranks', true);
+          showEle('voteitdex',false);
+          showEle('v_itemdetail',false);
+          showEle('v_betgame',false);
       
 		  vue_itemdetail.show = false;
 		  createRanksOfCate(Number(urltail.substr(ic+5)));
@@ -2675,30 +2677,47 @@ function readSellPrices()
 		  }
 		  else
 		  {
-        ic = urltail.indexOf('dex');
-        if(ic != -1)
-        {
-          showDex();
-        }
-        else
-        {
-        alleventv.mode = 1;
-        showEle('v_ranks', true);
-        showEle('voteitdex',false);
-        showEle('v_itemdetail',false);
-			  createRanksOfCate(1);
-        }
+            ic = urltail.indexOf('dex');
+            if(ic != -1)
+            {
+              showDex();
+            }
+            else
+            {
+            ic = urltail.indexOf('bet');
+                if(ic != -1)
+                {
+                showBet();
+                }
+                else
+                {
+                alleventv.mode = 1;
+                showEle('v_ranks', true);
+                showEle('voteitdex',false);
+                showEle('v_itemdetail',false);
+                showEle('v_betgame',false);
+                createRanksOfCate(1);
+                }
+            }
 		  }
 	  }		
 	}
 window.onpopstate = function(event) {
 	routeByHash();
 };
+function showBet()
+{
+    showEle('v_betgame',true);
+    showEle('voteitdex',false);
+    showEle('v_ranks',false);
+    showEle('v_itemdetail',false);
+}
 function showDex()
 {
   alleventv.mode =3;
   alleventv.switchSideTab();
   showEle('voteitdex',true);
+  showEle('v_betgame',false);
   showEle('v_ranks',false);
   showEle('v_itemdetail',false);
 }
