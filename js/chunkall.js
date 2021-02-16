@@ -2081,7 +2081,21 @@ methods:
                 }
             }
             this.myBets.push({bn:bet.betBN, amount:bet.betAmount, btype:betTypeToStr(bet.betType)});
+        },
+        updateMyBets:function(curBN)
+        {
+            this.myBets.sort(function(a,b){return a.bn-b.bn});
+            let len = this.myBets.length;
+            for(let i=len-1;i>=0;i--)
+            {
+                if((this.myBets[i].bn + 256) < curBN)
+                {
+                   this.myBets.pop();
+                }
+            }
+
         }
+
     }
 });
 
@@ -2158,17 +2172,22 @@ setInterval(async ()=>{
                      vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
                   }
                 })
+            vue_betgame.updateMyBets(bn);
             }
 	    });
     vue_dex.trxBalance = walletv.trxBalance;
     vue_dex.tokenBalance = walletv.tokenBalance;
 
     contractGetMyBets(function(ret){
+            if(!ret.result)
+                return;
+            let obj = ret.retobj;
             let i=0;
-            for(;i<ret.length;i++)
+            for(;i<obj.length;i++)
             {
-                contractGetBetDetail(big2numer(ret[i]), function(ret1){
-                    vue_betgame.addMyBet(ret1);
+                contractGetBetDetail(big2numer(obj[i]), function(ret1){
+                    if(ret1.result)
+                        vue_betgame.addMyBet(ret1.retobj);
                 })
             }
             });
