@@ -2087,7 +2087,7 @@ methods:
                     return;
                 }
             }
-            this.myBets.push({bn:big2numer(bet.betBN), amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),win:false});
+            this.myBets.push({bn:big2numer(bet.betBN), amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
         },
         updateMyBets:function(curBN)
         {
@@ -2113,6 +2113,7 @@ methods:
             {
                 if(this.myBets[i].bn == bn)
                 {
+                    this.myBets[i].result = result;
                     if((this.myBets[i].btype & result) == this.myBets[i].btype)
                     {
                         this.myBets[i].win = true;
@@ -2137,11 +2138,11 @@ function betTypeToStr(btype)
 function result2str(result)
 {
     let str ="";
-    if(result & 1 == 1)
+    if((result & 1) == 1)
     {
         str += "ODD";
     }
-    else
+    else if((result & 2) == 2)
     {
         str += "EVEN";
     }
