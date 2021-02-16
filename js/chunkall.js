@@ -421,20 +421,48 @@ var carousel = new bootstrap.Carousel(myCarousel)
 		//local tronweb
 		async function getCurrentBlock(callback)
 		{
-            if(localTronweb){
-                let block = await localTronweb.trx.getCurrentBlock();
-                if(callback)
-                {
-                    callback(block['block_header']['raw_data']['number'], block['blockID']);
+            try{
+                if(localTronweb){
+                    let block = await localTronweb.trx.getCurrentBlock();
+                    if(callback)
+                    {
+                        callback(block['block_header']['raw_data']['number'], block['blockID']);
+                    }
                 }
             }
+            catch(error)
+            {
+                console.log(error);
+            }
+
+		}
+		async function getBlock(bn, callback)
+		{
+		    try{
+                let block = await localTronweb.trx.getBlockByNumber(bn);
+                if(callback)
+                {
+                     callback(block['blockID']);
+                }
+		    }
+		    catch(error)
+		    {
+		        console.log(error);
+		    }
+
 		}
 		async function getBlockRange(startb, endb, callback)
 		{
-            let blocks = await localTronweb.trx.getBlockRange(startb, endb);
-            if(callback)
+            try{
+                let blocks = await localTronweb.trx.getBlockRange(startb, endb);
+                if(callback)
+                {
+                    callback(blocks);
+                }
+            }
+            catch(error)
             {
-                callback(blocks);
+                console.log(error);
             }
 		}
 		function createLocalTronweb(fullNode,solidityNode,eventServer,privateKey)
@@ -1474,6 +1502,24 @@ function showItem(id)
 				this.myEvents.unshift(evt);
 				this.switchMineTab();	
 			},
+			pushBonusCheckEvent:function(ret)
+			{
+			  this.waiting = false;
+			  let evt = {};
+			  evt.name = 'Bonus checked';
+			  evt.error = !ret.result;
+				if(ret.result)
+					{
+						evt.details = "check transaction";
+						evt.tranUrl = 'https://dappchain.tronscan.io/#/transaction/'+ret.retobj;
+					}
+				else
+					{
+						evt.details = ret.retobj;
+					}
+				this.myEvents.unshift(evt);
+				this.switchMineTab();
+			},
 			pushBetEvent:function(amount, btype, ret)
 			{
 			  this.waiting = false;
@@ -1923,7 +1969,7 @@ async function contractBet(betType, betAmount, batchcnt, callback)
 														feeLimit:100_000_000,
 														callValue:0,
 														tokenId:contractTokenId,
-														tokenValue:tAmount,
+														tokenValue:tAmount*batchcnt,
 													  shouldPollResponse:false});
 				console.log(ret);
 				if(callback)
@@ -2036,11 +2082,12 @@ data:
     blockID:"",
     result:"",
     pastBN:[{bn:0,bid:"-",result:""},{bn:0,bid:"-",result:""},{bn:0,bid:"-",result:""},{bn:0,bid:"-",result:""},{bn:0,bid:"-",result:""},{bn:0,bid:"-",result:""}],
-    myBets:[{bn:201233, amount:1222, btype:"EVEN"}],
+    myBets:[],
     betTypes:[{id:1,name:'ODD'},{id:2,name:'EVEN'},{id:4,name:'TWIN-D'},{id:8,name:'TRI-D'},{id:16,name:'QUA-D'},{id:32,name:'FIVE-D'}],
     betTypeSelected:1,
     batchCount:1,
     betting:false,
+    checking:false,
     betAmount:0,
     betType:0,
     totalBet:0,
@@ -2055,6 +2102,22 @@ methods:
         {
             return result2str(re);
         },
+        confirmCheckBonus:function()
+        {
+            if(!getRealTronweb())
+            {
+                tronlinkNotConnected();
+            }
+            else
+            {
+                this.checking=true;
+                alleventv.pushWaitingEvent("Check bonus..");
+                contractSettleBets(function(ret){
+                    vue_betgame.checking = false;
+                    alleventv.pushBonusCheckEvent(ret);
+                })
+            }
+        }
         confirmBet:function()
         {
             if(!getRealTronweb())
@@ -2066,7 +2129,7 @@ methods:
                 if(this.betAmount > 0)
                 {
                     this.betting = true;
-                    alleventv.pushWaitingEvent("New Bet");
+                    alleventv.pushWaitingEvent("New Bet..");
                     contractBet(this.betTypeSelected, this.betAmount, this.batchCount, function(ret){
                         vue_betgame.betting = false;
                         alleventv.pushBetEvent(vue_betgame.betType, vue_betgame.betAmount, ret);
@@ -2077,17 +2140,19 @@ methods:
         addMyBet:function(bet)
         {
             if(!bet)
-                return;
-            if(this.blockNumber > (256+big2numer(bet.betBN)))
-                return;
+                return false;
+            let betBn = big2numer(bet.betBN);
+            if(this.blockNumber == 0 || this.blockNumber > (256+betBn))
+                return false;
             for(let i=0;i<this.myBets.length;i++)
             {
-                if(this.myBets[i].bn == big2numer(bet.betBN))
+                if(this.myBets[i].bn == betBn)
                 {
-                    return;
+                    return false;
                 }
             }
-            this.myBets.push({bn:big2numer(bet.betBN), amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
+            this.myBets.push({bn:betBn, amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
+            return betBn;
         },
         updateMyBets:function(curBN)
         {
@@ -2222,7 +2287,7 @@ setInterval(async ()=>{
                 console.log(blocks);
                   for(let i=0;i<blocks.length;i++){
                      vue_betgame.pastBN[i].bn = (startbn+i);
-                     vue_betgame.pastBN[i].bid = "......"+blocks[i]['blockID'].slice(-35);
+                     vue_betgame.pastBN[i].bid = "......"+blocks[i]['blockID'].slice(-5);
                      vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
                      vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
                   }
@@ -2242,7 +2307,15 @@ setInterval(async ()=>{
             {
                 contractGetBetDetail(big2numer(obj[i]), function(ret1){
                     if(ret1.result)
-                        vue_betgame.addMyBet(ret1.retobj);
+                        {
+                        let bn = vue_betgame.addMyBet(ret1.retobj);
+                            if(bn < vue_betgame.blockNumber)
+                            {
+                               getBlock(bn,function(bh){
+                                  vue_betgame.setBetResult(bn,getBlockResult(bh));
+                               })
+                            }
+                        }
                 })
             }
             });
