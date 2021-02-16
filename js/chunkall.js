@@ -2048,6 +2048,7 @@ data:
     totalWin:0,
     tokenBalance:0,
 },
+
 methods:
     {
         confirmBet:function()
@@ -2080,11 +2081,11 @@ methods:
                     return;
                 }
             }
-            this.myBets.push({bn:bet.betBN, amount:bet.betAmount, btype:betTypeToStr(bet.betType)});
+            this.myBets.push({bn:bet.betBN, amount:bet.betAmount, btype:bet.betType, btypeStr:betTypeToStr(bet.betType),win:false});
         },
         updateMyBets:function(curBN)
         {
-            this.myBets.sort(function(a,b){return a.bn-b.bn});
+            this.myBets.sort(function(a,b){return b.bn-a.bn});
             let len = this.myBets.length;
             for(let i=len-1;i>=0;i--)
             {
@@ -2092,8 +2093,27 @@ methods:
                 {
                    this.myBets.pop();
                 }
+                else
+                {
+                break;
+                }
             }
 
+        },
+        setBetResult:function(bn, result)
+        {
+            let len = this.myBets.length;
+            for(let i=len-1;i>=0;i--)
+            {
+                if(this.myBets[i].bn == bn)
+                {
+                    if((this.myBets[i].btype & result) == this.myBets[i].btype)
+                    {
+                        this.myBets[i].win = true;
+                    }
+                    break;
+                }
+            }
         }
 
     }
@@ -2108,28 +2128,54 @@ function betTypeToStr(btype)
     }
     return '';
 }
+function result2str(result)
+{
+    let str ="";
+    if(result & 1 == 1)
+    {
+        str += "ODD";
+    }
+    else
+    {
+        str += "EVEN";
+    }
+    if((result & 4) == 4)
+    {
+        str += ",TWIN-D";
+    }else if((result & 8) == 8)
+    {
+        str += ",TRI-D";
+    }else if((result & 16) == 16)
+    {
+        str += ",QUA-D";
+    }else if((result & 32) == 32)
+    {
+        str += ",FIVE-D";
+    }
+    return str;
+}
 function getBlockResult(bid)
 {
-    let result ="";
+    let result =0;
     let last5bid = bid.slice(-5);
     let lastDigit = new bigInt(last5bid.slice(-1), 16).toJSNumber();
     if(lastDigit & 1 == 1)
     {
-        result += "ODD";
+        result += 1;
     }
     else
     {
-        result += "EVEN";
+        result += 2;
     }
     if(last5bid[4] == last5bid[3])
     {
-        result += ",TWIN-D";
+        result += 4;
         if(last5bid[2] == last5bid[3]){
-            result += ",TRI-D";
+            result += 8;
             if(last5bid[2] == last5bid[1]){
-                result += ",QUA-D";
+                result += 16;
                 if(last5bid[0] == last5bid[1]){
-                result += ",FIVE-D";
+                result += 32;
                 }
             }
         }
@@ -2164,12 +2210,14 @@ setInterval(async ()=>{
             //update bn and id;
             let startbn = bn - 6;
             let endbn = bn-1;
+            vue_betgame.setBetResult(bn, vue_betgame.result);
             getBlockRange(startbn, endbn, function(blocks){
                 console.log(blocks);
                   for(let i=0;i<blocks.length;i++){
                      vue_betgame.pastBN[i].bn = (startbn+i);
                      vue_betgame.pastBN[i].bid = "......"+blocks[i]['blockID'].slice(-35);
                      vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
+                     vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
                   }
                 })
             vue_betgame.updateMyBets(bn);
