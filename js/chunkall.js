@@ -1952,7 +1952,7 @@ function showItem(id)
     }
   }
   )
-let betcontract = "TVnC2Vi2kGhTcvatcB7wtHFVgj9aUe7zL7";
+let betcontract = "TDpqKgUHdx9X2LtXC1ZQuMx2cz2WGeD35Q";
 
 async function contractBet(betType, betAmount, batchcnt, callback)
 {
