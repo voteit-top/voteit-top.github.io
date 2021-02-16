@@ -384,7 +384,7 @@
                     {{blockNumber}}
                 </div>
                 <div class="text-primary col-6">
-                    {{"......"+blockID.slice(-35)}}
+                    {{"......"+blockID.slice(-5)}}
                 </div>
                 <div class="text-primary col-4">
                     {{resultStr(result)}}
@@ -438,15 +438,16 @@
                             <a :href="'https://dappchain.tronscan.org/#/block/'+mb.bn" target="_blank">{{mb.bn}}</a>
                         </div>
                         <div class="col-3">
-                            {{mb.amount}}
+                            {{mb.amount/1000000}}
                         </div>
                         <div class="col-3">
                             {{mb.btypeStr}}
                         </div>
                         <div class="col-3">
-                            {{resultStr(mb.result)}}<i v-if="mb.win" class="text-success fas fa-smile-beam"></i>
+                            {{resultStr(mb.result)}}<i v-if="mb.win" class="text-warning fas fa-smile-beam"></i>
                         </div>
                     </div>
+                    <div  class="text-center"><button class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
                 </div>
               </div>
         </div>
@@ -629,7 +630,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=222"></script>
+<script src="./js/chunkall.js?v=223"></script>
 <script>
     
 </script>
