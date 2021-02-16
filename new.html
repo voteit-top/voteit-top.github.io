@@ -370,7 +370,7 @@
             </div>
             <div class="row border-top" v-for="pbn in pastBN">
                 <div class="col-2">
-                    {{pbn.bn}}
+                    <a :href="'https://dappchain.tronscan.org/#/block/'+pbn.bn" target="_blank">{{pbn.bn}}</a>
                 </div>
                 <div class="col-6">
                     {{pbn.bid}}
@@ -421,7 +421,7 @@
                     <label class="col-form-label  text-info fs-5">My active bets</label>
                     <div class="row">
                         <div class="col-3">
-                            Block Number
+                            Block
                         </div>
                         <div class="col-3">
                             Amount
@@ -435,7 +435,7 @@
                     </div>
                     <div class="row" v-for="mb in myBets">
                         <div class="col-3">
-                            {{mb.bn}}
+                            <a :href="'https://dappchain.tronscan.org/#/block/'+mb.bn" target="_blank">{{mb.bn}}</a>
                         </div>
                         <div class="col-3">
                             {{mb.amount}}
@@ -629,7 +629,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=221"></script>
+<script src="./js/chunkall.js?v=222"></script>
 <script>
     
 </script>
