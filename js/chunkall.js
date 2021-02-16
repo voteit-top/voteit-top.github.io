@@ -2078,6 +2078,8 @@ methods:
         {
             if(!bet)
                 return;
+            if(this.blockNumber > (256+big2numer(bet.betBN)))
+                return;
             for(let i=0;i<this.myBets.length;i++)
             {
                 if(this.myBets[i].bn == big2numer(bet.betBN))
