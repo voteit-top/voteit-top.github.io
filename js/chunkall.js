@@ -2051,6 +2051,10 @@ data:
 
 methods:
     {
+        resultStr:function(re)
+        {
+            return result2str(re);
+        },
         confirmBet:function()
         {
             if(!getRealTronweb())
