@@ -376,7 +376,7 @@
                     {{pbn.bid}}
                 </div>
                 <div class="col-4">
-                    {{pbn.result}}
+                    {{resultStr(pbn.result)}}
                 </div>
             </div>
             <div class="row border">
@@ -437,7 +437,7 @@
                             {{mb.amount}}
                         </div>
                         <div class="col-3">
-                            {{mb.btype}}
+                            {{mb.btypeStr}}
                         </div>
                         <div class="col-3">
                             {{resultStr(mb.result)}}<i v-if="mb.win" class="fas fa-smile-beam"></i>
@@ -625,7 +625,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=218"></script>
+<script src="./js/chunkall.js?v=219"></script>
 <script>
     
 </script>
