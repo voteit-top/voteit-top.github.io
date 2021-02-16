@@ -2080,12 +2080,12 @@ methods:
                 return;
             for(let i=0;i<this.myBets.length;i++)
             {
-                if(this.myBets[i].bn == bet.betBN)
+                if(this.myBets[i].bn == big2numer(bet.betBN))
                 {
                     return;
                 }
             }
-            this.myBets.push({bn:bet.betBN, amount:bet.betAmount, btype:bet.betType, btypeStr:betTypeToStr(bet.betType),win:false});
+            this.myBets.push({bn:big2numer(bet.betBN), amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),win:false});
         },
         updateMyBets:function(curBN)
         {
