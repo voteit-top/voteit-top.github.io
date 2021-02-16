@@ -2117,7 +2117,7 @@ methods:
                     alleventv.pushBonusCheckEvent(ret);
                 })
             }
-        }
+        },
         confirmBet:function()
         {
             if(!getRealTronweb())
