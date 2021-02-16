@@ -418,15 +418,19 @@
                     <div  class="text-center"><button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
                 </div>
                 <div class="col-sm-6">
+                    <label class="col-form-label  text-info fs-5">My active bets</label>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             Block Number
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             Amount
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             Bet
+                        </div>
+                        <div class="col-3">
+                            Result
                         </div>
                     </div>
                     <div class="row" v-for="mb in myBets">
@@ -625,7 +629,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=219"></script>
+<script src="./js/chunkall.js?v=220"></script>
 <script>
     
 </script>
