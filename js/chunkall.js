@@ -2095,6 +2095,9 @@ data:
     totalAmount:0,
     totalWin:0,
     tokenBalance:0,
+    maxMyBetBn:0,
+    bonusReady:false,
+    bonusBlinkObj:null,
 },
 
 methods:
@@ -2152,7 +2155,11 @@ methods:
                     return false;
                 }
             }
-            this.myBets.push({bn:betBn, amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
+            if(betBn > maxMyBetBn)
+            {
+                maxMyBetBn = betBn;
+            }
+            this.myBets.unshift({bn:betBn, amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
             return betBn;
         },
         updateMyBets:function(curBN)
@@ -2169,6 +2176,30 @@ methods:
                 {
                 break;
                 }
+            }
+            if(curBN > maxMyBetBn && len > 0)
+            {
+                if(!this.bonusBlinkObj)
+                {
+                    this.bonusBlinkObj = setInterval(async ()=>{
+                                        let e=document.getElementById("btnClaimBonus");
+                                        if(vue_betgame.bonusReady)
+                                        {
+                                            e.classList.add("border");
+                                            e.classList.add("border-warning");
+                                        }
+                                        else
+                                        {
+                                            e.classList.remove("border");
+                                            e.classList.remove("border-warning");
+                                        }
+                                        vue_betgame.bonusReady = !vue_betgame.bonusReady;
+                                    },1000);
+                }
+            }
+            else{
+
+                clearInterval(this.bonusBlinkObj);
             }
 
         },
@@ -2304,6 +2335,10 @@ setInterval(async ()=>{
                 return;
             let obj = ret.retobj;
             let i=0;
+            if(obj.length != vue_betgame.myBets.length)
+            {
+                vue_betgame.myBets.splice(0, vue_betgame.myBets.length);
+            }
             for(;i<obj.length;i++)
             {
                 contractGetBetDetail(big2numer(obj[i]), function(ret1){
