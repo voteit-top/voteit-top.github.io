@@ -12,7 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/gh/peterolson/BigInteger.js/BigInteger.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/tronweb@3.2.1/dist/TronWeb.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sunweb@1.1.0/dist/SunWeb.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteit@0.1.7/presetranks.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteit@0.1.8/presetranks.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteitimgs@0.0.2/voteitdetails.js"></script>
 	<script src="https://kit.fontawesome.com/f4c2f140bb.js" crossorigin="anonymous"></script>
 	<style>
@@ -419,7 +419,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <a href="https://github.com/voteit-top/voteit/wiki/bet" target="_blank">Help</a>
+                        <div class="col-sm-4"><a class="text-muted" href="https://github.com/voteit-top/voteit/wiki/bet" target="_blank">Help</a></div>
                         <div class="col-sm-8">
                             <button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
                         </div>
@@ -455,7 +455,7 @@
                             {{resultStr(mb.result)}}<i v-if="mb.win" class="text-warning fas fa-smile-beam"></i>
                         </div>
                     </div>
-                    <div  class="text-center"><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="refreshMyBets">Refresh<span v-if="isRefreshing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                    <div  class="text-center"><button class="btn btn-info mb-3" v-on:click="refreshMyBets">Refresh<span v-if="isRefreshing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span>...</span><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
                     <p class="text-info">After bet, when the button starts to blink, you have to click to claim bonus.</p>
                 </div>
               </div>
