@@ -2155,9 +2155,9 @@ methods:
                     return false;
                 }
             }
-            if(betBn > maxMyBetBn)
+            if(betBn > this.maxMyBetBn)
             {
-                maxMyBetBn = betBn;
+                this.maxMyBetBn = betBn;
             }
             this.myBets.unshift({bn:betBn, amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
             return betBn;
@@ -2177,7 +2177,7 @@ methods:
                 break;
                 }
             }
-            if(curBN > maxMyBetBn && len > 0)
+            if(curBN > this.maxMyBetBn && len > 0)
             {
                 if(!this.bonusBlinkObj)
                 {
