@@ -2186,11 +2186,13 @@ methods:
                                         if(vue_betgame.bonusReady)
                                         {
                                             e.classList.add("border");
+                                            e.classList.add("border-5");
                                             e.classList.add("border-warning");
                                         }
                                         else
                                         {
                                             e.classList.remove("border");
+                                            e.classList.remove("border-5");
                                             e.classList.remove("border-warning");
                                         }
                                         vue_betgame.bonusReady = !vue_betgame.bonusReady;
@@ -2200,6 +2202,7 @@ methods:
             else{
 
                 clearInterval(this.bonusBlinkObj);
+                this.bonusBlinkObj = null;
             }
 
         },
