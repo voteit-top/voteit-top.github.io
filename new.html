@@ -90,7 +90,7 @@
 		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			<li class="nav-item">
 			  <a class="nav-link shand" id="nav_defaultlink" href="#cate=1" >Country/Region</a>
-			</li>		  	
+			</li>
 			<li class="nav-item">
 			  <a class="nav-link shand" href="#cate=3" >City</a>
 			</li>
@@ -102,10 +102,10 @@
 			</li>
 			<li class="nav-item">
 			  <a class="nav-link shand" href="#cate=2" >Person</a>
-			</li>      
+			</li>
 			<li class="nav-item">
 			  <a class="nav-link shand"  href="#cate=6" >Crypto</a>
-			</li>				
+			</li>
 		  </ul>
 		  <ul id="v_wallet" class="navbar-nav">
       <div class="rtdapp-stub text-muted"><img title="We are running in Dappchain.." alt="Tron DappChain Sun network" src="./img/dappchain.png"></div>
@@ -114,13 +114,13 @@
               </li>
 		  <li class="nav-item">
 			  <a class="nav-link"  href="#dex" onclick="showDex()">VOTEIT<i class="fas fa-exchange-alt"></i>TRX</a>
-			</li>	
+			</li>
         <li class="nav-item dropdown">
 			  <a class="nav-link dropdown-toggle" href="#" id="navbarhelper" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 				Help
 			  </a>
 			  <ul class="dropdown-menu" aria-labelledby="navbarhelper">
-			  
+
 			  <li><a class="dropdown-item" href="./res/VOTEIT-whitepaper.pdf">VOTEIT whitepaper</a></li>
 				<li><a class="dropdown-item" href="#"  onclick="requestVOTEIT()">VOTEIT Airdrop</a></li>
 				<li><a class="dropdown-item" href="#dex">Buy/Sell VOTEIT</a></li>
@@ -131,7 +131,7 @@
 				<span v-if="tlconneting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{wallet}}
 			  </a>
 			  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			  
+
 			  <li><a class="dropdown-item" href="#" v-on:click="connectWallet" v-if="!tlconnected">{{ConnectWallet}}</a></li>
 				<li><a class="dropdown-item" href="#"><span class="badge bg-info text-dark">TRX</span>{{trxBalance}}</a></li>
 				<li><a class="dropdown-item" href="#"><span class="badge bg-info text-dark">VOTEIT</span>{{tokenBalance}}</a></li>
@@ -155,9 +155,9 @@
 				<p class="fs-6 mb-1">Total Rewards：{{totalrewards}}</p>
 				<p class="fs-6 mb-1">Rewards(1Vote/day): ~{{estimateReward}}</p>
                 <button type="button" onclick="btnClaimReward()" class="btn btn-primary">Claim Rewards</button>
-				<span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>				
+				<span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 			  </div>
-			</div>		
+			</div>
 		</div>
 		<div class="col-sm-8">
 		  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -187,7 +187,7 @@
 
 				<div class="container">
 				  <div class="carousel-caption text-start">
-					
+
 					<h3>NO VOTE,NO REWARD</h3>
 					<p><a class="btn btn-lg btn-primary" href="#" onclick="btnClaimReward()" role="button">CLAIM REWARDS</a></p>
 				  </div>
@@ -211,7 +211,7 @@
         <li class="page-item" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a class="page-link" href="#" :title="'day'+(idx+1)">{{dr}}</a></li>
         <li class="page-item">
         <a class="page-link" href="https://github.com/voteit-top/voteit/wiki/FAQ#8-sign-in-rewards">?</a>
-        </li>	      
+        </li>
       </ul>
     </nav>
 		</div>
@@ -223,23 +223,23 @@
       <div  id='v_ranks' class="container">
         <div class="input-group mb-3">
           <span class="input-group-text bg-info">{{cateName}} rankings</span>
-          
+
           <input type="text" class="form-control" id="rankFilterInput" placeholder="Search for names.." onkeyup="rankFilter()">
           <span><a class="btn btn-lg btn-primary" href="#" onclick="createNew()" title="creator can get rewards per block" role="button">Create</a></span>
         </div>
         <div class="row align-items-center">
         <div class="border-bottom col-2 rankh">
-          <b>Rank</b> 
+          <b>Rank</b>
         </div>
         <div class="border-bottom col-4 rankh">
           <b>Name</b>
         </div>
         <div class="border-bottom col-2 rankh">
-          <b>Votes</b>  
+          <b>Votes</b>
         </div>
         <div class="border-bottom text-center col-4 rankh">
           <b>Operate</b>
-        </div>	
+        </div>
         </div>
         <rankitem v-for="(item,index) in items" v-bind:rank="index+1+(curPage-1)*pageSize" v-bind:cid="item.cateId" v-bind:gsbase="gbase" v-bind:rkitem="item" v-bind:rkid="item.id" v-bind:voting="item.voting" v-bind:unvoting="item.unvoting"></rankitem>
 
@@ -263,7 +263,7 @@
         <tr>
           <th scope="row" class="text-muted">Ranking</th>
           <td class="fs-4 text-success" >{{rank}}</td>
-          
+
         </tr>
         <tr>
           <th scope="row" class="text-muted">Votes</th>
@@ -303,17 +303,17 @@
         <div v-if="(imgs.length>0)" class="text-center">
         <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
         <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-        </div>       
+        </div>
       </div>
       <div  id="voteitdex" class="vhide">
         <ul class="list-group">
           <li class="list-group-item list-group-item-secondary"><div class="row"><div class="col-6">Sell Price(Trx)</div><div class="col-6">Amount(VOTEIT)</div></div></li>
-          
+
           <li class="list-group-item" v-for="(sorder,index) in sellorders"><div class="row"><div :id="index" onclick="clickSellItem(this)" class="col-6">{{sorder.dprice}}</div><div class="col-6">{{sorder.amount/1000000}}</div></div></li>
         </ul>
         <div class="row">
           <div class="col-6"><p class="fs-5 text-warning">Last price:{{lastPrice/1000000}}Trx</p></div><div class="col-6"><p class="fs-5 text-warning">Total orders:{{totalOrders}}</p></div></div>
-        
+
         <ul class="list-group">
         <li class="list-group-item list-group-item-success"><div class="row"><div class="col-6">Buy Price(Trx)</div><div class="col-6">Amount(VOTEIT)</div></div></li>
         <li class="list-group-item" v-for="(border,index) in buyorders"><div class="row"><div :id="index" onclick="clickBuyItem(this)" class="col-6">{{border.dprice}}</div><div class="col-6">{{border.amount/1000000}}</div></div></li>
@@ -337,7 +337,7 @@
         </div>
         <div class="text-center"><button class="btn btn-secondary mb-3" v-on:click="buyVoteit">Buy VOTEIT<span v-if="buying" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
       </div>
-      
+
       <div class="col-6">
         <div>
           <label class="col-form-label  text-info fs-5 nowrap">VOTEIT balance:<span>{{tokenBalance}}</span></label>
@@ -399,7 +399,7 @@
                 <div class="col-sm-6">
                     <label class="col-form-label  text-info fs-5 nowrap">VOTEIT balance:<span>{{tokenBalance}}</span></label>
                     <div class="mb-3 row">
-                        <label class="col-sm-4 col-form-label">Bet Amount:</label>
+                        <label class="col-sm-4 col-form-label" title="VOTEIT">Bet Amount:</label>
                         <div class="col-sm-8">
                             <input class="form-control" v-model="betAmount">
                         </div>
@@ -413,12 +413,12 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-4 col-form-label">Batch</label>
+                        <label class="col-sm-4 col-form-label" title="multiple bet">Batch:</label>
                         <div class="col-sm-8">
                             <input class="form-control" v-model="batchCount">
                         </div>
                     </div>
-                    <div  class="text-center"><button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                    <div  class="text-center"><button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span><a href="https://github.com/voteit-top/voteit/wiki/bet" target="_blank">Help</a></span></div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-form-label  text-info fs-5">My active bets</label>
@@ -451,6 +451,7 @@
                         </div>
                     </div>
                     <div  class="text-center"><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                    <p>After bet, when the button starts to blink, you have to click to claim bonus.</p>
                 </div>
               </div>
         </div>
@@ -465,18 +466,18 @@
         </li>
         <li class="nav-item" role="presentation">
           <a id="link_myEvents" class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">My events</a>
-        </li>	  
+        </li>
       </ul>
       <div  class="tab-content" >
-        <div class="tab-pane fade fade" id="supporters" role="tabpanel" aria-labelledby="supporters-tab">	  
+        <div class="tab-pane fade fade" id="supporters" role="tabpanel" aria-labelledby="supporters-tab">
           <ul class="list-group" v-if="mode==2">
             <li class="list-group-item" v-for="v in voters">{{v.addr}}<span class="text-red">({{v.vote}})</span></li>
           </ul>
           <ul class="list-group" v-if="mode==3">
             <li class="list-group-item" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger" v-on:click="cancelOrder(o.oid)">Cancel</button></li>
           </ul>
-        </div>  
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">	  
+        </div>
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <ul class="list-group">
         <li class="list-group-item" v-for="evt in events"><a :title="evt.details" :href="evt.tranId">{{evt.name}} {{evt.param2}}</a></li>
         </ul>
@@ -484,13 +485,13 @@
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
           <ul class="list-group">
             <li class="list-group-item" v-if="waiting">{{waitingText}}<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></li>
-            <li class="list-group-item" v-for="evt in myEvents"><a data-toggle="tooltip" data-placement="right" v-bind:title="evt.details" :href="evt.tranUrl">{{evt.name}} {{evt.param2}}</a><span class="badge bg-danger" v-if="evt.error">error</span><span class="badge bg-success" v-if="!evt.error">OK</span></li>
+            <li class="list-group-item" v-for="evt in myEvents"><a data-toggle="tooltip" data-placement="right" v-bind:title="evt.details" :href="evt.tranUrl" target="_blank">{{evt.name}} {{evt.param2}}</a><span class="badge bg-danger" v-if="evt.error">error</span><span class="badge bg-success" v-if="!evt.error">OK</span></li>
           </ul>
         </div>
       </div>
 
 	</div>
-  </div>	
+  </div>
 </div>
 
 <div class="modal" id="voteitModal" tabindex="-1">
@@ -570,7 +571,7 @@
         </form>
       </div>
       <div class="modal-footer">
-		<span class="text-info">{{indicator}}</span> 
+		<span class="text-info">{{indicator}}</span>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" v-on:click="confirmVote">{{title}}</button>
       </div>
@@ -586,7 +587,7 @@
       </div>
       <div class="modal-body">
         <form>
-          <div class="mb-3">          	
+          <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Trx balance:{{trxBalance}}</label>
           </div>
           <div class="mb-3">
@@ -600,7 +601,7 @@
         </form>
       </div>
       <div class="modal-footer">
-		<span class="text-info">{{indicator}}</span> 
+		<span class="text-info">{{indicator}}</span>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" v-on:click="confirmCreate">Create</button>
       </div>
@@ -633,9 +634,9 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=241"></script>
+<script src="./js/chunkall.js?v=238"></script>
 <script>
-    
+
 </script>
   </body>
 </html>
