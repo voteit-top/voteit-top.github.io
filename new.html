@@ -365,7 +365,7 @@
                     Block Number
                 </div>
                 <div class="col-6">
-                    Block ID
+                    L5BID
                 </div>
                 <div class="col-4">
                     Result
@@ -387,7 +387,7 @@
                     {{blockNumber}}
                 </div>
                 <div class="text-primary col-6">
-                    {{"......"+blockID.slice(-5)}}
+                    {{blockID.slice(-5)}}
                 </div>
                 <div class="text-primary col-4">
                     {{resultStr(result)}}
@@ -418,7 +418,12 @@
                             <input class="form-control" v-model="batchCount">
                         </div>
                     </div>
-                    <div  class="text-center"><button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span><a href="https://github.com/voteit-top/voteit/wiki/bet" target="_blank">Help</a></span></div>
+                    <div class="mb-3 row">
+                        <a href="https://github.com/voteit-top/voteit/wiki/bet" target="_blank">Help</a>
+                        <div class="col-sm-8">
+                            <button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-form-label  text-info fs-5">My active bets</label>
@@ -450,8 +455,8 @@
                             {{resultStr(mb.result)}}<i v-if="mb.win" class="text-warning fas fa-smile-beam"></i>
                         </div>
                     </div>
-                    <div  class="text-center"><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
-                    <p>After bet, when the button starts to blink, you have to click to claim bonus.</p>
+                    <div  class="text-center"><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="refresh">Refresh<span v-if="isRefreshing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                    <p class="text-info">After bet, when the button starts to blink, you have to click to claim bonus.</p>
                 </div>
               </div>
         </div>
@@ -634,7 +639,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=243"></script>
+<script src="./js/chunkall.js?v=248"></script>
 <script>
 
 </script>
