@@ -1953,7 +1953,7 @@ function showItem(id)
     }
   }
   )
-let betcontract = "TGm2tXdWdQJawJBRM1xJTAuyktvvHtgMbw";
+let betcontract = "TXPV4HTikmAzA1SDbGPKrs652KFzy1wnDp";
 
 async function contractBet(betType, betAmount, batchcnt, callback)
 {
@@ -2185,13 +2185,13 @@ methods:
                                         let e=document.getElementById("btnClaimBonus");
                                         if(vue_betgame.bonusReady)
                                         {
-                                            e.classList.add("border");
+                                            e.classList.add("border-bottom");
                                             e.classList.add("border-5");
                                             e.classList.add("border-warning");
                                         }
                                         else
                                         {
-                                            e.classList.remove("border");
+                                            e.classList.remove("border-bottom");
                                             e.classList.remove("border-5");
                                             e.classList.remove("border-warning");
                                         }
