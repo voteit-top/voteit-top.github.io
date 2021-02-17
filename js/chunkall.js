@@ -2098,6 +2098,7 @@ data:
     maxMyBetBn:0,
     bonusReady:false,
     bonusBlinkObj:null,
+    isRefreshing:false,
 },
 
 methods:
@@ -2119,6 +2120,7 @@ methods:
                 contractSettleBets(function(ret){
                     vue_betgame.checking = false;
                     alleventv.pushBonusCheckEvent(ret);
+                    vue_betgame.refreshMyBets();
                 })
             }
         },
@@ -2137,6 +2139,7 @@ methods:
                     contractBet(this.betTypeSelected, this.betAmount, this.batchCount, function(ret){
                         vue_betgame.betting = false;
                         alleventv.pushBetEvent(vue_betgame.betType, vue_betgame.betAmount, ret);
+                        vue_betgame.refreshMyBets();
                     })
                 }
             }
@@ -2196,15 +2199,50 @@ methods:
                                             e.classList.remove("border-warning");
                                         }
                                         vue_betgame.bonusReady = !vue_betgame.bonusReady;
-                                    },1000);
+                                    },500);
                 }
             }
             else{
 
                 clearInterval(this.bonusBlinkObj);
                 this.bonusBlinkObj = null;
+                let e=document.getElementById("btnClaimBonus");
+                {
+                    e.classList.remove("border-bottom");
+                    e.classList.remove("border-5");
+                    e.classList.remove("border-warning");
+                }
             }
 
+        },
+        refreshMyBets:function(){
+            this.isRefreshing = true;
+            contractGetMyBets(function(ret){
+                    vue_betgame.isRefreshing = false;
+                    if(!ret.result)
+                        return;
+                    let obj = ret.retobj;
+                    let i=0;
+                    if(obj.length != vue_betgame.myBets.length)
+                    {
+                        vue_betgame.myBets.splice(0, vue_betgame.myBets.length);
+                    }
+                    for(;i<obj.length;i++)
+                    {
+                        contractGetBetDetail(big2numer(obj[i]), function(ret1){
+                            if(ret1.result)
+                                {
+                                let bn = vue_betgame.addMyBet(ret1.retobj);
+                                    if(bn < vue_betgame.blockNumber)
+                                    {
+                                       getBlock(bn,function(bh){
+                                          vue_betgame.setBetResult(bn,getBlockResult(bh));
+                                       })
+                                    }
+                                }
+                        })
+                    }
+            });
         },
         setBetResult:function(bn, result)
         {
@@ -2322,7 +2360,7 @@ setInterval(async ()=>{
                 console.log(blocks);
                   for(let i=0;i<blocks.length;i++){
                      vue_betgame.pastBN[i].bn = (startbn+i);
-                     vue_betgame.pastBN[i].bid = "......"+blocks[i]['blockID'].slice(-5);
+                     vue_betgame.pastBN[i].bid = blocks[i]['blockID'].slice(-5);
                      vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
                      vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
                   }
@@ -2332,32 +2370,8 @@ setInterval(async ()=>{
 	    });
     vue_dex.trxBalance = walletv.trxBalance;
     vue_dex.tokenBalance = walletv.tokenBalance;
+    vue_betgame.tokenBalance = walletv.tokenBalance;
 
-    contractGetMyBets(function(ret){
-            if(!ret.result)
-                return;
-            let obj = ret.retobj;
-            let i=0;
-            if(obj.length != vue_betgame.myBets.length)
-            {
-                vue_betgame.myBets.splice(0, vue_betgame.myBets.length);
-            }
-            for(;i<obj.length;i++)
-            {
-                contractGetBetDetail(big2numer(obj[i]), function(ret1){
-                    if(ret1.result)
-                        {
-                        let bn = vue_betgame.addMyBet(ret1.retobj);
-                            if(bn < vue_betgame.blockNumber)
-                            {
-                               getBlock(bn,function(bh){
-                                  vue_betgame.setBetResult(bn,getBlockResult(bh));
-                               })
-                            }
-                        }
-                })
-            }
-            });
 		},3000);
 readBuyPrices();
 readSellPrices();
