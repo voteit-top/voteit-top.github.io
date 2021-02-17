@@ -1309,7 +1309,7 @@ function showItem(id)
 	let maxItemId = presetranks.length-1;
 	const PAGESIZE = 55;
   const EVENTCNT = 30;
-  var eventStart = 699;
+  var eventStart = 569;
 	var voteitModalObj;
 	var createModalObj;
 	var alleventv = new Vue({
@@ -2180,9 +2180,9 @@ methods:
                 break;
                 }
             }
-            if(curBN > this.maxMyBetBn && len > 0)
+            if(curBN >= this.maxMyBetBn)
             {
-                if(!this.bonusBlinkObj)
+                if(!this.bonusBlinkObj && len > 0)
                 {
                     this.bonusBlinkObj = setInterval(async ()=>{
                                         let e=document.getElementById("btnClaimBonus");
@@ -2202,8 +2202,8 @@ methods:
                                     },500);
                 }
             }
-            else{
-
+            if(len == 0)
+            {
                 clearInterval(this.bonusBlinkObj);
                 this.bonusBlinkObj = null;
                 let e=document.getElementById("btnClaimBonus");
