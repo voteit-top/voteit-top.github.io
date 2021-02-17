@@ -2188,29 +2188,18 @@ methods:
                                         let e=document.getElementById("btnClaimBonus");
                                         if(vue_betgame.bonusReady)
                                         {
-                                            e.classList.add("border-bottom");
-                                            e.classList.add("border-5");
+                                            e.classList.add("border");
+                                            e.classList.add("border-3");
                                             e.classList.add("border-warning");
                                         }
                                         else
                                         {
-                                            e.classList.remove("border-bottom");
-                                            e.classList.remove("border-5");
+                                            e.classList.remove("border");
+                                            e.classList.remove("border-3");
                                             e.classList.remove("border-warning");
                                         }
                                         vue_betgame.bonusReady = !vue_betgame.bonusReady;
                                     },500);
-                }
-            }
-            if(len == 0)
-            {
-                clearInterval(this.bonusBlinkObj);
-                this.bonusBlinkObj = null;
-                let e=document.getElementById("btnClaimBonus");
-                {
-                    e.classList.remove("border-bottom");
-                    e.classList.remove("border-5");
-                    e.classList.remove("border-warning");
                 }
             }
 
@@ -2241,6 +2230,18 @@ methods:
                                     }
                                 }
                         })
+                    }
+
+                    if(obj.length == 0)
+                    {
+                        clearInterval(this.bonusBlinkObj);
+                        this.bonusBlinkObj = null;
+                        let e=document.getElementById("btnClaimBonus");
+                        {
+                            e.classList.remove("border");
+                            e.classList.remove("border-3");
+                            e.classList.remove("border-warning");
+                        }
                     }
             });
         },
