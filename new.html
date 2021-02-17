@@ -110,7 +110,7 @@
 		  <ul id="v_wallet" class="navbar-nav">
       <div class="rtdapp-stub text-muted"><img title="We are running in Dappchain.." alt="Tron DappChain Sun network" src="./img/dappchain.png"></div>
               <li class="nav-item">
-                  <a class="nav-link"  href="#bet" onclick="showBet()">BLOCK BET<i class="fas fa-exchange-alt"></i></a>
+                  <a class="nav-link"  href="#bet" onclick="showBet()">BET<i class="text-danger fas fa-dice"></i></a>
               </li>
 		  <li class="nav-item">
 			  <a class="nav-link"  href="#dex" onclick="showDex()">VOTEIT<i class="fas fa-exchange-alt"></i>TRX</a>
@@ -450,7 +450,7 @@
                             {{resultStr(mb.result)}}<i v-if="mb.win" class="text-warning fas fa-smile-beam"></i>
                         </div>
                     </div>
-                    <div  class="text-center"><button class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                    <div  class="text-center"><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
                 </div>
               </div>
         </div>
@@ -633,7 +633,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.js?v=235"></script>
+<script src="./js/chunkall.js?v=238"></script>
 <script>
     
 </script>
