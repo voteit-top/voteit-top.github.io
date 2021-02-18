@@ -2100,7 +2100,33 @@ data:
     bonusBlinkObj:null,
     isRefreshing:false,
 },
-
+computed:{
+    indicate:function()
+    {
+        if(Number(this.batchCount) < 1 || Number(this.batchCount) > 5)
+        {
+            return "Batch: 1 to 5";
+        }
+        else if(Number(this.betAmount) < 0)
+        {
+            return "Amount should > 0";
+        }
+        else
+        {
+            switch(this.betTypeSelected)
+            {
+                case 2:
+                case 1: return "1:2";
+                case 4: return "1:16";
+                case 8: return "1:256";
+                case 16: return "1:4096";
+                case 32: return "1:65536";
+                return "pls select type";
+            }
+        }
+        return "15s to show result";
+    }
+},
 methods:
     {
         resultStr:function(re)
