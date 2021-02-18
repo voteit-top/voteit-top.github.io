@@ -2138,7 +2138,7 @@ methods:
                     alleventv.pushWaitingEvent("New Bet..");
                     contractBet(this.betTypeSelected, this.betAmount, this.batchCount, function(ret){
                         vue_betgame.betting = false;
-                        alleventv.pushBetEvent(vue_betgame.betType, vue_betgame.betAmount, ret);
+                        alleventv.pushBetEvent(vue_betgame.betAmount, vue_betgame.betTypeSelected,  ret);
                         vue_betgame.refreshMyBets();
                     })
                 }
