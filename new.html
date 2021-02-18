@@ -30,7 +30,7 @@
     }
       .bd-placeholder-img {
         font-size: 1.125rem;
-		
+
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
@@ -356,7 +356,7 @@
         </div>
         <div  class="text-center"><button class="btn btn-danger mb-3" v-on:click="sellVoteit">Sell VOTEIT<span v-if="selling" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
       </div>
-      <p class="text-warning">{{indicator}}</p>
+      <p class="text-warning">{{indicate}}</p>
       </div>
     </div>
         <div id="v_betgame" class="container vhide">
@@ -421,7 +421,7 @@
                     <div class="mb-3 row">
                         <div class="col-sm-4"><a class="text-muted" href="https://github.com/voteit-top/voteit/wiki/bet" target="_blank">Help</a></div>
                         <div class="col-sm-8">
-                            <button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                            <button class="btn btn-danger mb-3" v-on:click="confirmBet">Bet<span v-if="betting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span class="text-muted">{{indicator}}</span>
                         </div>
                     </div>
                 </div>
