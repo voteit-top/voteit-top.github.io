@@ -2189,13 +2189,13 @@ methods:
                                         if(vue_betgame.bonusReady)
                                         {
                                             e.classList.add("border");
-                                            e.classList.add("border-3");
+                                            e.classList.add("border-4");
                                             e.classList.add("border-warning");
                                         }
                                         else
                                         {
                                             e.classList.remove("border");
-                                            e.classList.remove("border-3");
+                                            e.classList.remove("border-4");
                                             e.classList.remove("border-warning");
                                         }
                                         vue_betgame.bonusReady = !vue_betgame.bonusReady;
@@ -2235,11 +2235,11 @@ methods:
                     if(obj.length == 0)
                     {
                         clearInterval(vue_betgame.bonusBlinkObj);
-                        vue.bonusBlinkObj = null;
+                        vue_betgame.bonusBlinkObj = null;
                         let e=document.getElementById("btnClaimBonus");
                         {
                             e.classList.remove("border");
-                            e.classList.remove("border-3");
+                            e.classList.remove("border-4");
                             e.classList.remove("border-warning");
                         }
                     }
