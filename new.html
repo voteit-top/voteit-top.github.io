@@ -364,7 +364,7 @@
                 <div class="col-2">
                     Block Number
                 </div>
-                <div class="col-6">
+                <div title="Last 5 characters of block ID" class="col-6">
                     L5BID
                 </div>
                 <div class="col-4">
@@ -455,8 +455,8 @@
                             {{resultStr(mb.result)}}<i v-if="mb.win" class="text-warning fas fa-smile-beam"></i>
                         </div>
                     </div>
-                    <div  class="text-center"><button class="btn btn-info mb-3" v-on:click="refreshMyBets">Refresh<span v-if="isRefreshing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span>...</span><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
-                    <p class="text-info">After bet, when the button starts to blink, you have to click to claim bonus.</p>
+                    <div  class="text-center"><button class="btn btn-info mb-3" v-on:click="refreshMyBets">Refresh<span v-if="isRefreshing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span>&nbsp;&nbsp;</span><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
+                    <p class="text-info">After bet, when the button beats, you have to click to claim bonus.</p>
                 </div>
               </div>
         </div>
