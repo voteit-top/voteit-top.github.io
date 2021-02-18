@@ -2234,8 +2234,8 @@ methods:
 
                     if(obj.length == 0)
                     {
-                        clearInterval(this.bonusBlinkObj);
-                        this.bonusBlinkObj = null;
+                        clearInterval(vue_betgame.bonusBlinkObj);
+                        vue.bonusBlinkObj = null;
                         let e=document.getElementById("btnClaimBonus");
                         {
                             e.classList.remove("border");
