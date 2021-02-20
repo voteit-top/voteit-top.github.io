@@ -1,6 +1,6 @@
 (function(){
 	var xmlns = "http://www.w3.org/2000/svg";
-	var avatar =""
+	var avatar ="https://svgsilh.com/svg/48200.svg"
 	var radius = [
 		(window.innerHeight * .58) / 2,
 		(window.innerHeight * .72) / 2,
@@ -99,8 +99,7 @@
 		
 		document.querySelector('.image').style.width = avatarSize + "px";
 		document.querySelector('.image').style.height = avatarSize + "px";
-		document.querySelector('.image').style.background = "url("+avatar+") no-repeat center center";
-		document.querySelector('.image').style.backgroundSize = "cover";
+		document.querySelector('.image').src=avatar;
 		
 		document.querySelector('.f-anim1').style.width = flareSize + "px";
 		document.querySelector('.f-anim1').style.height = flareSize + "px";
