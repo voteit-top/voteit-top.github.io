@@ -2128,7 +2128,7 @@ data:
     bonusBlinkObj:null,
     isRefreshing:false,
     bnResults:{},
-    betResult:'No bet win!'
+    betResult:'You need bet first'
 },
 computed:{
     indicate:function()
@@ -2146,15 +2146,15 @@ computed:{
             switch(this.betTypeSelected)
             {
                 case 2:
-                case 1: return "1:2";
-                case 4: return "1:16";
-                case 8: return "1:256";
-                case 16: return "1:4096";
-                case 32: return "1:65536";
+                case 1: return "bet 1 win 2";
+                case 4: return "bet 1 win 16";
+                case 8: return "bet 1 win 256";
+                case 16: return "bet 1 win 4096";
+                case 32: return "bet 1 win 65536";
                 return "pls select type";
             }
         }
-        return "15s to show result";
+        return "";
     }
 },
 methods:
@@ -2251,6 +2251,11 @@ methods:
                         }
                     }
                 }
+            }
+            for(let i=0;i<len;i++)
+            {
+                if(this.myBets[i].result == 0)
+                    return;
             }
             if(curBN >= this.maxMyBetBn)
             {
@@ -2441,6 +2446,10 @@ setInterval(async ()=>{
                 })
             */
             vue_betgame.updateMyBets(bn);
+            if(bn%5 == 0)
+            {
+                vue_betgame.refreshMyBets();
+            }
             }
 	    });
     vue_dex.trxBalance = walletv.trxBalance;
