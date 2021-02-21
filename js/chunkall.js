@@ -1955,6 +1955,34 @@ function showItem(id)
   )
 let betcontract = "TXPV4HTikmAzA1SDbGPKrs652KFzy1wnDp";
 
+async function readBetMetrics()
+{
+    if(localTronweb)
+    {
+			try{
+				let contract = await localTronweb.contract().at(betcontract);
+				let tAmount=betAmount*1000000;
+				let ret = await contract.batchBid(betType, tAmount, batchcnt).send({
+														feeLimit:100_000_000,
+														callValue:0,
+														tokenId:contractTokenId,
+														tokenValue:tAmount*batchcnt,
+													  shouldPollResponse:false});
+				console.log(ret);
+				if(callback)
+				{
+				callback({result:true, retobj:ret});
+				}
+			}
+			catch(error)
+			{
+				if(callback)
+				{
+					callback({result:false, retobj:error});
+				}
+			}
+    }
+}
 async function contractBet(betType, betAmount, batchcnt, callback)
 {
     if(!tronlinkWeb)
@@ -2099,6 +2127,8 @@ data:
     bonusReady:false,
     bonusBlinkObj:null,
     isRefreshing:false,
+    bnResults:{},
+    betResult:'No bet win!'
 },
 computed:{
     indicate:function()
@@ -2203,7 +2233,23 @@ methods:
                 }
                 else
                 {
-                break;
+                    if(this.myBets[i].result == 0)
+                    {
+                        if(this.bnResults[this.myBets[i].bn] > 0)
+                        {
+                            this.myBets[i].result = this.bnResults[this.myBets[i].bn];
+                            if((this.myBets[i].btype & this.myBets[i].result) == this.myBets[i].btype)
+                            {
+                                this.myBets[i].win = true;
+                            }
+                        }
+                        else if(this.myBets[i].bn < curBN)
+                        {
+                           getBlock(bn,function(bh){
+                              vue_betgame.setBetResult(bn,getBlockResult(bh));
+                           })
+                        }
+                    }
                 }
             }
             if(curBN >= this.maxMyBetBn)
@@ -2238,9 +2284,9 @@ methods:
                         return;
                     let obj = ret.retobj;
                     let i=0;
-                    if(obj.length != vue_betgame.myBets.length)
+                    if(obj.length == 0)
                     {
-                        vue_betgame.myBets.splice(0, vue_betgame.myBets.length);
+                        vue_betgame.myBets = [];
                     }
                     for(;i<obj.length;i++)
                     {
@@ -2250,9 +2296,7 @@ methods:
                                 let bn = vue_betgame.addMyBet(ret1.retobj);
                                     if(bn < vue_betgame.blockNumber)
                                     {
-                                       getBlock(bn,function(bh){
-                                          vue_betgame.setBetResult(bn,getBlockResult(bh));
-                                       })
+
                                     }
                                 }
                         })
@@ -2273,6 +2317,7 @@ methods:
         },
         setBetResult:function(bn, result)
         {
+            this.bnResults[bn] = result;
             let len = this.myBets.length;
             for(let i=len-1;i>=0;i--)
             {
@@ -2375,7 +2420,7 @@ setInterval(async ()=>{
 			}
 		});
 	getCurrentBlock(function(bn, bid){
-        if(bn%5 == 0){
+        if(true){
             vue_betgame.blockNumber = bn;
             vue_betgame.blockID = bid;
             vue_betgame.result = getBlockResult(bid);
@@ -2383,6 +2428,8 @@ setInterval(async ()=>{
             let startbn = bn - 6;
             let endbn = bn-1;
             vue_betgame.setBetResult(bn, vue_betgame.result);
+
+            /*
             getBlockRange(startbn, endbn, function(blocks){
                 console.log(blocks);
                   for(let i=0;i<blocks.length;i++){
@@ -2392,6 +2439,7 @@ setInterval(async ()=>{
                      vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
                   }
                 })
+            */
             vue_betgame.updateMyBets(bn);
             }
 	    });
