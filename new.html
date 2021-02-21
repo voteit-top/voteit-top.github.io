@@ -16,6 +16,7 @@
 	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteitimgs@0.0.2/voteitdetails.js"></script>
 	<script src="https://kit.fontawesome.com/f4c2f140bb.js" crossorigin="anonymous"></script>
 	<style>
+    .w3-spin{animation:w3-spin 4s infinite linear}@keyframes w3-spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
 		.rankh
 		{
 			height:32px;
@@ -110,7 +111,7 @@
 		  <ul id="v_wallet" class="navbar-nav">
       <div class="rtdapp-stub text-muted"><img title="We are running in Dappchain.." alt="Tron DappChain Sun network" src="./img/dappchain.png"></div>
               <li class="nav-item">
-                  <a class="nav-link"  href="#bet" onclick="showBet()">BET<i class="text-danger fas fa-dice"></i></a>
+                  <a class="nav-link"  href="#bet" onclick="showBet()">BET<i class="text-danger fas fa-dice w3-spin"></i></a>
               </li>
 		  <li class="nav-item">
 			  <a class="nav-link"  href="#dex" onclick="showDex()">VOTEIT<i class="text-primary fas fa-exchange-alt"></i>TRX</a>
@@ -361,25 +362,14 @@
     </div>
         <div id="v_betgame" class="container vhide">
             <div class="row">
-                <div class="col-2">
-                    Block Number
+                <div class="col-4">
+                   Latest Block Number
                 </div>
-                <div title="Last 5 characters of block ID" class="col-6">
+                <div title="Last 5 characters of block ID" class="col-4">
                     L5BID
                 </div>
                 <div class="col-4">
                     Result
-                </div>
-            </div>
-            <div class="row border-top" v-for="pbn in pastBN">
-                <div class="col-2">
-                    <a :href="'https://dappchain.tronscan.org/#/block/'+pbn.bn" target="_blank">{{pbn.bn}}</a>
-                </div>
-                <div class="col-6">
-                    {{pbn.bid}}
-                </div>
-                <div class="col-4">
-                    {{resultStr(pbn.result)}}
                 </div>
             </div>
             <div class="row border">
@@ -405,7 +395,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-4 col-form-label">Type:</label>
+                        <label class="col-sm-4 col-form-label"><a href="https://github.com/voteit-top/voteit/wiki/bet#support-modes" target="_blank"><i class="far fa-question-circle"></i></a>Type:</label>
                         <div class="col-sm-8">
                         <select id="betTypeselect" v-model="betTypeSelected" class="form-select" aria-label="Default Bet Type">
                             <option v-for='item in betTypes' :value="item.id">{{item.name}}</option>
@@ -413,7 +403,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-4 col-form-label" title="multiple bet">Batch:</label>
+                        <label class="col-sm-4 col-form-label" title="multiple bet"><a href="https://github.com/voteit-top/voteit/wiki/bet#support-modes" target="_blank"><i class="far fa-question-circle"></i></a>Batch:</label>
                         <div class="col-sm-8">
                             <input class="form-control" v-model="batchCount">
                         </div>
@@ -456,7 +446,7 @@
                         </div>
                     </div>
                     <div  class="text-center"><button class="btn btn-info mb-3" v-on:click="refreshMyBets">Refresh<span v-if="isRefreshing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button><span>&nbsp;&nbsp;</span><button id="btnClaimBonus" class="btn btn-success mb-3" v-on:click="confirmCheckBonus">Check Bonus<span v-if="checking" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div>
-                    <p class="text-info">After bet, when the button beats, you have to click to claim bonus.</p>
+                    <p class="text-info">{{betResult}}</p>
                 </div>
               </div>
         </div>
@@ -629,8 +619,9 @@
 	</div>
   <div class="col-4 container text-center">
     <p class="text-muted" title="4VOTEIT per block for voter|4VOTEIT per block for creator">Voting As Mining:VOTEIT</p>
-	<a href="https://dappchain.tronscan.org/#/contract/TECu9sH4r5BZ373yBgBDsS3chC4s24cePA/code">VOTEIT Miner smart contract</a>
-  <br><a href="https://dappchain.tronscan.org/#/contract/TRWnVLAEJcAha5rYFgSTTRFWG9Vb7SPeS5/code">VOTEIT DEX smart contract</a>
+	<a href="https://dappchain.tronscan.org/#/contract/TECu9sH4r5BZ373yBgBDsS3chC4s24cePA/">VOTEIT Miner smart contract</a>
+  <br><a href="https://dappchain.tronscan.org/#/contract/TRWnVLAEJcAha5rYFgSTTRFWG9Vb7SPeS5/">VOTEIT DEX smart contract</a>
+      <br><a href="https://dappchain.tronscan.org/#/contract/TXPV4HTikmAzA1SDbGPKrs652KFzy1wnDp/">VOTEIT BET smart contract</a>
   </div>
   <div class="col-4 container text-end">
     <a href="https://twitter.com/TopVoteit"><i class="fab fa-twitter"></i></a>
