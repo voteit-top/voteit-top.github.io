@@ -2270,7 +2270,7 @@ methods:
                     }
                 }
             }
-            this.betResult= "Win "+wins + "of "+ len;
+            this.betResult= "Win "+wins + " of "+ len;
             if(curBN >= this.maxMyBetBn)
             {
                 if(!this.bonusBlinkObj && wins > 0)
@@ -2460,9 +2460,9 @@ setInterval(async ()=>{
                 })
             */
             vue_betgame.updateMyBets(bn);
-            if((bn - this.refreshBn) >= 5)
+            if((bn - vue_betgame.refreshBn) >= 3)
             {
-                this.refreshBn = bn;
+                vue_betgame.refreshBn = bn;
                 vue_betgame.refreshMyBets();
             }
             }
