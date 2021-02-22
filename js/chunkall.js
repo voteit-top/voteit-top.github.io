@@ -2252,14 +2252,26 @@ methods:
                     }
                 }
             }
+            let wins = 0;
             for(let i=0;i<len;i++)
             {
                 if(this.myBets[i].result == 0)
-                    return;
+                    {
+                        this.betResult ="Waiting block..."
+                        return;
+                    }
+                else
+                {
+                    if(this.myBets[i].win)
+                    {
+                        wins ++;
+                    }
+                }
             }
+            this.betResult("Win "+wins + "of "+ len);
             if(curBN >= this.maxMyBetBn)
             {
-                if(!this.bonusBlinkObj && len > 0)
+                if(!this.bonusBlinkObj && wins > 0)
                 {
                     this.bonusBlinkObj = setInterval(async ()=>{
                                         let e=document.getElementById("btnClaimBonus");
