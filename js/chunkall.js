@@ -2128,7 +2128,8 @@ data:
     bonusBlinkObj:null,
     isRefreshing:false,
     bnResults:{},
-    betResult:'You need bet first'
+    betResult:'You need bet first',
+    refreshBn:0
 },
 computed:{
     indicate:function()
@@ -2245,6 +2246,7 @@ methods:
                         }
                         else if(this.myBets[i].bn < curBN)
                         {
+                            let bn = this.myBets[i].bn;
                            getBlock(bn,function(bh){
                               vue_betgame.setBetResult(bn,getBlockResult(bh));
                            })
@@ -2458,8 +2460,9 @@ setInterval(async ()=>{
                 })
             */
             vue_betgame.updateMyBets(bn);
-            if(bn%5 == 0)
+            if((bn - this.refreshBn) >= 5)
             {
+                this.refreshBn = bn;
                 vue_betgame.refreshMyBets();
             }
             }
