@@ -362,19 +362,19 @@
     </div>
         <div id="v_betgame" class="container vhide">
             <div class="row">
-                <div class="col-4">
+                <div class="col-4 text-muted">
                    Latest Block Number
                 </div>
-                <div title="Last 5 characters of block ID" class="col-4">
+                <div title="Last 5 characters of block ID" class="col-4 text-muted">
                     L5BID
                 </div>
-                <div class="col-4">
+                <div class="col-4 text-muted">
                     Result
                 </div>
             </div>
             <div class="row border">
                 <div class="fs-3 text-primary col-4">
-                    {{blockNumber}}
+                    <a :href="'https://dappchain.tronscan.org/#/block/'+blockNumber" target="_blank">{{blockNumber}}</a>
                 </div>
                 <div class="fs-3 text-primary col-4">
                     {{blockID.slice(-5)}}
