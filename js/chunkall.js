@@ -2270,7 +2270,7 @@ methods:
                     }
                 }
             }
-            this.betResult("Win "+wins + "of "+ len);
+            this.betResult= "Win "+wins + "of "+ len;
             if(curBN >= this.maxMyBetBn)
             {
                 if(!this.bonusBlinkObj && wins > 0)
