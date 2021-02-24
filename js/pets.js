@@ -4,8 +4,10 @@
 let petcontract='';
 let vue_petsmarket = new Vue(
 {
+	el:"#v_pets",
 	data:{
 		rawPets:[],
+		marketGems:[],
 		marketPets:[],
 		totalPets:0,
 

@@ -111,6 +111,9 @@
 		  <ul id="v_wallet" class="navbar-nav">
       <div class="rtdapp-stub text-muted"><img title="We are running in Dappchain.." alt="Tron DappChain Sun network" src="./img/dappchain.png"></div>
               <li class="nav-item">
+                  <a class="nav-link"  href="#pet" onclick="showPet()">PET<i class="text-secondary fas fa-cat"></i></a>
+              </li>
+              <li class="nav-item">
                   <a class="nav-link"  href="#bet" onclick="showBet()">BET<i class="text-danger fas fa-dice w3-spin"></i></a>
               </li>
 		  <li class="nav-item">
@@ -450,25 +453,19 @@
                 </div>
               </div>
         </div>
-	<div  id="v_pets" class="vhide1">
-            <div class="row">
-                <div class="col-sm">
-                    <img width="200px" height="200px" src="./img/kitty1.svg" class="rounded">
-                </div>
-                <div class="col-sm">
-
-                    <div><img width="200px" height="200px" src="./img/kitty1.svg" class="rounded"></div>
-                    <div><img width="20px" height="20px" src="./img/ruby.svg" class="rounded">3<img width="20px" height="20px" src="./img/gem.svg" class="rounded">12<img width="20px" height="20px" src="./img/diamond.svg" class="rounded">3</div>
-
-                </div>
-                <div class="col-sm">
-                    <img width="200px" height="200px" src="./img/kitty1.svg" class="rounded">
-                </div>
-                <div class="col-sm">
-                    <img width="200px" height="200px" src="./img/kitty1.svg" class="rounded">
-                </div>
-            </div>
-        </div>    
+	   <div  id="v_pets" class="vhide1">
+      <div class="btn-group"><button type="button" v-on:click="petRanks" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="petPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="petMarket" class="btn btn-outline-primary">Market</button></div>
+      <div class="card-group">
+        <div class="card" style="min-width:180px" v-for="rp in rawPets">
+        <img width=180px height=200px :src="'./img/'+rp.img" class="card-img-top" alt="...">
+          <div class="card-body">
+          <p class="card-text">{{rp.desc}}</p>
+          <p class="card-text">{{rp.price}}VOTEIT</p>
+          <a v-on:click="pick" class="btn btn-primary">Pick</a>
+          </div>
+        </div>
+     </div>
+    </div>
     </div>
     <div id="allevents_v" class="col-sm-3">
       <ul class="nav nav-tabs" id="myTab" role="tablist">

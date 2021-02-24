@@ -1309,7 +1309,7 @@ function showItem(id)
 	let maxItemId = presetranks.length-1;
 	const PAGESIZE = 55;
   const EVENTCNT = 30;
-  var eventStart = 569;
+  var eventStart = 869;
 	var voteitModalObj;
 	var createModalObj;
 	var alleventv = new Vue({
@@ -2474,6 +2474,252 @@ setInterval(async ()=>{
 		},3000);
 readBuyPrices();
 readSellPrices();
+readPetMetrics();
+//rawPet has unique ID from 1
+//marketPet has unique ID from 1
+//foods  has unique ID from 1
+let petcontract='';
+let vue_petsmarket = new Vue(
+{
+	el:"#v_pets",
+	data:{
+		rawPets:[{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},],
+		marketGems:[],
+		marketPets:[],
+		totalRawPets:0,
+		totalMarketPets:0,
+		totalMarketGems:0
+	}
+	,
+	methods:
+	{
+		pick:function(petId){
+
+		},
+		buy:function(petId)
+		{
+
+		},
+		sell:function(petId){
+
+		},
+		release:function(petId)
+		{
+
+		},
+		feed:function(petId)
+		{
+
+		},
+		searchGem:function()
+		{
+
+		},
+		pickGem:function()
+		{
+
+		},
+		buyGem:function(gemId)
+		{
+
+		},
+		sellGem:function(gemId)
+		{
+
+		}
+
+	}
+}
+);
+// let vue_petsranking = new Vue(
+// 	{
+// 	el:"#elment",
+// 	data:{
+// 		pets:[],
+// 	}
+// 	}
+// );
+
+getRawPets(function(ret){
+	if(ret.result)
+	{
+		let pets = ret.retobj;
+		for(let i=0;i<pets.length;i++)
+		{
+			getRawPetDetail(pets[i], function(ret1){
+				if(ret1.result)
+				{
+					let petooj = ret1.retobj;
+					let pet = {};
+					pet.desc=petobj.desc;
+					pet.price=petobj.price;
+					pet.hot=petobj.hot;//how many times it was picked.
+
+					vue_petsmarket.rawPets.push(pet);
+	
+				}
+				
+			});
+
+		}
+	}
+});
+
+getMarketPets(function(ret){
+	if(ret.result)
+	{
+		let mpets = ret.retobj;
+		for(let i=0;i<mpets.length;i++)
+		{
+			getMarketPetDetail(mpets[i], function(ret1){
+				let mpet = {};
+				//pet.name=
+				//pet.price=
+				//pet.hot=
+
+				vue_petsmarket.marketPets.push(pet);
+
+			});
+
+		}
+	}
+})
+async function readPetMetrics(callback)
+{
+	if(localTronweb)
+    {
+		try{
+			//access contract
+
+			if(callback)
+			{
+			callback({result:true, retobj:ret});
+			}
+		}
+		catch(error)
+		{
+			if(callback)
+			{
+				callback({result:false, retobj:error});
+			}
+		}
+    }
+}
+//system
+//type is :dog, cat...
+async function addRawPet(svgfile, type, name)
+{
+
+}
+
+async function addFood(svgfile, type, name)
+{
+
+}
+async function getFoodDetail(foodId, callback)
+{
+
+}
+async function getRawPetDetail(petId, callback)
+{
+
+}
+async function getRawPets(callback)
+{
+	if(localTronweb)
+    {
+			try{
+				//access contract
+				if(callback)
+				{
+				callback({result:true, retobj:ret});
+				}
+			}
+			catch(error)
+			{
+				if(callback)
+				{
+					callback({result:false, retobj:error});
+				}
+			}
+    }
+}
+//other users
+async function getMarketPets(callback)
+{
+	if(localTronweb)
+    {
+			try{
+				//access contract
+				if(callback)
+				{
+				callback({result:true, retobj:ret});
+				}
+			}
+			catch(error)
+			{
+				if(callback)
+				{
+					callback({result:false, retobj:error});
+				}
+			}
+    }	
+}
+async function getMyPets(callback)
+{
+
+}
+//pick pet from raw pets.
+async function pickPet(petId,callback)
+{
+
+}
+//release pet. pet will gone.
+async function releasePet(petId, callback)
+{
+
+}
+async function feedPet(petId, callback)
+{
+
+}
+async function getMarketPetDetail(petId, callback)
+{
+
+}
+//sell pet in market
+async function sellPet(petId, price, callback)
+{
+     
+}
+//buy pet from market
+async function buyPet(petId, price, callback)
+{
+	if(!tronlinkWeb)
+    {
+        tronlinkNotConnected();
+    }
+    else
+    {
+			try{
+				//buy pets from contract
+				console.log(ret);
+				if(callback)
+				{
+				callback({result:true, retobj:ret});
+				}
+			}
+			catch(error)
+			{
+				if(callback)
+				{
+					callback({result:false, retobj:error});
+				}
+			}
+    }
+}
+
+
 const maxOrders=5;
 
 function readUserOrders()
@@ -2842,12 +3088,22 @@ function readSellPrices()
                 }
                 else
                 {
-                alleventv.mode = 1;
-                showEle('v_ranks', true);
-                showEle('voteitdex',false);
-                showEle('v_itemdetail',false);
-                showEle('v_betgame',false);
-                createRanksOfCate(1);
+                	ic = urltail.indexOf('pet')
+
+                	if(ic != -1)
+                	{
+                		showPet();
+                	}
+                	else
+	                {
+	                	alleventv.mode = 1;
+		                showEle('v_ranks', true);
+		                showEle('voteitdex',false);
+		                showEle('v_itemdetail',false);
+		                showEle('v_betgame',false);
+		                showEle('v_pets', false);
+		                createRanksOfCate(1);
+	            	}
                 }
             }
 		  }
@@ -2859,6 +3115,15 @@ window.onpopstate = function(event) {
 function showBet()
 {
     showEle('v_betgame',true);
+    showEle('voteitdex',false);
+    showEle('v_ranks',false);
+    showEle('v_itemdetail',false);
+    showEle('v_pets', false);
+}
+function showPet()
+{
+	showEle('v_pets', true);
+    showEle('v_betgame',false);
     showEle('voteitdex',false);
     showEle('v_ranks',false);
     showEle('v_itemdetail',false);
