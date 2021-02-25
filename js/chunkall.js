@@ -520,7 +520,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 		return new bigInt(e._hex.substr(2), 16).toJSNumber();
 	}
 	
-	const dexcontract = 'TRWnVLAEJcAha5rYFgSTTRFWG9Vb7SPeS5';
+	const dexcontract = 'TBMEe1yTHM9Mt5MWKqCHBL78TnJG8R4t5G';
 
   async function dexGetOrders(callback)
   {
