@@ -520,7 +520,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 		return new bigInt(e._hex.substr(2), 16).toJSNumber();
 	}
 	
-	const dexcontract = 'TBMEe1yTHM9Mt5MWKqCHBL78TnJG8R4t5G';
+	const dexcontract = 'TRWnVLAEJcAha5rYFgSTTRFWG9Vb7SPeS5';
 
   async function dexGetOrders(callback)
   {
@@ -1953,7 +1953,7 @@ function showItem(id)
     }
   }
   )
-let betcontract = "TXPV4HTikmAzA1SDbGPKrs652KFzy1wnDp";
+let betcontract = "TBMEe1yTHM9Mt5MWKqCHBL78TnJG8R4t5G";
 
 async function readBetMetrics()
 {
