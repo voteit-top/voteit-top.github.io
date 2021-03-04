@@ -454,14 +454,63 @@
               </div>
         </div>
 	   <div  id="v_pets" class="vhide1">
-      <div class="btn-group"><button type="button" v-on:click="petRanks" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="petPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="petMarket" class="btn btn-outline-primary">Market</button></div>
-      <div class="card-group">
-        <div class="card" style="min-width:180px" v-for="rp in rawPets">
+      <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button></div>
+      <div id="petsRanking">
+        <p> this is ranking of pets</p>
+        <div class="row">
+            <div class="col-1">#</div>
+            <div class="col-1">
+                pet
+            </div>
+            <div class="col-2">
+                saph
+            </div>
+            <div class="col-2">
+                Ruby
+            </div>
+            <div class="col-2">
+                Diamond
+            </div>
+            <div class="col-2">
+                Power
+            </div>
+            <div class="col-2">
+                Farm
+            </div>
+        </div>
+        <div class="row" v-for="(pr,index) in rankingPets">
+            <div class="col-1">{{index+1}}</div>
+            <div class="col-1">
+                <img width="30px" height="30px" :src="'./img/'+pr.img">
+            </div>
+            <div class="col-2">
+                {{pr.saph}}
+            </div>
+            <div class="col-2">
+                {{pr.ruby}}
+            </div>
+            <div class="col-2">
+                {{pr.diam}}
+            </div>
+            <div class="col-2">
+                {{pr.power}}
+            </div>
+            <div class="col-2">
+                {{pr.farm}}
+            </div>
+        </div>
+      </div>
+      <div id="petsPick">
+        <p> you can pick a pet randomly. The first pet costs 10 VOTEIT. Starting with the second pet, you'll have to spend twice as much as the previous one.</p>
+        <button type="button" class="btn btn-primary">Pick one pet</button>
+      </div>
+      <div id="petsMarket" class="card-group">
+        <div class="card" style="min-width:180px" v-for="rp in marketPets">
         <img width=180px height=200px :src="'./img/'+rp.img" class="card-img-top" alt="...">
           <div class="card-body">
           <p class="card-text">{{rp.desc}}</p>
           <p class="card-text">{{rp.price}}VOTEIT</p>
-          <a v-on:click="pick" class="btn btn-primary">Pick</a>
+          <a v-on:click="buy(rp.petId)" class="btn btn-primary">Buy</a>
           </div>
         </div>
      </div>
