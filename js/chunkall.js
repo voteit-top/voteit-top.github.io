@@ -24,7 +24,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 				}
 			});
 			
-			contractWrite(null); 
+			//contractWrite(null);
 		}
 		
 		function getRealTronweb()
@@ -1953,7 +1953,7 @@ function showItem(id)
     }
   }
   )
-let betcontract = "TBMEe1yTHM9Mt5MWKqCHBL78TnJG8R4t5G";
+let betcontract = "TXPV4HTikmAzA1SDbGPKrs652KFzy1wnDp";
 
 async function readBetMetrics()
 {
@@ -2478,14 +2478,15 @@ readPetMetrics();
 //rawPet has unique ID from 1
 //marketPet has unique ID from 1
 //foods  has unique ID from 1
-let petcontract='';
+let petcontract='TDiLnhKtgNxydUj2PmESSWqnMcgZcoww6L';
 let vue_petsmarket = new Vue(
 {
 	el:"#v_pets",
 	data:{
-		rawPets:[{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},{desc:"A cute cate", price:0, img:"kitty1.svg"},{desc:"A cute cate", price:1,img:"kitty1.svg"},],
+		rawPets:[],
 		marketGems:[],
-		marketPets:[],
+		marketPets:[{petId:1,desc:"A cute cate", price:0, img:"kitty1.svg"},{petId:2,desc:"A cute cate", price:1,img:"kitty1.svg"}],
+		rankingPets:[{desc:"A cute cate", price:0, img:"kitty1.svg",saph:0,ruby:0,diam:0,power:0}],
 		totalRawPets:0,
 		totalMarketPets:0,
 		totalMarketGems:0
@@ -2493,19 +2494,20 @@ let vue_petsmarket = new Vue(
 	,
 	methods:
 	{
-		pick:function(petId){
+		//pick pets randomly
+		pick:function(){
 
 		},
 		buy:function(petId)
 		{
-
+			console.log(petId);
 		},
 		sell:function(petId){
-
+			console.log(petId);
 		},
 		release:function(petId)
 		{
-
+			console.log(petId);
 		},
 		feed:function(petId)
 		{
@@ -2526,6 +2528,18 @@ let vue_petsmarket = new Vue(
 		sellGem:function(gemId)
 		{
 
+		},
+		showPetMarket:function()
+		{
+
+		},
+		showPetPicker:function()
+		{
+
+		},
+		showPetRanking:function()
+		{
+
 		}
 
 	}
@@ -2540,30 +2554,6 @@ let vue_petsmarket = new Vue(
 // 	}
 // );
 
-getRawPets(function(ret){
-	if(ret.result)
-	{
-		let pets = ret.retobj;
-		for(let i=0;i<pets.length;i++)
-		{
-			getRawPetDetail(pets[i], function(ret1){
-				if(ret1.result)
-				{
-					let petooj = ret1.retobj;
-					let pet = {};
-					pet.desc=petobj.desc;
-					pet.price=petobj.price;
-					pet.hot=petobj.hot;//how many times it was picked.
-
-					vue_petsmarket.rawPets.push(pet);
-	
-				}
-				
-			});
-
-		}
-	}
-});
 
 getMarketPets(function(ret){
 	if(ret.result)
@@ -2584,113 +2574,185 @@ getMarketPets(function(ret){
 		}
 	}
 })
+async function petContractWritePay(mname, callback,value,param, param2)
+{
+    if(value <= 0)
+        return;
+   if(tronlinkWeb)
+   {
+       try{
+         let contract = await tronlinkWeb.contract().at(petcontract);
+         let obj = {feeLimit:100_000_000,
+                callValue:0,
+                tokenId:contractTokenId,
+                tokenValue:value*1000000,
+              shouldPollResponse:false};
+         let ret;
+         if(param != undefined && param2 != undefined)
+         {
+           ret = await contract[mname](param, param2).send();
+         }
+         else if(param != undefined)
+           ret = await contract[mname](param).send();
+         else
+           ret = await contract[mname]().send();
+         //console.log(ret);
+         if(callback)
+         {
+           callback({result:true, retobj:ret});
+         }
+       }
+       catch(err)
+       {
+         console.log(err);
+       }
+   }
+}
+async function petContractWrite(mname, callback,param, param2)
+{
+   if(tronlinkWeb)
+   {
+       try{
+         let contract = await tronlinkWeb.contract().at(petcontract);
+         let obj = {feeLimit:100_000_000,
+                callValue:0,
+                tokenId:'',
+                tokenValue:0,
+              shouldPollResponse:false};
+         let ret;
+         if(param != undefined && param2 != undefined)
+         {
+           ret = await contract[mname](param, param2).send();
+         }
+         else if(param != undefined)
+           ret = await contract[mname](param).send();
+         else
+           ret = await contract[mname]().send();
+         if(callback)
+         {
+           callback({result:true, retobj:ret});
+         }
+       }
+       catch(err)
+       {
+         console.log(err);
+       }
+   }
+}
+async function petContractRead(mname,callback,param,param2)
+{
+    if(localTronweb)
+    {
+        try{
+          let contract = await localTronweb.contract().at(petcontract);
+          let ret;
+          if(param != undefined && param2 != undefined)
+          {
+            ret = await contract[mname](param, param2).call();
+          }
+          else if(param != undefined)
+            ret = await contract[mname](param).call();
+          else
+            ret = await contract[mname]().call();
+          //console.log(ret);
+          if(callback)
+          {
+            callback({result:true, retobj:ret});
+          }
+        }
+        catch(err)
+        {
+          console.log(err);
+        }
+    }
+    else
+    {
+        console.log("NO tronweb");
+    }
+}
 async function readPetMetrics(callback)
 {
-	if(localTronweb)
-    {
-		try{
-			//access contract
-
-			if(callback)
-			{
-			callback({result:true, retobj:ret});
-			}
-		}
-		catch(error)
-		{
-			if(callback)
-			{
-				callback({result:false, retobj:error});
-			}
-		}
-    }
+    return petContractRead('getMetrics', callback);
 }
 //system
 //type is :dog, cat...
-async function addRawPet(svgfile, type, name)
+async function getUserMetrics(callback)
 {
-
-}
-
-async function addFood(svgfile, type, name)
-{
-
-}
-async function getFoodDetail(foodId, callback)
-{
-
-}
-async function getRawPetDetail(petId, callback)
-{
-
-}
-async function getRawPets(callback)
-{
-	if(localTronweb)
+	if(tronlinkWeb)
     {
-			try{
-				//access contract
-				if(callback)
-				{
-				callback({result:true, retobj:ret});
-				}
-			}
-			catch(error)
-			{
-				if(callback)
-				{
-					callback({result:false, retobj:error});
-				}
-			}
+    let addr = tronlinkWeb.defaultAddress.base58;
+    return petContractRead('getUserMetrics',callback,addr);
     }
 }
+
+
 //other users
 async function getMarketPets(callback)
 {
-	if(localTronweb)
-    {
-			try{
-				//access contract
-				if(callback)
-				{
-				callback({result:true, retobj:ret});
-				}
-			}
-			catch(error)
-			{
-				if(callback)
-				{
-					callback({result:false, retobj:error});
-				}
-			}
-    }	
+    return petContractRead('getMarketPets', callback);
+
 }
 async function getMyPets(callback)
 {
-
+    if(tronlinkWeb)
+    {
+    let addr = tronlinkWeb.defaultAddress.base58;
+    return petContractRead('getUserPets',callback,addr);
+    }
 }
 //pick pet from raw pets.
-async function pickPet(petId,callback)
+async function pickPet(pickPrice, callback)
 {
-
+	if(tronlinkWeb)
+    {
+        return petContractWritePay('pickRandomPet', callback, pickPrice);
+    }
 }
-//release pet. pet will gone.
-async function releasePet(petId, callback)
-{
 
-}
+const FEEDPRICE = 5;//5 voteit for 1 feed
 async function feedPet(petId, callback)
 {
-
+	if(tronlinkWeb)
+    {
+        return petContractWritePay('feedPet', callback, FEEDPRICE);
+    }
 }
-async function getMarketPetDetail(petId, callback)
+async function getPetBasic(petId, callback)
 {
-
+	if(localTronweb)
+    {
+        return petContractRead('getPetBasic',callback, petId);
+    }
+}
+async function getPetMore(petId, callback)
+{
+    	if(localTronweb)
+        {
+            return petContractRead('getPetMore',callback, petId);
+        }
 }
 //sell pet in market
 async function sellPet(petId, price, callback)
 {
-     
+    if(!tronlinkWeb)
+    {
+        tronlinkNotConnected();
+    }
+    else if(price > 0)
+    {
+        petContractWritePay('sellPet', callback,price,petId, price);
+    }
+}
+async function unsellPet(petId, callback)
+{
+    if(!tronlinkWeb)
+    {
+        tronlinkNotConnected();
+    }
+    else
+    {
+	petContractWrite('unsellPet', callback);
+    }
 }
 //buy pet from market
 async function buyPet(petId, price, callback)
@@ -2701,21 +2763,7 @@ async function buyPet(petId, price, callback)
     }
     else
     {
-			try{
-				//buy pets from contract
-				console.log(ret);
-				if(callback)
-				{
-				callback({result:true, retobj:ret});
-				}
-			}
-			catch(error)
-			{
-				if(callback)
-				{
-					callback({result:false, retobj:error});
-				}
-			}
+    petContractWritePay('buyPet',callback, price, petId, price);
     }
 }
 
