@@ -453,7 +453,7 @@
                 </div>
               </div>
         </div>
-	   <div  id="v_pets" class="vhide1">
+	   <div  id="v_pets" class="vhide">
       <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button></div>
       <div id="petsRanking">
         <p> this is ranking of pets</p>
@@ -500,20 +500,89 @@
             </div>
         </div>
       </div>
-      <div id="petsPick">
+      <div id="petsPick" class="vhide">
         <p> you can pick a pet randomly. The first pet costs 10 VOTEIT. Starting with the second pet, you'll have to spend twice as much as the previous one.</p>
-        <button type="button" class="btn btn-primary">Pick one pet</button>
-      </div>
-      <div id="petsMarket" class="card-group">
-        <div class="card" style="min-width:180px" v-for="rp in marketPets">
-        <img width=180px height=200px :src="'./img/'+rp.img" class="card-img-top" alt="...">
-          <div class="card-body">
-          <p class="card-text">{{rp.desc}}</p>
-          <p class="card-text">{{rp.price}}VOTEIT</p>
-          <a v-on:click="buy(rp.petId)" class="btn btn-primary">Buy</a>
+
+          <div class="row">
+              <div class="col-6">
+                  <span class="text-info">search price:{{searchPrice*searchTimes}} VOTEIT</span><button type="button" v-on:click="searchGem" class="btn btn-primary">Search Gem</button>
+                  <select id="searchSelect" v-model="searchTimes" aria-label="specify search times">
+                      <option value=1>1 time</option>
+                      <option value=2>2 times</option>
+                      <option value=3>3 times</option>
+                      <option value=4>4 times</option>
+                      <option value=5>5 times</option>
+                  </select>
+              </div>
+              <div class="col-6">
+                  <div class="row">
+                      <div class="col-6">
+                          <span v-if="searching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                          <button type="button" v-if="findGems > 0" v-on:click="claimGem" class="btn btn-primary">Claim Gem</button>
+                      </div>
+                      <div class="col-6"><p class="text-muted">My gems:{{myGemsCnt}}</p></div>
+                  </div>
+              </div>
           </div>
-        </div>
-     </div>
+          <div class="card-group">
+              <div class="card" style="max-width:150px;min-width:100px">
+                  <img width=60px height=60px src="./img/gem.svg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">power:16</p>
+                      <p class="card-text"  title="probability">PR: 1/16</p>
+                  </div>
+              </div>
+              <div class="card" style="max-width:150px;min-width:100px">
+                  <img width=60px height=60px src="./img/ruby.svg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">power:256</p>
+                      <p class="card-text" title="probability">PR: 1/256</p>
+                  </div>
+              </div>
+              <div class="card" style="max-width:150px;min-width:100px">
+                  <img width=60px height=60px src="./img/diamond.svg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">power:16</p>
+                      <p class="card-text"  title="probability">PR: 1/4096</p>
+                  </div>
+              </div>
+          </div>
+          <div class="mt-3 row"><div class="col-6"><span class="text-info">next pick price:{{nextPickPrice}} VOTEIT</span><button type="button" class="btn btn-primary" v-on:click="pick" >Pick one pet randomly</button></div><div class="col-6"><p class="text-muted">My pets:{{myPetsCnt}}</p></div></div>
+
+          <div class="card-group">
+              <div class="card" style="min-width:100px" v-for="(rp,index) in rawPets">
+                  <img width=100px height=100px :src="'./img/'+rp.img" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">#{{index+1}}</p>
+                      <p class="card-text">{{rp.hot}} pick</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+       <div id="petsMarket" class="vhide">
+           <div class="card-group">
+               <div class="card" style="max-width:200px;min-width:180px" v-for="mp in marketPets">
+                   <img width=180px height=200px :src="'./img/'+mp.img" class="card-img-top" alt="...">
+                   <div class="card-body">
+                       <p class="card-text">{{mp.desc}}</p>
+                       <p class="card-text">{{mp.price}}VOTEIT</p>
+                       <a v-on:click="buy(mp.petId,mp.price)" class="btn btn-primary">Buy</a>
+                   </div>
+               </div>
+           </div>
+           <div class="card-group">
+               <div class="card" style="max-width:100px;min-width:80px" v-for="mg in marketGems">
+                   <img width=100px height=100px :src="'./img/'+mg.img" class="card-img-top" alt="...">
+                   <div class="card-body">
+                       <p class="card-text">{{mg.owner}}</p>
+                       <p class="card-text">{{mg.price}}VOTEIT</p>
+                       <a v-on:click="buyGem(mg.gemId,mg.price)" class="btn btn-primary">Buy</a>
+                   </div>
+               </div>
+           </div>
+
+       </div>
+
     </div>
     </div>
     <div id="allevents_v" class="col-sm-3">

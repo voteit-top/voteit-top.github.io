@@ -3,8 +3,16 @@ var myCarousel = document.querySelector('#myCarousel')
 var carousel = new bootstrap.Carousel(myCarousel)	
 	let localTronweb=null;
 	let tronlinkWeb = null;
+	let vue_pets = null;
+
+	const VIEW_RANK = 1;
+	const VIEW_DEX = 2;
+	const VIEW_BET = 3;
+	const VIEW_PET = 4;
+	let view_type = VIEW_RANK;
 	let contractTokenId = '1003606';
 	const minercontract = 'TECu9sH4r5BZ373yBgBDsS3chC4s24cePA';
+    const petcontract = 'TLXWLUyHfdKf9yfqXpNEyE3NEvN5aibJ5W';
 	const HttpProvider = TronWeb.providers.HttpProvider;
 	const trongridurl = 'https://sun.tronex.io';
   //const sunurl = 'https://sun.tronex.io';
@@ -2421,6 +2429,8 @@ function getBlockResult(bid)
 }
 var maxOrderId = 0;
 setInterval(async ()=>{
+    if(view_type == VIEW_DEX)
+    {
     dexRead('getMetrics', function(metrics)
 		{
 			if(metrics.result)
@@ -2438,69 +2448,237 @@ setInterval(async ()=>{
 				}
 			}
 		});
-	getCurrentBlock(function(bn, bid){
-        if(true){
-            vue_betgame.blockNumber = bn;
-            vue_betgame.blockID = bid;
-            vue_betgame.result = getBlockResult(bid);
-            //update bn and id;
-            let startbn = bn - 6;
-            let endbn = bn-1;
-            vue_betgame.setBetResult(bn, vue_betgame.result);
+	}
+	if(view_type == VIEW_BET || view_type == VIEW_PET){
+        getCurrentBlock(function(bn, bid){
+            if(true){
+                vue_betgame.blockNumber = bn;
+                vue_betgame.blockID = bid;
+                vue_betgame.result = getBlockResult(bid);
+                vue_pets.setGemResult(bn, result);
+                //update bn and id;
+                let startbn = bn - 6;
+                let endbn = bn-1;
+                vue_betgame.setBetResult(bn, vue_betgame.result);
 
-            /*
-            getBlockRange(startbn, endbn, function(blocks){
-                console.log(blocks);
-                  for(let i=0;i<blocks.length;i++){
-                     vue_betgame.pastBN[i].bn = (startbn+i);
-                     vue_betgame.pastBN[i].bid = blocks[i]['blockID'].slice(-5);
-                     vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
-                     vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
-                  }
-                })
-            */
-            vue_betgame.updateMyBets(bn);
-            if((bn - vue_betgame.refreshBn) >= 3)
-            {
-                vue_betgame.refreshBn = bn;
-                vue_betgame.refreshMyBets();
-            }
-            }
-	    });
-    vue_dex.trxBalance = walletv.trxBalance;
-    vue_dex.tokenBalance = walletv.tokenBalance;
-    vue_betgame.tokenBalance = walletv.tokenBalance;
+                /*
+                getBlockRange(startbn, endbn, function(blocks){
+                    console.log(blocks);
+                      for(let i=0;i<blocks.length;i++){
+                         vue_betgame.pastBN[i].bn = (startbn+i);
+                         vue_betgame.pastBN[i].bid = blocks[i]['blockID'].slice(-5);
+                         vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
+                         vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
+                      }
+                    })
+                */
+                vue_betgame.updateMyBets(bn);
 
+                if((bn - vue_betgame.refreshBn) >= 3)
+                    {
+                        vue_betgame.refreshBn = bn;
+                        vue_betgame.refreshMyBets();
+                        vue_pets.refreshSearches();
+                    }
+                }
+            });
+
+            if(view_type == VIEW_PET){
+                readPetMetrics();
+                getUserMetrics(function(ret)
+                    {
+                        if(ret.result)
+                        {
+                        vue_pets.myGemsCnt = ret.retobj.gemCnt;
+                        vue_pets.myPetsCnt = ret.retobj.petCnt;
+                        }
+
+                    });
+
+            }
+	    }
+        vue_dex.trxBalance = walletv.trxBalance;
+        vue_dex.tokenBalance = walletv.tokenBalance;
+        vue_betgame.tokenBalance = walletv.tokenBalance;
+        vue_pets.tokenBalance = walletv.tokenBalance;
 		},3000);
 readBuyPrices();
 readSellPrices();
-readPetMetrics();
+
 //rawPet has unique ID from 1
 //marketPet has unique ID from 1
 //foods  has unique ID from 1
-let petcontract='TDiLnhKtgNxydUj2PmESSWqnMcgZcoww6L';
-let vue_petsmarket = new Vue(
+
+vue_pets = new Vue(
 {
 	el:"#v_pets",
 	data:{
+	    searches:[],
 		rawPets:[],
 		marketGems:[],
-		marketPets:[{petId:1,desc:"A cute cate", price:0, img:"kitty1.svg"},{petId:2,desc:"A cute cate", price:1,img:"kitty1.svg"}],
+		myPets:[],
+		myGems:[],
+		//{petId:1,desc:"A cute cate", price:0, img:"kitty1.svg"},{petId:2,desc:"A cute cate", price:1,img:"kitty1.svg"}
+		marketPets:[],
 		rankingPets:[{desc:"A cute cate", price:0, img:"kitty1.svg",saph:0,ruby:0,diam:0,power:0}],
-		totalRawPets:0,
+		totalRawPets:125,
+		totalPets:0,
+		totalGems:0,
+		petsCntBp:0,
+		myPetsCnt:0,
+		myGemsCnt:0,
+		nextPickPrice:10,
 		totalMarketPets:0,
-		totalMarketGems:0
+		totalMarketGems:0,
+		tokenBalance:0,
+		totalEvents:0,
+		searchPrice:5,
+		searchTimes:5,
+		feedPrice:5,
+		bnGems:{},
+		block:0,
+		findGems:0,
 	}
 	,
 	methods:
 	{
 		//pick pets randomly
-		pick:function(){
+		refreshSearches:function()
+		{
+		    this.searches=[];
+            petContractRead('getUserActiveSearch', function(ret){
+                if(ret.result)
+                {
+                    let sobj = ret.retobj;
+                    for(let i=0;i<sobj.length;i++)
+                    {
+                        let sidx = big2numer(sobj[i]);
+                        petContractRead('getSearchDetail', function(ret1){
+                            if(ret1.result)
+                            {
+                             let se = {};
+                             se.betbn = big2number(ret1.retobj.betBN);
+                             se.result = 0;
+                             this.searches.push(se);
+                            }
+                        }, sidx);
+                    }
+                }
+            })
+		},
+		setGemResult:function(bn, result)
+		{
+		    this.block = bn;
+		    if(result&4 == 4)
+		    {
+		        bnGems[bn] = 4;  //it is gem.
+		    }
+		    else
+		        bnGems[bn] = 1;
+		    let gemcnt = 0;
+            for(let i=0;i<this.searches.length;i++)
+            {
+                if(this.searches[i].betbn == bn)
+                {
+                    this.searches[i].result = bnGems[bn];
+                }
+                if(this.searches[i].result == 4)
+                   {
+                   gemcnt ++;
+                   }
+                if(bn > this.searches[i].betbn && this.searches[i].result == 0)
+                {
+                    let oldbn = this.searches[i].betbn;
+                   getBlock(oldbn,function(bh){
+                      vue_pets.setGemResult(bn,getBlockResult(bh));
+                   })
+                }
+            }
+            this.findGems = gemcnt;
 
 		},
-		buy:function(petId)
+		buildRawPets:function()
 		{
+		    if(this.rawPets.length == 0)
+		    {
+                for(let i=1;i<=this.totalRawPets;i++)
+                {
+                    this.rawPets.push({desc:'A cute pet', img:'pet'+i+'.png',hot:0});
+                }
+		    }
+		},
+		updateMarketGem:function(gem)
+		{
+		    let find = false;
+		    for(let i=0;i<this.marketGems.length;i++)
+		    {
+		        if(this.marketGems[i].gemId == gem.gemId)
+		        {
+		           find = true;
+		           this.marketGems[i].owner = gem.owner;
+                   this.marketGems[i].price = gem.price/DECIMALS;
+		        }
+		    }
+		    if(!find)
+		    {
+		        this.marketGems.push(gem);
+		    }
+		},
+		updateMarketPet:function(pet)
+		{
+		    let find = false;
+		    for(let i=0;i<this.marketPets.length;i++)
+		    {
+		        if(this.marketPets[i].petId == pet.petId)
+		        {
+		           find = true;
+		           this.marketPets[i].power = pet.power;
+                   this.marketPets[i].price = pet.price/DECIMALS;
+		        }
+		    }
+		    if(!find)
+		    {
+		        this.marketPets.push(pet);
+		    }
+
+		},
+		pick:function(){
+            if(!tronlinkWeb)
+            {
+                tronlinkNotConnected();
+            }
+            else if(this.nextPickPrice > 0)
+            {
+                this.petsCntBp = this.myPetsCnt;
+                pickPet(this.nextPickPrice, function(ret)
+                {
+                    if(ret.result)
+                    {
+                        //picked //push allevent;
+
+                    }
+                    else
+                    {
+                        console.log("pick pet eorro");
+                    }
+                })
+            }
+		},
+		buy:function(petId,price)
+		{
+            if(!tronlinkWeb)
+            {
+                tronlinkNotConnected();
+            }
+            else
+            {
+                buyPet(petId, price, function(ret)
+                {
+
+                });
+            }
 			console.log(petId);
+
 		},
 		sell:function(petId){
 			console.log(petId);
@@ -2513,13 +2691,23 @@ let vue_petsmarket = new Vue(
 		{
 
 		},
-		searchGem:function()
+		searchGem:function(batch,price)
 		{
+            if(!tronlinkWeb)
+            {
+                tronlinkNotConnected();
+            }
+            else
+            {
+                vue_pets.searching = true;
+                petContractWritePay('searchGem', function(ret){
+                    if(ret.result)
+                    {
+                        vue_pets.searching = true;
 
-		},
-		pickGem:function()
-		{
-
+                    }
+                },price, batch);
+            }
 		},
 		buyGem:function(gemId)
 		{
@@ -2531,44 +2719,86 @@ let vue_petsmarket = new Vue(
 		},
 		showPetMarket:function()
 		{
-
+        showEle('petsRanking',false);
+        showEle('petsPick',false);
+        showEle('petsMarket',true);
 		},
 		showPetPicker:function()
 		{
-
+            showEle('petsRanking',false);
+            showEle('petsPick',true);
+            showEle('petsMarket',false);
+            this.buildRawPets();
 		},
 		showPetRanking:function()
 		{
-
+        showEle('petsRanking',true);
+        showEle('petsPick',false);
+        showEle('petsMarket',false);
 		}
 
 	}
 }
 );
-// let vue_petsranking = new Vue(
-// 	{
-// 	el:"#elment",
-// 	data:{
-// 		pets:[],
-// 	}
-// 	}
-// );
+function gemType2Img(gt)
+{
+    if(gt == 1)
+    {
+        return 'gem.svg';
+    }
+    else if(gt == 2)
+    {
+        return 'ruby.svg';
+    }
+    else if(gt == 3)
+    {
+        return 'diamond.svg';
+    }
 
+}
+petContractRead('getMarketGems',function(ret){
+    	if(ret.result)
+    	{
+    		let mgems = ret.retobj;
+    		for(let i=0;i<mgems.length;i++)
+    		{
+    		    let gemId = big2numer(mgems[i]);
+    			petContractRead('getGem',function(ret1){
+                    if(ret1.result)
+                    {
+                        let gemobj = ret1.retobj;
+                        let gem={};
+                        gem.gemId = gemId;
+                        gem.gemType = gemobj.gemType;
+                        gem.img = gemType2Img(gem.gemType);
+                        gem.price = big2numer(gemobj.price);
+                        gem.owner = gemobj.gemowner;
+                        gem.petId = big2numer(gemobj.petId);
+                        vue_pets.updateMarketGem(gem);
+                    }
 
+    			}, gemId);
+    		}
+    	}
+})
 getMarketPets(function(ret){
 	if(ret.result)
 	{
 		let mpets = ret.retobj;
 		for(let i=0;i<mpets.length;i++)
 		{
-			getMarketPetDetail(mpets[i], function(ret1){
-				let mpet = {};
-				//pet.name=
-				//pet.price=
-				//pet.hot=
-
-				vue_petsmarket.marketPets.push(pet);
-
+		    let petId = big2numer(mpets[i]);
+			getPetBasic(petId, function(ret1){
+			    if(ret1.result)
+			    {
+			        let mpet = {};
+			         mpet.petId = petId;
+			         mpet.rpId = big2numer(ret1.retobj.rpId);
+			         mpet.power = big2numer(ret1.retobj.power);
+			         mpet.price = big2numer(ret1.retobj.price)/DECIMALS;
+			         mpet.img = 'pet'+mpet.rpId+'.png';
+			         vue_pets.updateMarketPet(mpet);
+			    }
 			});
 
 		}
@@ -2670,9 +2900,24 @@ async function petContractRead(mname,callback,param,param2)
         console.log("NO tronweb");
     }
 }
-async function readPetMetrics(callback)
+async function readPetMetrics()
 {
-    return petContractRead('getMetrics', callback);
+    return petContractRead('getMetrics', function(ret){
+        if(ret.result)
+        {
+        //uint eventCnt, uint searchCnt, uint gemCnt,uint petCnt, uint rawPetCnt,uint marketPetCnt, uint marketGemCnt
+            vue_pets.totalEvents = big2numer(ret.retobj.eventCnt);
+            vue_pets.totalGems = big2numer(ret.retobj.gemCnt);
+            vue_pets.totalPets =  big2numer(ret.retobj.petCnt);
+            vue_pets.totalMarketGems =  big2numer(ret.retobj.marketGemCnt);
+            vue_pets.totalMarketPets =  big2numer(ret.retobj.marketPetCnt);
+
+        }
+        else
+        {
+            console.log(ret.retobj);
+        }
+    });
 }
 //system
 //type is :dog, cat...
@@ -3151,6 +3396,7 @@ function readSellPrices()
 		                showEle('v_betgame',false);
 		                showEle('v_pets', false);
 		                createRanksOfCate(1);
+		                view_type = VIEW_RANK;
 	            	}
                 }
             }
@@ -3167,6 +3413,7 @@ function showBet()
     showEle('v_ranks',false);
     showEle('v_itemdetail',false);
     showEle('v_pets', false);
+    view_type = VIEW_BET;
 }
 function showPet()
 {
@@ -3175,6 +3422,7 @@ function showPet()
     showEle('voteitdex',false);
     showEle('v_ranks',false);
     showEle('v_itemdetail',false);
+    view_type = VIEW_PET;
 }
 function showDex()
 {
@@ -3184,6 +3432,7 @@ function showDex()
   showEle('v_betgame',false);
   showEle('v_ranks',false);
   showEle('v_itemdetail',false);
+  view_type = VIEW_DEX;
 }
 function showEle(eleid, show)
 {
