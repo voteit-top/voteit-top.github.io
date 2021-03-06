@@ -2403,7 +2403,7 @@ function getBlockResult(bid)
     let result =0;
     let last5bid = bid.slice(-5);
     let lastDigit = new bigInt(last5bid.slice(-1), 16).toJSNumber();
-    if(lastDigit & 1 == 1)
+    if((lastDigit & 1) == 1)
     {
         result += 1;
     }
@@ -2539,7 +2539,8 @@ vue_pets = new Vue(
 		block:0,
 		findGems:0,
 		searching:false,
-		claiming:false
+		claiming:false,
+		maxBn:0
 	}
 	,
 	methods:
@@ -2553,6 +2554,10 @@ vue_pets = new Vue(
 		        {
 		            return;
 		        }
+		    }
+		    if(se.betbn > this.maxBn)
+		    {
+		        this.maxBn = se.betbn;
 		    }
 		    this.searches.push(se);
 		},
@@ -2591,7 +2596,7 @@ vue_pets = new Vue(
 		setGemResult:function(bn, result)
 		{
 		    this.block = bn;
-		    if(result&4 == 4)
+		    if((result&4) == 4)
 		    {
 		        this.bnGems[bn] = 4;  //it is gem.
 		    }
