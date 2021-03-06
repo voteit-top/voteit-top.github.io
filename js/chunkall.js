@@ -2568,7 +2568,7 @@ vue_pets = new Vue(
                          let sobj = ret.retobj;
                          if(sobj.length == 0)
                          {
-                            this.searches = [];
+                            vue_pets.searches = [];
                          }
                          for(let i=0;i<sobj.length;i++)
                          {
