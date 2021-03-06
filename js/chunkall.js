@@ -2545,9 +2545,20 @@ vue_pets = new Vue(
 	methods:
 	{
 		//pick pets randomly
+		addNewSearch:function(se)
+		{
+		    for(let i=0;i<this.searches.length;i++)
+		    {
+		        if(this.searches[i].betbn == se.betbn)
+		        {
+		            return;
+		        }
+		    }
+		    this.searches.push(se);
+		},
 		refreshSearches:function()
 		{
-		    this.searches=[];
+		    //this.searches=[];
 		    if(tronlinkWeb)
 		    {
 		        let addr = tronlinkWeb.defaultAddress.base58;
@@ -2555,16 +2566,20 @@ vue_pets = new Vue(
                      if(ret.result)
                      {
                          let sobj = ret.retobj;
+                         if(sobj.length == 0)
+                         {
+                            this.searches = [];
+                         }
                          for(let i=0;i<sobj.length;i++)
                          {
-                             let sidx = big2numer(sobj[i]);
+                             let sidx = big2number(sobj[i]);
                              petContractRead('getSearchDetail', function(ret1){
                                  if(ret1.result)
                                  {
                                   let se = {};
                                   se.betbn = big2number(ret1.retobj.betBN);
                                   se.result = 0;
-                                  this.searches.push(se);
+                                  vue_pets.addNewSearch(se);
                                  }
                              }, sidx);
                          }
@@ -2951,7 +2966,7 @@ async function getUserMetrics(callback)
 	if(tronlinkWeb)
     {
     let addr = tronlinkWeb.defaultAddress.base58;
-    return petContractRead('getUserMetrics',callback,addr);
+    return petContractRead('getUserMetrics',callback/*,addr*/);
     }
 }
 
