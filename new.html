@@ -517,7 +517,7 @@
               <div class="col-6">
                   <div class="row">
                       <div class="col-6">
-                         <span class="text-success">Found {{findGems}} Gem.</span>
+                         <span class="text-success">Found {{findGems}}/{{searches.length}} Gem.</span>
                           <button type="button" v-if="findGems > 0" v-on:click="claimGem" class="btn btn-primary"><span v-if="claiming" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Claim Gem</button>
                       </div>
                       <div class="col-6"><p class="text-muted">My gems:{{myGemsCnt}}</p></div>

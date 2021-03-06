@@ -2455,7 +2455,7 @@ setInterval(async ()=>{
                 vue_betgame.blockNumber = bn;
                 vue_betgame.blockID = bid;
                 vue_betgame.result = getBlockResult(bid);
-                vue_pets.setGemResult(bn, result);
+                vue_pets.setGemResult(bn, vue_betgame.result);
                 //update bn and id;
                 let startbn = bn - 6;
                 let endbn = bn-1;
