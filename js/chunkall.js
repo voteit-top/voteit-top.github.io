@@ -2611,9 +2611,16 @@ vue_pets = new Vue(
                 if(bn > this.searches[i].betbn && this.searches[i].result == 0)
                 {
                    let oldbn = this.searches[i].betbn;
-                   getBlock(oldbn,function(bh){
-                      vue_pets.setGemResult(bn,getBlockResult(bh));
-                   })
+                   if((oldbn + 255) > bn)
+                   {
+                        getBlock(oldbn,function(bh){
+                            vue_pets.setGemResult(bn,getBlockResult(bh));
+                        });
+                   }
+                   else
+                   {
+                      this.searches[i].result = 1;
+                   }
                 }
             }
             this.findGems = gemcnt;
