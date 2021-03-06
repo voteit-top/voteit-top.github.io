@@ -2589,7 +2589,7 @@ vue_pets = new Vue(
                    }
                 if(bn > this.searches[i].betbn && this.searches[i].result == 0)
                 {
-                    let oldbn = this.searches[i].betbn;
+                   let oldbn = this.searches[i].betbn;
                    getBlock(oldbn,function(bh){
                       vue_pets.setGemResult(bn,getBlockResult(bh));
                    })
@@ -2704,7 +2704,7 @@ vue_pets = new Vue(
                 petContractWritePay('searchGem', function(ret){
                     if(ret.result)
                     {
-                        vue_pets.searching = true;
+                        vue_pets.searching = false;
 
                     }
                 },this.searchPrice*this.searchTimes, this.searchTimes);
@@ -2821,12 +2821,12 @@ async function petContractWritePay(mname, callback,value,param, param2)
          let ret;
          if(param != undefined && param2 != undefined)
          {
-           ret = await contract[mname](param, param2).send();
+           ret = await contract[mname](param, param2).send(obj);
          }
          else if(param != undefined)
-           ret = await contract[mname](param).send();
+           ret = await contract[mname](param).send(obj);
          else
-           ret = await contract[mname]().send();
+           ret = await contract[mname]().send(obj);
          //console.log(ret);
          if(callback)
          {
@@ -2853,12 +2853,12 @@ async function petContractWrite(mname, callback,param, param2)
          let ret;
          if(param != undefined && param2 != undefined)
          {
-           ret = await contract[mname](param, param2).send();
+           ret = await contract[mname](param, param2).send(obj);
          }
          else if(param != undefined)
-           ret = await contract[mname](param).send();
+           ret = await contract[mname](param).send(obj);
          else
-           ret = await contract[mname]().send();
+           ret = await contract[mname]().send(obj);
          if(callback)
          {
            callback({result:true, retobj:ret});
