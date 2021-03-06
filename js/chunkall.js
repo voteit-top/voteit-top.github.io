@@ -2538,6 +2538,7 @@ vue_pets = new Vue(
 		bnGems:{},
 		block:0,
 		findGems:0,
+		searching:false
 	}
 	,
 	methods:
@@ -2691,7 +2692,7 @@ vue_pets = new Vue(
 		{
 
 		},
-		searchGem:function(batch,price)
+		searchGem:function()
 		{
             if(!tronlinkWeb)
             {
@@ -2706,7 +2707,7 @@ vue_pets = new Vue(
                         vue_pets.searching = true;
 
                     }
-                },price, batch);
+                },this.searchPrice*this.searchTimes, this.searchTimes);
             }
 		},
 		buyGem:function(gemId)

@@ -505,7 +505,7 @@
 
           <div class="row">
               <div class="col-6">
-                  <span class="text-info">search price:{{searchPrice*searchTimes}} VOTEIT</span><button type="button" v-on:click="searchGem" class="btn btn-primary">Search Gem</button>
+                  <span class="text-info">search price:{{searchPrice*searchTimes}} VOTEIT</span><button type="button" v-on:click="searchGem" class="btn btn-primary"><span v-if="searching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Search Gem</button>
                   <select id="searchSelect" v-model="searchTimes" aria-label="specify search times">
                       <option value=1>1 time</option>
                       <option value=2>2 times</option>
@@ -517,8 +517,8 @@
               <div class="col-6">
                   <div class="row">
                       <div class="col-6">
-                          <span v-if="searching" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                          <button type="button" v-if="findGems > 0" v-on:click="claimGem" class="btn btn-primary">Claim Gem</button>
+                         <span class="text-success">Found {{findGems}} Gem.</span>
+                          <button type="button" v-if="findGems > 0" v-on:click="claimGem" class="btn btn-primary"><span v-if="claiming" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Claim Gem</button>
                       </div>
                       <div class="col-6"><p class="text-muted">My gems:{{myGemsCnt}}</p></div>
                   </div>
