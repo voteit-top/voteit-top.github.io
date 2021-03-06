@@ -2548,25 +2548,30 @@ vue_pets = new Vue(
 		refreshSearches:function()
 		{
 		    this.searches=[];
-            petContractRead('getUserActiveSearch', function(ret){
-                if(ret.result)
-                {
-                    let sobj = ret.retobj;
-                    for(let i=0;i<sobj.length;i++)
-                    {
-                        let sidx = big2numer(sobj[i]);
-                        petContractRead('getSearchDetail', function(ret1){
-                            if(ret1.result)
-                            {
-                             let se = {};
-                             se.betbn = big2number(ret1.retobj.betBN);
-                             se.result = 0;
-                             this.searches.push(se);
-                            }
-                        }, sidx);
-                    }
-                }
-            })
+		    if(tronlinkWeb)
+		    {
+		        let addr = tronlinkWeb.defaultAddress.base58;
+                petContractRead('getUserActiveSearch', function(ret){
+                     if(ret.result)
+                     {
+                         let sobj = ret.retobj;
+                         for(let i=0;i<sobj.length;i++)
+                         {
+                             let sidx = big2numer(sobj[i]);
+                             petContractRead('getSearchDetail', function(ret1){
+                                 if(ret1.result)
+                                 {
+                                  let se = {};
+                                  se.betbn = big2number(ret1.retobj.betBN);
+                                  se.result = 0;
+                                  this.searches.push(se);
+                                 }
+                             }, sidx);
+                         }
+                     }
+                 },addr);
+		    }
+
 		},
 		setGemResult:function(bn, result)
 		{
@@ -2912,7 +2917,7 @@ async function petContractRead(mname,callback,param,param2)
         }
         catch(err)
         {
-          console.log(err);
+          console.log(err+" "+mname);
         }
     }
     else
