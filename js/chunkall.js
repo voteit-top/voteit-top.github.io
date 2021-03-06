@@ -2538,7 +2538,8 @@ vue_pets = new Vue(
 		bnGems:{},
 		block:0,
 		findGems:0,
-		searching:false
+		searching:false,
+		claiming:false
 	}
 	,
 	methods:
@@ -2572,16 +2573,16 @@ vue_pets = new Vue(
 		    this.block = bn;
 		    if(result&4 == 4)
 		    {
-		        bnGems[bn] = 4;  //it is gem.
+		        this.bnGems[bn] = 4;  //it is gem.
 		    }
 		    else
-		        bnGems[bn] = 1;
+		        this.bnGems[bn] = 1;
 		    let gemcnt = 0;
             for(let i=0;i<this.searches.length;i++)
             {
                 if(this.searches[i].betbn == bn)
                 {
-                    this.searches[i].result = bnGems[bn];
+                    this.searches[i].result = this.bnGems[bn];
                 }
                 if(this.searches[i].result == 4)
                    {
@@ -2708,6 +2709,24 @@ vue_pets = new Vue(
 
                     }
                 },this.searchPrice*this.searchTimes, this.searchTimes);
+            }
+		},
+		claimGem:function()
+		{
+            if(!tronlinkWeb)
+            {
+                tronlinkNotConnected();
+            }
+            else
+            {
+                vue_pets.claiming = true;
+                petContractWrite('claimGems', function(ret){
+                    if(ret.result)
+                    {
+                        vue_pets.claiming = false;
+
+                    }
+                });
             }
 		},
 		buyGem:function(gemId)
