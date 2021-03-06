@@ -2489,8 +2489,8 @@ setInterval(async ()=>{
                     {
                         if(ret.result)
                         {
-                        vue_pets.myGemsCnt = ret.retobj.gemCnt;
-                        vue_pets.myPetsCnt = ret.retobj.petCnt;
+                        vue_pets.myGemsCnt = big2number(ret.retobj.gemCnt);
+                        vue_pets.myPetsCnt = big2number(ret.retobj.petCnt);
                         }
 
                     });
