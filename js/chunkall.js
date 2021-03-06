@@ -523,7 +523,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 				}
 			}
 		}
-	function big2numer(e)
+	function big2number(e)
 	{
 		return new bigInt(e._hex.substr(2), 16).toJSNumber();
 	}
@@ -947,7 +947,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 		{
 			votemodalv.reset();
 			contractRead('getUserVotes', function(ret){						
-						votemodalv.tokenBalance = big2numer(ret)/DECIMALS;
+						votemodalv.tokenBalance = big2number(ret)/DECIMALS;
 						}, getRealTronweb().defaultAddress.base58,itemid, true);
 			votemodalv.itemId = itemid;
 			votemodalv.itemName = presetranks[itemid].name;
@@ -997,7 +997,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 			{
 			  if(ret1.result)
 			  {
-				vue_signdays.contDays = big2numer(ret1.retobj.contDays);
+				vue_signdays.contDays = big2number(ret1.retobj.contDays);
 			  }
 			});			 
 		 }
@@ -1145,9 +1145,9 @@ function getkey()
         let item ={};
         item.name = ret1[0];
         item.voting = false;
-        item.cateId = big2numer(ret1[2]);
+        item.cateId = big2number(ret1[2]);
         item.id = itemId;
-        item.votes = big2numer(ret1[1])/DECIMALS;
+        item.votes = big2number(ret1[1])/DECIMALS;
         if(itemId >= presetranks.length)
         {
           presetranks.length = itemId +1;
@@ -1189,7 +1189,7 @@ function getkey()
 		contractRead('getCateItemsId', function(ret){
 				for(let i=0;i<ret.length;i++)
 				{
-					let itemId = big2numer(ret[i]);
+					let itemId = big2number(ret[i]);
           readItem(itemId);
 				}
         refreshRanks();
@@ -2213,7 +2213,7 @@ methods:
         {
             if(!bet)
                 return false;
-            let betBn = big2numer(bet.betBN);
+            let betBn = big2number(bet.betBN);
             if(this.blockNumber == 0 || this.blockNumber > (256+betBn))
                 return false;
             for(let i=0;i<this.myBets.length;i++)
@@ -2227,7 +2227,7 @@ methods:
             {
                 this.maxMyBetBn = betBn;
             }
-            this.myBets.unshift({bn:betBn, amount:big2numer(bet.betAmount), btype:big2numer(bet.betType), btypeStr:betTypeToStr(big2numer(bet.betType)),result:0,win:false});
+            this.myBets.unshift({bn:betBn, amount:big2number(bet.betAmount), btype:big2number(bet.betType), btypeStr:betTypeToStr(big2number(bet.betType)),result:0,win:false});
             return betBn;
         },
         updateMyBets:function(curBN)
@@ -2317,7 +2317,7 @@ methods:
                     }
                     for(;i<obj.length;i++)
                     {
-                        contractGetBetDetail(big2numer(obj[i]), function(ret1){
+                        contractGetBetDetail(big2number(obj[i]), function(ret1){
                             if(ret1.result)
                                 {
                                 let bn = vue_betgame.addMyBet(ret1.retobj);
@@ -2435,10 +2435,10 @@ setInterval(async ()=>{
 		{
 			if(metrics.result)
 			{
-				let morderId = big2numer(metrics.retobj.totalOrders);
+				let morderId = big2number(metrics.retobj.totalOrders);
                 vue_dex.totalOrders = morderId;
-                vue_dex.lastPrice = big2numer(metrics.retobj.lastPrice);
-                vue_dex.totalAmount = big2numer(metrics.retobj.totalAmount);
+                vue_dex.lastPrice = big2number(metrics.retobj.lastPrice);
+                vue_dex.totalAmount = big2number(metrics.retobj.totalAmount);
 				if(morderId > maxOrderId)
 				{
 					readBuyPrices();
@@ -2802,7 +2802,7 @@ petContractRead('getMarketGems',function(ret){
     		let mgems = ret.retobj;
     		for(let i=0;i<mgems.length;i++)
     		{
-    		    let gemId = big2numer(mgems[i]);
+    		    let gemId = big2number(mgems[i]);
     			petContractRead('getGem',function(ret1){
                     if(ret1.result)
                     {
@@ -2811,9 +2811,9 @@ petContractRead('getMarketGems',function(ret){
                         gem.gemId = gemId;
                         gem.gemType = gemobj.gemType;
                         gem.img = gemType2Img(gem.gemType);
-                        gem.price = big2numer(gemobj.price);
+                        gem.price = big2number(gemobj.price);
                         gem.owner = gemobj.gemowner;
-                        gem.petId = big2numer(gemobj.petId);
+                        gem.petId = big2number(gemobj.petId);
                         vue_pets.updateMarketGem(gem);
                     }
 
@@ -2827,15 +2827,15 @@ getMarketPets(function(ret){
 		let mpets = ret.retobj;
 		for(let i=0;i<mpets.length;i++)
 		{
-		    let petId = big2numer(mpets[i]);
+		    let petId = big2number(mpets[i]);
 			getPetBasic(petId, function(ret1){
 			    if(ret1.result)
 			    {
 			        let mpet = {};
 			         mpet.petId = petId;
-			         mpet.rpId = big2numer(ret1.retobj.rpId);
-			         mpet.power = big2numer(ret1.retobj.power);
-			         mpet.price = big2numer(ret1.retobj.price)/DECIMALS;
+			         mpet.rpId = big2number(ret1.retobj.rpId);
+			         mpet.power = big2number(ret1.retobj.power);
+			         mpet.price = big2number(ret1.retobj.price)/DECIMALS;
 			         mpet.img = 'pet'+mpet.rpId+'.png';
 			         vue_pets.updateMarketPet(mpet);
 			    }
@@ -2946,11 +2946,11 @@ async function readPetMetrics()
         if(ret.result)
         {
         //uint eventCnt, uint searchCnt, uint gemCnt,uint petCnt, uint rawPetCnt,uint marketPetCnt, uint marketGemCnt
-            vue_pets.totalEvents = big2numer(ret.retobj.eventCnt);
-            vue_pets.totalGems = big2numer(ret.retobj.gemCnt);
-            vue_pets.totalPets =  big2numer(ret.retobj.petCnt);
-            vue_pets.totalMarketGems =  big2numer(ret.retobj.marketGemCnt);
-            vue_pets.totalMarketPets =  big2numer(ret.retobj.marketPetCnt);
+            vue_pets.totalEvents = big2number(ret.retobj.eventCnt);
+            vue_pets.totalGems = big2number(ret.retobj.gemCnt);
+            vue_pets.totalPets =  big2number(ret.retobj.petCnt);
+            vue_pets.totalMarketGems =  big2number(ret.retobj.marketGemCnt);
+            vue_pets.totalMarketPets =  big2number(ret.retobj.marketPetCnt);
 
         }
         else
@@ -3064,18 +3064,18 @@ function readUserOrders()
           let i=0;
           for(;i<ods.length;i++)
           {
-              let oid = big2numer(ods[i]);
+              let oid = big2number(ods[i]);
 
               dexRead('getOrderDetails',function(odetail){
                 if(odetail.result)
                   {
                   let ometrics = odetail.retobj;
                   let torder = {'oid':oid};
-                  torder.price = big2numer(ometrics.price); 
-                  torder.amount = big2numer(ometrics.amount); 
-                  torder.lamount = big2numer(ometrics.leftamout);
-                  torder.ts = big2numer(ometrics.ts);
-                  torder.tsdone = big2numer(ometrics.tsdone);
+                  torder.price = big2number(ometrics.price); 
+                  torder.amount = big2number(ometrics.amount); 
+                  torder.lamount = big2number(ometrics.leftamout);
+                  torder.ts = big2number(ometrics.ts);
+                  torder.tsdone = big2number(ometrics.tsdone);
                   torder.type = ometrics.otype;
                   if(torder.lamount > 0)
                     {
@@ -3118,7 +3118,7 @@ function readBuyPrices()
        for(;i<bps.length;i++)
        {
           let bo =vue_dex.buyorders[i];
-          let price = big2numer(bps[i]);
+          let price = big2number(bps[i]);
           bo.price = price;
           bo.dprice = bo.price/1000000;
           //bo.amount = 0;//need update;
@@ -3126,7 +3126,7 @@ function readBuyPrices()
           dexRead('getBuyAmount',function(bas){
             if(bas.result)
             { 
-              vue_dex.ordersMap[price].amount = big2numer(bas.retobj);
+              vue_dex.ordersMap[price].amount = big2number(bas.retobj);
             }
           }, price);
           
@@ -3153,14 +3153,14 @@ function readSellPrices()
      for(;i<sps.length;i++)
      {
         let so =vue_dex.sellorders[maxOrders-i-1];
-        so.price = big2numer(sps[i]);
+        so.price = big2number(sps[i]);
 		so.dprice = so.price/1000000;
 		let price = so.price;
         so.amount = 0;//need update;
         vue_dex.sordersMap[price]=so;
         dexRead('getSellAmount',function(sa){
           if(sa.result)
-           vue_dex.sordersMap[price].amount = big2numer(sa.retobj);
+           vue_dex.sordersMap[price].amount = big2number(sa.retobj);
         }, price);
      }
 	 for(;i<maxOrders;i++)
@@ -3211,8 +3211,8 @@ function readSellPrices()
       item.name = ret1[0];
       item.rank = itemId;
       item.voting = false;
-      item.votes = big2numer(ret1[1])/DECIMALS;
-      item.cateId = big2numer(ret1[2]);
+      item.votes = big2number(ret1[1])/DECIMALS;
+      item.cateId = big2number(ret1[2]);
       item.creator = getLocalTronweb().address.fromHex(ret1[3]);
       let insert = insertIntoRanks(item);
       //console.log(ret1);
@@ -3241,7 +3241,7 @@ function readSellPrices()
 		contractRead('getCateItemsId', function(ret){
 				for(let i=0;i<ret.length;i++)
 				{
-					let itemId = big2numer(ret[i]);
+					let itemId = big2number(ret[i]);
           readItem(itemId);
 				}
 				//
@@ -3251,18 +3251,18 @@ function readSellPrices()
 	{
 		contractRead('getMetrics', function(ret){
 			
-			tongjiv.totalvotes = big2numer(ret[0])/DECIMALS;
-			 tongjiv.totalrewards = big2numer(ret[1])/DECIMALS;
-			 tongjiv.totalitems = big2numer(ret[2])-1;
+			tongjiv.totalvotes = big2number(ret[0])/DECIMALS;
+			 tongjiv.totalrewards = big2number(ret[1])/DECIMALS;
+			 tongjiv.totalitems = big2number(ret[2])-1;
 			 presetranks.length = tongjiv.totalitems+1;			 
-			 tongjiv.costOfCreate = big2numer(ret[3]);
+			 tongjiv.costOfCreate = big2number(ret[3]);
 			 tongjiv.createtext = "Cost " + tongjiv.costOfCreate/DECIMALS + " TRX to create new item";
 			 createmodalv.indicator = tongjiv.createtext;
-			 tongjiv.myvotes = big2numer(ret[4])/DECIMALS;
-       tongjiv.exrate = big2numer(ret[5]);
-       tongjiv.airdropusers = big2numer(ret[6]);
-       tongjiv.totalusers = big2numer(ret[7]);
-       tongjiv.totalevents = big2numer(ret[8]);
+			 tongjiv.myvotes = big2number(ret[4])/DECIMALS;
+       tongjiv.exrate = big2number(ret[5]);
+       tongjiv.airdropusers = big2number(ret[6]);
+       tongjiv.totalusers = big2number(ret[7]);
+       tongjiv.totalevents = big2number(ret[8]);
        if(tongjiv.totalevents > eventStart)
        {
          //load event;
@@ -3273,10 +3273,10 @@ function readSellPrices()
              
              let evt = {};
              evt.caller = getLocalTronweb().address.fromHex(ret1[0]);
-             evt.type = big2numer(ret1[1]);
-             evt.itemId = big2numer(ret1[2]);
-             evt.amount = big2numer(ret1[3])/DECIMALS;
-             evt.total = big2numer(ret1[4])/DECIMALS;
+             evt.type = big2number(ret1[1]);
+             evt.itemId = big2number(ret1[2]);
+             evt.amount = big2number(ret1[3])/DECIMALS;
+             evt.total = big2number(ret1[4])/DECIMALS;
              evt.param2 ='';
              evt.details = evt.caller;
              alleventv.updateEventResult(evt);
