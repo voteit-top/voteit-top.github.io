@@ -2942,10 +2942,13 @@ async function petContractWrite(mname, callback,param, param2)
 }
 async function petContractRead(mname,callback,param,param2)
 {
-    if(localTronweb)
+    let optw = localTronweb;
+    if(tronlinkWeb)
+        optw = tronlinkWeb;
+    if(optw)
     {
         try{
-          let contract = await localTronweb.contract().at(petcontract);
+          let contract = await optw.contract().at(petcontract);
           let ret;
           if(param != undefined && param2 != undefined)
           {
