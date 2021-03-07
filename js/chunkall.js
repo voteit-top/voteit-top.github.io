@@ -2728,7 +2728,20 @@ vue_pets = new Vue(
 		},
 		feed:function(petId)
 		{
-
+            if(!tronlinkWeb)
+            {
+                tronlinkNotConnected();
+            }
+            else
+            {
+                feedPet(petId, function(ret){
+                    if(ret.result)
+                    {
+                        //pushtoallevet;
+                        
+                    }
+                })
+            }
 		},
 		searchGem:function()
 		{

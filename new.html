@@ -502,12 +502,21 @@
       </div>
       <div id="myPetGem" class="vhide">
           <div class="card-group">
+              <div class="card" style="max-width:200px;min-width:180px" v-for="mp in myPets">
+                  <img width=180px height=200px :src="'./img/'+mp.img" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <a v-on:click="sell(mp.petId)" class="btn btn-primary">Sell</a>
+                      <a v-on:click="feed(mp.petId)" class="btn btn-primary">Feed</a>
+                  </div>
+              </div>
+          </div>
+          <div class="card-group">
               <div class="card" style="max-width:150px;min-width:100px" v-for="mg in myGems">
                   <img width=60px height=60px :src="mg.img" class="card-img-top" alt="...">
                   <div class="card-body">
                       <p class="card-text">power:{{mg.power}}</p>
-                      <a v-on:click="sellGem(mp.gemId)" class="btn btn-primary">sell</a>
-                      <a v-on:click="bindGem(mp.gemId)" class="btn btn-primary">bind</a>
+                      <a v-on:click="sellGem(mg.gemId)" class="btn btn-primary">sell</a>
+                      <a v-on:click="bindGem(mg.gemId)" class="btn btn-primary">bind</a>
                   </div>
               </div>
           </div>
