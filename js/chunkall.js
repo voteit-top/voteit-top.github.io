@@ -836,15 +836,20 @@ var carousel = new bootstrap.Carousel(myCarousel)
 				let itemId = this.itemId;
 				if(this.isVote)
 				{
-          if(this.callback)
-          {
-            this.callback(1);
-          }
+                  if(this.callback)
+                  {
+                    this.callback(1);
+                  }
 				presetranks[itemId].voting = true;
 				voteModalObj.hide();
 				let votes = Number(this.inputVotes);
-        if(this.alleventv)
-          this.alleventv.pushWaitingEvent("Voting");
+				if(votes <=0 )
+				{
+				    votemodalv.indicator = "cannot vote 0";
+				    return;
+				}
+                if(this.alleventv)
+                  this.alleventv.pushWaitingEvent("Voting");
 				contractVoteItem(tronlinkNotConnected, 
 								this.itemId, 
 								this.inputVotes, 
@@ -869,31 +874,31 @@ var carousel = new bootstrap.Carousel(myCarousel)
 				}
 				else
 				{
-				if(this.inputVotes > this.vote)
-				{
-					this.indicator="you can only unvote your votes";
-					return;
-				}
-        if(this.callback)
-        {
-          this.callback(3);
-        }
-				presetranks[itemId].unvoting = true;
-				voteModalObj.hide();
-				let unvotes = Number(this.inputVotes);
-        if(this.alleventv)
-          alleventv.pushWaitingEvent("UnVoting");
-				contractUnVoteItem(tronlinkNotConnected, 
-								this.itemId, 
-								this.inputVotes, 
-								function(ret){
-									presetranks[itemId].unvoting = false;
-                  if(votemodalv.alleventv)
-                    alleventv.pushUnVoteEvent(presetranks[itemId].name, unvotes,ret);
-									if(votemodalv.callback)
-                  {
-                    votemodalv.callback(4);
-                  }
+                    if(this.inputVotes > this.vote)
+                    {
+                        this.indicator="you can only unvote your votes";
+                        return;
+                    }
+                    if(this.callback)
+                    {
+                      this.callback(3);
+                    }
+                    presetranks[itemId].unvoting = true;
+                    voteModalObj.hide();
+                    let unvotes = Number(this.inputVotes);
+                    if(this.alleventv)
+                      alleventv.pushWaitingEvent("UnVoting");
+                    contractUnVoteItem(tronlinkNotConnected,
+                                    this.itemId,
+                                    this.inputVotes,
+                                    function(ret){
+                                        presetranks[itemId].unvoting = false;
+                      if(votemodalv.alleventv)
+                        alleventv.pushUnVoteEvent(presetranks[itemId].name, unvotes,ret);
+                                        if(votemodalv.callback)
+                      {
+                        votemodalv.callback(4);
+                      }
 									if(ret.result)
 									{										
 										votemodalv.indicator = "UnVoted successfully";
@@ -2769,17 +2774,31 @@ vue_pets = new Vue(
 		{
 
 		},
+		bindGem:function(gemId)
+		{
+
+		},
+		showMyPetGem:function()
+		{
+            showEle('petsRanking',false);
+            showEle('petsPick',false);
+            showEle('petsMarket',false);
+            showEle('myPetGem',true);
+		},
+
 		showPetMarket:function()
 		{
         showEle('petsRanking',false);
         showEle('petsPick',false);
         showEle('petsMarket',true);
+        showEle('myPetGem',false);
 		},
 		showPetPicker:function()
 		{
             showEle('petsRanking',false);
             showEle('petsPick',true);
             showEle('petsMarket',false);
+            showEle('myPetGem',false);
             this.buildRawPets();
 		},
 		showPetRanking:function()

@@ -454,7 +454,7 @@
               </div>
         </div>
 	   <div  id="v_pets" class="vhide">
-      <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button></div>
+      <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button><button type="button" v-on:click="showMyPetGem" class="btn btn-outline-primary">My</button></div>
       <div id="petsRanking">
         <p> this is ranking of pets</p>
         <div class="row">
@@ -499,6 +499,18 @@
                 {{pr.farm}}
             </div>
         </div>
+      </div>
+      <div id="myPetGem" class="vhide">
+          <div class="card-group">
+              <div class="card" style="max-width:150px;min-width:100px" v-for="mg in myGems">
+                  <img width=60px height=60px :src="mg.img" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">power:{{mg.power}}</p>
+                      <a v-on:click="sellGem(mp.gemId)" class="btn btn-primary">sell</a>
+                      <a v-on:click="bindGem(mp.gemId)" class="btn btn-primary">bind</a>
+                  </div>
+              </div>
+          </div>
       </div>
       <div id="petsPick" class="vhide">
         <p> you can pick a pet randomly. The first pet costs 10 VOTEIT. Starting with the second pet, you'll have to spend twice as much as the previous one.</p>
