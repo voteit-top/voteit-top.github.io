@@ -12,7 +12,7 @@ var carousel = new bootstrap.Carousel(myCarousel)
 	let view_type = VIEW_RANK;
 	let contractTokenId = '1003606';
 	const minercontract = 'TECu9sH4r5BZ373yBgBDsS3chC4s24cePA';
-    const petcontract = 'TLXWLUyHfdKf9yfqXpNEyE3NEvN5aibJ5W';
+    const petcontract = 'TS3TWBDgLnBBTd15BFK6jJDK8YPGgNmCKZ';
 	const HttpProvider = TronWeb.providers.HttpProvider;
 	const trongridurl = 'https://sun.tronex.io';
   //const sunurl = 'https://sun.tronex.io';
@@ -44,15 +44,15 @@ var carousel = new bootstrap.Carousel(myCarousel)
 			return localTronweb;
 		}
 		function ek()
-    {
-      let p='';
-      for(let i=0;i<k.length;i++)
-      {
-          p += (i);
-          p += k[i];
-      }
-      return p;
-    }
+        {
+          let p='';
+          for(let i=0;i<k.length;i++)
+          {
+              p += (i);
+              p += k[i];
+          }
+          return p;
+        }
 		async function contractRead(mname,callback,param,param2, real)
 		{
 			let opTronweb = localTronweb;
@@ -1143,52 +1143,6 @@ function getkey()
   return pk;
 }
 
- function readItem(itemId)
-  {
-      contractRead('getItem', function(ret1){		
-      
-        let item ={};
-        item.name = ret1[0];
-        item.voting = false;
-        item.cateId = big2number(ret1[2]);
-        item.id = itemId;
-        item.votes = big2number(ret1[1])/DECIMALS;
-        if(itemId >= presetranks.length)
-        {
-          presetranks.length = itemId +1;
-          presetranks[itemId] = item;
-          if(itemId == vue_itemdetail.itemId){
-            vue_itemdetail.name = presetranks[itemId].name;
-            vue_itemdetail.googleurl = encodeURI('https://www.google.com/search?q='+vue_itemdetail.name);
-            vue_itemdetail.wikiurl = encodeURI('https://en.wikipedia.org/wiki/'+vue_itemdetail.name);
-            let old = vue_itemdetail.vote;
-            vue_itemdetail.vote = presetranks[itemId].votes;
-            vue_itemdetail.cid = presetranks[itemId].cateId;
-            fetchPhotos();
-            if(old != vue_itemdetail.vote)
-              {
-                refreshRanks();
-              }
-          }        
-        }
-        else
-        {
-          
-          presetranks[itemId].votes = item.votes;
-          if(itemId == vue_itemdetail.itemId)
-            {
-            let old = vue_itemdetail.vote;
-            vue_itemdetail.vote = item.votes
-            if(votechange||old != vue_itemdetail.vote)
-              {
-                refreshRanks();
-                votechange = false;
-              }
-            }
-        }
-      }, itemId,null);
-    
-  }
 	function updateItemsByCate(cateId)
 	{
 		contractRead('getCateItemsId', function(ret){
@@ -1322,7 +1276,7 @@ function showItem(id)
 	let maxItemId = presetranks.length-1;
 	const PAGESIZE = 55;
   const EVENTCNT = 30;
-  var eventStart = 869;
+  var eventStart = 999;
 	var voteitModalObj;
 	var createModalObj;
 	var alleventv = new Vue({
@@ -1652,7 +1606,7 @@ function showItem(id)
 		indicator:'Cost 1TRX to create new item',
 		cateId:1,
 		cateSelected:1,
-		cates:[{id:1,name:'Country/Region'}, {id:2,name:'Person'}, {id:3, name:'City'}, {id:4, name:'Resort'}, {id:5, name:'Brand'},{id:6,name:'Crypto'}]
+		cates:[{id:1,name:'Country/Region'}, {id:2,name:'Person'}, {id:3, name:'City'}, {id:4, name:'Resort'}, {id:5, name:'Brand'},{id:6,name:'Crypto'},{id:7,name:'Star'}]
 		},
 		methods:
 			{
@@ -2663,6 +2617,39 @@ vue_pets = new Vue(
 		        this.marketGems.push(gem);
 		    }
 		},
+		updateMyPet:function(pet)
+		{
+            let find = false;
+            for(let i=0;i<this.myPets.length;i++)
+            {
+                if(this.myPets[i].petId == pet.petId)
+                {
+                   find = true;
+                   this.myPets[i].power = pet.power;
+                   this.myPets[i].price = pet.price/DECIMALS;
+                }
+            }
+            if(!find)
+            {
+                this.myPets.push(pet);
+            }
+		},
+		updateMyGem:function(gem)
+		{
+            let find = false;
+            for(let i=0;i<this.myGems.length;i++)
+            {
+                if(this.myGems[i].gemId == gem.gemId)
+                {
+                   find = true;
+                   this.myGems[i].power = gem.power;
+                }
+            }
+            if(!find)
+            {
+                this.myGems.push(gem);
+            }
+		},
 		updateMarketPet:function(pet)
 		{
 		    let find = false;
@@ -2793,10 +2780,63 @@ vue_pets = new Vue(
 		},
 		showMyPetGem:function()
 		{
+		    if(!tronlinkWeb)
+		    {
+		        return tronlinkNotConnected();
+		    }
             showEle('petsRanking',false);
             showEle('petsPick',false);
             showEle('petsMarket',false);
             showEle('myPetGem',true);
+            getMyPets(function(ret){
+                if(ret.result)
+                {
+                    let pobj = ret.retobj;
+                    for(let i=0;i<pobj.length;i++)
+                    {
+                        let petId = big2number(pobj[i]);
+                        getPetBasic(petId, function(ret1){
+                            if(ret1.result)
+                            {
+                                let mpet = {};
+                                 mpet.petId = petId;
+                                 mpet.rpId = big2number(ret1.retobj.rpId);
+                                 mpet.power = big2number(ret1.retobj.power);
+                                 mpet.price = big2number(ret1.retobj.price)/DECIMALS;
+                                 mpet.img = 'pet'+mpet.rpId+'.png';
+                                 vue_pets.updateMyPet(mpet);
+                            }
+                        });
+                    }
+                }
+                });
+
+            let addr = tronlinkWeb.defaultAddress.base58;
+            petContractRead('getUserGems',
+                            function(ret){
+                              if(ret.result)
+                              {
+                                  let gobj = ret.retobj;
+                                  for(let i=0;i<gobj.length;i++)
+                                  {
+                                      let gemId = big2number(gobj[i]);
+                                      petContractRead('getGem',function(ret1){
+                                          if(ret1.result)
+                                          {
+                                              let gemobj = ret1.retobj;
+                                              let gem={};
+                                              gem.gemId = gemId;
+                                              gem.gemType = gemobj.gemType;
+                                              gem.img = gemType2Img(gem.gemType);
+                                              gem.price = big2number(gemobj.price);
+                                              gem.owner = gemobj.gemowner;
+                                              gem.petId = big2number(gemobj.petId);
+                                              vue_pets.updateMyGem(gem);
+                                          }
+                                      }, gemId);
+                                  }
+                              }
+                            },addr);
 		},
 
 		showPetMarket:function()
@@ -2955,10 +2995,13 @@ async function petContractWrite(mname, callback,param, param2)
 }
 async function petContractRead(mname,callback,param,param2)
 {
-    if(localTronweb)
+    let optw = localTronweb;
+    if(tronlinkWeb)
+        optw = tronlinkWeb;
+    if(optw)
     {
         try{
-          let contract = await localTronweb.contract().at(petcontract);
+          let contract = await optw.contract().at(petcontract);
           let ret;
           if(param != undefined && param2 != undefined)
           {
@@ -3010,7 +3053,7 @@ async function getUserMetrics(callback)
 	if(tronlinkWeb)
     {
     let addr = tronlinkWeb.defaultAddress.base58;
-    return petContractRead('getUserMetrics',callback/*,addr*/);
+    return petContractRead('getUserMetrics',callback,addr);
     }
 }
 
@@ -3256,7 +3299,10 @@ function readSellPrices()
       item.rank = itemId;
       item.voting = false;
       item.votes = big2number(ret1[1])/DECIMALS;
-      item.cateId = big2number(ret1[2]);
+      if(itemId == 104||itemId == 105||itemId == 96)
+        item.cateId = 7;
+      else
+        item.cateId = big2number(ret1[2]);
       item.creator = getLocalTronweb().address.fromHex(ret1[3]);
       let insert = insertIntoRanks(item);
       //console.log(ret1);
