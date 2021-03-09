@@ -2455,13 +2455,8 @@ vue_pets = new Vue({
                 alleventv.pushWaitingEvent("Picking pet");
                 this.petsCntBp = this.myPetsCnt;
                 pickPet(this.nextPickPrice, function(ret) {
-                    if (ret.result) {
-                        //picked //push allevent;
-                        alleventv.pushPickPet(ret);
-
-                    } else {
-                        console.log("pick pet eorro");
-                    }
+                    //picked //push allevent;
+                    alleventv.pushPickPet(ret);
                 })
             }
         },
@@ -2488,11 +2483,7 @@ vue_pets = new Vue({
             } else {
                 alleventv.pushWaitingEvent('Feeding pet'); 
                 feedPet(petId, function(ret) {
-                    if (ret.result) {
-                        //pushtoallevet;
-                        alleventv.pushFeedPet(petId, ret);
-
-                    }
+                    alleventv.pushFeedPet(petId, ret);
                 })
             }
         },
