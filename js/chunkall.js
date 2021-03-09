@@ -2602,7 +2602,7 @@ vue_pets = new Vue({
                      else
                          return 'Unsell';
                  }
-
+               }
 	    }
         },
         showMyPetGem: function() {
