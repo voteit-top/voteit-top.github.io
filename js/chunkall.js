@@ -2259,7 +2259,7 @@ setInterval(async () => {
                 if (ret.result) {
                     vue_pets.myGemsCnt = big2number(ret.retobj.gemCnt);
                     vue_pets.myPetsCnt = big2number(ret.retobj.petCnt);
-                    vue_pets.nextPickPrice = big2number(ret.retobj.pickPrice);
+                    vue_pets.nextPickPrice = big2number(ret.retobj.pickPrice)/DECIMALS;
                 }
 
             });
