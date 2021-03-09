@@ -2315,6 +2315,7 @@ vue_pets = new Vue({
         }],
         sellPrice:0,
         itemName:'',
+        sellIndicator:'',
         totalRawPets: 125,
         totalPets: 0,
         totalGems: 0,
