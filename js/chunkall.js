@@ -2450,6 +2450,7 @@ setInterval(async ()=>{
                         {
                         vue_pets.myGemsCnt = big2number(ret.retobj.gemCnt);
                         vue_pets.myPetsCnt = big2number(ret.retobj.petCnt);
+                        vue_pets.nextPickPrice = big2number(ret.retobj.pickPrice);
                         }
 
                     });
@@ -2788,6 +2789,7 @@ vue_pets = new Vue(
             showEle('petsPick',false);
             showEle('petsMarket',false);
             showEle('myPetGem',true);
+
             getMyPets(function(ret){
                 if(ret.result)
                 {
@@ -2810,7 +2812,6 @@ vue_pets = new Vue(
                     }
                 }
                 });
-
             let addr = tronlinkWeb.defaultAddress.base58;
             petContractRead('getUserGems',
                             function(ret){
@@ -3086,7 +3087,7 @@ async function feedPet(petId, callback)
 {
 	if(tronlinkWeb)
     {
-        return petContractWritePay('feedPet', callback, FEEDPRICE);
+        return petContractWritePay('feedPet', callback, FEEDPRICE,petId);
     }
 }
 async function getPetBasic(petId, callback)
