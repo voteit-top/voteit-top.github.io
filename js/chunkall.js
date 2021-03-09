@@ -2292,7 +2292,7 @@ readSellPrices();
 //rawPet has unique ID from 1
 //marketPet has unique ID from 1
 //foods  has unique ID from 1
-let petPriceModalObj = new bootstrap.Modal(document.getElementById('petModal'), null);
+let petPriceModalObj = null;//new bootstrap.Modal(document.getElementById('petModal'), null);
 
 vue_pets = new Vue({
     el: "#v_pets",
@@ -2517,6 +2517,7 @@ vue_pets = new Vue({
         sell: function(petId) {
             this.itemName="Pet "+petId;
             this.sellObj = {type:1, id:petId};
+            petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
             petPriceModalObj.show();
         },
         release: function(petId) {
