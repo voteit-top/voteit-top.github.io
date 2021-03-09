@@ -1193,6 +1193,21 @@ var alleventv = new Vue({
             this.myEvents.unshift(evt);
             this.switchMineTab();
 	},
+        pushSellPetGem:function(name,pid, ret)
+        {
+           this.waiting = false;
+           let evt ={};
+           evt.name = "Sell " + name + " to Market " +  pid;
+           evt.error = !ret.result;
+           if(ret.result){
+                evt.tranUrl = 'https://dappchain.tronscan.io/#/transaction/' + ret.retobj;
+                evt.details = "check transaction";
+	   }else{
+                evt.details = ret.retobj;
+           }
+            this.myEvents.unshift(evt);
+            this.switchMineTab();
+	},
         pushFeedPet:function(pid, ret)
         {
            this.waiting = false;
@@ -2277,6 +2292,7 @@ readSellPrices();
 //rawPet has unique ID from 1
 //marketPet has unique ID from 1
 //foods  has unique ID from 1
+let petPriceModalObj = new bootstrap.Modal(document.getElementById('petModal'), null);
 
 vue_pets = new Vue({
     el: "#v_pets",
@@ -2297,6 +2313,8 @@ vue_pets = new Vue({
             diam: 0,
             power: 0
         }],
+        sellPrice:0,
+        itemName:'',
         totalRawPets: 125,
         totalPets: 0,
         totalGems: 0,
@@ -2471,8 +2489,34 @@ vue_pets = new Vue({
             console.log(petId);
 
         },
+        confirmSell:function()
+        {
+           if(this.sellPrice > 0)
+           {
+              if(this.sellObj.type == 1)
+              {
+	         //sellPet;
+                 let petId = this.sellObj.id;
+	         alleventv.pushWaitingEvent("Selling Pet..");
+                 sellPet(petId, this.sellPrice, function(ret){
+                        alleventv.pushSellPetGem("Pet",petId, ret);
+			});
+	      }
+	      else
+              {
+                 //sellGem
+                 let gemId= this.sellObj.id;
+	         alleventv.pushWaitingEvent("Selling Gem ..");
+                 contractSellGem(gemId, this.sellPrice, function(ret){
+                        alleventv.pushSellPetGem("Gem",gemId, ret);
+			});
+	      }
+           } 
+        },
         sell: function(petId) {
-            console.log(petId);
+            this.itemName="Pet "+petId;
+            this.sellObj = {type:1, id:petId};
+            petPriceModalObj.show();
         },
         release: function(petId) {
             console.log(petId);
@@ -2517,7 +2561,9 @@ vue_pets = new Vue({
 
         },
         sellGem: function(gemId) {
-
+            this.itemName="Gem " + gemId;
+            this.sellObj = {type:2, id:petId};
+            petPriceModalObj.show();
         },
         bindGem: function(gemId) {
 
@@ -2803,6 +2849,13 @@ async function sellPet(petId, price, callback) {
         tronlinkNotConnected();
     } else if (price > 0) {
         petContractWritePay('sellPet', callback, price, petId, price);
+    }
+}
+async function contractSellGem(gemId, price, callback) {
+    if (!tronlinkWeb) {
+        tronlinkNotConnected();
+    } else if (price > 0) {
+        petContractWritePay('sellGem', callback, price, gemId, price);
     }
 }
 async function unsellPet(petId, callback) {

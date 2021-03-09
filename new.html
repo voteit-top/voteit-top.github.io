@@ -457,6 +457,30 @@
               </div>
         </div>
 	   <div  id="v_pets" class="vhide">
+
+<div class="modal fade" id="petModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="petModalLabel">Sell <span class="text-primary">{{itemName}}</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Price to sell(VOTEIT)</label>
+            <input type="text" class="form-control" id="recipient-name" v-model="sellPrice">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <span class="text-info">{{sellIndicator}}</span>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" v-on:click="confirmSell">Sell</button>
+      </div>
+    </div>
+  </div>
+</div>
       <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button><button type="button" v-on:click="showMyPetGem" class="btn btn-outline-primary">My</button></div>
       <div id="petsRanking">
         <p> this is ranking of pets</p>
