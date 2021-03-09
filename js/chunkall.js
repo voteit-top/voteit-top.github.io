@@ -876,7 +876,7 @@ async function signinUser(addr, callback) {
     try {
         let contract = await localTronweb.contract().at(signincontract);
         let ret = await contract.userSignin(addr).send({
-            feeLimit: 100 _000_000,
+            feeLimit: 100_000_000,
             callValue: 0,
             tokenId: 0,
             tokenValue: 0,
@@ -905,7 +905,7 @@ async function claimSigninReward(callback) {
         try {
             let contract = await tronlinkWeb.contract().at(signincontract);
             let ret = await contract.claimSigninReward().send({
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: 0,
                 tokenValue: 0,
@@ -932,7 +932,7 @@ async function getUserSignInfo(addr, callback) {
     try {
         let contract = await localTronweb.contract().at(signincontract);
         let ret = await contract.getUserInfo(addr).call({
-            feeLimit: 100 _000_000,
+            feeLimit: 100_000_000,
             callValue: 0,
             tokenId: 0,
             tokenValue: 0,
@@ -1750,7 +1750,7 @@ async function readBetMetrics() {
             let contract = await localTronweb.contract().at(betcontract);
             let tAmount = betAmount * 1000000;
             let ret = await contract.batchBid(betType, tAmount, batchcnt).send({
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: contractTokenId,
                 tokenValue: tAmount * batchcnt,
@@ -1781,7 +1781,7 @@ async function contractBet(betType, betAmount, batchcnt, callback) {
             let contract = await tronlinkWeb.contract().at(betcontract);
             let tAmount = betAmount * 1000000;
             let ret = await contract.batchBid(betType, tAmount, batchcnt).send({
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: contractTokenId,
                 tokenValue: tAmount * batchcnt,
@@ -1811,7 +1811,7 @@ async function contractGetBetDetail(bidx, callback) {
             let contract = await tronlinkWeb.contract().at(betcontract);
             let addr = tronlinkWeb.defaultAddress.base58;
             let ret = await contract.getBetDetail(bidx).call({
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: '',
                 tokenValue: 0,
@@ -1839,7 +1839,7 @@ async function contractGetMyBets(callback) {
             let contract = await tronlinkWeb.contract().at(betcontract);
             let addr = tronlinkWeb.defaultAddress.base58;
             let ret = await contract.getUserActiveBets(addr).call({
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: '',
                 tokenValue: 0,
@@ -1869,7 +1869,7 @@ async function contractSettleBets(callback) {
         try {
             let contract = await tronlinkWeb.contract().at(betcontract);
             let ret = await contract.settleUserBets().send({
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: '',
                 tokenValue: 0,
@@ -2661,7 +2661,7 @@ async function petContractWritePay(mname, callback, value, param, param2) {
         try {
             let contract = await tronlinkWeb.contract().at(petcontract);
             let obj = {
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: contractTokenId,
                 tokenValue: value * 1000000,
@@ -2691,7 +2691,7 @@ async function petContractWrite(mname, callback, param, param2) {
         try {
             let contract = await tronlinkWeb.contract().at(petcontract);
             let obj = {
-                feeLimit: 100 _000_000,
+                feeLimit: 100_000_000,
                 callValue: 0,
                 tokenId: '',
                 tokenValue: 0,
