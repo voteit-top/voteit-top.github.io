@@ -2272,9 +2272,19 @@ setInterval(async () => {
             readPetMetrics();
             getUserMetrics(function(ret) {
                 if (ret.result) {
+                    let oldGemCnt = vue_pets.myGemsCnt;
+		    let oldPetCnt = vue_pets.myPetsCnt;
                     vue_pets.myGemsCnt = big2number(ret.retobj.gemCnt);
                     vue_pets.myPetsCnt = big2number(ret.retobj.petCnt);
                     vue_pets.nextPickPrice = big2number(ret.retobj.pickPrice)/DECIMALS;
+                    if(oldGemCnt != vue_pets.myGemsCnt)
+                    {
+ 	              vue_pets.updateMyGems();		
+		    }
+                    if(oldPetCnt != vue_pets.myPetsCnt)
+                    {
+                      vue_pets.updateMyPets();
+                    }
                 }
 
             });
@@ -2605,15 +2615,8 @@ vue_pets = new Vue({
                }
 	    }
         },
-        showMyPetGem: function() {
-            if (!tronlinkWeb) {
-                return tronlinkNotConnected();
-            }
-            showEle('petsRanking', false);
-            showEle('petsPick', false);
-            showEle('petsMarket', false);
-            showEle('myPetGem', true);
-
+        updateMyPets:function()
+        {
             getMyPets(function(ret) {
                 if (ret.result) {
                     let pobj = ret.retobj;
@@ -2633,6 +2636,9 @@ vue_pets = new Vue({
                     }
                 }
             });
+        },
+        updateMyGems:function()
+        {
             let addr = tronlinkWeb.defaultAddress.base58;
             petContractRead('getUserGems',
                 function(ret) {
@@ -2656,6 +2662,18 @@ vue_pets = new Vue({
                         }
                     }
                 }, addr);
+
+        },
+        showMyPetGem: function() {
+            if (!tronlinkWeb) {
+                return tronlinkNotConnected();
+            }
+            showEle('petsRanking', false);
+            showEle('petsPick', false);
+            showEle('petsMarket', false);
+            showEle('myPetGem', true);
+            this.updateMyPets();
+            this.updateMyGems();
         },
 
         showPetMarket: function() {
