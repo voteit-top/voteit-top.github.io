@@ -2512,7 +2512,13 @@ vue_pets = new Vue({
                         alleventv.pushSellPetGem("Gem",gemId, ret);
 			});
 	      }
+             
+             petPriceModalObj.hide();
            } 
+           else
+           {
+	       this.sellIndicator='Sell price must >0';
+           }
         },
         sell: function(petId) {
             this.itemName="Pet "+petId;
@@ -2569,6 +2575,35 @@ vue_pets = new Vue({
         },
         bindGem: function(gemId) {
 
+        },
+        sellOrUnsell:function(type,petId)
+        {
+            if(type == 1)
+            {
+               for(let i=0;i<this.myPets.length;i++)
+               {
+                  if(this.myPets[i].petId == petId)
+                  {
+                     if(this.myPets[i].price == 0)
+                         return 'Sell';
+                     else
+                         return 'Unsell';
+		  }
+               }
+            }
+	    else
+            {
+               for(let i=0;i<this.myGems.length;i++)
+               {
+                  if(this.myGems[i].gemId == petId)
+                  {
+                     if(this.myGems[i].price == 0)
+                         return 'Sell';
+                     else
+                         return 'Unsell';
+                 }
+
+	    }
         },
         showMyPetGem: function() {
             if (!tronlinkWeb) {
