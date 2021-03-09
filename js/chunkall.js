@@ -1178,6 +1178,19 @@ var alleventv = new Vue({
             this.switchMineTab();
 
         },
+        pushPickPet:function(ret)
+        {
+           this.waiting = false;
+           let evt ={};
+           evt.name = "New Pet picked ";
+           evt.error = !ret.result;
+           if(ret.result){
+                evt.tranUrl = 'https://dappchain.tronscan.io/#/transaction/' + ret.retobj;
+                evt.details = "check transaction";
+	   }else{
+                evt.details = ret.retobj;
+           }
+	},
         pushFeedPet:function(pid, ret)
         {
            this.waiting = false;
@@ -2435,10 +2448,12 @@ vue_pets = new Vue({
             if (!tronlinkWeb) {
                 tronlinkNotConnected();
             } else if (this.nextPickPrice > 0) {
+                alleventv.pushWaitingEvent("Picking pet");
                 this.petsCntBp = this.myPetsCnt;
                 pickPet(this.nextPickPrice, function(ret) {
                     if (ret.result) {
                         //picked //push allevent;
+                        alleventv.pushPickPet(ret);
 
                     } else {
                         console.log("pick pet eorro");
@@ -2467,9 +2482,11 @@ vue_pets = new Vue({
             if (!tronlinkWeb) {
                 tronlinkNotConnected();
             } else {
+                alleventv.pushWaitingEvent('Feeding pet'); 
                 feedPet(petId, function(ret) {
                     if (ret.result) {
                         //pushtoallevet;
+                        alleventv.pushFeedPet(petId, ret);
 
                     }
                 })
