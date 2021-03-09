@@ -1190,6 +1190,8 @@ var alleventv = new Vue({
 	   }else{
                 evt.details = ret.retobj;
            }
+            this.myEvents.unshift(evt);
+            this.switchMineTab();
 	},
         pushFeedPet:function(pid, ret)
         {
@@ -1203,6 +1205,8 @@ var alleventv = new Vue({
 	   }else{
                 evt.details = ret.retobj;
            }
+            this.myEvents.unshift(evt);
+            this.switchMineTab();
 	},
         pushCancelOrder: function(oid, ret) {
             this.waiting = false;
