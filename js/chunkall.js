@@ -2885,14 +2885,14 @@ async function sellPet(petId, price, callback) {
     if (!tronlinkWeb) {
         tronlinkNotConnected();
     } else if (price > 0) {
-        petContractWritePay('sellPet', callback, price, petId, price);
+        petContractWrite('sellPet', callback, petId, price);
     }
 }
 async function contractSellGem(gemId, price, callback) {
     if (!tronlinkWeb) {
         tronlinkNotConnected();
     } else if (price > 0) {
-        petContractWritePay('sellGem', callback, price, gemId, price);
+        petContractWrite('sellGem', callback, gemId, price);
     }
 }
 async function unsellPet(petId, callback) {
