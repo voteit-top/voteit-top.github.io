@@ -2365,10 +2365,6 @@ vue_pets = new Vue({
     },
     methods: {
         //pick pets randomly
-        isPetSelling:function(petId)
-        {
-	
-	},
         addNewSearch: function(se) {
             for (let i = 0; i < this.searches.length; i++) {
                 if (this.searches[i].betbn == se.betbn) {
@@ -2633,9 +2629,9 @@ vue_pets = new Vue({
                   if(this.myPets[i].petId == id)
                   {
                      if(this.myPets[i].price == 0)
-                         return true;
-                     else
                          return false;
+                     else
+                         return true;
 		  }
                }
             }
@@ -2646,9 +2642,9 @@ vue_pets = new Vue({
                   if(this.myGems[i].gemId == id)
                   {
                      if(this.myGems[i].price == 0)
-                         return true;
-                     else
                          return false;
+                     else
+                         return true;
                  }
                }
 	    }
@@ -2955,7 +2951,7 @@ async function unsellPet(petId, callback) {
     if (!tronlinkWeb) {
         tronlinkNotConnected();
     } else {
-        petContractWrite('unsellPet', callback);
+        petContractWrite('unsellPet', callback, petId);
     }
 }
 //buy pet from market
