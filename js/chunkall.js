@@ -2742,8 +2742,8 @@ function gemType2Img(gt) {
 }
 function updateMys()
 {
-    this.updateMyPets();
-    this.updateMyGems();
+    vue_pets.updateMyPets();
+    vue_pets.updateMyGems();
 }
 function updateMarkets()
 {
