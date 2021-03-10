@@ -484,48 +484,15 @@
       <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button><button type="button" v-on:click="showMyPetGem" class="btn btn-outline-primary">My</button></div>
       <div id="petsRanking">
         <p> this is ranking of pets</p>
-        <div class="row">
-            <div class="col-1">#</div>
-            <div class="col-1">
-                pet
-            </div>
-            <div class="col-2">
-                saph
-            </div>
-            <div class="col-2">
-                Ruby
-            </div>
-            <div class="col-2">
-                Diamond
-            </div>
-            <div class="col-2">
-                Power
-            </div>
-            <div class="col-2">
-                Farm
-            </div>
-        </div>
-        <div class="row" v-for="(pr,index) in rankingPets">
-            <div class="col-1">{{index+1}}</div>
-            <div class="col-1">
-                <img width="30px" height="30px" :src="'./img/'+pr.img">
-            </div>
-            <div class="col-2">
-                {{pr.saph}}
-            </div>
-            <div class="col-2">
-                {{pr.ruby}}
-            </div>
-            <div class="col-2">
-                {{pr.diam}}
-            </div>
-            <div class="col-2">
-                {{pr.power}}
-            </div>
-            <div class="col-2">
-                {{pr.farm}}
-            </div>
-        </div>
+          <div class="card-group">
+              <div class="card" style="min-width:100px" v-for="(rp,index) in rankingPets">
+                  <img width=100px height=100px :src="'./img/'+rp.img" class="card-img-top" alt="...">
+                  <div class="card-body">
+                      <p class="card-text">Rank:{{index+1}}</p>
+                      <p class="card-text">power:{{rp.power}}</p>
+                  </div>
+              </div>
+          </div>
       </div>
       <div id="myPetGem" class="vhide">
           <div class="card-group">

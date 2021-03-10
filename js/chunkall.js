@@ -2676,7 +2676,7 @@ vue_pets = new Vue({
                     if(!vue_pets.allPets[petId])
                         vue_pets.allPets[petId] = {};
                     let rpet=vue_pets.allPets[petId];
-                        rpet.petId = petId;
+                    rpet.petId = petId;
 			rpet.rpId = big2number(ret1.retobj.rpId);
 			rpet.power = big2number(ret1.retobj.power);
 			rpet.price = big2number(ret1.retobj.price) / DECIMALS;
@@ -2936,7 +2936,8 @@ async function readPetMetrics() {
             vue_pets.totalEvents = big2number(ret.retobj.eventCnt);
             vue_pets.totalGems = big2number(ret.retobj.gemCnt);
             vue_pets.totalPets = big2number(ret.retobj.petCnt);
-	    vue_pets.readAllPets(false);
+	    vue_pets.readAllPets(vue_pets.block%10 == 0);
+            
             vue_pets.totalMarketGems = big2number(ret.retobj.marketGemCnt);
             vue_pets.totalMarketPets = big2number(ret.retobj.marketPetCnt);
 
