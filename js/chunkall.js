@@ -2551,7 +2551,7 @@ vue_pets = new Vue({
            }
         },
         sell: function(petId) {
-            if(this.isSelling(1, petId)
+            if(this.isSelling(1, petId))
 	    {
               
 	      alleventv.pushWaitingEvent("Unselling Pet..");
@@ -2561,10 +2561,10 @@ vue_pets = new Vue({
 	    }
             else
             {
-            this.itemName="Pet "+petId;
-            this.sellObj = {type:1, id:petId};
-            petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
-            petPriceModalObj.show();
+              this.itemName="Pet "+petId;
+              this.sellObj = {type:1, id:petId};
+              petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
+              petPriceModalObj.show();
             }
         },
         release: function(petId) {
