@@ -2680,7 +2680,7 @@ vue_pets = new Vue({
 			rpet.rpId = big2number(ret1.retobj.rpId);
 			rpet.power = big2number(ret1.retobj.power);
 			rpet.price = big2number(ret1.retobj.price) / DECIMALS;
-			rpet.img = 'pet' + mpet.rpId + '.png';
+			rpet.img = 'pet' + rpet.rpId + '.png';
                     if(!vue_pets.rankMaps[petId])
                     {
                         vue_pets.rankingPets.push(rpet);
