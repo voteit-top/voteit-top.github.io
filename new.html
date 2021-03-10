@@ -532,6 +532,7 @@
               <div class="card" style="max-width:200px;min-width:180px" v-for="mp in myPets">
                   <img width=180px height=200px :src="'./img/'+mp.img" class="card-img-top" alt="...">
                   <div class="card-body">
+                      <p class="card-text">power:{{mp.power}}</p>
                       <a v-on:click="sell(mp.petId)" class="btn btn-primary">{{sellOrUnsell(1,mp.petId)}}</a>
                       <a v-on:click="feed(mp.petId)" class="btn btn-primary">Feed</a>
                   </div>

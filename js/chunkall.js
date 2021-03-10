@@ -1208,6 +1208,22 @@ var alleventv = new Vue({
             this.myEvents.unshift(evt);
             this.switchMineTab();
 	},
+        pushPetCommonEvent:function(ename, id, ret)
+        {
+           this.waiting = false;
+           let evt ={};
+           evt.name = ename + " " + id;
+           evt.error = !ret.result;
+           if(ret.result){
+                evt.tranUrl = 'https://dappchain.tronscan.io/#/transaction/' + ret.retobj;
+                evt.details = "check transaction";
+	   }else{
+                evt.details = ret.retobj;
+           }
+            this.myEvents.unshift(evt);
+            this.switchMineTab();
+
+	},
         pushFeedPet:function(pid, ret)
         {
            this.waiting = false;
@@ -2349,6 +2365,10 @@ vue_pets = new Vue({
     },
     methods: {
         //pick pets randomly
+        isPetSelling:function(petId)
+        {
+	
+	},
         addNewSearch: function(se) {
             for (let i = 0; i < this.searches.length; i++) {
                 if (this.searches[i].betbn == se.betbn) {
@@ -2531,10 +2551,21 @@ vue_pets = new Vue({
            }
         },
         sell: function(petId) {
+            if(this.isSelling(1, petId)
+	    {
+              
+	      alleventv.pushWaitingEvent("Unselling Pet..");
+              unsellPet(petId, function(ret){
+	        alleventv.pushPetCommonEvent("Unsell Pet", petId, ret);	
+		});
+	    }
+            else
+            {
             this.itemName="Pet "+petId;
             this.sellObj = {type:1, id:petId};
             petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
             petPriceModalObj.show();
+            }
         },
         release: function(petId) {
             console.log(petId);
@@ -2554,11 +2585,11 @@ vue_pets = new Vue({
                 tronlinkNotConnected();
             } else {
                 vue_pets.searching = true;
+	        alleventv.pushWaitingEvent("Search Gem..");
+                
                 petContractWritePay('searchGem', function(ret) {
-                    if (ret.result) {
-                        vue_pets.searching = false;
-
-                    }
+	             alleventv.pushPetCommonEvent("Search Gem", vue_pets.searchTimes, ret);	
+                     vue_pets.searching = false;
                 }, this.searchPrice * this.searchTimes, this.searchTimes);
             }
         },
@@ -2588,16 +2619,23 @@ vue_pets = new Vue({
         },
         sellOrUnsell:function(type,petId)
         {
+	    if(!this.isSelling(type, petId))
+              return 'Sell';
+            else
+              return 'Unsell';
+        },
+        isSelling:function(type, id)
+        {
             if(type == 1)
             {
                for(let i=0;i<this.myPets.length;i++)
                {
-                  if(this.myPets[i].petId == petId)
+                  if(this.myPets[i].petId == id)
                   {
                      if(this.myPets[i].price == 0)
-                         return 'Sell';
+                         return true;
                      else
-                         return 'Unsell';
+                         return false;
 		  }
                }
             }
@@ -2605,12 +2643,12 @@ vue_pets = new Vue({
             {
                for(let i=0;i<this.myGems.length;i++)
                {
-                  if(this.myGems[i].gemId == petId)
+                  if(this.myGems[i].gemId == id)
                   {
                      if(this.myGems[i].price == 0)
-                         return 'Sell';
+                         return true;
                      else
-                         return 'Unsell';
+                         return false;
                  }
                }
 	    }
@@ -2903,7 +2941,7 @@ async function sellPet(petId, price, callback) {
     if (!tronlinkWeb) {
         tronlinkNotConnected();
     } else if (price > 0) {
-        petContractWrite('sellPet', callback, petId, price);
+        petContractWrite('sellPet', callback, petId, price*DECIMALS);
     }
 }
 async function contractSellGem(gemId, price, callback) {
@@ -2925,7 +2963,7 @@ async function buyPet(petId, price, callback) {
     if (!tronlinkWeb) {
         tronlinkNotConnected();
     } else {
-        petContractWritePay('buyPet', callback, price, petId, price);
+        petContractWritePay('buyPet', callback, price, petId, price*DECIMALS);
     }
 }
 
