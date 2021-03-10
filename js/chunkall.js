@@ -2684,7 +2684,7 @@ vue_pets = new Vue({
                     if(!vue_pets.rankMaps[petId])
                     {
                         vue_pets.rankingPets.push(rpet);
-                        vue_pets.rankingPets.sort(function(a,b){return a.power>b.power});
+                        vue_pets.rankingPets.sort(function(a,b){return b.power-a.power});
                         vue_pets.rankMaps[petId]=true;
                     }
 		});

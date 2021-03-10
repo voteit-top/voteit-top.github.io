@@ -485,11 +485,11 @@
       <div id="petsRanking">
         <p> this is ranking of pets</p>
           <div class="card-group">
-              <div class="card" style="min-width:100px" v-for="(rp,index) in rankingPets">
+              <div class="card" style="min-width:100px;max-width:100px" v-for="(rp,index) in rankingPets">
                   <img width=100px height=100px :src="'./img/'+rp.img" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text">Rank:{{index+1}}</p>
-                      <p class="card-text">power:{{rp.power}}</p>
+                      <p class="card-text text-center">Rank:{{index+1}}</p>
+                      <p class="card-text text-center">Power:{{rp.power}}</p>
                   </div>
               </div>
           </div>
