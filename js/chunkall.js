@@ -2525,8 +2525,9 @@ vue_pets = new Vue({
             if (!tronlinkWeb) {
                 tronlinkNotConnected();
             } else {
+                alleventv.pushWaitingEvent("Buying pet");
                 buyPet(petId, price, function(ret) {
-
+			alleventv.pushPetCommonEvent("Buy Pet", petId, ret);
                 });
             }
             console.log(petId);
@@ -2618,8 +2619,16 @@ vue_pets = new Vue({
                 });
             }
         },
-        buyGem: function(gemId) {
-
+        buyGem: function(gemId, price) {
+            if (!tronlinkWeb) {
+                tronlinkNotConnected();
+            } else {
+                alleventv.pushWaitingEvent("Buying Gem..");
+                petContractWritePay('buyGem', function(ret){
+	             alleventv.pushPetCommonEvent("Buy Gem", gemId, ret);	
+		        
+		}, price, petId, price*DECIMALS);
+            }
         },
         sellGem: function(gemId) {
             this.itemName="Gem " + gemId;

@@ -489,6 +489,7 @@
                   <img width=100px height=100px :src="'./img/'+rp.img" class="card-img-top" alt="...">
                   <div class="card-body">
                       <p class="card-text text-center">Rank:{{index+1}}</p>
+                      <p class="card-text text-center">UID:{{rp.petId}}</p>
                       <p class="card-text text-center">Power:{{rp.power}}</p>
                   </div>
               </div>
@@ -499,7 +500,8 @@
               <div class="card" style="max-width:200px;min-width:180px" v-for="mp in myPets">
                   <img width=180px height=200px :src="'./img/'+mp.img" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text">power:{{mp.power}}</p>
+                      <p class="card-text text-center">UID:{{mp.petId}}</p>
+                      <p class="card-text text-center">Power:{{mp.power}}</p>
                       <a v-on:click="sell(mp.petId)" class="btn btn-primary">{{sellOrUnsell(1,mp.petId)}}</a>
                       <a v-on:click="feed(mp.petId)" class="btn btn-primary">Feed</a>
                   </div>
@@ -509,7 +511,8 @@
               <div class="card" style="max-width:150px;min-width:100px" v-for="mg in myGems">
                   <img width=60px height=60px :src="mg.img" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text">power:{{mg.power}}</p>
+                      <p class="card-text text-center">UID:{{mg.gemId}}</p>
+                      <p class="card-text text-center">Power:{{mg.power}}</p>
                       <a v-on:click="sellGem(mg.gemId)" class="btn btn-primary">{{sellOrUnsell(2,mg.gemId)}}</a>
                       <a v-on:click="bindGem(mg.gemId)" class="btn btn-primary">bind</a>
                   </div>
@@ -541,25 +544,25 @@
               </div>
           </div>
           <div class="card-group">
-              <div class="card" style="max-width:150px;min-width:100px">
+              <div class="card" style="max-width:100px;min-width:100px">
                   <img width=60px height=60px src="./img/gem.svg" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text">power:16</p>
-                      <p class="card-text"  title="probability">PR: 1/16</p>
+                      <p class="card-text text-center">Power:16</p>
+                      <p class="card-text text-center"  title="probability">PR: 1/16</p>
                   </div>
               </div>
-              <div class="card" style="max-width:150px;min-width:100px">
+              <div class="card" style="max-width:100px;min-width:100px">
                   <img width=60px height=60px src="./img/ruby.svg" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text">power:256</p>
-                      <p class="card-text" title="probability">PR: 1/256</p>
+                      <p class="card-text text-center">Power:256</p>
+                      <p class="card-text text-center" title="probability">PR: 1/256</p>
                   </div>
               </div>
-              <div class="card" style="max-width:150px;min-width:100px">
+              <div class="card" style="max-width:100px;min-width:100px">
                   <img width=60px height=60px src="./img/diamond.svg" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text">power:16</p>
-                      <p class="card-text"  title="probability">PR: 1/4096</p>
+                      <p class="card-text text-center">Power:16</p>
+                      <p class="card-text text-center"  title="probability">PR: 1/4096</p>
                   </div>
               </div>
           </div>
