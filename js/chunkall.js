@@ -2358,7 +2358,7 @@ vue_pets = new Vue({
         searching: false,
         claiming: false,
         maxBn: 0,
-        refreshCB:null;
+        refreshCB:null
     },
     methods: {
         //pick pets randomly
