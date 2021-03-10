@@ -2482,13 +2482,27 @@ vue_pets = new Vue({
                 if (this.marketPets[i].petId == pet.petId) {
                     find = true;
                     this.marketPets[i].power = pet.power;
-                    this.marketPets[i].price = pet.price / DECIMALS;
+                    this.marketPets[i].price = pet.price;
                 }
             }
             if (!find) {
                 this.marketPets.push(pet);
             }
 
+        },
+        removeFromMarket:function(type, idmap)
+        {
+	    if(type == 1)
+            {
+		for(let i=0;i<this.marketPets.length;i++)
+                {
+		    if(!idmap[this.marketPets[i].petId])
+                    {
+                      this.marketPets.splice(i,1);
+                      i--;
+                    }
+                }
+            }
         },
         pick: function() {
             if (!tronlinkWeb) {
@@ -2773,8 +2787,10 @@ function updateMarkets()
 	getMarketPets(function(ret) {
 	    if (ret.result) {
 		let mpets = ret.retobj;
+                let newMpetIds = {};
 		for (let i = 0; i < mpets.length; i++) {
 		    let petId = big2number(mpets[i]);
+                    newMpetIds[petId] = true;
 		    getPetBasic(petId, function(ret1) {
 			if (ret1.result) {
 			    let mpet = {};
@@ -2786,8 +2802,8 @@ function updateMarkets()
 			    vue_pets.updateMarketPet(mpet);
 			}
 		    });
-
 		}
+                vue_pets.removeFromMarket(1,newMpetIds);
 	    }
 	})
 }
