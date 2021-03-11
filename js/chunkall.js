@@ -2575,7 +2575,7 @@ vue_pets = new Vue({
 	         //sellPet;
                  let petId = this.sellObj.id;
 	         alleventv.pushWaitingEvent("Selling Pet..");
-                 sellPet(petId, this.sellPrice, function(ret){
+                 sellPet(petId, Number(this.sellPrice), function(ret){
                         alleventv.pushSellPetGem("Pet",petId, ret);
 			});
 	      }
@@ -2584,7 +2584,7 @@ vue_pets = new Vue({
                  //sellGem
                  let gemId= this.sellObj.id;
 	         alleventv.pushWaitingEvent("Selling Gem ..");
-                 contractSellGem(gemId, this.sellPrice, function(ret){
+                 contractSellGem(gemId, Number(this.sellPrice), function(ret){
                         alleventv.pushSellPetGem("Gem",gemId, ret);
 			});
 	      }
@@ -2685,7 +2685,7 @@ vue_pets = new Vue({
 		    this.bindGemId = gemId;
 		    delete bindPetModalObj;
 		    bindPetModalObj = new bootstrap.Modal(document.getElementById('bindPetModal'), null);
-		    bindPetModalObj.show;
+		    bindPetModalObj.show();
 	    } 
         },
         bindOrUnbind:function(gemId)
@@ -3079,7 +3079,7 @@ async function contractSellGem(gemId, price, callback) {
     if (!tronlinkWeb) {
         tronlinkNotConnected();
     } else if (price > 0) {
-        petContractWrite('sellGem', callback, gemId, price);
+        petContractWrite('sellGem', callback, gemId, price*DECIMALS);
     }
 }
 async function unsellPet(petId, callback) {
