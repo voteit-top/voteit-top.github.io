@@ -2671,13 +2671,13 @@ vue_pets = new Vue({
             petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
             petPriceModalObj.show();
         },
-        bindGem: function(gemId) {
+        bindGem: function(gemId,petId) {
             if(this.isGemBinded(gemId))
             {
-                alleventv.pushWaitingEvent("Unbind Gem..");
+                alleventv.pushWaitingEvent("Unbind Gem..");            
                 petContractWrite('unbindGem', function(ret) {
 	             alleventv.pushPetCommonEvent("Unbind Gem", gemId, ret);	
-                },gemId);
+                },gemId, petId);
             }
             else
             {
@@ -2772,6 +2772,8 @@ vue_pets = new Vue({
             getMyPets(function(ret) {
                 if (ret.result) {
                     let pobj = ret.retobj;
+		    if(vue_pets.myPets.length != pobj.length)
+                       this.myPets =[];
                     for (let i = 0; i < pobj.length; i++) {
                         let petId = big2number(pobj[i]);
                         getPetBasic(petId, function(ret1) {
@@ -2796,6 +2798,9 @@ vue_pets = new Vue({
                 function(ret) {
                     if (ret.result) {
                         let gobj = ret.retobj;
+                        
+		        if(vue_pets.myGems.length != gobj.length)
+                           this.myGems =[];
                         for (let i = 0; i < gobj.length; i++) {
                             let gemId = big2number(gobj[i]);
                             petContractRead('getGem', function(ret1) {
@@ -2847,6 +2852,11 @@ vue_pets = new Vue({
             showEle('petsRanking', true);
             showEle('petsPick', false);
             showEle('petsMarket', false);
+            showEle('myPetGem', false);
+            if(this.rankingPets.length > 1)
+            {
+               this.rankingPets.sort(function(a,b){return b.power-a.power});
+            } 
         }
 
     }
