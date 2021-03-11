@@ -2672,9 +2672,8 @@ vue_pets = new Vue({
             petPriceModalObj.show();
         },
         bindGem: function(gemId) {
-            if(this.isGemBinded(gemId)
+            if(this.isGemBinded(gemId))
             {
-               
                 alleventv.pushWaitingEvent("Unbind Gem..");
                 petContractWrite('unbindGem', function(ret) {
 	             alleventv.pushPetCommonEvent("Unbind Gem", gemId, ret);	
@@ -2691,7 +2690,7 @@ vue_pets = new Vue({
         },
         bindOrUnbind:function(gemId)
         {
-           if(this.isGemBinded(gemId)
+           if(this.isGemBinded(gemId))
               return 'Unbind';
            else
               return 'Bind';
