@@ -2315,6 +2315,7 @@ readSellPrices();
 //marketPet has unique ID from 1
 //foods  has unique ID from 1
 let petPriceModalObj = null;//new bootstrap.Modal(document.getElementById('petModal'), null);
+let bindPetModalObj = null;
 
 vue_pets = new Vue({
     el: "#v_pets",
@@ -2322,6 +2323,8 @@ vue_pets = new Vue({
         searches: [],
         rawPets: [],
         marketGems: [],
+        bindGemId:0,
+        selectedPetId:0,
         myPets: [],
         myGems: [],
         //{petId:1,desc:"A cute cate", price:0, img:"kitty1.svg"},{petId:2,desc:"A cute cate", price:1,img:"kitty1.svg"}
@@ -2353,6 +2356,21 @@ vue_pets = new Vue({
         claiming: false,
         maxBn: 0,
         refreshCB:null
+    },
+    computed:{
+        selectedPetImg:function()
+        {
+          if(this.selectePetId == 0)
+              return "";
+	  for(let i=0;i<this.myPets.length;i++)
+          {
+	      if(this.myPets[i].petId == this.selectedPetId)
+              {
+		 return './img/pet' + this.myPets[i].rpId + '.png';
+              }
+	  } 
+          return "";
+	}
     },
     methods: {
         //pick pets randomly
@@ -2533,6 +2551,21 @@ vue_pets = new Vue({
             console.log(petId);
 
         },
+        confirmBind:function()
+        {
+	    if(this.selectedPetId > 0 && this.bindGemId > 0)
+            {
+	         alleventv.pushWaitingEvent("Binding Gem..");
+                 
+                 petContractWrite('bindGem', funciont(ret)
+			{
+			alleventv.pushPetCommonEvent("Bind Gem to Pet", this.bindGemId, ret);
+			}
+			, this.bindGemId, this.selectedPetId);
+    
+            }
+
+        },
         confirmSell:function()
         {
            if(this.sellPrice > 0)
@@ -2576,6 +2609,7 @@ vue_pets = new Vue({
             {
               this.itemName="Pet "+petId;
               this.sellObj = {type:1, id:petId};
+              delete petPriceModalObj;
               petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
               petPriceModalObj.show();
             }
@@ -2632,11 +2666,35 @@ vue_pets = new Vue({
         },
         sellGem: function(gemId) {
             this.itemName="Gem " + gemId;
-            this.sellObj = {type:2, id:petId};
+            this.sellObj = {type:2, id:gemId};
+            delete petPriceModalObj;
+            petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
             petPriceModalObj.show();
         },
         bindGem: function(gemId) {
-
+            if(this.isGemBinded(gemId)
+            {
+               
+                alleventv.pushWaitingEvent("Unbind Gem..");
+                petContractWrite('unbindGem', function(ret) {
+	             alleventv.pushPetCommonEvent("Unbind Gem", gemId, ret);	
+                },gemId);
+            }
+            else
+            {
+		    this.itemName = "Bind Gem " + gemId +" to";
+		    this.bindGemId = gemId;
+		    delete bindPetModalObj;
+		    bindPetModalObj = new bootstrap.Modal(document.getElementById('bindPetModal'), null);
+		    bindPetModalObj.show;
+	    } 
+        },
+        bindOrUnbind:function(gemId)
+        {
+           if(this.isGemBinded(gemId)
+              return 'Unbind';
+           else
+              return 'Bind';
         },
         sellOrUnsell:function(type,petId)
         {
@@ -2644,6 +2702,17 @@ vue_pets = new Vue({
               return 'Sell';
             else
               return 'Unsell';
+        },
+        isGemBinded:function(gemId)
+        {
+          for(let i=0;i<this.myGems.length;i++)
+          {
+	      if(this.myGems[i].gemId == gemId)
+              {
+		  return (this.myGems[i].petId > 0);
+              }
+          }
+          return false;
         },
         isSelling:function(type, id)
         {
