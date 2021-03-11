@@ -2556,8 +2556,8 @@ vue_pets = new Vue({
 	    if(this.selectedPetId > 0 && this.bindGemId > 0)
             {
 	         alleventv.pushWaitingEvent("Binding Gem..");
-                 
-                 petContractWrite('bindGem', funciont(ret)
+                 petBindModalObj.hide();         
+                 petContractWrite('bindGem', function(ret)
 			{
 			alleventv.pushPetCommonEvent("Bind Gem to Pet", this.bindGemId, ret);
 			}
