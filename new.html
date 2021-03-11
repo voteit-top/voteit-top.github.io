@@ -492,16 +492,17 @@
 		<form>
 		  <div class="mb-3">
                   <select id="petSelect" v-model="selectedPetId" aria-label="specify pet to bind">
+                      <option value=0>Select Pet</option>
                       <option v-for="p in myPets" :value="p.petId">{{p.petId}}</option>
                   </select>
-		    <img :src="selectedPetImg"/>
+		    <img width=100px height=100px :src="selectedPetImg"/>
 		  </div>
 		</form>
 	      </div>
 	      <div class="modal-footer">
 		<span class="text-info">{{sellIndicator}}</span>
 		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary" v-on:click="confirmBind">Sell</button>
+		<button type="button" class="btn btn-primary" v-on:click="confirmBind">Bind</button>
 	      </div>
 	    </div>
 	  </div>
