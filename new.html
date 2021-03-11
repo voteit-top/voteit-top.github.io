@@ -607,7 +607,7 @@
        <div id="petsMarket" class="vhide">
            <div class="card-group">
                <div class="card" style="max-width:200px;min-width:180px" v-for="mp in marketPets">
-                   <img width=180px height=200px :src="'./img/'+mp.img" class="card-img-top" alt="...">
+                   <img width=180px height=200px :src="'./img/'+mp.img" :title="mp.owner" class="card-img-top" alt="...">
                    <div class="card-body">
                        <p class="card-text">{{mp.desc}}</p>
                        <p class="card-text">{{mp.price}}VOTEIT</p>
@@ -616,10 +616,10 @@
                </div>
            </div>
            <div class="card-group">
-               <div class="card" style="max-width:100px;min-width:80px" v-for="mg in marketGems">
-                   <img width=100px height=100px :src="'./img/'+mg.img" class="card-img-top" alt="...">
+               <div class="card" style="max-width:150px;min-width:150px" v-for="mg in marketGems">
+                   <img width=150px height=150px :src="'./img/'+mg.img" :title="mg.owner" class="card-img-top" alt="...">
                    <div class="card-body">
-                       <p class="card-text">{{mg.owner}}</p>
+                       <p class="card-text">{{mg.power}}</p>
                        <p class="card-text">{{mg.price}}VOTEIT</p>
                        <a v-on:click="buyGem(mg.gemId,mg.price)" class="btn btn-primary">Buy</a>
                    </div>

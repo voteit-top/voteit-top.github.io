@@ -2481,7 +2481,7 @@ vue_pets = new Vue({
             for (let i = 0; i < this.myGems.length; i++) {
                 if (this.myGems[i].gemId == gem.gemId) {
                     find = true;
-                    this.myGems[i].power = gem.power;
+                    this.myGems[i]= gem;
                 }
             }
             if (!find) {
@@ -2810,8 +2810,9 @@ vue_pets = new Vue({
                                     gem.gemId = gemId;
                                     gem.gemType = gemobj.gemType;
                                     gem.img = gemType2Img(gem.gemType);
+                                    gem.power = gemType2Power(gem.gemType);
                                     gem.price = big2number(gemobj.price);
-                                    gem.owner = gemobj.gemowner;
+                                    gem.owner = localTronweb.address.fromHex(gemobj.gemowner);
                                     gem.petId = big2number(gemobj.petId);
                                     vue_pets.updateMyGem(gem);
                                 }
@@ -2871,6 +2872,16 @@ function gemType2Img(gt) {
         return 'diamond.svg';
     }
 }
+function gemType2Power(gt) {
+    if (gt == 1) {
+        return 16;
+    } else if (gt == 2) {
+        return 256;
+    } else if (gt == 3) {
+        return 4096;
+    }
+    return 0;
+}
 function updateMys()
 {
     vue_pets.updateMyPets();
@@ -2893,8 +2904,9 @@ function updateMarkets()
 			    gem.gemId = gemId;
 			    gem.gemType = gemobj.gemType;
 			    gem.img = gemType2Img(gem.gemType);
+                            gem.power = gemType2Power(gem.gemType);
 			    gem.price = big2number(gemobj.price);
-			    gem.owner = gemobj.gemowner;
+			    gem.owner = localTronweb.address.fromHex(gemobj.gemowner);
 			    gem.petId = big2number(gemobj.petId);
 			    vue_pets.updateMarketGem(gem);
 			}
