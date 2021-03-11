@@ -2661,7 +2661,7 @@ vue_pets = new Vue({
                 petContractWritePay('buyGem', function(ret){
 	             alleventv.pushPetCommonEvent("Buy Gem", gemId, ret);	
 		        
-		}, price, petId, price*DECIMALS);
+		}, price, gemId, price*DECIMALS);
             }
         },
         sellGem: function(gemId) {

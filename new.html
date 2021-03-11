@@ -617,10 +617,10 @@
            </div>
            <div class="card-group">
                <div class="card" style="max-width:150px;min-width:150px" v-for="mg in marketGems">
-                   <img width=150px height=150px :src="'./img/'+mg.img" :title="mg.owner" class="card-img-top" alt="...">
+                   <img width=100px height=100px :src="'./img/'+mg.img" :title="mg.owner" class="card-img-top" alt="...">
                    <div class="card-body">
-                       <p class="card-text">{{mg.power}}</p>
-                       <p class="card-text">{{mg.price}}VOTEIT</p>
+                       <p class="card-text">Powner:{{mg.power}}</p>
+                       <p class="card-text">{{mg.price}} VOTEIT</p>
                        <a v-on:click="buyGem(mg.gemId,mg.price)" class="btn btn-primary">Buy</a>
                    </div>
                </div>
