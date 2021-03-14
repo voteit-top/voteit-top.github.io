@@ -11,7 +11,7 @@ const VIEW_PET = 4;
 let view_type = VIEW_RANK;
 let contractTokenId = '1003606';
 const minercontract = 'TECu9sH4r5BZ373yBgBDsS3chC4s24cePA';
-const petcontract = 'TSX64bSTrEWKFH4b1CBoQq6B9arXhb1NWr';
+const petcontract = 'TZ5vprjAXgkPAnjHFiUQq7tLsLSAwrha7c';
 const HttpProvider = TronWeb.providers.HttpProvider;
 const trongridurl = 'https://sun.tronex.io';
 //const sunurl = 'https://sun.tronex.io';
@@ -2257,7 +2257,6 @@ setInterval(async () => {
                 vue_betgame.blockNumber = bn;
                 vue_betgame.blockID = bid;
                 vue_betgame.result = getBlockResult(bid);
-                vue_pets.setGemResult(bn, vue_betgame.result);
                 //update bn and id;
                 let startbn = bn - 6;
                 let endbn = bn - 1;
@@ -2279,7 +2278,6 @@ setInterval(async () => {
                 if ((bn - vue_betgame.refreshBn) >= 3) {
                     vue_betgame.refreshBn = bn;
                     vue_betgame.refreshMyBets();
-                    vue_pets.refreshSearches();
                 }
             }
         });
@@ -2374,71 +2372,6 @@ vue_pets = new Vue({
     },
     methods: {
         //pick pets randomly
-        addNewSearch: function(se) {
-            for (let i = 0; i < this.searches.length; i++) {
-                if (this.searches[i].betbn == se.betbn) {
-                    return;
-                }
-            }
-            if (se.betbn > this.maxBn) {
-                this.maxBn = se.betbn;
-            }
-            this.searches.push(se);
-        },
-        refreshSearches: function() {
-            //this.searches=[];
-            if (tronlinkWeb) {
-                let addr = tronlinkWeb.defaultAddress.base58;
-                petContractRead('getUserActiveSearch', function(ret) {
-                    if (ret.result) {
-                        let sobj = ret.retobj;
-                        if (sobj.length == 0) {
-                            vue_pets.searches = [];
-                        }
-                        for (let i = 0; i < sobj.length; i++) {
-                            let sidx = big2number(sobj[i]);
-                            petContractRead('getSearchDetail', function(ret1) {
-                                if (ret1.result) {
-                                    let se = {};
-                                    se.betbn = big2number(ret1.retobj.betBN);
-                                    se.result = 0;
-                                    vue_pets.addNewSearch(se);
-                                }
-                            }, sidx);
-                        }
-                    }
-                }, addr);
-            }
-
-        },
-        setGemResult: function(bn, result) {
-            this.block = bn;
-            if ((result & 4) == 4) {
-                this.bnGems[bn] = 4; //it is gem.
-            } else
-                this.bnGems[bn] = 1;
-            let gemcnt = 0;
-            for (let i = 0; i < this.searches.length; i++) {
-                if (this.searches[i].betbn == bn) {
-                    this.searches[i].result = this.bnGems[bn];
-                }
-                if (this.searches[i].result == 4) {
-                    gemcnt++;
-                }
-                if (bn > this.searches[i].betbn && this.searches[i].result == 0) {
-                    let oldbn = this.searches[i].betbn;
-                    if ((oldbn + 255) > bn) {
-                        getBlock(oldbn, function(bh) {
-                            vue_pets.setGemResult(bn, getBlockResult(bh));
-                        });
-                    } else {
-                        this.searches[i].result = 1;
-                    }
-                }
-            }
-            this.findGems = gemcnt;
-
-        },
         buildRawPets: function() {
             if (this.rawPets.length == 0) {
                 for (let i = 1; i <= this.totalRawPets; i++) {
