@@ -2330,6 +2330,7 @@ vue_pets = new Vue({
         rankingPets: [],
         rankMaps:{},
         allPets:[],
+        allGems:[],
         sellPrice:0,
         itemName:'',
         sellIndicator:'',
