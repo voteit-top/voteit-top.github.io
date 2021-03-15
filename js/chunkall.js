@@ -2598,11 +2598,23 @@ vue_pets = new Vue({
             }
         },
         sellGem: function(gemId) {
+            if(this.isSelling(2, gemId))
+	    {
+              
+	      alleventv.pushWaitingEvent("Unselling Gem..");
+              petContractWrite('unsellGem', function(ret){
+	        alleventv.pushPetCommonEvent("Unsell Gem", gemId, ret);	
+		}, gemId);
+	    }
+            else
+            {
+
             this.itemName="Gem " + gemId;
             this.sellObj = {type:2, id:gemId};
             delete petPriceModalObj;
             petPriceModalObj = new bootstrap.Modal(document.getElementById('petPriceModal'), null);
             petPriceModalObj.show();
+           }
         },
         bindGem: function(gemId,petId) {
             if(this.isGemBinded(gemId))
