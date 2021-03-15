@@ -2252,6 +2252,7 @@ setInterval(async () => {
         });
     }
     if (view_type == VIEW_BET || view_type == VIEW_PET) {
+        if(view_type == VIEW_BET){
         getCurrentBlock(function(bn, bid) {
             if (true) {
                 vue_betgame.blockNumber = bn;
@@ -2261,18 +2262,6 @@ setInterval(async () => {
                 let startbn = bn - 6;
                 let endbn = bn - 1;
                 vue_betgame.setBetResult(bn, vue_betgame.result);
-
-                /*
-                getBlockRange(startbn, endbn, function(blocks){
-                    console.log(blocks);
-                      for(let i=0;i<blocks.length;i++){
-                         vue_betgame.pastBN[i].bn = (startbn+i);
-                         vue_betgame.pastBN[i].bid = blocks[i]['blockID'].slice(-5);
-                         vue_betgame.pastBN[i].result = getBlockResult(vue_betgame.pastBN[i].bid);
-                         vue_betgame.setBetResult(vue_betgame.pastBN[i].bn, vue_betgame.pastBN[i].result);
-                      }
-                    })
-                */
                 vue_betgame.updateMyBets(bn);
 
                 if ((bn - vue_betgame.refreshBn) >= 3) {
@@ -2281,7 +2270,7 @@ setInterval(async () => {
                 }
             }
         });
-
+        }
         if (view_type == VIEW_PET) {
             readPetMetrics();
             if(vue_pets.refreshCB)
