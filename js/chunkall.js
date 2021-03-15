@@ -2766,7 +2766,7 @@ vue_pets = new Vue({
                                     gem.gemType = gemobj.gemType;
                                     gem.img = gemType2Img(gem.gemType);
                                     gem.power = gemType2Power(gem.gemType);
-                                    gem.price = big2number(gemobj.price);
+                                    gem.price = big2number(gemobj.price)/DECIMALS;
                                     gem.owner = localTronweb.address.fromHex(gemobj.gemowner);
                                     gem.petId = big2number(gemobj.petId);
                                     vue_pets.updateMyGem(gem);
@@ -2860,7 +2860,7 @@ function updateMarkets()
 			    gem.gemType = gemobj.gemType;
 			    gem.img = gemType2Img(gem.gemType);
                             gem.power = gemType2Power(gem.gemType);
-			    gem.price = big2number(gemobj.price);
+			    gem.price = big2number(gemobj.price)/DECIMALS;
 			    gem.owner = localTronweb.address.fromHex(gemobj.gemowner);
 			    gem.petId = big2number(gemobj.petId);
 			    vue_pets.updateMarketGem(gem);
