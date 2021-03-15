@@ -12,7 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/gh/peterolson/BigInteger.js/BigInteger.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/tronweb@3.2.1/dist/TronWeb.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sunweb@1.1.0/dist/SunWeb.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteit@0.1.11/presetranks.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteit@0.1.12/presetranks.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/voteit-top/voteitimgs@0.0.2/voteitdetails.js"></script>
 	<script src="https://kit.fontawesome.com/f4c2f140bb.js" crossorigin="anonymous"></script>
 	<style>
@@ -515,7 +515,7 @@
                   <img width=120px height=120px :src="'./img/'+rp.img" class="card-img-top" alt="...">
                   <div class="card-body">
                       <p class="card-text text-center">Rank:{{index+1}}</p>
-                      <p class="card-text text-center">UID:{{rp.petId}}</p>
+                      <p class="card-text text-center">PUID:{{rp.petId}}</p>
                       <p class="card-text text-center">Power:{{rp.power}}</p>
                   </div>
               </div>
@@ -526,7 +526,7 @@
               <div class="card" style="max-width:200px;min-width:180px" v-for="mp in myPets">
                   <img width=180px height=200px :src="'./img/'+mp.img" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text text-center">UID:{{mp.petId}}</p>
+                      <p class="card-text text-center">PUID:{{mp.petId}}</p>
                       <p class="card-text text-center">Power:{{mp.power}}</p>
                       <a v-on:click="sell(mp.petId)" class="btn btn-primary">{{sellOrUnsell(1,mp.petId)}}</a>
                       <a v-on:click="feed(mp.petId)" class="btn btn-primary">Feed</a>
@@ -537,7 +537,7 @@
               <div class="card" style="max-width:150px;min-width:150px" v-for="mg in myGems">
                   <img width=120px height=120px :src="'./img/'+mg.img" class="card-img-top" alt="...">
                   <div class="card-body">
-                      <p class="card-text text-center">UID:{{mg.gemId}}</p>
+                      <p class="card-text text-center">GUID:{{mg.gemId}}</p>
                       <p class="card-text text-center">Power:{{mg.power}}</p>
                       <a v-on:click="sellGem(mg.gemId)" class="btn btn-primary">{{sellOrUnsell(2,mg.gemId)}}</a>
                       <a v-on:click="bindGem(mg.gemId, mg.petId)" class="btn btn-primary">{{bindOrUnbind(mg.gemId)}}</a>

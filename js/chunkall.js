@@ -1119,7 +1119,7 @@ let cateNames = ['', 'Country/Region', 'Person', 'City', 'Resort', 'Brand', 'Cry
 let maxItemId = presetranks.length - 1;
 const PAGESIZE = 55;
 const EVENTCNT = 30;
-var eventStart = 999;
+var eventStart = 1045;
 var voteitModalObj;
 var createModalObj;
 var alleventv = new Vue({
@@ -3383,7 +3383,7 @@ function routeByHash() {
         showEle('voteitdex', false);
         showEle('v_itemdetail', false);
         showEle('v_betgame', false);
-
+        showEle('v_pets', false);
         vue_itemdetail.show = false;
         createRanksOfCate(Number(urltail.substr(ic + 5)));
     } else {
