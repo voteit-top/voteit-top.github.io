@@ -2388,8 +2388,7 @@ vue_pets = new Vue({
             for (let i = 0; i < this.marketGems.length; i++) {
                 if (this.marketGems[i].gemId == gem.gemId) {
                     find = true;
-                    this.marketGems[i].owner = gem.owner;
-                    this.marketGems[i].price = gem.price / DECIMALS;
+                    break;
                 }
             }
             if (!find) {
@@ -2401,8 +2400,7 @@ vue_pets = new Vue({
             for (let i = 0; i < this.myPets.length; i++) {
                 if (this.myPets[i].petId == pet.petId) {
                     find = true;
-                    this.myPets[i].power = pet.power;
-                    this.myPets[i].price = pet.price / DECIMALS;
+                    break;
                 }
             }
             if (!find) {
@@ -2410,13 +2408,15 @@ vue_pets = new Vue({
             }
         },
         updateMyGem: function(gem) {
+            
             let find = false;
             for (let i = 0; i < this.myGems.length; i++) {
                 if (this.myGems[i].gemId == gem.gemId) {
                     find = true;
-                    this.myGems[i]= gem;
+                    break;
                 }
             }
+            
             if (!find) {
                 this.myGems.push(gem);
             }
@@ -2426,8 +2426,7 @@ vue_pets = new Vue({
             for (let i = 0; i < this.marketPets.length; i++) {
                 if (this.marketPets[i].petId == pet.petId) {
                     find = true;
-                    this.marketPets[i].power = pet.power;
-                    this.marketPets[i].price = pet.price;
+                    break;
                 }
             }
             if (!find) {
@@ -2695,9 +2694,7 @@ vue_pets = new Vue({
            {
                let petId = i;
                getPetBasic(petId, function(ret1){
-                    if(!vue_pets.allPets[petId])
-                        vue_pets.allPets[petId] = {};
-                    let rpet=vue_pets.allPets[petId];
+                    let rpet=vue_pets.getPet(petId);
                     rpet.petId = petId;
 			rpet.rpId = big2number(ret1.retobj.rpId);
 			rpet.power = big2number(ret1.retobj.power);
@@ -2712,18 +2709,30 @@ vue_pets = new Vue({
 		});
            }
         },
+        getGem:function(gId)
+        {
+           if(!this.allGems[gId])
+              this.allGems[gId] = {};
+           return this.allGems[gId];
+        },
+        getPet:function(pId)
+        {
+           if(!this.allPets[pId])
+              this.allPets[pId] = {};
+           return this.allPets[pId];
+        },
         updateMyPets:function()
         {
             getMyPets(function(ret) {
                 if (ret.result) {
                     let pobj = ret.retobj;
 		    if(vue_pets.myPets.length != pobj.length)
-                       this.myPets =[];
+                       vue_pets.myPets =[];
                     for (let i = 0; i < pobj.length; i++) {
                         let petId = big2number(pobj[i]);
                         getPetBasic(petId, function(ret1) {
                             if (ret1.result) {
-                                let mpet = {};
+                                let mpet = vue_pets.getPet(petId);
                                 mpet.petId = petId;
                                 mpet.rpId = big2number(ret1.retobj.rpId);
                                 mpet.power = big2number(ret1.retobj.power);
@@ -2745,13 +2754,13 @@ vue_pets = new Vue({
                         let gobj = ret.retobj;
                         
 		        if(vue_pets.myGems.length != gobj.length)
-                           this.myGems =[];
+                           vue_pets.myGems =[];
                         for (let i = 0; i < gobj.length; i++) {
                             let gemId = big2number(gobj[i]);
                             petContractRead('getGem', function(ret1) {
                                 if (ret1.result) {
                                     let gemobj = ret1.retobj;
-                                    let gem = {};
+                                    let gem = vue_pets.getGem(gemId);
                                     gem.gemId = gemId;
                                     gem.gemType = gemobj.gemType;
                                     gem.img = gemType2Img(gem.gemType);
@@ -2845,8 +2854,8 @@ function updateMarkets()
 		    petContractRead('getGem', function(ret1) {
 			if (ret1.result) {
 			    let gemobj = ret1.retobj;
-			    let gem = {};
-			    gem.gemId = gemId;
+			    let gem = vue_pets.getGem(gemId);
+                            gem.gemId = gemId;
 			    gem.gemType = gemobj.gemType;
 			    gem.img = gemType2Img(gem.gemType);
                             gem.power = gemType2Power(gem.gemType);
@@ -2870,7 +2879,7 @@ function updateMarkets()
                     newIdsMap[petId] = true;
 		    getPetBasic(petId, function(ret1) {
 			if (ret1.result) {
-			    let mpet = {};
+			    let mpet = vue_pets.getPet(petId);
 			    mpet.petId = petId;
 			    mpet.rpId = big2number(ret1.retobj.rpId);
 			    mpet.power = big2number(ret1.retobj.power);
