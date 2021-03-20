@@ -719,6 +719,9 @@ var votemodalv = new Vue({
         }
     },
     methods: {
+        voteAllBalance:function(){
+             this.inputVotes = this.tokenBalance;
+        }, 
         reset: function() {
             this.inputVotes = '';
             this.indicator = '';

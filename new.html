@@ -735,7 +735,7 @@
             <p class="text-secondary">{{tokenBalance}}</p>
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{title}}:</label><span class="btn btn-info">All</span>
+            <label for="message-text" class="col-form-label">{{title}}:</label><span v-on:click="voteAllBalance" class="btn btn-info">All</span>
             <input type="text" class="form-control" id="recipient-name" v-model="inputVotes">
           </div>
         </form>
