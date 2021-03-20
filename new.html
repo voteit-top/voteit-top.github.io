@@ -113,7 +113,7 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="#" onclick="requestVOTEIT()" id="airdrop">Airdrop<i class="fas fa-gift"></i></a>
-  <a href="https://github.com/voteit-top/voteit/wiki/FAQ" target="_blank" id="help">Help&nbsp&nbsp&nbsp<i class="fas fa-question"></i></a>
+  <a href="https://github.com/voteit-top/voteit/wiki/FAQ" target="_blank" id="help">Help&nbsp&nbsp&nbsp&nbsp<i class="fas fa-question"></i></a>
   <a href="https://twitter.com/TopVoteit" target="_blank" id="contact">Contact<i class="fab fa-twitter"></i></a>
 </div>
 
@@ -735,7 +735,7 @@
             <p class="text-secondary">{{tokenBalance}}</p>
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{title}}:</label>
+            <label for="message-text" class="col-form-label">{{title}}:</label><span class="btn btn-info">All</span>
             <input type="text" class="form-control" id="recipient-name" v-model="inputVotes">
           </div>
         </form>
