@@ -703,7 +703,8 @@ var votemodalv = new Vue({
         indicator: '',
         alleventv: null,
         //1,vote,2:vote done;3:unvote;4:uv done
-        callback: null
+        callback: null,
+        confirmCB:null
     },
     computed: {
         title: function() {
@@ -732,65 +733,70 @@ var votemodalv = new Vue({
         confirmVote: function() {
             this.indicator = "waiting for tronlink  to sign";
             let itemId = this.itemId;
-            if (this.isVote) {
-                if (this.callback) {
-                    this.callback(1);
-                }
-                presetranks[itemId].voting = true;
-                voteModalObj.hide();
-                let votes = Number(this.inputVotes);
-                if (votes <= 0) {
-                    votemodalv.indicator = "cannot vote 0";
-                    return;
-                }
-                if (this.alleventv)
-                    this.alleventv.pushWaitingEvent("Voting");
-                contractVoteItem(tronlinkNotConnected,
-                    this.itemId,
-                    this.inputVotes,
-                    function(ret) {
-                        if (votemodalv.alleventv)
-                            votemodalv.alleventv.pushVoteEvent(presetranks[itemId].name, votes, ret);
-                        presetranks[itemId].voting = false;
-                        if (votemodalv.callback) {
-                            votemodalv.callback(2);
-                        }
-                        console.log(ret);
-                        if (ret) {
-                            votemodalv.indicator = "Voted successfully";
-                        } else {
-                            votemodalv.indicator = "Failed to vote";
-                        }
-                    })
-            } else {
-                if (this.inputVotes > this.vote) {
-                    this.indicator = "you can only unvote your votes";
-                    return;
-                }
-                if (this.callback) {
-                    this.callback(3);
-                }
-                presetranks[itemId].unvoting = true;
-                voteModalObj.hide();
-                let unvotes = Number(this.inputVotes);
-                if (this.alleventv)
-                    alleventv.pushWaitingEvent("UnVoting");
-                contractUnVoteItem(tronlinkNotConnected,
-                    this.itemId,
-                    this.inputVotes,
-                    function(ret) {
-                        presetranks[itemId].unvoting = false;
-                        if (votemodalv.alleventv)
-                            alleventv.pushUnVoteEvent(presetranks[itemId].name, unvotes, ret);
-                        if (votemodalv.callback) {
-                            votemodalv.callback(4);
-                        }
-                        if (ret.result) {
-                            votemodalv.indicator = "UnVoted successfully";
-                        } else {
-                            votemodalv.indicator = "Failed to unvote:" + ret.retobj;
-                        }
-                    })
+            if(this.confirmCB)
+            {
+               this.confirmCB(itemId, this.inputVotes);
+            }else{ 
+		    if (this.isVote) {
+			if (this.callback) {
+			    this.callback(1);
+			}
+			presetranks[itemId].voting = true;
+			voteModalObj.hide();
+			let votes = Number(this.inputVotes);
+			if (votes <= 0) {
+			    votemodalv.indicator = "cannot vote 0";
+			    return;
+			}
+			if (this.alleventv)
+			    this.alleventv.pushWaitingEvent("Voting");
+			contractVoteItem(tronlinkNotConnected,
+			    this.itemId,
+			    this.inputVotes,
+			    function(ret) {
+				if (votemodalv.alleventv)
+				    votemodalv.alleventv.pushVoteEvent(presetranks[itemId].name, votes, ret);
+				presetranks[itemId].voting = false;
+				if (votemodalv.callback) {
+				    votemodalv.callback(2);
+				}
+				console.log(ret);
+				if (ret) {
+				    votemodalv.indicator = "Voted successfully";
+				} else {
+				    votemodalv.indicator = "Failed to vote";
+				}
+			    })
+		    } else {
+			if (this.inputVotes > this.vote) {
+			    this.indicator = "you can only unvote your votes";
+			    return;
+			}
+			if (this.callback) {
+			    this.callback(3);
+			}
+			presetranks[itemId].unvoting = true;
+			voteModalObj.hide();
+			let unvotes = Number(this.inputVotes);
+			if (this.alleventv)
+			    alleventv.pushWaitingEvent("UnVoting");
+			contractUnVoteItem(tronlinkNotConnected,
+			    this.itemId,
+			    this.inputVotes,
+			    function(ret) {
+				presetranks[itemId].unvoting = false;
+				if (votemodalv.alleventv)
+				    alleventv.pushUnVoteEvent(presetranks[itemId].name, unvotes, ret);
+				if (votemodalv.callback) {
+				    votemodalv.callback(4);
+				}
+				if (ret.result) {
+				    votemodalv.indicator = "UnVoted successfully";
+				} else {
+				    votemodalv.indicator = "Failed to unvote:" + ret.retobj;
+				}
+			    })
+		    }
             }
         }
     }
@@ -3067,7 +3073,6 @@ async function buyPet(petId, price, callback) {
         petContractWritePay('buyPet', callback, price, petId, price*DECIMALS);
     }
 }
-
 let uefa_vue = new Vue(
     {
 	el:"#uefa2021",
@@ -3090,11 +3095,35 @@ let uefa_vue = new Vue(
           },
           voteItem:function(itemId)
           {
-              
+            votemodalv.itemId = itemId;
+            votemodelv.itemName = this.itemName(itemId);
+            votemodelv.isVote = true;
+            votemodelv.confirmCB = uefa_vue.confirmVote;
+            delete voteModalObj;
+            voteModalObj = new bootstrap.Modal(document.getElementById('voteModal'), null);
+            voteModalObj.show();
+             
+          },
+          confirmVote:function(itemId, amount)
+          {
+              if(amount > 0)
+              {
+              instantContractWritePay('vote', function(ret){
+                       if(ret.result)
+                       {
+                          
+                       }                
+                   }, amount, amount*DECIMALS);    
+
+              }
+              voteModalObj.hide();
+
           },
           claimWin:function(cateId)
           {
-
+             instantContractWrite('claimWin', function(ret){
+				
+		});
           }
 
         }
@@ -3190,7 +3219,7 @@ async function instantContractRead(mname, callback, param, param2) {
         console.log("NO tronweb");
     }
 }
-a
+
 const maxOrders = 5;
 
 function readUserOrders() {

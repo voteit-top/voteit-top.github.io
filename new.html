@@ -409,14 +409,14 @@
         <h1>{{desc}}</h1>
          <div class="row" v-for="grp in groups">
 	    <div class="col">
-	     <img src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
+	     <img :src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
              <p>Total votes:{{grp.votes}}</p> 
              <p>Your votes:{{grp.uvotes}}</p> 
              <p>Bonus:{{grp.bonus}}</p> 
              <button class="btn btn-primary" v-on:click="voteItem(grp.items[0].id)">Vote</button>
 	    </div>
 	    <div class="col">
-	     <img src="'./img/'+itemImg(grp.items[1].id)" :title="itemName(grp.items[1].id)"><br>
+	     <img :src="'./img/'+itemImg(grp.items[1].id)" :title="itemName(grp.items[1].id)"><br>
              <p>Total votes:{{grp.votes}}</p> 
              <p>Your votes:{{grp.uvotes}}</p> 
              <p>Bonus:{{grp.bonus}}</p> 
