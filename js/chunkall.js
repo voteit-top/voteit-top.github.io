@@ -3096,9 +3096,9 @@ let uefa_vue = new Vue(
           voteItem:function(itemId)
           {
             votemodalv.itemId = itemId;
-            votemodelv.itemName = this.itemName(itemId);
-            votemodelv.isVote = true;
-            votemodelv.confirmCB = uefa_vue.confirmVote;
+            votemodalv.itemName = this.itemName(itemId);
+            votemodalv.isVote = true;
+            votemodalv.confirmCB = uefa_vue.confirmVote;
             delete voteModalObj;
             voteModalObj = new bootstrap.Modal(document.getElementById('voteModal'), null);
             voteModalObj.show();
