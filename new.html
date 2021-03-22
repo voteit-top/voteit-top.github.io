@@ -408,7 +408,7 @@
         <div id="uefa2021" class="container vhide1">
         <h1>{{desc}}</h1>
          <div class="row" v-for="grp in groups">
-            <h3>{{title}}-Votes:{{grp.votes}}-Bonus:{{grp.bonus}}Trx</h3>
+            <h3>{{grp.title}}-Votes:{{grp.votes}}-Bonus:{{grp.bonus}}Trx</h3>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
              <p>Total votes:{{grp.items[0].votes}}</p> 
