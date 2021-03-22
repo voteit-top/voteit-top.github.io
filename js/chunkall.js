@@ -3080,13 +3080,78 @@ let uefa_vue = new Vue(
 	el:"#uefa2021",
         data:
 	{
-        desc:"Meet the Quater-Finallists",
+        desc:"UEFA Champion League Quater Finals",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final 1", bonus:0, votes:0, items:[{id:1,votes:0,uvotes:0,expire:0},{id:2,votes:0,uvotes:0,expire:0}]}],
+	groups:[{title:"Quater-Final 1",cid:1, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[{id:1,votes:0,uvotes:0,expire:0},{id:2,votes:0,uvotes:0,expire:0}]}],
         
 	},
         methods:
-        {
+        { 
+          updateGroups:function(user)
+          {
+	      for(let i=0;i<this.groups.length;i++)
+              {
+                  let cid = this.groups[i].cid;
+                  let cObj = this.groups[i];
+		  instantContractRead('getCateDetails', function(ret){
+		        if(ret.result)
+                        {
+                           cObj.winItemId = big2number(ret.retobj.winItem;
+                           cObj.votes = big2number(ret.retobj.votes); 
+                           cObj.expire = big2number(ret.retobj.expireTs; 
+                        }	
+			},cid);
+                  for(let j=0;j<this.groups[i].items.length;j++)
+                  {
+                      
+                      let itemId = this.groups[i].items[j].id;
+                      let itemObj = this.groups[i].items[j];
+		      instantContractRead('getItemDetails', function(ret){
+		        if(ret.result)
+                        {
+                           itemObj.votes = big2number(ret.retobj.votes;
+                           itemObj.uvotes = big2number(ret.retobj.uvotes;
+                           itemObj.expire = big2number(ret.retobj.expireTs; 
+                        }	
+			},itemId, user);
+                       
+                  }
+	      }
+
+          },
+          leftTime:function(expireTs)
+          {
+	      let now = Date.now()/1000;
+              if(now > expireTS)
+                  return 'Expired';
+              let diff = now - expireTs;
+              let str = '';
+              if(diff > 3600)
+                 {
+                 let hour = diff/3600;
+                 if(hour == 1)
+                 	str += '1+ hour ';
+                 else
+                     { 
+                       str += hour;
+                       str += "+ hours ";  
+                    }
+                 }
+              else
+              {
+                 let min= diff/60;
+                 if(min== 1)
+                 	str += '1+ min ';
+                 else
+                     { 
+                       str += min;
+                       str += "+ mins ";  
+                    }
+                 
+              }
+              return 'Expired';
+
+          },
           itemName:function(itemId)
           {
              return this.items[itemId].name;
@@ -3111,10 +3176,7 @@ let uefa_vue = new Vue(
               if(amount > 0)
               {
               instantContractWritePay('vote', function(ret){
-                       if(ret.result)
-                       {
-                          
-                       }                
+	                  alleventv.pushPetCommonEvent("Vote " + uefa_vue.items[itemId].name + " ", amount, ret);	
                    }, amount, amount*DECIMALS);    
 
               }
