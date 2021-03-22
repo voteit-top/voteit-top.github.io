@@ -3122,7 +3122,7 @@ let uefa_vue = new Vue(
           leftTime:function(expireTs)
           {
 	      let now = Date.now()/1000;
-              if(now > expireTS)
+              if(now > expireTs)
                   return 'Expired';
               let diff = now - expireTs;
               let str = '';
