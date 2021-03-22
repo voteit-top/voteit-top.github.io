@@ -3096,9 +3096,9 @@ let uefa_vue = new Vue(
 		  instantContractRead('getCateDetails', function(ret){
 		        if(ret.result)
                         {
-                           cObj.winItemId = big2number(ret.retobj.winItem;
+                           cObj.winItemId = big2number(ret.retobj.winItem);
                            cObj.votes = big2number(ret.retobj.votes); 
-                           cObj.expire = big2number(ret.retobj.expireTs; 
+                           cObj.expire = big2number(ret.retobj.expireTs); 
                         }	
 			},cid);
                   for(let j=0;j<this.groups[i].items.length;j++)
@@ -3109,9 +3109,9 @@ let uefa_vue = new Vue(
 		      instantContractRead('getItemDetails', function(ret){
 		        if(ret.result)
                         {
-                           itemObj.votes = big2number(ret.retobj.votes;
-                           itemObj.uvotes = big2number(ret.retobj.uvotes;
-                           itemObj.expire = big2number(ret.retobj.expireTs; 
+                           itemObj.votes = big2number(ret.retobj.votes);
+                           itemObj.uvotes = big2number(ret.retobj.uvotes);
+                           itemObj.expire = big2number(ret.retobj.expireTs); 
                         }	
 			},itemId, user);
                        
