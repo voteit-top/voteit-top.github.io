@@ -12,6 +12,7 @@ let view_type = VIEW_RANK;
 let contractTokenId = '1003606';
 const minercontract = 'TECu9sH4r5BZ373yBgBDsS3chC4s24cePA';
 const petcontract = 'TJ5qtb9wUM9iNBzaRETcrVXBhPkuqBq4r9';
+const instantcontract = 'TRGRKGBsxPZEsAFhdNZ7R75zk41bt4VMrR';
 const HttpProvider = TronWeb.providers.HttpProvider;
 const trongridurl = 'https://sun.tronex.io';
 //const sunurl = 'https://sun.tronex.io';
@@ -3067,7 +3068,129 @@ async function buyPet(petId, price, callback) {
     }
 }
 
+let uefa_vue = new Vue(
+    {
+	el:"#uefa2021",
+        data:
+	{
+        desc:"Meet the Quater-Finallists",
+        items:{1:{name:'Man. City','img':'mc.png'},2:{name:'Dortmund','img':'dtmd.png'},3:{name:'Real Madrid','img':'hm.png'},4:{name:'Liverpool','img':'lwp.png'},5:{name:'Bayern','img':'br.png'},6:{name:'Paris','img':'bl.png'},7:{name:'Porto','img':'bet.png'},8:{name:'Chelsea','img':'qex.png'}};
+	groups:[{title:"Quater-Final1", bonus:0, votes:0, items:[{id:1,votes:0,uvotes:0,expire:0},{id:2,votes:0,uvotes:0,expire:0}],[],[],[]],
+        
+	},
+        methods:
+        {
+          itemName:function(itemId)
+          {
+             return this.items[itemId].name;
+          },
+          itemImg:function(itemId)
+          {
+             return this.items[itemId].img;
+          },
+          voteItem:function(itemId)
+          {
+              
+          },
+          claimWin:function(cateId)
+          {
 
+          }
+
+        }
+       
+    }
+);
+async function instantContractWritePay(mname, callback, value, param, param2) {
+    if (value <= 0)
+        return;
+    if (tronlinkWeb) {
+        try {
+            let contract = await tronlinkWeb.contract().at(instantcontract);
+            let obj = {
+                feeLimit: 100_000_000,
+                callValue: 0,
+                tokenId: contractTokenId,
+                tokenValue: value * 1000000,
+                shouldPollResponse: false
+            };
+            let ret;
+            if (param != undefined && param2 != undefined) {
+                ret = await contract[mname](param, param2).send(obj);
+            } else if (param != undefined)
+                ret = await contract[mname](param).send(obj);
+            else
+                ret = await contract[mname]().send(obj);
+            //console.log(ret);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: ret
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+async function instantContractWrite(mname, callback, param, param2) {
+    if (tronlinkWeb) {
+        try {
+            let contract = await tronlinkWeb.contract().at(instantcontract);
+            let obj = {
+                feeLimit: 100_000_000,
+                callValue: 0,
+                tokenId: '',
+                tokenValue: 0,
+                shouldPollResponse: false
+            };
+            let ret;
+            if (param != undefined && param2 != undefined) {
+                ret = await contract[mname](param, param2).send(obj);
+            } else if (param != undefined)
+                ret = await contract[mname](param).send(obj);
+            else
+                ret = await contract[mname]().send(obj);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: ret
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+async function instantContractRead(mname, callback, param, param2) {
+    let optw = localTronweb;
+    if (tronlinkWeb)
+        optw = tronlinkWeb;
+    if (optw) {
+        try {
+            let contract = await optw.contract().at(instantcontract);
+            let ret;
+            if (param != undefined && param2 != undefined) {
+                ret = await contract[mname](param, param2).call();
+            } else if (param != undefined)
+                ret = await contract[mname](param).call();
+            else
+                ret = await contract[mname]().call();
+            //console.log(ret);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: ret
+                });
+            }
+        } catch (err) {
+            console.log(err + " " + mname);
+        }
+    } else {
+        console.log("NO tronweb");
+    }
+}
+a
 const maxOrders = 5;
 
 function readUserOrders() {
