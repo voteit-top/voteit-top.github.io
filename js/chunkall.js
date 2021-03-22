@@ -610,7 +610,7 @@ async function dexCancelOrder(ntlCB, oid, callback) {
     }
 }
 //wallet
-
+let votemodalv = null; 
 var voteModalObj;
 var vue_dex = null;
 let vue_signdays = null;
@@ -652,6 +652,8 @@ var walletv = new Vue({
                                 getTrxBalance(tronlinkNotConnected, function(trx, token) {
                                     walletv.trxBalance = trx / DECIMALS;
                                     walletv.tokenBalance = token / DECIMALS;
+                                    if(votemodalv)
+                                       votemodalv.tokenBalance = walletv.tokenBalance;
                                     if (vue_dex) {
                                         vue_dex.trxBalance = walletv.trxBalance;
                                         vue_dex.tokenBalance = walletv.tokenBalance;
@@ -692,7 +694,7 @@ var walletv = new Vue({
         }
     }
 })
-var votemodalv = new Vue({
+votemodalv = new Vue({
     el: '#voteModal',
     data: {
         isVote: 'true',
@@ -3080,7 +3082,7 @@ let uefa_vue = new Vue(
 	{
         desc:"Meet the Quater-Finallists",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final1", bonus:0, votes:0, items:[{id:1,votes:0,uvotes:0,expire:0},{id:2,votes:0,uvotes:0,expire:0}]}],
+	groups:[{title:"Quater-Final 1", bonus:0, votes:0, items:[{id:1,votes:0,uvotes:0,expire:0},{id:2,votes:0,uvotes:0,expire:0}]}],
         
 	},
         methods:

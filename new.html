@@ -408,18 +408,17 @@
         <div id="uefa2021" class="container vhide1">
         <h1>{{desc}}</h1>
          <div class="row" v-for="grp in groups">
+            <h2>{{title}}-Votes:{{grp.votes}}-Bonus:{{grp.bonus}}Trx</h2>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
-             <p>Total votes:{{grp.votes}}</p> 
-             <p>Your votes:{{grp.uvotes}}</p> 
-             <p>Bonus:{{grp.bonus}}</p> 
+             <p>Total votes:{{grp.items[0].votes}}</p> 
+             <p>Your votes:{{grp.item[0].uvotes}}</p> 
              <button class="btn btn-primary" v-on:click="voteItem(grp.items[0].id)">Vote</button>
 	    </div>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[1].id)" :title="itemName(grp.items[1].id)"><br>
-             <p>Total votes:{{grp.votes}}</p> 
-             <p>Your votes:{{grp.uvotes}}</p> 
-             <p>Bonus:{{grp.bonus}}</p> 
+             <p>Total votes:{{grp.items[1].votes}}</p> 
+             <p>Your votes:{{grp.item[1].uvotes}}</p> 
              <button class="btn btn-primary" v-on:click="voteItem(grp.items[1].id)">Vote</button>
 	    </div>
 	  </div>
