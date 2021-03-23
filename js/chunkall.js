@@ -3088,7 +3088,7 @@ uefa_vue = new Vue(
 	{
         desc:"UEFA Champion League Quater Finals",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final 1",cid:1, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[{id:1,votes:0,uvotes:0,expire:0},{id:2,votes:0,uvotes:0,expire:0}]}],
+	groups:[{title:"Quater-Final 1",cid:1, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[{id:1,votes:0,uvotes:0,expire:0,voting:false},{id:2,votes:0,uvotes:0,expire:0,voting:false}]}],
         
 	},
         methods:
@@ -3103,7 +3103,7 @@ uefa_vue = new Vue(
 		        if(ret.result)
                         {
                            cObj.winItemId = big2number(ret.retobj.winItem);
-                           cObj.votes = big2number(ret.retobj.votes); 
+                           cObj.votes = big2number(ret.retobj.votes)/DECIMALS; 
                            cObj.expire = big2number(ret.retobj.expireTs); 
                         }	
 			},cid);
@@ -3115,8 +3115,8 @@ uefa_vue = new Vue(
 		      instantContractRead('getItemDetails', function(ret){
 		        if(ret.result)
                         {
-                           itemObj.votes = big2number(ret.retobj.itemVotes);
-                           itemObj.uvotes = big2number(ret.retobj.uVotes);
+                           itemObj.votes = big2number(ret.retobj.itemVotes)/DECIMALS;
+                           itemObj.uvotes = big2number(ret.retobj.uVotes)/DECIMALS;
                            itemObj.expire = big2number(ret.retobj.expireTs); 
                            itemObj.ltStr = uefa_vue.leftTime(itemObj.expire);
                            const timestamp = new Date().getTime();

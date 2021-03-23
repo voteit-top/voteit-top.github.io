@@ -417,6 +417,9 @@
              <p>Left time:{{grp.items[0].ltStr}}</p>
              <button class="btn btn-primary" v-if="grp.items[1].active" v-on:click="voteItem(grp.items[0].id)">Vote</button>
 	    </div>
+            <div class="col">
+              <img src="./img/vs.png">
+            </div>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[1].id)" :title="itemName(grp.items[1].id)"><br>
              <p>Total votes:{{grp.items[1].votes}}</p> 
