@@ -3156,7 +3156,7 @@ uefa_vue = new Vue(
                     }
                  
               }
-              return 'Expired';
+              return str;
 
           },
           itemName:function(itemId)
