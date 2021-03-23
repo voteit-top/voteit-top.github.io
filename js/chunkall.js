@@ -3188,7 +3188,7 @@ uefa_vue = new Vue(
               {
               instantContractWritePay('vote', function(ret){
 	                  alleventv.pushPetCommonEvent("Vote " + uefa_vue.items[itemId].name + " ", amount, ret);	
-                   }, amount, amount*DECIMALS);    
+                   }, amount, itemId);    
 
               }
               voteModalObj.hide();
