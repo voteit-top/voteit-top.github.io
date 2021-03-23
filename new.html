@@ -417,7 +417,7 @@
              <p>Total votes:{{grp.items[0].votes}}</p> 
              <p>Your votes:{{grp.items[0].uvotes}}</p> 
              <p>Left time:{{grp.items[0].ltStr}}</p>
-             <button class="btn btn-primary" v-if="grp.items[1].active" v-on:click="voteItem(grp.items[0].id)">Vote</button>
+             <button class="btn btn-primary" v-bind:class='{disabled:!grp.items[0].active}'> v-on:click="voteItem(grp.items[0].id)">Vote</button>
 	    </div>
             <div class="col">
               <img src="./img/vs.png" width=100px height=100px>
@@ -427,7 +427,7 @@
              <p>Total votes:{{grp.items[1].votes}}</p> 
              <p>Your votes:{{grp.items[1].uvotes}}</p> 
              <p>Left time:{{grp.items[1].ltStr}}</p>
-             <button class="btn btn-primary" v-if="grp.items[1].active" v-on:click="voteItem(grp.items[1].id)">Vote</button>
+             <button class="btn btn-primary" v-bind:class='{disabled:!grp.items[1].active}' v-on:click="voteItem(grp.items[1].id)">Vote</button>
 	    </div>
 	  </div>
         </div>

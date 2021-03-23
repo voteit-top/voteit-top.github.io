@@ -3116,8 +3116,8 @@ uefa_vue = new Vue(
         data:
 	{
         desc:"UEFA Champion League Quater Finals",
-        items:{9:{name:'Man. City',img:'mc.png'},10:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final 1",cid:2, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[{id:8,votes:0,uvotes:0,expire:0,voting:false},{id:9,votes:0,uvotes:0,expire:0,voting:false}]}],
+        items:{9:{name:'Man. City',img:'mc.png'},11:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
+	groups:[{title:"Quater-Final 1",cid:2, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[{id:11,votes:0,uvotes:0,expire:0,voting:false},{id:9,votes:0,uvotes:0,expire:0,voting:false}]}],
         
 	},
         methods:
