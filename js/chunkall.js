@@ -426,6 +426,7 @@ function loginWithTronlink(callback, timeout, TOcallback) {
             clearInterval(obj)
             console.log("tronlink connected");
             tronlinkWeb = window.sunWeb.sidechain;
+            userAddr = tronlinkWeb.defaultAddress.base58;
             if (callback) {
                 callback(tronlinkWeb);
             }
