@@ -1946,7 +1946,7 @@ async function contractSettleBets(callback) {
 }
 
 let vue_allbets = new Vue({
-    el: "#v_betgame",
+    el: '#v_betgame',
     data:{
     }, 
     methods:{
@@ -1965,7 +1965,7 @@ let vue_allbets = new Vue({
       
 });
 let vue_betgame = new Vue({
-    el: "#v_blockbet",
+    el: 'v_blockbet',
     data: {
         blockNumber: 0,
         blockID: "",
