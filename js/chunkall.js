@@ -3118,6 +3118,7 @@ uefa_vue = new Vue(
                            itemObj.votes = big2number(ret.retobj.itemVotes);
                            itemObj.uvotes = big2number(ret.retobj.uVotes);
                            itemObj.expire = big2number(ret.retobj.expireTs); 
+                           itemObj.ltStr = uefa_vue.leftTime(itemObj.expire);
                         }	
 			},itemId, user);
                        

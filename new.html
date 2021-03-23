@@ -414,14 +414,14 @@
 	     <img :src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
              <p>Total votes:{{grp.items[0].votes}}</p> 
              <p>Your votes:{{grp.items[0].uvotes}}</p> 
-             <p>Left time:{{leftTime(grp.items[0].expire)}}</p>
+             <p>Left time:{{grp.items[0].ltStr}}</p>
              <button class="btn btn-primary" v-if="(Date.now()/1000)>grp.items[1].expire" v-on:click="voteItem(grp.items[0].id)">Vote</button>
 	    </div>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[1].id)" :title="itemName(grp.items[1].id)"><br>
              <p>Total votes:{{grp.items[1].votes}}</p> 
              <p>Your votes:{{grp.items[1].uvotes}}</p> 
-             <p>Left time:{{leftTime(grp.items[1].expire)}}</p>
+             <p>Left time:{{grp.items[1].ltStr}}</p>
              <button class="btn btn-primary" v-if="(Date.now()/1000)>grp.items[1].expire" v-on:click="voteItem(grp.items[1].id)">Vote</button>
 	    </div>
 	  </div>
