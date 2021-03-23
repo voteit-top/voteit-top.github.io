@@ -3116,7 +3116,7 @@ uefa_vue = new Vue(
 		        if(ret.result)
                         {
                            itemObj.votes = big2number(ret.retobj.itemVotes);
-                           itemObj.uvotes = big2number(ret.retobj.uvotes);
+                           itemObj.uvotes = big2number(ret.retobj.uVotes);
                            itemObj.expire = big2number(ret.retobj.expireTs); 
                         }	
 			},itemId, user);
