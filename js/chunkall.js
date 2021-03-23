@@ -1944,8 +1944,28 @@ async function contractSettleBets(callback) {
     }
 
 }
-let vue_betgame = new Vue({
+
+let vue_allbets = new Vue({
     el: "#v_betgame",
+    data:{
+    }, 
+    methods:{
+       showUefa2021:function()
+       {
+            showEle('uefa2021', true);
+            showEle('v_blockbet', false);
+    
+       },
+       showBlockbet:function()
+       {
+            showEle('uefa2021', false);
+            showEle('v_blockbet', true);
+       }
+    }
+      
+});
+let vue_betgame = new Vue({
+    el: "#v_blockbet",
     data: {
         blockNumber: 0,
         blockID: "",

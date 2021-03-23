@@ -405,6 +405,8 @@
       <p class="text-warning">{{indicator}}</p>
       </div>
     </div>
+    <div id="v_betgame" class="container vhide">
+        <div class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League 2021</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="container vhide1">
         <h1>{{desc}}</h1>
          <div class="row" v-for="grp in groups">
@@ -429,7 +431,7 @@
 	    </div>
 	  </div>
         </div>
-        <div id="v_betgame" class="container vhide">
+        <div id="v_blockbet" class="container vhide"> 
             
             <div class="row">
                 <div class="col-4 text-muted">
@@ -519,6 +521,7 @@
                     <p class="text-info">{{betResult}}</p>
                 </div>
               </div>
+            </div>
         </div>
 	   <div  id="v_pets" class="vhide">
 
