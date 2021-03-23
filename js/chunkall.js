@@ -3129,13 +3129,15 @@ uefa_vue = new Vue(
           leftTime:function(expireTs)
           {
 	      let now = Date.now()/1000;
+              now = now.toFixed(0);
               if(now > expireTs)
                   return 'Expired';
-              let diff = now - expireTs;
+              let diff = expireTs-now;
               let str = '';
               if(diff > 3600)
                  {
                  let hour = diff/3600;
+                 hour = hour.toFixed(0);
                  if(hour == 1)
                  	str += '1+ hour ';
                  else
@@ -3147,6 +3149,7 @@ uefa_vue = new Vue(
               else
               {
                  let min= diff/60;
+                 min = min.toFixed(0);
                  if(min== 1)
                  	str += '1+ min ';
                  else
@@ -3154,7 +3157,6 @@ uefa_vue = new Vue(
                        str += min;
                        str += "+ mins ";  
                     }
-                 
               }
               return str;
 
