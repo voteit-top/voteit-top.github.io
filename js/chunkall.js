@@ -3119,6 +3119,8 @@ uefa_vue = new Vue(
                            itemObj.uvotes = big2number(ret.retobj.uVotes);
                            itemObj.expire = big2number(ret.retobj.expireTs); 
                            itemObj.ltStr = uefa_vue.leftTime(itemObj.expire);
+                           const timestamp = new Date().getTime();
+                           itemObj.active = timestamp > itemObj.expire;
                         }	
 			},itemId, user);
                        
