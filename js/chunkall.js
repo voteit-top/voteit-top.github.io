@@ -3,11 +3,13 @@ var carousel = new bootstrap.Carousel(myCarousel)
 let localTronweb = null;
 let tronlinkWeb = null;
 let vue_pets = null;
+let uefa_vue = null;
 
 const VIEW_RANK = 1;
 const VIEW_DEX = 2;
 const VIEW_BET = 3;
 const VIEW_PET = 4;
+let userAddr = null;
 let view_type = VIEW_RANK;
 let contractTokenId = '1003606';
 const minercontract = 'TECu9sH4r5BZ373yBgBDsS3chC4s24cePA';
@@ -24,6 +26,7 @@ createLocalTronweb(fullNode, solidityNode, eventServer, ek().slice(1));
 
 function tronlinkConnected(tlweb) {
     tronlinkWeb = tlweb;
+    userAddr = tronlinkWeb.defaultAddress.base58;
     contractRead('totalLeftToken', function(ret) {
         //console.log(ret);
         if (ret) {
@@ -413,6 +416,7 @@ async function getBlockRange(startb, endb, callback) {
 
 function createLocalTronweb(fullNode, solidityNode, eventServer, privateKey) {
     localTronweb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
+    userAddr = localTronweb.defaultAddress.base58;
     return localTronweb;
 }
 
@@ -2282,6 +2286,7 @@ setInterval(async () => {
                 }
             }
         });
+               uefa_vue.updateGroups(userAddr);
         }
         if (view_type == VIEW_PET) {
             readPetMetrics();
@@ -3075,7 +3080,7 @@ async function buyPet(petId, price, callback) {
         petContractWritePay('buyPet', callback, price, petId, price*DECIMALS);
     }
 }
-let uefa_vue = new Vue(
+uefa_vue = new Vue(
     {
 	el:"#uefa2021",
         data:
@@ -3109,7 +3114,7 @@ let uefa_vue = new Vue(
 		      instantContractRead('getItemDetails', function(ret){
 		        if(ret.result)
                         {
-                           itemObj.votes = big2number(ret.retobj.votes);
+                           itemObj.votes = big2number(ret.retobj.itemVotes);
                            itemObj.uvotes = big2number(ret.retobj.uvotes);
                            itemObj.expire = big2number(ret.retobj.expireTs); 
                         }	
