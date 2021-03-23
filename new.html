@@ -409,7 +409,7 @@
         <h1>{{desc}}</h1>
          <div class="row" v-for="grp in groups">
             <h3>{{grp.title}}</h3>
-            <p>Votes:{{grp.votes}}-Bonus:{{grp.bonus}}Trx</p>
+            <p>Votes:{{grp.votes}} &nbsp&nbsp&nbsp Bonus:{{grp.bonus}}Trx</p>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
              <p>Total votes:{{grp.items[0].votes}}</p> 
