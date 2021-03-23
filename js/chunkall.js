@@ -1948,18 +1948,24 @@ async function contractSettleBets(callback) {
 let vue_allbets = new Vue({
     el: '#v_betheader',
     data:{
+       isBlockbet:false,
+       isUefa2021:true,
     }, 
     methods:{
        showUefa2021:function()
        {
             showEle('uefa2021', true);
             showEle('v_blockbet', false);
+            this.isUefa2021=true;
+            this.isBlockbet=false;
     
        },
        showBlockbet:function()
        {
             showEle('uefa2021', false);
             showEle('v_blockbet', true);
+            this.isUefa2021=false;
+            this.isBlockbet=true;
        }
     }
       
@@ -2290,24 +2296,27 @@ setInterval(async () => {
     }
     if (view_type == VIEW_BET || view_type == VIEW_PET) {
         if(view_type == VIEW_BET){
-        getCurrentBlock(function(bn, bid) {
-            if (true) {
-                vue_betgame.blockNumber = bn;
-                vue_betgame.blockID = bid;
-                vue_betgame.result = getBlockResult(bid);
-                //update bn and id;
-                let startbn = bn - 6;
-                let endbn = bn - 1;
-                vue_betgame.setBetResult(bn, vue_betgame.result);
-                vue_betgame.updateMyBets(bn);
+            if(vue_allbets.isBlockbet){ 
+		    getCurrentBlock(function(bn, bid) {
+		    if (true) {
+			vue_betgame.blockNumber = bn;
+			vue_betgame.blockID = bid;
+			vue_betgame.result = getBlockResult(bid);
+			//update bn and id;
+			let startbn = bn - 6;
+			let endbn = bn - 1;
+			vue_betgame.setBetResult(bn, vue_betgame.result);
+			vue_betgame.updateMyBets(bn);
 
-                if ((bn - vue_betgame.refreshBn) >= 3) {
-                    vue_betgame.refreshBn = bn;
-                    vue_betgame.refreshMyBets();
-                }
-            }
-        });
-               uefa_vue.updateGroups(userAddr);
+			if ((bn - vue_betgame.refreshBn) >= 3) {
+			    vue_betgame.refreshBn = bn;
+			    vue_betgame.refreshMyBets();
+			}
+		    }
+		});
+           }else if(vue_allbets.isUefa2021){
+                uefa_vue.updateGroups(userAddr);
+           }
         }
         if (view_type == VIEW_PET) {
             readPetMetrics();
