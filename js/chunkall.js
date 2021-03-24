@@ -1152,6 +1152,7 @@ var alleventv = new Vue({
         myEvents: [],
         showMine: false,
         waiting: false,
+        pendingLoadEvents:0,
         waitingText: ''
     },
     computed: {
@@ -3499,22 +3500,9 @@ function createRanksOfCate(cateId) {
         //
     }, defaultCateId);
 }
+function loadHisEvents()
+{
 
-function readMetrics() {
-    contractRead('getMetrics', function(ret) {
-
-        tongjiv.totalvotes = big2number(ret[0]) / DECIMALS;
-        tongjiv.totalrewards = big2number(ret[1]) / DECIMALS;
-        tongjiv.totalitems = big2number(ret[2]) - 1;
-        presetranks.length = tongjiv.totalitems + 1;
-        tongjiv.costOfCreate = big2number(ret[3]);
-        tongjiv.createtext = "Cost " + tongjiv.costOfCreate / DECIMALS + " TRX to create new item";
-        createmodalv.indicator = tongjiv.createtext;
-        tongjiv.myvotes = big2number(ret[4]) / DECIMALS;
-        tongjiv.exrate = big2number(ret[5]);
-        tongjiv.airdropusers = big2number(ret[6]);
-        tongjiv.totalusers = big2number(ret[7]);
-        tongjiv.totalevents = big2number(ret[8]);
         if (tongjiv.totalevents > eventStart) {
             //load event;
             let sidx = eventStart;
@@ -3534,6 +3522,24 @@ function readMetrics() {
             }
             eventStart = tongjiv.totalevents;
         }
+
+}
+function readMetrics() {
+    contractRead('getMetrics', function(ret) {
+
+        tongjiv.totalvotes = big2number(ret[0]) / DECIMALS;
+        tongjiv.totalrewards = big2number(ret[1]) / DECIMALS;
+        tongjiv.totalitems = big2number(ret[2]) - 1;
+        presetranks.length = tongjiv.totalitems + 1;
+        tongjiv.costOfCreate = big2number(ret[3]);
+        tongjiv.createtext = "Cost " + tongjiv.costOfCreate / DECIMALS + " TRX to create new item";
+        createmodalv.indicator = tongjiv.createtext;
+        tongjiv.myvotes = big2number(ret[4]) / DECIMALS;
+        tongjiv.exrate = big2number(ret[5]);
+        tongjiv.airdropusers = big2number(ret[6]);
+        tongjiv.totalusers = big2number(ret[7]);
+        tongjiv.totalevents = big2number(ret[8]);
+        alleventv.pendingLoadEvents= (tongjiv.totalevents-eventStart);
         tongjiv.loading = false;
     }, null, null, true);
 }
