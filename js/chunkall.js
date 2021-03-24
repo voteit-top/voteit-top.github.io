@@ -3134,6 +3134,7 @@ uefa_vue = new Vue(
                            cObj.winItemId = big2number(ret.retobj.winItem);
                            cObj.votes = big2number(ret.retobj.votes)/DECIMALS; 
                            cObj.expire = big2number(ret.retobj.expireTs); 
+                           cObj.bonus = big2number(ret.retobj.totalToken)/DECIMALS;
                         }	
 			},cid);
                   for(let j=0;j<this.groups[i].items.length;j++)

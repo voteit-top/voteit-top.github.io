@@ -409,9 +409,9 @@
         <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League 2021</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="vhide1">
         <h1>{{desc}}</h1>
-         <div class="row" v-for="grp in groups">
+         <div class="p-1 row bg-light" v-for="grp in groups">
             <h3>{{grp.title}}</h3>
-            <p>Votes:{{grp.votes}} &nbsp&nbsp&nbsp Bonus:{{grp.bonus}}Trx</p>
+            <p>Votes:{{grp.votes}} &nbsp&nbsp&nbsp pool:{{grp.bonus}}VOTEIT</p>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[0])" :title="itemName(grp.items[0])"><br>
              <p>Total votes:{{items[grp.items[0]].votes}}</p> 
@@ -428,7 +428,7 @@
              <p>Your votes:{{items[grp.items[1]].uvotes}}</p> 
              <p>Left time:{{items[grp.items[1]].ltStr}}</p>
              <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[1]].active}' v-on:click="voteItem(grp.items[1])">Vote</button>
-	    </div>
+	    </div>            
 	  </div>
         </div>
         <div id="v_blockbet" class="container vhide"> 
