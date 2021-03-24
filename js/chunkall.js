@@ -9,6 +9,7 @@ const VIEW_RANK = 1;
 const VIEW_DEX = 2;
 const VIEW_BET = 3;
 const VIEW_PET = 4;
+const VIEW_ITEM = 5;
 let userAddr = null;
 let view_type = VIEW_RANK;
 let contractTokenId = '1003606';
@@ -1112,6 +1113,7 @@ function showItem(id) {
         showEle('voteitdex', false);
         showEle('v_betgame', false);
         showEle('v_itemdetail', true);
+        view_type = VIEW_ITEM;
         alleventv.mode = 2;
         if (rankItemDetails[id]) {
             vue_itemdetail.desc = rankItemDetails[id].desc;
@@ -3644,6 +3646,7 @@ function routeByHash() {
         showEle('v_pets', false);
         vue_itemdetail.show = false;
         createRanksOfCate(Number(urltail.substr(ic + 5)));
+        view_type = VIEW_RANK;
     } else {
         ic = urltail.indexOf('item=');
         if (ic != -1) {
