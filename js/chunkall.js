@@ -3151,7 +3151,8 @@ uefa_vue = new Vue(
                            itemObj.expire = big2number(ret.retobj.expireTs); 
                            itemObj.ltStr = uefa_vue.leftTime(itemObj.expire);
                            const timestamp = (Date.now()/1000).toFixed(0);
-                           itemObj.active = Number(timestamp) > itemObj.expire;
+                           itemObj.active = Number(timestamp) < itemObj.expire;
+                           uefa_vue.$forceUpdate();
                         }	
 			},itemId, user);
                        
