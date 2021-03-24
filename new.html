@@ -409,10 +409,10 @@
         <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League 2021</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="vhide1">
         <h1>{{desc}}</h1>
-        <p class="text-warning">Note:two matches, vote for teams who will enter semi-finals.</p>
-         <div class="border border-3 border-white row bg-light" v-for="grp in groups">
+        <p class="text-info">Note:two matches for each, vote for teams who will enter semi-finals.</p>
+         <div class="border border-5 border-white row bg-light" v-for="grp in groups">
             <h3>{{grp.title}}</h3>
-            <p>Votes:{{grp.votes}} &nbsp&nbsp&nbsp pool:{{grp.bonus}}VOTEIT</p>
+            <p>Votes:<span class="text-secondary">{{grp.votes}}</span>&nbsp&nbsp&nbsp Pool:<span class="text-success">{{grp.bonus}}</span>VOTEIT</p>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[0])" :title="itemName(grp.items[0])"><br>
              <p>Total votes:{{items[grp.items[0]].votes}}</p> 
