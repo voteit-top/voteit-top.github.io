@@ -682,6 +682,8 @@
         </ul>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <button type="button" class="btn btn-secondary" onclick="loadHisEvents()" v-if="pendingLoadEvents>0">Load Events({{pendingLoadEvents}})</button>
+
           <ul class="list-group">
             <li class="list-group-item" v-if="waiting">{{waitingText}}<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></li>
             <li class="list-group-item" v-for="evt in myEvents"><a data-toggle="tooltip" data-placement="right" v-bind:title="evt.details" :href="evt.tranUrl" target="_blank">{{evt.name}} {{evt.param2}}</a><span class="badge bg-danger" v-if="evt.error">error</span><span class="badge bg-success" v-if="!evt.error">OK</span></li>
