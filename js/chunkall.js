@@ -1155,6 +1155,7 @@ var alleventv = new Vue({
         showMine: false,
         waiting: false,
         pendingLoadEvents:0,
+        loadingEvents:false,
         waitingText: ''
     },
     computed: {
@@ -3508,6 +3509,7 @@ function loadHisEvents()
         if (tongjiv.totalevents > eventStart) {
             //load event;
             let sidx = eventStart;
+            alleventv.loadingEvents=true;
             for (; sidx < tongjiv.totalevents; sidx++) {
                 contractRead('getUpdateEvent', function(ret1) {
 
@@ -3520,6 +3522,7 @@ function loadHisEvents()
                     evt.param2 = '';
                     evt.details = evt.caller;
                     alleventv.updateEventResult(evt);
+                    alleventv.loadingEvents=false;
                 }, sidx)
             }
             eventStart = tongjiv.totalevents;
