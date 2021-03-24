@@ -413,21 +413,21 @@
             <h3>{{grp.title}}</h3>
             <p>Votes:{{grp.votes}} &nbsp&nbsp&nbsp Bonus:{{grp.bonus}}Trx</p>
 	    <div class="col">
-	     <img :src="'./img/'+itemImg(grp.items[0].id)" :title="itemName(grp.items[0].id)"><br>
-             <p>Total votes:{{grp.items[0].votes}}</p> 
-             <p>Your votes:{{grp.items[0].uvotes}}</p> 
-             <p>Left time:{{grp.items[0].ltStr}}</p>
-             <button class="btn btn-primary" v-bind:class='{disabled:!grp.items[0].active}' v-on:click="voteItem(grp.items[0].id)">Vote</button>
+	     <img :src="'./img/'+itemImg(grp.items[0])" :title="itemName(grp.items[0])"><br>
+             <p>Total votes:{{items[grp.items[0]].votes}}</p> 
+             <p>Your votes:{{items[grp.items[0]].uvotes}}</p> 
+             <p>Left time:{{items[grp.items[0]].ltStr}}</p>
+             <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[0]].active}' v-on:click="voteItem(grp.items[0])">Vote</button>
 	    </div>
             <div class="col">
               <img src="./img/vs.png" width=100px height=100px>
             </div>
 	    <div class="col">
-	     <img :src="'./img/'+itemImg(grp.items[1].id)" :title="itemName(grp.items[1].id)"><br>
-             <p>Total votes:{{grp.items[1].votes}}</p> 
-             <p>Your votes:{{grp.items[1].uvotes}}</p> 
-             <p>Left time:{{grp.items[1].ltStr}}</p>
-             <button class="btn btn-primary" v-bind:class='{disabled:!grp.items[1].active}' v-on:click="voteItem(grp.items[1].id)">Vote</button>
+	     <img :src="'./img/'+itemImg(grp.items[1])" :title="itemName(grp.items[1])"><br>
+             <p>Total votes:{{items[grp.items[1]].votes}}</p> 
+             <p>Your votes:{{items[grp.items[1]].uvotes}}</p> 
+             <p>Left time:{{items[grp.items[1]].ltStr}}</p>
+             <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[1]].active}' v-on:click="voteItem(grp.items[1])">Vote</button>
 	    </div>
 	  </div>
         </div>

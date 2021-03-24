@@ -3117,7 +3117,7 @@ uefa_vue = new Vue(
 	{
         desc:"UEFA Champion League Quater Finals",
         items:{9:{name:'Man. City',img:'mc.png'},11:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final 1",cid:2, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[{id:11,votes:0,uvotes:0,expire:0,voting:false},{id:9,votes:0,uvotes:0,expire:0,voting:false}]}],
+	groups:[{title:"Quater-Final 1",cid:2, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[11,9]}],
         
 	},
         methods:
@@ -3140,7 +3140,9 @@ uefa_vue = new Vue(
                   {
                       
                       let itemId = this.groups[i].items[j].id;
-                      let itemObj = this.groups[i].items[j];
+                      if(!this.items[itemId])
+                          this.items[itemId] = {};
+                      let itemObj = this.items[itemId];
 		      instantContractRead('getItemDetails', function(ret){
 		        if(ret.result)
                         {
@@ -3148,9 +3150,8 @@ uefa_vue = new Vue(
                            itemObj.uvotes = big2number(ret.retobj.uVotes)/DECIMALS;
                            itemObj.expire = big2number(ret.retobj.expireTs); 
                            itemObj.ltStr = uefa_vue.leftTime(itemObj.expire);
-                           uefa_vue.groups[i].items[j].ltStr = itemObj.ltStr;
                            const timestamp = (Date.now()/1000).toFixed(0);
-                           itemObj.active = timestamp > itemObj.expire;
+                           itemObj.active = Number(timestamp) > itemObj.expire;
                         }	
 			},itemId, user);
                        
