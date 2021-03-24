@@ -3223,6 +3223,7 @@ uefa_vue = new Vue(
           {
               if(amount > 0)
               {
+              alleventv.pushWaitingEvent("Voting");
               instantContractWritePay('vote', function(ret){
 	                  alleventv.pushPetCommonEvent("Vote " + uefa_vue.items[itemId].name + " ", amount, ret);	
                    }, amount, itemId);    
