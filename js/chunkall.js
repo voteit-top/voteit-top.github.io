@@ -14,7 +14,7 @@ let view_type = VIEW_RANK;
 let contractTokenId = '1003606';
 const minercontract = 'TECu9sH4r5BZ373yBgBDsS3chC4s24cePA';
 const petcontract = 'TJ5qtb9wUM9iNBzaRETcrVXBhPkuqBq4r9';
-const instantcontract = 'TRGRKGBsxPZEsAFhdNZ7R75zk41bt4VMrR';
+const instantcontract = 'TLysE9cYxfsDUrU25SZWpuNW5o6sF1gL3H';
 const HttpProvider = TronWeb.providers.HttpProvider;
 const trongridurl = 'https://sun.tronex.io';
 //const sunurl = 'https://sun.tronex.io';
@@ -3116,8 +3116,8 @@ uefa_vue = new Vue(
         data:
 	{
         desc:"UEFA Champion League Quater Finals",
-        items:{14:{name:'Man. City',img:'mc.png'},15:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final 1",cid:4, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[14,15]},{title:"Quater-Final 1",cid:4, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[14,15]}],
+        items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
+	groups:[{title:"Quater-Final 1",cid:1, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[1,2]},{title:"Quater-Final 2",cid:2, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[3,4]},{title:"Quater-Final 3",cid:3, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[5,6]},{title:"Quater-Final 4",cid:4, bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[7,8]}],
         
 	},
         methods:
