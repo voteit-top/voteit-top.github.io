@@ -3139,7 +3139,7 @@ uefa_vue = new Vue(
                   for(let j=0;j<this.groups[i].items.length;j++)
                   {
                       
-                      let itemId = this.groups[i].items[j].id;
+                      let itemId = this.groups[i].items[j];
                       if(!this.items[itemId])
                           this.items[itemId] = {};
                       let itemObj = this.items[itemId];
