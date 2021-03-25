@@ -2743,9 +2743,11 @@ vue_pets = new Vue({
 			rpet.img = 'pet' + rpet.rpId + '.png';
                     if(!vue_pets.rankMaps[petId])
                     {
-                        vue_pets.rankingPets.push(rpet);
-                        vue_pets.rankingPets.sort(function(a,b){return b.power-a.power});
-                        vue_pets.rankMaps[petId]=true;
+                        if(rpet.power > 0){
+                           vue_pets.rankingPets.push(rpet);
+                           vue_pets.rankingPets.sort(function(a,b){return b.power-a.power});
+                           vue_pets.rankMaps[petId]=true;
+                        }
                     }
 		});
            }
