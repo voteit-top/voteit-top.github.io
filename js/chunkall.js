@@ -3212,6 +3212,11 @@ uefa_vue = new Vue(
           },
           voteItem:function(itemId)
           {
+            if(!tronlinkWeb)
+            {
+               tronlinkNotConnected();
+               return;
+            }
             votemodalv.itemId = itemId;
             votemodalv.itemName = this.itemName(itemId);
             votemodalv.isVote = true;
