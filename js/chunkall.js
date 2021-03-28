@@ -1136,7 +1136,7 @@ let cateNames = ['', 'Country/Region', 'Person', 'City', 'Resort', 'Brand', 'Cry
 let maxItemId = presetranks.length - 1;
 const PAGESIZE = 55;
 const EVENTCNT = 30;
-var eventStart = 1045;
+var eventStart = 1200;
 var voteitModalObj;
 var createModalObj;
 var alleventv = new Vue({
