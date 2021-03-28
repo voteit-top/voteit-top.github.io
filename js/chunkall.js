@@ -3173,7 +3173,21 @@ uefa_vue = new Vue(
                   return 'Expired';
               let diff = expireTs-now;
               let str = '';
-              if(diff > 3600)
+              if(diff > 3600*24)
+              {
+                 let day = diff/(3600*24);
+                 day = day.toFixed(0);
+                 if(day == 1)
+                 {
+                    str += '1 day';
+                 }
+                 else
+                 {
+                    str += day;
+                    str += "+ days";
+                 }
+              }
+              else if(diff > 3600)
                  {
                  let hour = diff/3600;
                  hour = hour.toFixed(0);
