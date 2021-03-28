@@ -658,8 +658,6 @@ var walletv = new Vue({
                                 getTrxBalance(tronlinkNotConnected, function(trx, token) {
                                     walletv.trxBalance = trx / DECIMALS;
                                     walletv.tokenBalance = token / DECIMALS;
-                                    if(votemodalv)
-                                       votemodalv.tokenBalance = walletv.tokenBalance;
                                     if (vue_dex) {
                                         vue_dex.trxBalance = walletv.trxBalance;
                                         vue_dex.tokenBalance = walletv.tokenBalance;
