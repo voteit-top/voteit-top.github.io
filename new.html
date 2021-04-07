@@ -410,7 +410,7 @@
         <p class="text-info">Note:two matches for each, vote for teams who will enter semi-finals.<a href="https://voteit-docs.readthedocs.io/en/latest/uefa2021/" target="_blank">Help</a></p>
          <div class="border border-5 border-white row bg-light" v-for="grp in groups">
             <h3>{{grp.title}}</h3>
-            <p>Votes:<span class="text-secondary">{{grp.votes}}</span>&nbsp&nbsp&nbsp Pool:<span class="text-success">{{grp.bonus}}</span>VOTEIT&nbsp&nbspLeg1:{{grp.leg1}}&nbsp&nbsp Leg2: {{grp.leg2}} &nbsp&nbsp Winner:{{grp.winner}}</p>
+            <p>Votes:<span class="text-secondary">{{grp.votes}}</span>&nbsp&nbsp&nbsp Pool:<span class="text-success">{{grp.bonus}}</span>VOTEIT&nbsp&nbspLeg1:<i class="text-primary">{{grp.leg1}}</i>&nbsp&nbsp Leg2:<i class="text-primary">{{grp.leg2}}</i> &nbsp&nbsp Winner:{{grp.winner}}</p>
 	    <div class="col">
 	     <img :src="'./img/'+itemImg(grp.items[0])" :title="itemName(grp.items[0])"><br>
              <h4>{{itemName(grp.items[0])}}</h4>
