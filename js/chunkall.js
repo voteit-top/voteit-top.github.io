@@ -3121,7 +3121,7 @@ uefa_vue = new Vue(
 	{
         desc:"UEFA Champion League Quater Finals",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'}},
-	groups:[{title:"Quater-Final 1",cid:1,leg1:"2-1",leg2:" ",winner:" ", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[1,2]},{title:"Quater-Final 2",cid:2, leg1:"3-1",leg2:" ",winner:" ", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[3,4]},{title:"Quater-Final 3",cid:3,leg1:"-",leg2:"-",winner:" ", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[5,6]},{title:"Quater-Final 4",cid:4,leg1:"-",leg2:"-",winner:" ",bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[7,8]}],
+	groups:[{title:"Quater-Final 1",cid:1,leg1:"2-1",leg2:" ",winner:" ", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[1,2]},{title:"Quater-Final 2",cid:2, leg1:"3-1",leg2:" ",winner:" ", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[3,4]},{title:"Quater-Final 3",cid:3,leg1:"2-3",leg2:"-",winner:" ", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[5,6]},{title:"Quater-Final 4",cid:4,leg1:"0-2",leg2:"-",winner:" ",bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[7,8]}],
         
 	},
         methods:
