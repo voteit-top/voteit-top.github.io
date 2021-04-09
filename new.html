@@ -573,7 +573,14 @@
 	    </div>
 	  </div>
 	</div>
+         <div class="row">
+            <div class="col">
 	      <div class="btn-group"><button type="button" v-on:click="showPetRanking" class="btn btn-outline-primary">Ranking</button><button type="button" v-on:click="showPetPicker" class="btn btn-outline-primary">Pick</button><button type="button" v-on:click="showPetMarket" class="btn btn-outline-primary">Market</button><button type="button" v-on:click="showMyPetGem" class="btn btn-outline-primary">My</button><span><a target="_blank" href="https://voteit-docs.readthedocs.io/en/latest/pet/">help</a></span></div>
+            </div>
+            <div class="col">
+	      <div class="btn-group"><button type="button" v-on:click="smartRefresh" class="btn btn-outline-primary">Refresh</button></div>
+            </div>
+         </div>
       <div id="petsRanking">
         <p>Ranking of pets</p>
           <div class="card-group">
@@ -836,7 +843,7 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="./js/chunkall.min.js?v=249"></script>
+<script src="./js/chunkall.js?v=249"></script>
 <script>
 
 </script>

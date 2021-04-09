@@ -2321,21 +2321,6 @@ setInterval(async () => {
            }
         }
         if (view_type == VIEW_PET) {
-            readPetMetrics();
-            if(vue_pets.refreshCB)
-            {
-		vue_pets.refreshCB();
-	    }
-            getUserMetrics(function(ret) {
-                if (ret.result) {
-                    let oldGemCnt = vue_pets.myGemsCnt;
-		    let oldPetCnt = vue_pets.myPetsCnt;
-                    vue_pets.myGemsCnt = big2number(ret.retobj.gemCnt);
-                    vue_pets.myPetsCnt = big2number(ret.retobj.petCnt);
-                    vue_pets.nextPickPrice = big2number(ret.retobj.pickPrice)/DECIMALS;
-                }
-
-            });
 
         }
     }
@@ -2725,6 +2710,11 @@ vue_pets = new Vue({
                }
 	    }
         },
+        smartRefresh:function()
+        {
+            if(this.refreshCB)
+               this.refreshCB();
+        },
         readAllPets:function(forceUpdate)
         {
            if(!forceUpdate && this.totalPets == this.rankingPets.length)
@@ -2842,6 +2832,7 @@ vue_pets = new Vue({
             showEle('petsPick', true);
             showEle('petsMarket', false);
             showEle('myPetGem', false);
+            this.refreshCB = this.buildRawPets;
             this.buildRawPets();
         },
         showPetRanking: function() {
@@ -2849,6 +2840,8 @@ vue_pets = new Vue({
             showEle('petsPick', false);
             showEle('petsMarket', false);
             showEle('myPetGem', false);
+            readPetMetrics();
+            this.refreshCB = readPetMetrics;
             if(this.rankingPets.length > 1)
             {
                this.rankingPets.sort(function(a,b){return b.power-a.power});
@@ -3024,7 +3017,16 @@ async function petContractRead(mname, callback, param, param2) {
     }
 }
 async function readPetMetrics() {
-    return petContractRead('getMetrics', function(ret) {
+    getUserMetrics(function(ret) {
+          if (ret.result) {
+                    let oldGemCnt = vue_pets.myGemsCnt;
+		    let oldPetCnt = vue_pets.myPetsCnt;
+                    vue_pets.myGemsCnt = big2number(ret.retobj.gemCnt);
+                    vue_pets.myPetsCnt = big2number(ret.retobj.petCnt);
+                    vue_pets.nextPickPrice = big2number(ret.retobj.pickPrice)/DECIMALS;
+                }
+          });
+    petContractRead('getMetrics', function(ret) {
         if (ret.result) {
             //uint eventCnt, uint searchCnt, uint gemCnt,uint petCnt, uint rawPetCnt,uint marketPetCnt, uint marketGemCnt
             vue_pets.totalEvents = big2number(ret.retobj.eventCnt);
@@ -3722,6 +3724,7 @@ function showPet() {
     showEle('v_ranks', false);
     showEle('v_itemdetail', false);
     view_type = VIEW_PET;
+    readPetMetrics();
 }
 
 function showDex() {
