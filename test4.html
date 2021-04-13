@@ -18,6 +18,10 @@ let passwd ="Ab123456";
 
 function decryptBtn()
 {
+  const myWallet = ethwallet.default.fromV3(json, passwd, true);
+
+  console.log("Private Key: " + myWallet.getPrivateKey().toString('hex')) 
+  console.log("Address: " + myWallet.getAddress().toString('hex')) 
   console.log(ethwallet.decryptKeyStore(json, passwd));
 }
 </script>
