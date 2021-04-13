@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<head>
+
+<script  src="./js/bundle1.js">
+</script>
+</head>
+<body>
+
+<h1 onclick="decryptBtn()">This is a heading</h1>
+<p>This is a paragraph.</p>
+
+<script>
+let json = '{"address":"41279f5262bb1db389850489bb0f8f90e958252da2","id":"96777361-cd37-4e5e-a5f3-fc8a60ce5735","version":3,"crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"4d662bf78b9772815d01dc76b2ba9763"},"ciphertext":"0ba12591132f1da422352d130568380cfa64793c163d8dbac584981d8fdf5760","kdf":"scrypt","kdfparams":{"salt":"469c80b760d08caf45e372e24823eaaab23ef6b2d527be550db420409722b84a","n":131072,"dklen":32,"p":1,"r":8},"mac":"799a79e58af9df3ad637ab383a15a50e85ea0bc46db750625bdbe185800221f0"}}';
+let passwd ="Ab123456";
+
+
+function decryptBtn()
+{
+  console.log(decryptKeyStore(json, passwd));
+}
+</script>
+</body>
+</html>
