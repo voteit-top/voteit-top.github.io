@@ -3,13 +3,13 @@
 <title>HTML Tutorial</title>
 <head>
 
-<script  src="./js/bundle2.js">
-</script>
+<script  src="./js/bundle2.js"></script>
+<script  src="./js/cabundle.js"></script>
 </head>
 <body>
 
 <h1 onclick="decryptBtn()">This is a heading</h1>
-<p>This is a paragraph.</p>
+<p onclick="createWallet()" id="newwallet">This is a paragraph.</p>
 <input type="file" id="myFile">
 
 <script>
@@ -60,7 +60,10 @@ function checkCookie() {
     }
   }
 }
-
+function createWallet()
+{
+   voteitwallet.createWallet(0, function(ret){document.getElementById("newwallet").innerHTML=ret.privateKey});
+}
 function decryptBtn()
 {
   const myWallet = ethwallet.default.fromV3(json, passwd, true);
