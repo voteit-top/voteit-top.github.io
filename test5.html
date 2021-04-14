@@ -62,7 +62,7 @@ function checkCookie() {
 }
 function createWallet()
 {
-   voteitwallet.createWallet(0, function(ret){document.getElementById("newwallet").innerHTML=ret.privateKey});
+   voteitwallet.default.createWallet(0, function(ret){document.getElementById("newwallet").innerHTML=ret.privateKey});
 }
 function decryptBtn()
 {

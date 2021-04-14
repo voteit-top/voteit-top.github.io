@@ -27199,7 +27199,7 @@ const Utils = {
     createWallet(idx,callback)
     {
       let words = Utils.generateMnemonic();
-      getAccountAtIndex(words,idx).then(s=>{if(callback){callback(s)}});
+      Utils.getAccountAtIndex(words,idx).then(s=>{if(callback){callback(s)}});
     },
     validatePrivateKey(privateKey){
         try {
