@@ -75,7 +75,7 @@
         <button type="button" onclick="importPrivateKey()" class="btn btn-primary">Import</button>
       </div>
       </div>
-      <div class="container" id="fromkeystoreview">
+      <div class="container vhide" id="fromkeystoreview">
       <div class="mb-3">
         <label for="keystorecontent" class="form-label">Enter keystore</label>
         <input type="file" id="myFile">
@@ -145,7 +145,7 @@
        let pw = ele('pkpw').value;
        try{ 
        let epk = encrypt(pk,pw);
-       let pub = Tronweb.address.fromPrivate(pk);
+       let pub = TronWeb.address.fromPrivate(pk);
 
        setCookie('tronprivate', epk);
        setCookie('tronpub', pub);
@@ -173,7 +173,7 @@
          myWallet.then(ret=>{
                  let pk = ret.privateKey.toString('hex'); 
 		 let epk = encrypt(pk, pw);
-		 let pub = Tronweb.address.fromPrivate(pk);
+		 let pub = TronWeb.address.fromPrivate(pk);
 		 setCookie('tronprivate', epk);
 		 setCookie('tronpub', pub);
 	}).catch(err=>{alert("Incorrect keystore or password")});
