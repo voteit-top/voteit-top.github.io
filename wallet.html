@@ -176,7 +176,7 @@
 		 let pub = Tronweb.address.fromPrivate(pk);
 		 setCookie('tronprivate', epk);
 		 setCookie('tronpub', pub);
-	});
+	}).catch(err=>{alert("Incorrect keystore or password")});
          }
          catch(err)
          {
@@ -185,17 +185,19 @@
       }
    }
 
-
    
    function importFromPrivate()
    {
-
+      showEle('fromprivateview', true);
+      showEle('fromkeystoreview', false);
    }
 
    function importFromKeystore()
    {
-
+      showEle('fromprivateview', false);
+      showEle('fromkeystoreview', true);
    }
+
 function createWallet()
 {
    voteitwallet.default.createWallet(0, function(ret){document.getElementById("newwallet").innerHTML=ret.privateKey});
