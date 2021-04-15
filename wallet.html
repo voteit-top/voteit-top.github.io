@@ -1,0 +1,126 @@
+ <!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script  src="./js/bundle2.js"></script>
+    <script  src="./js/cabundle2.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <style>
+    .vhide{
+     display:none
+    }
+    </style>
+    <title>Wallet</title>
+  </head>
+  <body>
+    <div class="container" id="walletmanager">
+      <div class="row text-center">
+      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" onclick="clickTronlink()" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="btnradio1">Tronlink</label>
+
+        <input type="radio" class="btn-check" onclick="clickImport()" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio2">Import Wallet</label>
+
+        <input type="radio" class="btn-check" onclick="clickCreate()" name="btnradio" id="btnradio3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio3">Create Wallet</label>
+      </div>
+        </div>
+      <br>
+      <br>
+  
+  <div id="wallettronlinkview" class="row">
+       
+  </div>
+  <div id="walletcreateview" class="row">
+      
+  </div>
+  <div id="walletimportview" class="row">
+    <div class="col-3">
+    <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+    <input type="radio" class="btn-check" onclick="importFromPrivate()" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
+    <label class="btn btn-outline-danger" for="vbtn-radio1">From Private Key</label>
+    <input type="radio" class="btn-check" onclick="importFromKeystore()" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+    <label class="btn btn-outline-danger" for="vbtn-radio2">From KeyStore File</label>
+    </div>
+    </div>
+    <div class="col-9">
+      <div class="container" id="fromprivateview">
+      <div class="mb-3">
+        <label for="pkcontent" class="form-label">Enter private key</label>
+        <textarea class="form-control" id="pkcontent" rows="3" placeholder="copy and paste your private key"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="pkpw" class="form-label">Enter Password</label>
+        
+        <input type="text" class="form-control" id="pkpw" placeholder="set password encrypt your key">
+      </div>
+      <div class="mb-3 text-center">
+        <button type="button" class="btn btn-primary">Import</button>
+      </div>
+      </div>
+      <div class="container" id="fromkeystoreview">
+      <div class="mb-3">
+        <label for="keystorecontent" class="form-label">Enter private key</label>
+        <textarea class="form-control" id="keystorecontent" rows="3" placeholder="copy and paste your keystore file content"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="keystorepw" class="form-label">Enter Password</label>
+        <input type="text" class="form-control" id="keystorepw" placeholder="enter password decrypt your keystore file">
+      </div>
+      <div class="mb-3 text-center">
+        <button type="button" class="btn btn-primary">Import</button>
+      </div>
+      </div>
+    </div>
+  </div>      
+
+</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script  src="./js/chunkall.js"></script>
+   <script>
+
+   function clickTronlink()
+   {
+       showEle('wallettronlinkview', true);
+       showEle('walletimportview', false);
+       showEle('walletcreateview', false);
+       
+   }
+
+   function clickImport()
+   {
+       showEle('wallettronlinkview', false);
+       showEle('walletimportview', true);
+       showEle('walletcreateview', false);
+
+
+   }
+   function clickCreate()
+   {
+       showEle('wallettronlinkview', false);
+       showEle('walletimportview', false);
+       showEle('walletcreateview', true);
+
+
+   } 
+   function importFromPrivate()
+   {
+
+   }
+
+   function importFromKeystore()
+   {
+
+   }
+
+
+   </script>
+
+  </body>
+</html> 
