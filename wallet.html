@@ -122,9 +122,13 @@ const sunWeb = new SunWeb(
 );
 sunWeb.sidechain.trx.sign = (function(_super) {
     return function() {
-        let dpk = decrypt(getCookie('tronprivate'), 'Ab1234567');
+        var pw= prompt("Please enter your password:", "");
+        if(pw)
+	{
+        let dpk = decrypt(getCookie('tronprivate'), pw);
         sunWeb.sidechain.defaultPrivateKey = dpk;
         return _super.apply(this, arguments);
+        }
     };         
 
 })(sunWeb.sidechain.trx.sign);
