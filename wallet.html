@@ -223,8 +223,8 @@ sunWeb.sidechain.trx.sign = (function(_super) {
    }
    function testpk()
    {
-     sunWeb.sidechain.trx.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 10, '1003606');
-     //tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{tronWeb.trx.sign(tx).then(signedTx=>{tronWeb.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
+//     sunWeb.sidechain.trx.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 10, '1003606');
+     sunWeb.sidechain.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{sunWeb.sidechain.trx.sign(tx).then(signedTx=>{sunWeb.sidechain.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
       
    }
    
