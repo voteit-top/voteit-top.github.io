@@ -209,9 +209,7 @@ tronWeb.trx.sign=function(tobj,pk)
    }
    function testpk()
    {
-                var tx = await tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', 'TCbLNGcJy1SzmoVrZvE1H1oY5mZbuzHhuM')
-                var signedTx = await tronWeb.trx.sign(tx)
-                var broastTx = await tronWeb.trx.sendRawTransaction(signedTx)
+     tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', 'TCbLNGcJy1SzmoVrZvE1H1oY5mZbuzHhuM').then(tx=>{tronWeb.trx.sign(tx).then(signedTx=>{tronWeb.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
       
    }
    
