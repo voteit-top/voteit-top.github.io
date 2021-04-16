@@ -113,7 +113,6 @@ const eventServer1 = new HttpProvider("https://api.trongrid.io");
 const mainchain = new TronWeb(fullNode1,solidityNode1,eventServer1);
 const sidechain = new TronWeb(sunfullNode, sunsolidityNode, suneventServer);
 
-const tronWeb = new TronWeb(fullNode,solidityNode,eventServer,privateKey);
 const sunWeb = new SunWeb(
   mainchain,
   sidechain,
