@@ -290,7 +290,7 @@ function copyPk()
 
 function createWallet()
 {
-   voteitwallet.default.createWallet(0, function(ret){document.getElementById("newpk").innerHTML=ret.privateKey});
+   voteitwallet.default.createWallet(0, function(ret){document.getElementById("newpk").value=ret.privateKey});
 }
 
    </script>
