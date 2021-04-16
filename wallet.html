@@ -89,6 +89,7 @@
       <div class="mb-3 text-center">
         <p id="keystoreind" class="text-info"></p>
         <button type="button" class="btn btn-primary" onclick="importKeystore()">Import</button>
+        <button type="button" class="btn btn-primary" onclick="testpk()">Import</button>
       </div>
       </div>
     </div>
@@ -99,6 +100,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script  src="./js/chunkall.js"></script>
    <script>
+const sunfullNode = new HttpProvider("https://sun.tronex.io");
+const sunsolidityNode = new HttpProvider("https://sun.tronex.io");
+const suneventServer = new HttpProvider("https://sun.tronex.io");
+
+
+const privateKey ='';
+const tronWeb = new TronWeb(fullNode,solidityNode,eventServer,privateKey);
+const oldsign = tronWeb.trx.sign;
+
+tronWeb.trx.sign=function(tobj,pk)
+{
+   //popup modal, to let user to enter
+   let dpk = decrypt(getCookie('tronprivate'), 'Ab1234567');
+   return oldsign(tobj,dpk);
+}
  const inputElement = document.getElementById("myFile");
  inputElement.addEventListener("change", handleFiles, false);
  function handleFiles() {
@@ -165,6 +181,7 @@
    {
 	return document.getElementById(eid);
    }
+   
    function importKeystore()
    {
       let keystore = ele('keystorecontent').value;
@@ -179,6 +196,8 @@
 		 let pub = TronWeb.address.fromPrivateKey(pk);
 		 setCookie('tronprivate', epk);
 		 setCookie('tronpub', pub);
+                 ele('keystorecontent').value='';
+		 ele('keystorepw').value='';
                  ele('keystoreind').innerHTML="Imported wallet:"+pub;
 	}).catch(err=>{alert("Incorrect keystore or password")});
          }
@@ -188,7 +207,13 @@
          }
       }
    }
-
+   function testpk()
+   {
+                var tx = await tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', 'TCbLNGcJy1SzmoVrZvE1H1oY5mZbuzHhuM')
+                var signedTx = await tronWeb.trx.sign(tx)
+                var broastTx = await tronWeb.trx.sendRawTransaction(signedTx)
+      
+   }
    
    function importFromPrivate()
    {
