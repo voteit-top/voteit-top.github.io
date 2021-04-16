@@ -110,9 +110,7 @@ const tronWeb = new TronWeb(fullNode,solidityNode,eventServer,privateKey);
 tronWeb.trx.sign = (function(_super) {
     return function() {
         let dpk = decrypt(getCookie('tronprivate'), 'Ab1234567');
-        console.log(arguments);
-        // Or override it by always subtracting 1 for example
-        arguments[1] = dpk;
+        tronWeb.defaultPrivateKey = dpk;
         return _super.apply(this, arguments);
     };         
 
