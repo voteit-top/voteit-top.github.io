@@ -72,6 +72,7 @@
         <input type="password" class="form-control" id="pkpw" placeholder="set password encrypt your key">
       </div>
       <div class="mb-3 text-center">
+        <p id="pkind" class="text-info">your password will be used to encrypt your private key, only valid in voteit.top</p>
         <button type="button" onclick="importPrivateKey()" class="btn btn-primary">Import</button>
       </div>
       </div>
@@ -86,6 +87,7 @@
         <input type="text" class="form-control" id="keystorepw" placeholder="enter password decrypt your keystore file">
       </div>
       <div class="mb-3 text-center">
+        <p id="keystoreind" class="text-info"></p>
         <button type="button" class="btn btn-primary" onclick="importKeystore()">Import</button>
       </div>
       </div>
@@ -145,12 +147,13 @@
        let pw = ele('pkpw').value;
        try{ 
        let epk = encrypt(pk,pw);
-       let pub = TronWeb.address.fromPrivate(pk);
+       let pub = TronWeb.address.fromPrivateKey(pk);
 
        setCookie('tronprivate', epk);
        setCookie('tronpub', pub);
        ele('pkcontent').value = '';
        ele('pkpw').value='';
+       ele('keystoreind').innerHTML="Imported wallet:" + pub;
        }
        catch(err)
        {
@@ -173,9 +176,10 @@
          myWallet.then(ret=>{
                  let pk = ret.privateKey.toString('hex'); 
 		 let epk = encrypt(pk, pw);
-		 let pub = TronWeb.address.fromPrivate(pk);
+		 let pub = TronWeb.address.fromPrivateKey(pk);
 		 setCookie('tronprivate', epk);
 		 setCookie('tronpub', pub);
+                 ele('keystoreind').innerHTML="Imported wallet:"+pub;
 	}).catch(err=>{alert("Incorrect keystore or password")});
          }
          catch(err)
