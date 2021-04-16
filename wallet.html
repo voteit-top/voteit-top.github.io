@@ -8,6 +8,7 @@
     <script  src="./js/cabundle2.js"></script>
     <script  src="./js/cbundle2.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tronweb@3.2.1/dist/TronWeb.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sunweb@1.1.0/dist/SunWeb.js"></script>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -100,21 +101,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script  src="./js/chunkall.js"></script>
    <script>
+
 const sunfullNode = new HttpProvider("https://sun.tronex.io");
 const sunsolidityNode = new HttpProvider("https://sun.tronex.io");
 const suneventServer = new HttpProvider("https://sun.tronex.io");
+const fullNode = new HttpProvider("https://api.trongrid.io");
+const solidityNode = new HttpProvider("https://api.trongrid.io");
+const eventServer = new HttpProvider("https://api.trongrid.io");
 
+const mainchain = new TronWeb(fullNode,solidityNode,eventServer);
+const sidechain = new TronWeb(sunfullNode, sunsolidityNode, suneventServer);
 
-const privateKey ='';
 const tronWeb = new TronWeb(fullNode,solidityNode,eventServer,privateKey);
-tronWeb.trx.sign = (function(_super) {
+const sunWeb = new SunWeb(
+  mainchain,
+  sidechain,
+  'TWaPZru6PR5VjgT4sJrrZ481Zgp3iJ8Rfo',
+  'TGKotco6YoULzbYisTBuP6DWXDjEgJSpYz',
+  '41E209E4DE650F0150788E8EC5CAFA240A23EB8EB7'
+);
+sunWeb.sidechain.trx.sign = (function(_super) {
     return function() {
         let dpk = decrypt(getCookie('tronprivate'), 'Ab1234567');
-        tronWeb.defaultPrivateKey = dpk;
+        sunWeb.sidechain.defaultPrivateKey = dpk;
         return _super.apply(this, arguments);
     };         
 
-})(tronWeb.trx.sign);
+})(sunWeb.sidechain.trx.sign);
 
  const inputElement = document.getElementById("myFile");
  inputElement.addEventListener("change", handleFiles, false);
@@ -170,7 +183,7 @@ tronWeb.trx.sign = (function(_super) {
        setCookie('tronpub', pub);
        ele('pkcontent').value = '';
        ele('pkpw').value='';
-       ele('keystoreind').innerHTML="Imported wallet:" + pub;
+       ele('pkind').innerHTML="Imported wallet:" + pub;
        }
        catch(err)
        {
@@ -210,7 +223,8 @@ tronWeb.trx.sign = (function(_super) {
    }
    function testpk()
    {
-     tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{tronWeb.trx.sign(tx).then(signedTx=>{tronWeb.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
+     sunWeb.sidechain.trx.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 10, '1003606');
+     //tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{tronWeb.trx.sign(tx).then(signedTx=>{tronWeb.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
       
    }
    
