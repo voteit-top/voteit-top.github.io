@@ -38,12 +38,14 @@
       <br>
   
   <div id="wallettronlinkview" class="row vhide">
-       
+
+      <p>No tronlink installed?  install <a href="https://chrome.google.com/webstore/detail/tronlink/ibnejdfjmmkpcnlpebklmnkoeoihofec" target="_blank">official tronlink</a> extension</p> 
+      <button type="button" class="btn btn-primary" onclick="connectTronlink()">Connect Tronlink</button> 
   </div>
   <div id="walletcreateview" class="row vhide">
      <div class="container">
        <label>Generated private key</label>
-       <h5 id="newpk" class="text-info"></h5>
+       <h5 id="newpk" class="text-info">Generating...</h5>
 
        <p class="text-info">BACKUP your private key, if you lost it, you will lost all assets in it</p> 
 
@@ -166,7 +168,7 @@ sunWeb.sidechain.trx.sign = (function(_super) {
        showEle('wallettronlinkview', false);
        showEle('walletimportview', false);
        showEle('walletcreateview', true);
-
+      createWallet();
 
    } 
    function encrypt(pk, pw)
@@ -281,3 +283,4 @@ function createWallet()
 
   </body>
 </html> 
+
