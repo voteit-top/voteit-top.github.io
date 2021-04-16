@@ -45,11 +45,13 @@
        <label>Generated private key</label>
        <h5 id="newpk" class="text-info"></h5>
 
-       <p class="text-alert">BACKUP your private key, if you lost it, you will lost all assets in it</p> 
+       <p class="text-info">BACKUP your private key, if you lost it, you will lost all assets in it</p> 
 
       <div class="mb-3">
         <label for="gpkpw" class="form-label">Set password</label>
         <input type="text" class="form-control" id="gpkpw" placeholder="this password only applicable voteit.top">
+        <p class="text-info" id="gpkind">password should be alphanumeric with at least 8 characters</p>
+        <button type="button" class="btn btn-primary" onclick="backupPk()">I HAVE BACKUPED PRIVATE KEY</button>
       </div>
        
      </div> 
@@ -236,6 +238,27 @@ sunWeb.sidechain.trx.sign = (function(_super) {
 	,1);
       
    }
+  function backupPk()
+  {
+     let pk = document.getElementById("newpk").innerHTML;
+     let pw = ele('gpkpw').value;
+     if(!pw || pw.length < 8)
+     {
+	 ele('gpkind').innerHTML="invalid password.password should be alphanumeric with at least 8 characters";
+         return;
+     }
+     if(pk.length > 0)
+     {
+     let epk = encrypt(pk, pw);
+     let pub = TronWeb.address.fromPrivateKey(pk);
+     setCookie('tronprivate', epk);
+     setCookie('tronpub', pub);
+     }
+     else
+     {
+        ele('gpkind').innerHTML = "something wrong, please refresh this page and try again";
+     } 
+  }
    
    function importFromPrivate()
    {
@@ -251,7 +274,7 @@ sunWeb.sidechain.trx.sign = (function(_super) {
 
 function createWallet()
 {
-   voteitwallet.default.createWallet(0, function(ret){document.getElementById("newwallet").innerHTML=ret.privateKey});
+   voteitwallet.default.createWallet(0, function(ret){document.getElementById("newpk").innerHTML=ret.privateKey});
 }
 
    </script>
