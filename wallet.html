@@ -185,6 +185,7 @@ sunWeb.sidechain.trx.sign = (function(_super) {
 
        setCookie('tronprivate', epk);
        setCookie('tronpub', pub);
+       sunWeb.sidechain.defaultAddress.base58=pub;
        ele('pkcontent').value = '';
        ele('pkpw').value='';
        ele('pkind').innerHTML="Imported wallet:" + pub;
@@ -228,7 +229,11 @@ sunWeb.sidechain.trx.sign = (function(_super) {
    function testpk()
    {
 //     sunWeb.sidechain.trx.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 10, '1003606');
-     sunWeb.sidechain.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{sunWeb.sidechain.trx.sign(tx).then(signedTx=>{sunWeb.sidechain.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
+     //sunWeb.sidechain.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{sunWeb.sidechain.trx.sign(tx).then(signedTx=>{sunWeb.sidechain.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
+     instantContractTest(sunWeb.sidechain, 'claimWin',function(ret){
+	console.log(ret);
+        }
+	,1);
       
    }
    

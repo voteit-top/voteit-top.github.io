@@ -3298,10 +3298,40 @@ async function instantContractWritePay(mname, callback, value, param, param2) {
         }
     }
 }
+
 async function instantContractWrite(mname, callback, param, param2) {
     if (tronlinkWeb) {
         try {
             let contract = await tronlinkWeb.contract().at(instantcontract);
+            let obj = {
+                feeLimit: 100_000_000,
+                callValue: 0,
+                tokenId: '',
+                tokenValue: 0,
+                shouldPollResponse: false
+            };
+            let ret;
+            if (param != undefined && param2 != undefined) {
+                ret = await contract[mname](param, param2).send(obj);
+            } else if (param != undefined)
+                ret = await contract[mname](param).send(obj);
+            else
+                ret = await contract[mname]().send(obj);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: ret
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+async function instantContractTest(opTronWeb, mname, callback, param, param2) {
+    if (opTronWeb) {
+        try {
+            let contract = await opTronWeb.contract().at(instantcontract);
             let obj = {
                 feeLimit: 100_000_000,
                 callValue: 0,
