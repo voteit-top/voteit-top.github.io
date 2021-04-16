@@ -44,10 +44,10 @@
   </div>
   <div id="walletcreateview" class="row vhide">
      <div class="container">
-       <label>Generated private key</label>
-       <h5 id="newpk" class="text-info">Generating...</h5>
+       <label for="newpk" class="form-label">Generated private key</label>
+       <input type="text" class="form-control" id="newpk" placeholder="Generating..."><button type="button" class="btn btn-primary" onclick="copyPk()">Copy</button>
 
-       <p class="text-info">BACKUP your private key, if you lost it, you will lost all assets in it</p> 
+       <p class="text-info" id="pkind">BACKUP your private key, if you lost it, you will lost all assets in it</p> 
 
       <div class="mb-3">
         <label for="gpkpw" class="form-label">Set password</label>
@@ -240,6 +240,19 @@ sunWeb.sidechain.trx.sign = (function(_super) {
 	,1);
       
    }
+function copyPk()
+{
+    /* Get the text field */
+  var copyText = document.getElementById("newpk");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy"); 
+  ele('pkind').innerHTML="Copied private key";
+}
   function backupPk()
   {
      let pk = document.getElementById("newpk").innerHTML;
@@ -255,6 +268,7 @@ sunWeb.sidechain.trx.sign = (function(_super) {
      let pub = TronWeb.address.fromPrivateKey(pk);
      setCookie('tronprivate', epk);
      setCookie('tronpub', pub);
+     
      }
      else
      {

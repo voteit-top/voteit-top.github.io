@@ -27080,7 +27080,6 @@ const Utils = {
         const child = node.derivePath(`m/44'/195'/${ index }'/0/0`);
         const privateKey = child.privateKey.toString('hex');
         const address = TronWeb.address.fromPrivateKey(privateKey);
-        console.log(address+"|"+privateKey);
         resolve({privateKey,address});
         });     
       });
