@@ -212,7 +212,7 @@ tronWeb.trx.sign = (function(_super) {
    }
    function testpk()
    {
-     tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', 'TCbLNGcJy1SzmoVrZvE1H1oY5mZbuzHhuM').then(tx=>{tronWeb.trx.sign(tx).then(signedTx=>{tronWeb.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
+     tronWeb.transactionBuilder.sendToken('TUB31UbsuqHesf13zrrmyQ1fQLaXm11crB', 100000, '1003606', getCookie('tronpub')).then(tx=>{tronWeb.trx.sign(tx).then(signedTx=>{tronWeb.trx.sendRawTransaction(signedTx).then(sobj=>console.log(sobj))})});
       
    }
    
