@@ -7,6 +7,7 @@
     <script  src="./js/bundle2.js"></script>
     <script  src="./js/cabundle2.js"></script>
     <script  src="./js/cbundle2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tronweb@3.2.1/dist/TronWeb.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sunweb@1.1.0/dist/SunWeb.js"></script>
 
@@ -105,11 +106,11 @@
 const sunfullNode = new HttpProvider("https://sun.tronex.io");
 const sunsolidityNode = new HttpProvider("https://sun.tronex.io");
 const suneventServer = new HttpProvider("https://sun.tronex.io");
-const fullNode = new HttpProvider("https://api.trongrid.io");
-const solidityNode = new HttpProvider("https://api.trongrid.io");
-const eventServer = new HttpProvider("https://api.trongrid.io");
+const fullNode1 = new HttpProvider("https://api.trongrid.io");
+const solidityNode1 = new HttpProvider("https://api.trongrid.io");
+const eventServer1 = new HttpProvider("https://api.trongrid.io");
 
-const mainchain = new TronWeb(fullNode,solidityNode,eventServer);
+const mainchain = new TronWeb(fullNode1,solidityNode1,eventServer1);
 const sidechain = new TronWeb(sunfullNode, sunsolidityNode, suneventServer);
 
 const tronWeb = new TronWeb(fullNode,solidityNode,eventServer,privateKey);
