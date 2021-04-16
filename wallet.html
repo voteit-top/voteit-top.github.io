@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script  src="./js/bundle2.js"></script>
     <script  src="./js/cabundle2.js"></script>
-    <script  src="./js/cbundle.js"></script>
+    <script  src="./js/cbundle2.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tronweb@3.2.1/dist/TronWeb.js"></script>
 
     <!-- Bootstrap CSS -->
@@ -107,14 +107,17 @@ const suneventServer = new HttpProvider("https://sun.tronex.io");
 
 const privateKey ='';
 const tronWeb = new TronWeb(fullNode,solidityNode,eventServer,privateKey);
-const oldsign = tronWeb.trx.sign;
+tronWeb.trx.sign = (function(_super) {
+    return function() {
+        let dpk = decrypt(getCookie('tronprivate'), 'Ab1234567');
+        console.log(arguments);
+        // Or override it by always subtracting 1 for example
+        arguments[1] = dpk;
+        return _super.apply(this, arguments);
+    };         
 
-tronWeb.trx.sign=function(tobj,pk)
-{
-   //popup modal, to let user to enter
-   let dpk = decrypt(getCookie('tronprivate'), 'Ab1234567');
-   return oldsign(tobj,dpk);
-}
+})(tronWeb.trx.sign);
+
  const inputElement = document.getElementById("myFile");
  inputElement.addEventListener("change", handleFiles, false);
  function handleFiles() {
