@@ -2318,6 +2318,7 @@ setInterval(async () => {
 		});
            }else if(vue_allbets.isUefa2021){
                 uefa_vue.updateGroups(userAddr);
+                uefa_vue.updateHisGroups(userAddr);
            }
         }
         if (view_type == VIEW_PET) {
@@ -3138,6 +3139,45 @@ uefa_vue = new Vue(
 	},
         methods:
         { 
+           updateHisGroups:function(user)
+          {
+	      for(let i=0;i<this.hisgroups.length;i++)
+              {
+                  let cid = this.hisgroups[i].cid;
+                  let cObj = this.hisgroups[i];
+		  instantContractRead('getCateDetails', function(ret){
+		        if(ret.result)
+                        {
+                           cObj.winItemId = big2number(ret.retobj.winItem);
+                           cObj.votes = big2number(ret.retobj.votes)/DECIMALS; 
+                           cObj.expire = big2number(ret.retobj.expireTs); 
+                           cObj.bonus = big2number(ret.retobj.totalToken)/DECIMALS;
+                        }	
+			},cid);
+                  for(let j=0;j<this.hisgroups[i].items.length;j++)
+                  {
+                      
+                      let itemId = this.hisgroups[i].items[j];
+                      if(!this.items[itemId])
+                          this.items[itemId] = {};
+                      let itemObj = this.items[itemId];
+		      instantContractRead('getItemDetails', function(ret){
+		        if(ret.result)
+                        {
+                           itemObj.votes = big2number(ret.retobj.itemVotes)/DECIMALS;
+                           itemObj.uvotes = big2number(ret.retobj.uVotes)/DECIMALS;
+                           itemObj.expire = big2number(ret.retobj.expireTs); 
+                           itemObj.ltStr = uefa_vue.leftTime(itemObj.expire);
+                           const timestamp = (Date.now()/1000).toFixed(0);
+                           itemObj.active = Number(timestamp) < itemObj.expire;
+                           uefa_vue.$forceUpdate();
+                        }	
+			},itemId, user);
+                       
+                  }
+	      }
+
+          },
           updateGroups:function(user)
           {
 	      for(let i=0;i<this.groups.length;i++)
