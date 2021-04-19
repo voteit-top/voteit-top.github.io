@@ -75,7 +75,7 @@
       </div>
       <div class="mb-3">
         <label for="pkpw" class="form-label">Enter Password</label>
-        <input type="password" class="form-control" id="pkpw" placeholder="set password encrypt your key">
+        <input type="password" class="form-control" id="pkpw" placeholder="set alphanumberic password(len>=8) encrypt your key">
       </div>
       <div class="mb-3 text-center">
         <p id="pkind" class="text-info">your password will be used to encrypt your private key, only valid in voteit.top</p>
@@ -192,7 +192,7 @@ sunWeb.sidechain.trx.sign = (function(_super) {
        sunWeb.sidechain.defaultAddress.base58=pub;
        ele('pkcontent').value = '';
        ele('pkpw').value='';
-       ele('pkind').innerHTML="Imported wallet:" + pub;
+       ele('gpkind').innerHTML="Imported wallet:" + pub;
        }
        catch(err)
        {

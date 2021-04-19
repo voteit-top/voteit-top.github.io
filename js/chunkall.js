@@ -25,6 +25,21 @@ const eventServer = new HttpProvider(trongridurl);
 let k = ['4d376eb18ccde5a', 'a5a682860bc2a8b425546', '930d2b3f58bd2dd1a', 'f30d2a15'];
 createLocalTronweb(fullNode, solidityNode, eventServer, ek().slice(1));
 
+let blurTS = new Date().now()/1000;
+
+window.onfocus=function(ret)
+{
+    let curTS = new Data().now()/1000;
+    if((curTS - blurTS) > 300)
+    {
+       console.log('5 minues');
+    } 
+}
+
+window.onblur=function(ret)
+{
+    let blurTS = new Date().now()/1000;
+}
 function tronlinkConnected(tlweb) {
     tronlinkWeb = tlweb;
     userAddr = tronlinkWeb.defaultAddress.base58;
@@ -3652,6 +3667,60 @@ function readMetrics() {
         tongjiv.loading = false;
     }, null, null, true);
 }
+
+walletmgrv = new Vue({
+   el:'#v_walletmgr",
+
+   data:{
+      
+   },
+   methods:{
+      clickTronlink:function()
+      {
+
+      },
+      clickImport:function()
+      {
+
+      },
+      clickCreate:function()
+      {
+
+      },
+     connectTronlink:function()
+     {
+
+     },
+     importFromPrivate:function()
+     {
+
+     },
+     importFromKeystore:function()
+     {
+
+     },
+     backupPk:function()
+    {
+
+    },
+    copyPk:function()
+    {
+
+    },
+    importPrivateKey:function()
+    {
+
+    },
+     importKeystore:function()
+     {
+
+     }, 
+      
+  }
+
+
+}
+
 readMetrics();
 setInterval(async () => {
     readMetrics();
