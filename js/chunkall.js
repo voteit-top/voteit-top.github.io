@@ -3122,19 +3122,22 @@ uefa_vue = new Vue(
 	el:'#uefa2021',
         data:
 	{
-        desc:"UEFA Champion League Semi Finals",
+        desc:"UEFA Champion League Final",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'},9:{name:'Real Madrid',img:'hm.png'},10:{name:'Chelsea',img:'qex.png'},
              11:{name:'Paris',img:'bl.png'},
-             12:{name:'Man. City',img:'mc.png'}
+             12:{name:'Man. City',img:'mc.png'},
+             13:{name:'Man. City',img:'mc.png'},
+             14:{name:'Chelsea',img:'qex.png'}
               },
 	hisgroups:[
+                {title:"Semi-Final 1",cid:5,leg1:"1-1",leg2:"0-2",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[9,10]},
+                {title:"Semi-Final 2",cid:6,leg1:"1-2",leg2:"0-2",winner:"Man. City", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[11,12]},
                 {title:"Quater-Final 1",cid:1,leg1:"2-1",leg2:"2-1",winner:"Man. City", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[1,2]},
                 {title:"Quater-Final 2",cid:2, leg1:"3-1",leg2:"0-0",winner:"Real Madrid", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[3,4]},
                 {title:"Quater-Final 3",cid:3,leg1:"2-3",leg2:"1-0",winner:"Paris", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[5,6]},
                 {title:"Quater-Final 4",cid:4,leg1:"0-2",leg2:"1-0",winner:"Chelsea",bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[7,8]}],
 	groups:[
-                {title:"Semi-Final 1",cid:5,leg1:"1-1",leg2:"0-2",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[9,10]},
-                {title:"Semi-Final 2",cid:6,leg1:"1-2",leg2:"0-2",winner:"Man. City", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[11,12]},
+                {title:"Final",cid:7,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[13,14]},
                ], 
 	},
         methods:
