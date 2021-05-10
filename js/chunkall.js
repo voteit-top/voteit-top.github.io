@@ -48,11 +48,10 @@ var observer = new IntersectionObserver(function(entries) {
        entries[i].target.isOnScreen = entries[i].isIntersecting;
     }
 }, { root: null });
-observer.observe(ele('sec_vote');
-observer.observe(ele('sec_bet');
-observer.observe(ele('sec_pet');
-observer.observe(ele('sec_dex');
-function 
+observer.observe(ele('sec_vote'));
+observer.observe(ele('sec_bet'));
+observer.observe(ele('sec_pet'));
+observer.observe(ele('sec_dex'));
 
 function isOnScreen(elename)
 {
@@ -1159,6 +1158,36 @@ const EVENTCNT = 30;
 var eventStart = 1479;
 var voteitModalObj;
 var createModalObj;
+var dexmyorders = new Vue(
+{
+  el:'#dex_myorders',
+  data:{
+        orderType: ['', 'Buy', 'Sell'],
+        orders: [],
+        ordersMap: {},
+  },
+  methods:
+  {
+        cancelOrder: function(oid) {
+            alleventv.pushWaitingEvent("Canel Order...");
+            let idx = alleventv.ordersMap[oid];
+            alleventv.orders[idx - 1].canceling = true;
+
+            dexCancelOrder(tronlinkConnected, oid, function(ret) {
+                alleventv.orders[idx - 1].canceling = false;
+                alleventv.pushCancelOrder(oid, ret);
+                readBuyPrices();
+                readSellPrices();
+                readUserOrders();
+                if (ret.result) {
+                    alleventv.orders.splice(idx - 1, 1);
+                }
+            })
+        },
+
+  }
+}
+)
 var alleventv = new Vue({
     el: '#allevents_v',
     data: {
@@ -1185,22 +1214,6 @@ var alleventv = new Vue({
         }
     },
     methods: {
-        cancelOrder: function(oid) {
-            alleventv.pushWaitingEvent("Canel Order...");
-            let idx = alleventv.ordersMap[oid];
-            alleventv.orders[idx - 1].canceling = true;
-
-            dexCancelOrder(tronlinkConnected, oid, function(ret) {
-                alleventv.orders[idx - 1].canceling = false;
-                alleventv.pushCancelOrder(oid, ret);
-                readBuyPrices();
-                readSellPrices();
-                readUserOrders();
-                if (ret.result) {
-                    alleventv.orders.splice(idx - 1, 1);
-                }
-            })
-        },
         switchSideTab: function() {
             let e = document.getElementById('link_sidetab');
             if (e)
@@ -3510,19 +3523,18 @@ function readUserOrders() {
                         torder.tsdone = big2number(ometrics.tsdone);
                         torder.type = ometrics.otype;
                         if (torder.lamount > 0) {
-                            if (!alleventv.ordersMap[oid]) {
-                                alleventv.orders.unshift(torder);
-                                alleventv.ordersMap[oid] = alleventv.orders.length;
-                                //alleventv.orders.push(order);
+                            if (!dexmyorders.ordersMap[oid]) {
+                                dexmyorders.orders.unshift(torder);
+                                dexmyorders.ordersMap[oid] = dexmyorders.orders.length;
                             } else {
-                                alleventv.orders[alleventv.ordersMap[oid] - 1] = torder;
+                                dexmyorders.orders[dexmyorders.ordersMap[oid] - 1] = torder;
                             }
 
                         } else {
-                            let idx = alleventv.ordersMap[oid];
+                            let idx = dexmyorders.ordersMap[oid];
                             if (idx > 0) {
-                                alleventv.orders.splice(idx - 1, 1);
-                                alleventv.ordersMap[oid] = 0;
+                                dexmyorders.orders.splice(idx - 1, 1);
+                                dexmyorders.ordersMap[oid] = 0;
                             }
                         }
                     }

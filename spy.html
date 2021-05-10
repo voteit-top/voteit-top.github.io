@@ -353,8 +353,11 @@
             </div>
          </div>
        </div>
-      <div class="col-sm-3">
-         dex statistics
+      <div id="dex_myorders" class="col-sm-3">
+	     <ul class="list-group">
+		<li class="list-group-item fs-6" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(o.oid)">Cancel</button></li>
+	     </ul>
+ dex statistics
       </div>
     </div>
   </div>
