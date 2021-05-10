@@ -4,12 +4,14 @@ let localTronweb = null;
 let tronlinkWeb = null;
 let vue_pets = null;
 let uefa_vue = null;
+let bk_vue = null; //book keeper
 
 const VIEW_RANK = 1;
 const VIEW_DEX = 2;
 const VIEW_BET = 3;
 const VIEW_PET = 4;
 const VIEW_ITEM = 5;
+const VIEW_BOOKKEEPER = 6;
 let userAddr = null;
 let view_type = VIEW_RANK;
 let contractTokenId = '1003606';
@@ -3117,6 +3119,23 @@ async function buyPet(petId, price, callback) {
         petContractWritePay('buyPet', callback, price, petId, price*DECIMALS);
     }
 }
+bk_vue = new Vue(
+    {
+        el:'#v_bookkeeper',
+        data:
+        {
+            bks:{},            
+        },
+        methods:
+        {
+            readAllBks:function(user)
+            {
+
+            },
+
+        }
+    }
+),
 uefa_vue = new Vue(
     {
 	el:'#uefa2021',
