@@ -42,6 +42,10 @@ function tronlinkConnected(tlweb) {
 
     //contractWrite(null);
 }
+function ele(ename)
+{
+  return document.getElementById(ename);
+}
 var observer = new IntersectionObserver(function(entries) {
     for(let i=0;i<entries.length;i++)
     {
