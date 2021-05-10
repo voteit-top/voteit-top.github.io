@@ -183,6 +183,53 @@
                      <h5 class="text-center text-muted">Vote For Great {{cateName}}s Around The World!!</h5>
                   </div>
                </div>
+               <div id="v_itemdetail" class="vhide">
+                  <h2 class="text-center">{{name}}</h2>
+                  <table class="table">
+                     <tbody>
+                        <tr>
+                           <th scope="row" class="text-muted">Ranking</th>
+                           <td class="fs-4 text-success" >{{rank}}</td>
+                        </tr>
+                        <tr>
+                           <th scope="row" class="text-muted">Votes</th>
+                           <td class="fs-4 text-info">{{vote}}</td>
+                        </tr>
+                        <tr>
+                           <th scope="row" class="text-muted">Votes to rise ranking</th>
+                           <td class="fs-3 text-secondary">{{vote2rise}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="text-center">
+                     <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                     <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                  </div>
+                  <div>
+                     <div class="border-bottom">
+                        {{desc}}
+                        <div class="row">
+                           <div class="col-4">
+                              <a v-if="(desc.length==0)" :href="googleurl" target="_blank">Google {{name}}</a>
+                           </div>
+                           <div class="col-4">
+                              <a v-if="(desc.length==0)" :href="wikiurl" target="_blank">Wiki {{name}}</a>
+                           </div>
+                           <div class="col-4">
+                              <a v-if="(desc.length==0)" href="https://github.com/voteit-top/voteitimgs" target="_blank">Add description for {{name}}({{itemId}})</a>
+                           </div>
+                        </div>
+                     </div>
+                     <div>
+                        <a v-if="(imgs.length==0)" href="https://github.com/voteit-top/voteitimgs" target="_blank">Add images for {{name}}({{itemId}})</a>
+                        <img v-for="img in imgs" :src="img" class="img-fluid" :alt="name">
+                     </div>
+                  </div>
+                  <div v-if="(imgs.length>0)" class="text-center">
+                     <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                     <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                  </div>
+               </div>
             </div>
             <div class="col-sm-3">
             vote statistics
@@ -190,10 +237,10 @@
         </div>
   </div>
   <div id="section2" class="container-fluid bg-light" style="padding-top:70px;padding-bottom:70px">
-    <h1>Section 2</h1>
+    <h1>DEX</h1>
      <div  class="row">
        <div class="col-sm-9">
-         <div  id="voteitdex" class="vhide">
+         <div  id="voteitdex" class="">
             <ul class="list-group">
                <li class="list-group-item list-group-item-secondary">
                   <div class="row">
@@ -278,9 +325,9 @@
   </div>
   <div id="section3" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
     <h1>Bet</h1>
-     <div id="v_betgame" class="vhide">
+     <div id="v_betgame" class="">
         <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League 2021</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
-        <div id="uefa2021" class="vhide1">
+        <div id="uefa2021" class="">
            <h1>{{desc}}</h1>
            <p class="text-info">Note:two matches for each, vote for teams who will enter finals.<a href="https://voteit-docs.readthedocs.io/en/latest/uefa2021/" target="_blank">Help</a></p>
            <div class="border border-5 border-white row bg-light" v-for="grp in groups">
@@ -427,8 +474,8 @@
      </div>
   </div>
   <div id="section41" class="container-fluid bg-light" style="padding-top:70px;padding-bottom:70px">
-    <h1>Section 4 Submenu 1</h1>
-     <div  id="v_pets" class="vhide">
+    <h3>Pet</h3>
+     <div  id="v_pets" class="">
         <div class="modal fade" id="petPriceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
            <div class="modal-dialog">
               <div class="modal-content">
