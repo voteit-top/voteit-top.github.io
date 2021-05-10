@@ -1143,8 +1143,6 @@ const EVENTCNT = 30;
 var eventStart = 1479;
 var voteitModalObj;
 var createModalObj;
-var alleventv = null;
-/*
 var alleventv = new Vue({
     el: '#allevents_v',
     data: {
@@ -1465,7 +1463,6 @@ var alleventv = new Vue({
         }
     }
 })
-*/
 votemodalv.alleventv = alleventv;
 vue_signdays.alleventv = alleventv;
 var createmodalv = new Vue({
