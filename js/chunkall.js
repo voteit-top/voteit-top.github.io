@@ -2340,8 +2340,7 @@ setInterval(async () => {
             }
         });
     }
-    if (isOnScreen('sec_bet') {
-        if(view_type == VIEW_BET){
+    if (isOnScreen('sec_bet')) {
             if(vue_allbets.isBlockbet){ 
 		    getCurrentBlock(function(bn, bid) {
 		    if (true) {
@@ -2364,7 +2363,6 @@ setInterval(async () => {
                 uefa_vue.updateGroups(userAddr);
                 uefa_vue.updateHisGroups(userAddr);
            }
-        }
     }
     vue_dex.trxBalance = walletv.trxBalance;
     vue_dex.tokenBalance = walletv.tokenBalance;
