@@ -372,7 +372,7 @@
   <div id="section3" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
     <h1>Bet</h1>
      <div id="v_betgame">
-        <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League 2021</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
+        <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="">
            <h1>{{desc}}</h1>
            <p class="text-info">Note:two matches for each, vote for teams who will enter finals.<a href="https://voteit-docs.readthedocs.io/en/latest/uefa2021/" target="_blank">Help</a></p>
@@ -401,6 +401,8 @@
                  <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[1]].active}' v-on:click="voteItem(grp.items[1])">Vote</button>
               </div>
            </div>
+        </div>
+        <div id="uefa2021his" class="vhide">
            <h1>Quater Finals(expired)</h1>
            <p class="text-info">Note:two matches for each, vote for teams who will enter semi-finals.<a href="https://voteit-docs.readthedocs.io/en/latest/uefa2021/" target="_blank">Help</a></p>
            <div class="border border-5 border-white row bg-light" v-for="grp in hisgroups">
