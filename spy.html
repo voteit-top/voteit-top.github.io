@@ -141,9 +141,53 @@
                   </div>
                 </li>
               </ul>
+               <ul id="v_wallet" class="navbar-nav">
+                  <div class="rtdapp-stub text-muted"><img title="We are running in Dappchain.." alt="Tron DappChain Sun network" src="./img/dappchain.png"></div>
+                  <li class="nav-item">
+                     <a class="nav-link"  href="#pet" onclick="showPet()">PET<i class="text-secondary fas fa-cat"></i></a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link"  href="#bet" onclick="showBet()">BET<i class="text-danger fas fa-dice w3-spin"></i></a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link"  href="#dex" onclick="showDex()">VOTEIT<i class="text-primary fas fa-exchange-alt"></i>TRX</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarhelper" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     Help
+                     </a>
+                     <ul class="dropdown-menu" aria-labelledby="navbarhelper">
+                        <li><a class="dropdown-item" href="./res/VOTEIT-whitepaper.pdf">VOTEIT whitepaper</a></li>
+                        <li><a class="dropdown-item" href="#"  onclick="requestVOTEIT()">VOTEIT Airdrop</a></li>
+                        <li><a class="dropdown-item" href="#dex">Buy/Sell VOTEIT</a></li>
+                     </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <span v-if="tlconneting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{wallet}}
+                     </a>
+                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#" v-on:click="connectWallet" v-if="!tlconnected">{{ConnectWallet}}</a></li>
+                        <li><a class="dropdown-item" href="#"><span class="badge bg-info text-dark">TRX</span>{{trxBalance}}</a></li>
+                        <li><a class="dropdown-item" href="#"><span class="badge bg-info text-dark">VOTEIT</span>{{tokenBalance}}</a></li>
+                        <li><a class="dropdown-item" href="#" v-on:click="exitWallet" v-if="tlconnected">Disconnect</a></li>
+                     </ul>
+                  </li>
+               </ul>
             </div>
           </div>
 </nav>
+       <nav>
+	  <ul id="signindays" class="pagination pagination-sm">
+	     <li class="page-item">
+		<a class="page-link" href="#" v-on:click="claimSignReward">Signin rewards</a>
+	     </li>
+	     <li class="page-item" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a class="page-link" href="#" :title="'day'+(idx+1)">{{dr}}</a></li>
+	     <li class="page-item">
+		<a class="page-link" href="https://voteit-docs.readthedocs.io/en/latest/FAQ/#8-sign-in-rewards">?</a>
+	     </li>
+	  </ul>
+       </nav>
 <div class="container">
   <div id="section1" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
 
@@ -232,7 +276,19 @@
                </div>
             </div>
             <div class="col-sm-3">
-            vote statistics
+            <div  id="v_tongji">
+               <div class="card text-white mb-1 tongjih" style="background-color:#4682B4">
+                  <div class="card-body">
+                     <p class="fs-6 mb-1">Total Votes:{{totalvotes}}</p>
+                     <p class="fs-6 mb-1">My Votes:{{myvotes}}</p>
+                     <p class="fs-6 mb-1">Total Items:{{totalitems}}</p>
+                     <p class="fs-6 mb-1">Total Rewards:{{totalrewards}}</p>
+                     <p class="fs-6 mb-1">Rewards(1Vote/day): ~{{estimateReward}}</p>
+                     <button type="button" onclick="btnClaimReward()" class="btn btn-primary">Claim Rewards</button>
+                     <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </div>
+               </div>
+            </div>
             </div>
         </div>
   </div>

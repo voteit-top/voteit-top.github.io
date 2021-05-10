@@ -1143,6 +1143,8 @@ const EVENTCNT = 30;
 var eventStart = 1479;
 var voteitModalObj;
 var createModalObj;
+var alleventv = null;
+/*
 var alleventv = new Vue({
     el: '#allevents_v',
     data: {
@@ -1463,6 +1465,7 @@ var alleventv = new Vue({
         }
     }
 })
+*/
 votemodalv.alleventv = alleventv;
 vue_signdays.alleventv = alleventv;
 var createmodalv = new Vue({
@@ -3121,6 +3124,7 @@ async function buyPet(petId, price, callback) {
         petContractWritePay('buyPet', callback, price, petId, price*DECIMALS);
     }
 }
+/*
 bk_vue = new Vue(
     {
         el:'#v_bookkeeper',
@@ -3137,7 +3141,8 @@ bk_vue = new Vue(
 
         }
     }
-),
+)
+*/
 uefa_vue = new Vue(
     {
 	el:'#uefa2021',
@@ -3685,7 +3690,7 @@ setInterval(async () => {
     });
 }, 5000);
 walletv.connectWallet();
-routeByHash();
+//routeByHash();
 
 function voteItemOnLink(itemId) {
     console.log("vote item" + itemId);
@@ -3812,7 +3817,7 @@ function routeByHash() {
     }
 }
 window.onpopstate = function(event) {
-    routeByHash();
+    //routeByHash();
 };
 
 function showBet() {
