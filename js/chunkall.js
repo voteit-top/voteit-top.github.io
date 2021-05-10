@@ -3687,6 +3687,7 @@ setInterval(async () => {
     });
 }, 5000);
 walletv.connectWallet();
+createRanksOfCate(1);
 //routeByHash();
 
 function voteItemOnLink(itemId) {
