@@ -42,7 +42,23 @@ function tronlinkConnected(tlweb) {
 
     //contractWrite(null);
 }
+var observer = new IntersectionObserver(function(entries) {
+    for(let i=0;i<entries.length;i++)
+    {
+       entries[i].target.isOnScreen = entries[i].isIntersecting;
+    }
+}, { root: null });
+observer.observe(ele('sec_vote');
+observer.observe(ele('sec_bet');
+observer.observe(ele('sec_pet');
+observer.observe(ele('sec_dex');
+function 
 
+function isOnScreen(elename)
+{
+    let el = ele(elename);
+    return el.isOnScreen;
+}
 function getRealTronweb() {
     return tronlinkWeb;
 }
@@ -2295,7 +2311,7 @@ function getBlockResult(bid) {
 }
 var maxOrderId = 0;
 setInterval(async () => {
-    if (view_type == VIEW_DEX) {
+    if (isOnScreen('sec_dex')) {
         dexRead('getMetrics', function(metrics) {
             if (metrics.result) {
                 let morderId = big2number(metrics.retobj.totalOrders);
@@ -2311,7 +2327,7 @@ setInterval(async () => {
             }
         });
     }
-    if (view_type == VIEW_BET || view_type == VIEW_PET) {
+    if (isOnScreen('sec_bet') {
         if(view_type == VIEW_BET){
             if(vue_allbets.isBlockbet){ 
 		    getCurrentBlock(function(bn, bid) {
@@ -2335,9 +2351,6 @@ setInterval(async () => {
                 uefa_vue.updateGroups(userAddr);
                 uefa_vue.updateHisGroups(userAddr);
            }
-        }
-        if (view_type == VIEW_PET) {
-
         }
     }
     vue_dex.trxBalance = walletv.trxBalance;
@@ -2867,6 +2880,7 @@ vue_pets = new Vue({
     }
 });
 
+readPetMetrics();
 function gemType2Img(gt) {
     if (gt == 1) {
         return 'gem.svg';
