@@ -647,6 +647,7 @@ const DECIMALS = 1000000;
 var walletv = new Vue({
     el: '#v_wallet',
     data: {
+        eventcnt:0,
         cateId: 1,
         tlconneting: false,
         tlconnected: false,
@@ -3720,6 +3721,7 @@ function readMetrics() {
         tongjiv.totalevents = big2number(ret[8]);
         alleventv.pendingLoadEvents= (tongjiv.totalevents-eventStart);
         tongjiv.loading = false;
+        walletv.eventcnt = alleventv.pendingLoadEvents;
     }, null, null, true);
 }
 
