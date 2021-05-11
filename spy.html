@@ -15,33 +15,6 @@
   <script src="https://cdn.jsdelivr.net/gh/voteit-top/voteitimgs@0.0.2/voteitdetails.js"></script>
   <script src="https://kit.fontawesome.com/f4c2f140bb.js" crossorigin="anonymous"></script>
   <style>
-         #mySidenav a {
-         position: absolute;
-         left: -15px;
-         transition: 0.3s;
-         z-index: 19;
-         padding: 15px;
-         width: 120px;
-         text-decoration: none;
-         font-size: 20px;
-         color: white;
-         border-radius: 0 5px 5px 0;
-         }
-         #mySidenav a:hover {
-         left: 0px;
-         }
-         #airdrop{
-         top: 60px;
-         background-color: #4CAF50;
-         }
-         #help{
-         top: 110px;
-         background-color: #2196F3;
-         }
-         #contact{
-         top: 160px;
-         background-color: #f44336;
-         }
          .w3-spin{animation:w3-spin 4s infinite linear}@keyframes w3-spin{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}}
          .rankh
          {
@@ -66,30 +39,6 @@
          font-size: 3.5rem;
          }
          }
-         .rtdapp-stub{
-         z-index:10;
-         position: fixed;
-         right:0;
-         top:0;
-         }
-         .rtdapp{
-         z-index:10;
-         position: fixed;
-         right:0;
-         top:48px;
-         width:363px;
-         height:152px;
-         display:none;
-         }
-         .cfooter {
-         position: fixed;
-         left: 0;
-         bottom: 0;
-         width: 100%;
-         background-color: red;
-         color: white;
-         text-align: center;
-         }
          .shand
          {
          cursor:pointer;
@@ -107,7 +56,7 @@
 
   </style>
 </head>
-<body class="d-flex flex-column h-100" data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
 
 <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
          <div class="container-fluid container">
@@ -131,7 +80,7 @@
                   <a class="nav-link" href="#sec_dex">DEX</a>
                 </li>
               </ul>
-               <ul id="v_wallet" class="navbar-nav d-flex">
+              <ul id="v_wallet" class="navbar-nav d-flex">
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <span v-if="tlconneting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{wallet}}
@@ -147,17 +96,6 @@
             </div>
           </div>
 </nav>
-       <nav>
-	  <ul id="signindays" class="pagination pagination-sm">
-	     <li class="page-item">
-		<a class="page-link" href="#" v-on:click="claimSignReward">Signin rewards</a>
-	     </li>
-	     <li class="page-item" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a class="page-link" href="#" :title="'day'+(idx+1)">{{dr}}</a></li>
-	     <li class="page-item">
-		<a class="page-link" href="https://voteit-docs.readthedocs.io/en/latest/FAQ/#8-sign-in-rewards">?</a>
-	     </li>
-	  </ul>
-       </nav>
 <div class="container">
   <div id="sec_vote" class="container-fluid" style="padding-top:25px;padding-bottom:5px">
     <h3><span class="badge bg-info">VOTE</span></h3>
@@ -657,43 +595,20 @@
      </div>
   </div>
   <div id="section42" class="container-fluid" style="padding-top:5px;padding-bottom:5px">
-            <div id="allevents_v" class="col-sm-3">
-               <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" v-if="mode > 1" role="presentation">
-                     <a id="link_sidetab" class="nav-link" id="supporters-tab" data-bs-toggle="tab" href="#supporters" role="tab" aria-controls="home" aria-selected="true">{{sidetitle}}</a>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Events</a>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                     <a id="link_myEvents" class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">My events</a>
-                  </li>
-               </ul>
-               <div  class="tab-content" >
-                  <div class="tab-pane fade fade" id="supporters" role="tabpanel" aria-labelledby="supporters-tab">
-                     <ul class="list-group" v-if="mode==2">
-                        <li class="list-group-item fs-6" v-for="v in voters">{{v.addr}}<span class="text-red">({{v.vote}})</span></li>
-                     </ul>
-                     <ul class="list-group" v-if="mode==3">
-                        <li class="list-group-item fs-6" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(o.oid)">Cancel</button></li>
-                     </ul>
-                  </div>
-                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                     <button type="button" class="btn btn-primary" onclick="loadHisEvents()" v-if="pendingLoadEvents>0">Load Events({{pendingLoadEvents}})<span v-if="loadingEvents" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                     <ul class="list-group">
-                        <li class="list-group-item" v-for="evt in events"><a :title="evt.details" :href="evt.tranId">{{evt.name}} {{evt.param2}}</a></li>
-                     </ul>
-                  </div>
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                     <ul class="list-group">
-                        <li class="list-group-item" v-if="waiting">{{waitingText}}<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></li>
-                        <li class="list-group-item" v-for="evt in myEvents"><a data-toggle="tooltip" data-placement="right" v-bind:title="evt.details" :href="evt.tranUrl" target="_blank">{{evt.name}} {{evt.param2}}</a><span class="badge bg-danger" v-if="evt.error">error</span><span class="badge bg-success" v-if="!evt.error">OK</span></li>
-                     </ul>
-                  </div>
-               </div>
-            </div>
+       <nav>
+	  <ul id="signindays" class="pagination pagination-sm">
+	     <li class="page-item">
+		<a class="page-link" href="#" v-on:click="claimSignReward">Signin rewards</a>
+	     </li>
+	     <li class="page-item" v-for="dr,idx in daysreward" v-bind:class="{active: idx<contDays}"><a class="page-link" href="#" :title="'day'+(idx+1)">{{dr}}</a></li>
+	     <li class="page-item">
+		<a class="page-link" href="https://voteit-docs.readthedocs.io/en/latest/FAQ/#8-sign-in-rewards">?</a>
+	     </li>
+	  </ul>
+       </nav>
   </div>
 </div>
+
       <div class="modal" id="voteitModal" tabindex="-1">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -806,7 +721,73 @@
             </div>
          </div>
       </div>
-
+      <div class="modal fade" id="eventsModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+            <div id="allevents_v" class="col-sm-3">
+               <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" v-if="mode > 1" role="presentation">
+                     <a id="link_sidetab" class="nav-link" id="supporters-tab" data-bs-toggle="tab" href="#supporters" role="tab" aria-controls="home" aria-selected="true">{{sidetitle}}</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Events</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a id="link_myEvents" class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">My events</a>
+                  </li>
+               </ul>
+               <div  class="tab-content" >
+                  <div class="tab-pane fade fade" id="supporters" role="tabpanel" aria-labelledby="supporters-tab">
+                     <ul class="list-group" v-if="mode==2">
+                        <li class="list-group-item fs-6" v-for="v in voters">{{v.addr}}<span class="text-red">({{v.vote}})</span></li>
+                     </ul>
+                     <ul class="list-group" v-if="mode==3">
+                        <li class="list-group-item fs-6" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(o.oid)">Cancel</button></li>
+                     </ul>
+                  </div>
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                     <button type="button" class="btn btn-primary" onclick="loadHisEvents()" v-if="pendingLoadEvents>0">Load Events({{pendingLoadEvents}})<span v-if="loadingEvents" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                     <ul class="list-group">
+                        <li class="list-group-item" v-for="evt in events"><a :title="evt.details" :href="evt.tranId">{{evt.name}} {{evt.param2}}</a></li>
+                     </ul>
+                  </div>
+                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                     <ul class="list-group">
+                        <li class="list-group-item" v-if="waiting">{{waitingText}}<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></li>
+                        <li class="list-group-item" v-for="evt in myEvents"><a data-toggle="tooltip" data-placement="right" v-bind:title="evt.details" :href="evt.tranUrl" target="_blank">{{evt.name}} {{evt.param2}}</a><span class="badge bg-danger" v-if="evt.error">error</span><span class="badge bg-success" v-if="!evt.error">OK</span></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+       </div>
+</div>
+      <footer class="mt-auto py-3 bg-light">
+         <div class="container">
+            <div class=" row">
+               <div class="col-1">
+                  <img src="./img/logo100.png">
+               </div>
+               <div class="col-3 container text-start">
+                  <a href="./res/VOTEIT-whitepaper.pdf">whitepaper</a>
+                  <br><a href="https://voteit-docs.readthedocs.io/en/latest/FAQ/" target="_blank">FAQ</a>
+                  <br><a href="#" onclick="requestVOTEIT()">airdrop</a>
+                  <br><a href="./res/VOTEIT-dappchain-activate-day1.txt">Dappchain accounts activation d1</a>
+                  <br><a href="./res/VOTEIT-dappchain-activate-day2.txt">Dappchain accounts activation d2</a>
+                  <br><a href="./res/VOTEIT-dappchain-activate-day3.txt">Dappchain accounts activation d3</a>
+               </div>
+               <div class="col-4 container text-center">
+                  <p class="text-muted" title="4VOTEIT per block for voter|4VOTEIT per block for creator">Voting As Mining:VOTEIT</p>
+                  <a href="https://dappchain.tronscan.org/#/contract/TECu9sH4r5BZ373yBgBDsS3chC4s24cePA/" target="_blank">VOTEIT Miner smart contract</a>
+                  <br><a href="https://dappchain.tronscan.org/#/contract/TRWnVLAEJcAha5rYFgSTTRFWG9Vb7SPeS5/" target="_blank">VOTEIT DEX smart contract</a>
+                  <br><a href="https://dappchain.tronscan.org/#/contract/TXPV4HTikmAzA1SDbGPKrs652KFzy1wnDp/" target="_blank">VOTEIT BET smart contract</a>
+                  <br><a href="https://dappchain.tronscan.org/#/contract/TJ5qtb9wUM9iNBzaRETcrVXBhPkuqBq4r9/" target="_blank">VOTEIT PET smart contract</a>
+                  <br><a href="https://dappchain.tronscan.io/#/contract/TLysE9cYxfsDUrU25SZWpuNW5o6sF1gL3H/" target="_blank">VOTEIT MATCH BET smart contract</a>
+               </div>
+               <div class="col-4 container text-end">
+                  <a href="https://twitter.com/TopVoteit"><i class="fab fa-twitter"></i></a>
+               </div>
+            </div>
+         </div>
+      </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
 <script src="http://www.voteit.top/js/chunkall.js?v=249"></script>
 </body>
