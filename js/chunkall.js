@@ -1172,17 +1172,17 @@ var dexmyorders = new Vue(
   {
         cancelOrder: function(oid) {
             alleventv.pushWaitingEvent("Canel Order...");
-            let idx = alleventv.ordersMap[oid];
-            alleventv.orders[idx - 1].canceling = true;
+            let idx = this.ordersMap[oid];
+            this.orders[idx - 1].canceling = true;
 
             dexCancelOrder(tronlinkConnected, oid, function(ret) {
-                alleventv.orders[idx - 1].canceling = false;
+                this.orders[idx - 1].canceling = false;
                 alleventv.pushCancelOrder(oid, ret);
                 readBuyPrices();
                 readSellPrices();
                 readUserOrders();
                 if (ret.result) {
-                    alleventv.orders.splice(idx - 1, 1);
+                    this.orders.splice(idx - 1, 1);
                 }
             })
         },
@@ -1196,8 +1196,6 @@ var alleventv = new Vue({
         mode: 1,
         lastbn: 0,
         orderType: ['', 'Buy', 'Sell'],
-        orders: [],
-        ordersMap: {},
         events: [],
         eventsMap: new Map(),
         myEvents: [],
@@ -3855,10 +3853,6 @@ function showEle(eleid, show) {
             ele.classList.add("vhide");
         }
     }
-}
-
-function showSupporter(show) {
-    alleventv.showSupport = show;
 }
 
 function clickSellItem(e) {
