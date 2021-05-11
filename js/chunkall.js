@@ -1172,17 +1172,17 @@ var dexmyorders = new Vue(
   {
         cancelOrder: function(oid) {
             alleventv.pushWaitingEvent("Canel Order...");
-            let idx = this.ordersMap[oid];
-            this.orders[idx - 1].canceling = true;
+            let idx = dexmyorders.ordersMap[oid];
+            dexmyorders.orders[idx - 1].canceling = true;
 
             dexCancelOrder(tronlinkConnected, oid, function(ret) {
-                this.orders[idx - 1].canceling = false;
+                dexmyorders.orders[idx - 1].canceling = false;
                 alleventv.pushCancelOrder(oid, ret);
                 readBuyPrices();
                 readSellPrices();
                 readUserOrders();
                 if (ret.result) {
-                    this.orders.splice(idx - 1, 1);
+                    dexmyorders.orders.splice(idx - 1, 1);
                 }
             })
         },
