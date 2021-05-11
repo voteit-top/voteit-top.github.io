@@ -1132,10 +1132,6 @@ function showItem(id) {
         vue_itemdetail.imgs = [];
         vue_itemdetail.originals = [];
 
-        showEle('v_ranks', false);
-        showEle('voteitdex', false);
-        showEle('v_betgame', false);
-        showEle('v_itemdetail', true);
         view_type = VIEW_ITEM;
         alleventv.mode = 2;
         if (rankItemDetails[id]) {
@@ -3737,8 +3733,8 @@ setInterval(async () => {
     });
 }, 5000);
 walletv.connectWallet();
-createRanksOfCate(1);
-//routeByHash();
+//createRanksOfCate(1);
+routeByHash();
 
 function voteItemOnLink(itemId) {
     console.log("vote item" + itemId);
@@ -3823,49 +3819,26 @@ function routeByHash() {
     let urltail = window.location.hash;
     let ic = urltail.indexOf('cate=');
     if (ic != -1) {
-        alleventv.mode = 1;
         showEle('v_ranks', true);
-        showEle('voteitdex', false);
         showEle('v_itemdetail', false);
-        showEle('v_betgame', false);
-        showEle('v_pets', false);
         vue_itemdetail.show = false;
         createRanksOfCate(Number(urltail.substr(ic + 5)));
-        view_type = VIEW_RANK;
     } else {
         ic = urltail.indexOf('item=');
         if (ic != -1) {
+            showEle('v_ranks', false);
+            showEle('v_itemdetail', true);
             showItem(Number(urltail.substr(ic + 5)));
         } else {
-            ic = urltail.indexOf('dex');
-            if (ic != -1) {
-                showDex();
-            } else {
-                ic = urltail.indexOf('bet');
-                if (ic != -1) {
-                    showBet();
-                } else {
-                    ic = urltail.indexOf('pet')
-
-                    if (ic != -1) {
-                        showPet();
-                    } else {
-                        alleventv.mode = 1;
-                        showEle('v_ranks', true);
-                        showEle('voteitdex', false);
-                        showEle('v_itemdetail', false);
-                        showEle('v_betgame', false);
-                        showEle('v_pets', false);
-                        createRanksOfCate(1);
-                        view_type = VIEW_RANK;
-                    }
-                }
-            }
+		alleventv.mode = 1;
+		showEle('v_ranks', true);
+		showEle('v_itemdetail', false);
+		createRanksOfCate(1);
         }
     }
 }
 window.onpopstate = function(event) {
-    //routeByHash();
+    routeByHash();
 };
 
 function showBet() {

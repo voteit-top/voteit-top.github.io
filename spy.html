@@ -93,7 +93,7 @@
                      </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link"  href="#events" onclick="showAllEvents()"><i class="text-info fas fa-bell" v-bind:class='{"w3-spin":eventspin}'><span class="badge rounded-pill bg-info">{{eventcnt}}</span></i></a>
+                    <a class="nav-link"  href="#events" onclick="showAllEvents()"><i class="text-info fas fa-bell" v-bind:class='{"w3-spin":eventspin}'></i><span class="badge rounded-pill bg-warning">{{eventcnt}}</span></a>
                   </li>
                </ul>
             </div>
@@ -102,17 +102,17 @@
 <div class="container">
   <div id="sec_vote" class="container-fluid" style="padding-top:55px;padding-bottom:5px">
     <h3><span class="badge bg-info">VOTE</span></h3>
-<div class="btn-group">
-<button type="button" onclick="createRanksOfCate(1)" class="btn btn-outline-primary">Country/Region</button>
-<button type="button" onclick="createRanksOfCate(2)" class="btn btn-outline-primary">Person</button>
-<button type="button" onclick="createRanksOfCate(6)" class="btn btn-outline-primary">Crypto</button>
-<button type="button" onclick="createRanksOfCate(7)" class="btn btn-outline-primary">Universe</button>
-<button type="button" onclick="createRanksOfCate(3)" class="btn btn-outline-primary">City</button>
-<button type="button" onclick="createRanksOfCate(4)" class="btn btn-outline-primary">Resort</button>
-<button type="button" onclick="createRanksOfCate(5)" class="btn btn-outline-primary">Brand</button>
-</div>    
          <div  class="row">
             <div class="col-sm-9">
+		<div class="btn-group text-center">
+		<button type="button" onclick="createRanksOfCate(1)" class="btn btn-outline-primary">Country/Region</button>
+		<button type="button" onclick="createRanksOfCate(2)" class="btn btn-outline-primary">Person</button>
+		<button type="button" onclick="createRanksOfCate(6)" class="btn btn-outline-primary">Crypto</button>
+		<button type="button" onclick="createRanksOfCate(7)" class="btn btn-outline-primary">Universe</button>
+		<button type="button" onclick="createRanksOfCate(3)" class="btn btn-outline-primary">City</button>
+		<button type="button" onclick="createRanksOfCate(4)" class="btn btn-outline-primary">Resort</button>
+		<button type="button" onclick="createRanksOfCate(5)" class="btn btn-outline-primary">Brand</button>
+		</div>    
                <div  id='v_ranks' class="container">
                   <div class="input-group mb-3">
                      <span class="input-group-text bg-info">{{cateName}} rankings</span>
