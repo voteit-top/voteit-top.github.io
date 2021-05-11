@@ -1586,8 +1586,16 @@ var tongjiv = new Vue({
             if (this.totalvotes > 0) {
                 return Number(115200 / this.totalvotes).toFixed(6);
             } else
-                return 0;
+                return '-';
+        },
+        estimateApy:function() {
+            if (this.totalvotes > 0) {
+               return Number(115200*36500/this.totalvotes.toFixed(0)).toFixed(0);
+            }
+            else
+               return '-'; 
         }
+        
     },
     methods: {
         tjClaimReward: function(evt) {
