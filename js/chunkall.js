@@ -1994,15 +1994,15 @@ let vue_allbets = new Vue({
        showUefa2021His:function()
        {
             showEle('uefa2021his', true);
-            showEle('uefa2021', false);
+            showEle('uefa2021cur', false);
             showEle('v_blockbet', false);
             this.isUefa2021=true;
             this.isBlockbet=false;
     
        },
-       showUefa2021:function()
+       showUefa2021Cur:function()
        {
-            showEle('uefa2021', true);
+            showEle('uefa2021cur', true);
             showEle('uefa2021his', false);
             showEle('v_blockbet', false);
             this.isUefa2021=true;
@@ -2011,7 +2011,7 @@ let vue_allbets = new Vue({
        },
        showBlockbet:function()
        {
-            showEle('uefa2021', false);
+            showEle('uefa2021cur', false);
             showEle('uefa2021his', false);
             showEle('v_blockbet', true);
             this.isUefa2021=false;

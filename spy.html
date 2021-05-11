@@ -361,11 +361,12 @@
       </div>
     </div>
   </div>
-  <div id="sec_bet" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
+  <div id="sec_bet" class="container-fluid" style="padding-top:5px;padding-bottom:5px">
     <h1>Bet</h1>
      <div id="v_betgame">
-        <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
+        <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021Cur" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="">
+        <div id="uefa2021cur">
            <h1>{{desc}}</h1>
            <p class="text-info">Note:two matches for each, vote for teams who will enter finals.<a href="https://voteit-docs.readthedocs.io/en/latest/uefa2021/" target="_blank">Help</a></p>
            <div class="border border-5 border-white row bg-light" v-for="grp in groups">
@@ -422,6 +423,7 @@
                  <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[1]].active}' v-on:click="voteItem(grp.items[1])">Vote</button>
               </div>
            </div>
+        </div>
         </div>
         <div id="v_blockbet" class="container vhide">
            <div class="row">
@@ -513,7 +515,7 @@
         </div>
      </div>
   </div>
-  <div id="sec_pet" class="container-fluid bg-light" style="padding-top:70px;padding-bottom:70px">
+  <div id="sec_pet" class="container-fluid bg-light" style="padding-top:5px;padding-bottom:5px">
     <h3>Pet</h3>
      <div  id="v_pets">
         <div class="modal fade" id="petPriceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -654,7 +656,7 @@
         </div>
      </div>
   </div>
-  <div id="section42" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
+  <div id="section42" class="container-fluid" style="padding-top:5px;padding-bottom:5px">
             <div id="allevents_v" class="col-sm-3">
                <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item" v-if="mode > 1" role="presentation">
