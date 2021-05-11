@@ -3602,7 +3602,12 @@ function readSellPrices() {
         }
     })
 }
+function showAllEvents()
+{
+    allEventsObj = new bootstrap.Modal(ele('eventsModal'));
+    allEventsObj.show();
 
+}
 function createNew() {
     if (!getRealTronweb()) {
         tronlinkNotConnected();

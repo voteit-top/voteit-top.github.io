@@ -199,11 +199,11 @@
             <div  id="v_tongji">
                <div class="card text-white mb-1 bg-light">
                   <div class="card-body">
-                     <p class="fs-6 mb-1">Total Votes:{{totalvotes}}</p>
-                     <p class="fs-6 mb-1">My Votes:{{myvotes}}</p>
-                     <p class="fs-6 mb-1">Total Items:{{totalitems}}</p>
-                     <p class="fs-6 mb-1">Total Rewards:{{totalrewards}}</p>
-                     <p class="fs-6 mb-1">Rewards(1Vote/day): ~{{estimateReward}}</p>
+                     <p class="fs-6 mb-1 text-dark">Total Votes:{{totalvotes}}</p>
+                     <p class="fs-6 mb-1 text-dark">My Votes:{{myvotes}}</p>
+                     <p class="fs-6 mb-1 text-dark">Total Items:{{totalitems}}</p>
+                     <p class="fs-6 mb-1 text-dark">Total Rewards:{{totalrewards}}</p>
+                     <p class="fs-6 mb-1 text-dark">Rewards(1Vote/day): ~{{estimateReward}}</p>
                      <button type="button" onclick="btnClaimReward()" class="btn btn-primary">Claim Rewards</button>
                      <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   </div>
