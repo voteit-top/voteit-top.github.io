@@ -66,7 +66,7 @@
             <span class="navbar-toggler-icon"></span>
             </button>
             <div  class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav">
+              <ul class="nav nav-pills">
                 <li class="nav-item">
                   <a class="nav-link" href="#sec_vote">Vote</a>
                 </li>
@@ -80,7 +80,7 @@
                   <a class="nav-link" href="#sec_dex">DEX</a>
                 </li>
               </ul>
-              <ul id="v_wallet" class="nav justify-content-end">
+              <ul id="v_wallet" class="nav text-end">
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <span v-if="tlconneting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{wallet}}
@@ -97,7 +97,7 @@
           </div>
 </nav>
 <div class="container">
-  <div id="sec_vote" class="container-fluid" style="padding-top:35px;padding-bottom:5px">
+  <div id="sec_vote" class="container-fluid" style="padding-top:55px;padding-bottom:5px">
     <h3><span class="badge bg-info">VOTE</span></h3>
 <div class="btn-group">
 <button type="button" onclick="createRanksOfCate(1)" class="btn btn-outline-primary">Country/Region</button>
