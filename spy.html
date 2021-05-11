@@ -131,7 +131,7 @@
                   <a class="nav-link" href="#sec_dex">DEX</a>
                 </li>
               </ul>
-               <ul id="v_wallet" class="navbar-nav">
+               <ul id="v_wallet" class="navbar-nav d-flex">
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <span v-if="tlconneting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{wallet}}
@@ -160,7 +160,7 @@
        </nav>
 <div class="container">
   <div id="sec_vote" class="container-fluid" style="padding-top:25px;padding-bottom:5px">
-    <h1>VOTE</h1>
+    <h3><span class="badge bg-info">VOTE</span></h3>
 <div class="btn-group">
 <button type="button" onclick="createRanksOfCate(1)" class="btn btn-outline-primary">Country/Region</button>
 <button type="button" onclick="createRanksOfCate(2)" class="btn btn-outline-primary">Person</button>
@@ -272,7 +272,7 @@
         </div>
   </div>
   <div id="sec_dex" class="container-fluid bg-light" style="padding-top:5px;padding-bottom:5px">
-    <h3>DEX</h3>
+    <h3><span class="badge bg-info">DEX</span></h3>
      <div  class="row">
        <div class="col-sm-9">
          <div  id="voteitdex">
@@ -362,7 +362,7 @@
     </div>
   </div>
   <div id="sec_bet" class="container-fluid" style="padding-top:5px;padding-bottom:5px">
-    <h3>Bet</h3>
+    <h3><span class="badge bg-info">BET</span></h3>
      <div id="v_betgame">
         <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021Cur" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="">
@@ -516,7 +516,7 @@
      </div>
   </div>
   <div id="sec_pet" class="container-fluid bg-light" style="padding-top:5px;padding-bottom:5px">
-    <h3>Pet</h3>
+    <h3><span class="badge bg-info">PET</span></h3>
      <div  id="v_pets">
         <div class="modal fade" id="petPriceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
            <div class="modal-dialog">
