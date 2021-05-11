@@ -648,6 +648,7 @@ var walletv = new Vue({
     el: '#v_wallet',
     data: {
         eventcnt:0,
+        eventspin:false,
         cateId: 1,
         tlconneting: false,
         tlconnected: false,
@@ -1228,11 +1229,14 @@ var alleventv = new Vue({
             let e = document.getElementById('link_myEvents');
             if (e)
                 e.click();
+            walletv.eventspin=false;
+            walletv.eventcnt ++;
         },
         pushWaitingEvent: function(name) {
             this.waiting = true;
             this.waitingText = name + '...waiting Tronlink to sign';
             this.switchMineTab();
+            walletv.eventspin=true;
 
         },
         pushPickPet:function(ret)
