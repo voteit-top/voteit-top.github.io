@@ -1175,11 +1175,11 @@ var dexmyorders = new Vue(
             alleventv.pushWaitingEvent("Canel Order...");
             let idx = dexmyorders.ordersMap[oid];
             dexmyorders.orders[idx - 1].canceling = true;
-            cancelMap[oid] = true;
+            dexmyorders.cancelMap[oid] = true;
 
             dexCancelOrder(tronlinkConnected, oid, function(ret) {
                 dexmyorders.orders[idx - 1].canceling = false;
-                cancelMap[oid] = true;
+                dexmyorders.cancelMap[oid] = true;
                 alleventv.pushCancelOrder(oid, ret);
                 readBuyPrices();
                 readSellPrices();
