@@ -2393,9 +2393,9 @@ setInterval(async () => {
            }else if(vue_allbets.init){
                 uefa_vue.updateGroups(userAddr);
                 vue_allbets.init = false;
-                #manual update
-                #uefa_vue.updateGroups(userAddr);
-                #uefa_vue.updateHisGroups(userAddr);
+                //manual update
+                //uefa_vue.updateGroups(userAddr);
+                //uefa_vue.updateHisGroups(userAddr);
            }
     }
     vue_dex.trxBalance = walletv.trxBalance;
