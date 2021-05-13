@@ -233,7 +233,12 @@
    <div class="container">
     <h3><span class="badge bg-info">BET</span></h3>
      <div id="v_betgame">
-        <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021Cur" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
+        <div class="row">
+        <div id="v_betheader" class="col-9 btn-group"><button type="button" v-on:click="showUefa2021Cur" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
+        <div class="col">
+           <div class="btn-group"><button type="button" id="betRefresh" v-on:click="smartRefresh" class="btn btn-outline-primary">Refresh</button></div>
+        </div>
+        </div>
         <div id="uefa2021" class="">
         <div id="uefa2021cur">
            <h1>{{desc}}</h1>

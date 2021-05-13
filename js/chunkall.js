@@ -1997,8 +1997,10 @@ async function contractSettleBets(callback) {
 let vue_allbets = new Vue({
     el: '#v_betheader',
     data:{
+       init: true,
        isBlockbet:false,
        isUefa2021:true,
+       isUefa2021His:false,
     }, 
     methods:{
        showUefa2021His:function()
@@ -2006,7 +2008,9 @@ let vue_allbets = new Vue({
             showEle('uefa2021his', true);
             showEle('uefa2021cur', false);
             showEle('v_blockbet', false);
-            this.isUefa2021=true;
+            showEle('betRefresh', true);
+            this.isUefa2021=false;
+            this.isUefa2021His=true;
             this.isBlockbet=false;
     
        },
@@ -2015,7 +2019,9 @@ let vue_allbets = new Vue({
             showEle('uefa2021cur', true);
             showEle('uefa2021his', false);
             showEle('v_blockbet', false);
+            showEle('betRefresh', true);
             this.isUefa2021=true;
+            this.isUefa2021His=false;
             this.isBlockbet=false;
     
        },
@@ -2023,9 +2029,20 @@ let vue_allbets = new Vue({
        {
             showEle('uefa2021cur', false);
             showEle('uefa2021his', false);
+            showEle('betRefresh', false);
             showEle('v_blockbet', true);
+           
             this.isUefa2021=false;
+            this.isUefa2021His=false;
             this.isBlockbet=true;
+       },
+       smartRefresh:function()
+       {
+           if(this.isUefa2021)
+                uefa_vue.updateGroups(userAddr);
+           else if(this.isUefa2021His)
+                uefa_vue.updateHisGroups(userAddr);
+               
        }
     }
       
@@ -2373,9 +2390,12 @@ setInterval(async () => {
 			}
 		    }
 		});
-           }else if(vue_allbets.isUefa2021){
+           }else if(vue_allbets.init){
                 uefa_vue.updateGroups(userAddr);
-                uefa_vue.updateHisGroups(userAddr);
+                vue_allbets.init = false;
+                #manual update
+                #uefa_vue.updateGroups(userAddr);
+                #uefa_vue.updateHisGroups(userAddr);
            }
     }
     vue_dex.trxBalance = walletv.trxBalance;
@@ -2896,16 +2916,17 @@ vue_pets = new Vue({
             showEle('myPetGem', false);
             readPetMetrics();
             this.refreshCB = readPetMetrics;
+/*
             if(this.rankingPets.length > 1)
             {
                this.rankingPets.sort(function(a,b){return b.power-a.power});
             } 
+*/
         }
 
     }
 });
-
-readPetMetrics();
+vue_pets.showPetRanking();
 function gemType2Img(gt) {
     if (gt == 1) {
         return 'gem.svg';
