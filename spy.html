@@ -619,7 +619,7 @@
      <div id="dex_myorders" class="col-sm-3">
        <h4>My orders</h4>
        <ul class="list-group">
-     <li class="list-group-item fs-6" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(o.oid)">Cancel<span v-if="cancelMap[o.oid]" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></li>
+     <li class="list-group-item fs-6" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(o.oid)">Cancel<span v-if="o.canceling" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></li>
        </ul>
      </div>
    </div>
