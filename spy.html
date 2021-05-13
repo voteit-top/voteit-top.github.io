@@ -256,7 +256,7 @@
             </div>
             <div class="col-sm-3">
             <div  id="v_tongji">
-               <div class="card text-white mb-1 tongjih" style="background-color:#4682B4">
+               <div class="card text-white mb-1 bg-light">
                   <div class="card-body">
                      <p class="fs-6 mb-1">Total Votes:{{totalvotes}}</p>
                      <p class="fs-6 mb-1">My Votes:{{myvotes}}</p>
@@ -272,7 +272,7 @@
         </div>
   </div>
   <div id="sec_dex" class="container-fluid bg-light" style="padding-top:5px;padding-bottom:5px">
-    <h1>DEX</h1>
+    <h3>DEX</h3>
      <div  class="row">
        <div class="col-sm-9">
          <div  id="voteitdex">
@@ -354,15 +354,15 @@
          </div>
        </div>
       <div id="dex_myorders" class="col-sm-3">
+	     <h4>My orders</h4>
 	     <ul class="list-group">
 		<li class="list-group-item fs-6" v-for="o in orders">{{orderType[o.type&3]}} {{o.lamount/1000000}} VOTEIT<span class="text-red">({{o.price/1000000}})</span><button type="button" class="btn btn-danger btn-sm" v-on:click="cancelOrder(o.oid)">Cancel</button></li>
 	     </ul>
- dex statistics
       </div>
     </div>
   </div>
   <div id="sec_bet" class="container-fluid" style="padding-top:70px;padding-bottom:70px">
-    <h1>Bet</h1>
+    <h3>Bet</h3>
      <div id="v_betgame">
         <div id="v_betheader" class="btn-group"><button type="button" v-on:click="showUefa2021" class="btn btn-outline-primary">UEFA Champion League FINAL</button><button type="button" v-on:click="showUefa2021His" class="btn btn-outline-primary">Semi/Quater Final</button><button type="button" v-on:click="showBlockbet" class="btn btn-outline-primary">Block bet</button></div>
         <div id="uefa2021" class="">
