@@ -2012,6 +2012,7 @@ let vue_allbets = new Vue({
             this.isUefa2021=false;
             this.isUefa2021His=true;
             this.isBlockbet=false;
+            smartRefresh();
     
        },
        showUefa2021Cur:function()
@@ -2023,6 +2024,7 @@ let vue_allbets = new Vue({
             this.isUefa2021=true;
             this.isUefa2021His=false;
             this.isBlockbet=false;
+            smartRefresh();
     
        },
        showBlockbet:function()
