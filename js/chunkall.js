@@ -3382,6 +3382,8 @@ uefa_vue = new Vue(
                tronlinkNotConnected();
                return;
             }
+            votemodalv.reset();
+            votemodalv.tokenBalance = walletv.tokenBalance;
             votemodalv.itemId = itemId;
             votemodalv.itemName = this.itemName(itemId);
             votemodalv.isVote = true;
@@ -3397,7 +3399,8 @@ uefa_vue = new Vue(
               {
               alleventv.pushWaitingEvent("Voting");
               instantContractWritePay('vote', function(ret){
-	                  alleventv.pushPetCommonEvent("Vote " + uefa_vue.items[itemId].name + " ", amount, ret);	
+	               alleventv.pushPetCommonEvent("Vote " + uefa_vue.items[itemId].name + " ", amount, ret);	
+                       vue_allbets.smartRefresh(); 
                    }, amount, itemId);    
 
               }
