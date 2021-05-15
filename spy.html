@@ -89,17 +89,17 @@
                 <li class="nav-item">
                   <a class="nav-link  text-light" href="#sec_pet">Pet</a>
                 </li>
-                <li class="nav-item  text-light">
-                  <a class="nav-link" href="#sec_dex">DEX</a>
+                <li class="nav-item ">
+                  <a class="nav-link text-light" href="#sec_dex">DEX</a>
                 </li>
               </ul>
               <ul id="v_wallet" class="navbar-nav">
                   <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                      <span v-if="tlconneting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{{wallet}}
                      </a>
                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item text-light" href="#" v-on:click="connectWallet" v-if="!tlconnected">{{ConnectWallet}}</a></li>
+                        <li><a class="dropdown-item" href="#" v-on:click="connectWallet" v-if="!tlconnected">{{ConnectWallet}}</a></li>
                         <li><a class="dropdown-item" href="#"><span class="badge bg-info text-dark">TRX</span>{{trxBalance}}</a></li>
                         <li><a class="dropdown-item" href="#"><span class="badge bg-info text-dark">VOTEIT</span>{{tokenBalance}}</a></li>
                         <li><a class="dropdown-item" href="#" v-on:click="exitWallet" v-if="tlconnected">Disconnect</a></li>
