@@ -39,6 +39,19 @@
          font-size: 3.5rem;
          }
          }
+         .bg_b1
+         {
+            background-color:#4285f4!important
+         }
+         .bg_b2
+         {
+            background-color:#82aef9!important
+         }
+         .bg_b3
+         {
+            background-color:#a2c3fa!important
+         }
+
          .shand
          {
          cursor:pointer;
@@ -58,7 +71,7 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
 
-<nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+<nav class="navbar navbar-expand-sm bg-b1 navbar-light fixed-top">
          <div class="container-fluid container">
             <a class="navbar-brand" href="#"> <img src="./img/logo100.png" alt="VOTEIT logo" width="30" height="30" class="d-inline-block align-top">
             VoteIt</a>
@@ -93,14 +106,14 @@
                      </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link"  href="#events" onclick="showAllEvents()"><i class="text-info fas fa-bell" v-bind:class='{"w3-spin":eventspin}'></i><span class="badge rounded-pill bg-warning">{{eventcnt}}</span></a>
+                    <a class="nav-link"  href="#events" onclick="showAllEvents()"><i class="text-warning fas fa-bell" v-bind:class='{"w3-spin":eventspin}'></i><span class="badge rounded-pill bg-warning">{{eventcnt}}</span></a>
                   </li>
                </ul>
             </div>
           </div>
 </nav>
 <div class="">
-  <div id="sec_vote" class="container-fluid" style="padding-top:55px;padding-bottom:5px">
+  <div id="sec_vote" class="bg_b2 container-fluid" style="padding-top:55px;padding-bottom:5px">
    <div class="container">
     <h3><span class="badge bg-info">VOTE</span></h3>
          <div  class="row">
@@ -215,7 +228,7 @@
         </div>
   </div>
 
-  <div id="sec_bet" class="container-fluid" style="padding-top:25px;padding-bottom:5px">
+  <div id="sec_bet" class="container-fluid bg_b3" style="padding-top:25px;padding-bottom:5px">
    <div class="container">
     <h3><span class="badge bg-info">BET</span></h3>
      <div id="v_betgame">
@@ -371,7 +384,7 @@
      </div>
    </div>
   </div>
-  <div id="sec_pet" class="container-fluid bg-light" style="padding-top:25px;padding-bottom:5px">
+  <div id="sec_pet" class="container-fluid bg-b2" style="padding-top:25px;padding-bottom:5px">
    <div class="container">
     <h3><span class="badge bg-info">PET</span></h3>
      <div  id="v_pets">
@@ -514,7 +527,7 @@
      </div>
    </div>
   </div>
-  <div id="sec_dex" class="container-fluid bg-light" style="padding-top:25px;padding-bottom:5px">
+  <div id="sec_dex" class="container-fluid bg-b3" style="padding-top:25px;padding-bottom:5px">
    <div class="container">
    <h3><span class="badge bg-info">DEX</span></h3>
     <div  class="row">
@@ -783,7 +796,7 @@
 	    </div>
        </div>
 </div>
-      <footer class="mt-auto py-3 bg-light">
+      <footer class="mt-auto py-3 bg-b1">
          <div class="container">
             <div class=" row">
                <div class="col-1">
