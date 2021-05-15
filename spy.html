@@ -78,7 +78,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <div  class="d-flex collapse navbar-collapse" id="navbarSupportedContent">
+            <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex">
               <ul class="flex-grow-1 navbar-nav">
                 <li class="nav-item">
                   <a class="nav-link" href="#sec_vote">Vote</a>
@@ -109,6 +110,7 @@
                     <a class="nav-link"  href="#events" onclick="showAllEvents()"><i class="text-warning fas fa-bell" v-bind:class='{"w3-spin":eventspin}'></i><span class="badge rounded-pill bg-info">{{eventcnt}}</span></a>
                   </li>
                </ul>
+            </div>
             </div>
           </div>
 </nav>
