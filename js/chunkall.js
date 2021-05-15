@@ -3841,33 +3841,9 @@ window.onpopstate = function(event) {
     routeByHash();
 };
 
-function showBet() {
-    showEle('v_betgame', true);
-    showEle('voteitdex', false);
-    showEle('v_ranks', false);
+function backFromItemDetail(e) {
+    showEle('v_ranks', true);
     showEle('v_itemdetail', false);
-    showEle('v_pets', false);
-    view_type = VIEW_BET;
-}
-
-function showPet() {
-    showEle('v_pets', true);
-    showEle('v_betgame', false);
-    showEle('voteitdex', false);
-    showEle('v_ranks', false);
-    showEle('v_itemdetail', false);
-    view_type = VIEW_PET;
-    readPetMetrics();
-}
-
-function showDex() {
-    alleventv.mode = 3;
-    alleventv.switchSideTab();
-    showEle('voteitdex', true);
-    showEle('v_betgame', false);
-    showEle('v_ranks', false);
-    showEle('v_itemdetail', false);
-    view_type = VIEW_DEX;
 }
 
 function showEle(eleid, show) {
@@ -3886,12 +3862,12 @@ function showSupporter(show) {
 }
 
 function clickSellItem(e) {
-    let si = Number(e.idx);
+    let si = Number(e.getAttribute('idx'));
     vue_dex.buyPrice = vue_dex.sellorders[si].price / 1000000;
 }
 
 function clickBuyItem(e) {
-    let bi = Number(e.idx);
+    let bi = Number(e.getAttribute('idx'));
     vue_dex.sellPrice = vue_dex.buyorders[bi].price / 1000000;
 }
 function setCookie(cname, cvalue, exdays) {
