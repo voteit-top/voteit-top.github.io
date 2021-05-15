@@ -3886,12 +3886,12 @@ function showSupporter(show) {
 }
 
 function clickSellItem(e) {
-    let si = Number(e.id);
+    let si = Number(e.idx);
     vue_dex.buyPrice = vue_dex.sellorders[si].price / 1000000;
 }
 
 function clickBuyItem(e) {
-    let bi = Number(e.id);
+    let bi = Number(e.idx);
     vue_dex.sellPrice = vue_dex.buyorders[bi].price / 1000000;
 }
 function setCookie(cname, cvalue, exdays) {

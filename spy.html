@@ -542,8 +542,8 @@
               </li>
               <li class="list-group-item" v-for="(sorder,index) in sellorders">
                  <div class="row">
-                    <div :id="index" onclick="clickSellItem(this)" class="col-6">{{sorder.dprice}}</div>
-                    <div class="col-6">{{sorder.amount/1000000}}</div>
+                    <div :idx="index" onclick="clickSellItem(this)" class="col-6">{{sorder.dprice}}</div>
+                    <div class="col-6" :idx="index" onclick="clickSellItem(this)">{{sorder.amount/1000000}}</div>
                  </div>
               </li>
            </ul>
@@ -564,8 +564,8 @@
               </li>
               <li class="list-group-item" v-for="(border,index) in buyorders">
                  <div class="row">
-                    <div :id="index" onclick="clickBuyItem(this)" class="col-6">{{border.dprice}}</div>
-                    <div class="col-6">{{border.amount/1000000}}</div>
+                    <div :idx="index" onclick="clickBuyItem(this)" class="col-6">{{border.dprice}}</div>
+                    <div class="col-6" :idx="index" onclick="clickBuyItem(this)">{{border.amount/1000000}}</div>
                  </div>
               </li>
            </ul>
