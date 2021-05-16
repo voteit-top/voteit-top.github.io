@@ -2414,7 +2414,7 @@ vue_pets = new Vue({
         petsCntBp: 0,
         myPetsCnt: 0,
         myGemsCnt: 0,
-        nextPickPrice: 10,
+        nextPickPrice: 100,
         totalMarketPets: 0,
         totalMarketGems: 0,
         tokenBalance: 0,
@@ -3208,7 +3208,8 @@ uefa_vue = new Vue(
                 {title:"Quater-Final 4",cid:4,leg1:"0-2",leg2:"1-0",winner:"Chelsea",bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[7,8]}],
 	groups:[
                 {title:"Final",cid:7,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[13,14]},
-               ], 
+           ],
+    claimingCids:{}, 
 	},
         methods:
         { 
@@ -3380,8 +3381,10 @@ uefa_vue = new Vue(
           claimWin:function(cateId)
           {
              alleventv.pushWaitingEvent("Voting");
+             this.claimingCids[cateId] = true;
              instantContractWrite('claimWin', function(ret){
-	                  alleventv.pushPetCommonEvent("Claim Bonus", cateId, ret);	
+                uefa_vue.claimingCids[cateId] = false;
+	            alleventv.pushPetCommonEvent("Claim Bonus", cateId, ret);	
 		},cateId);
           }
 
