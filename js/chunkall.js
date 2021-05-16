@@ -1180,7 +1180,7 @@ var dexmyorders = new Vue(
                 alleventv.pushCancelOrder(oid, ret);
                 readBuyPrices();
                 readSellPrices();
-                readUserOrders();
+                //readUserOrders();
                 if (ret.result) {
                     dexmyorders.orders.splice(idx - 1, 1);
                 }
