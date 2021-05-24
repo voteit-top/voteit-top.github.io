@@ -3233,7 +3233,7 @@ uefa_vue = new Vue(
                 {title:"Quater-Final 3",cid:3,leg1:"2-3",leg2:"1-0",winner:"Paris", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[5,6]},
                 {title:"Quater-Final 4",cid:4,leg1:"0-2",leg2:"1-0",winner:"Chelsea",bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[7,8]}],
 	groups:[
-                {title:"Final",cid:7,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[13,14]},
+                {title:"Final",cid:7,leg1:"0-1",leg2:"",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[13,14]},
            ],
     claimingCids:{}, 
 	},
