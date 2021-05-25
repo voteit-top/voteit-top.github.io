@@ -246,7 +246,7 @@
            <div class="border border-5 border-muted row bg-light" v-for="grp in groups">
               <h3>{{grp.title}}</h3>
               <p>
-                 Votes:<span class="text-secondary">{{grp.votes}}</span>&nbsp&nbsp&nbsp Pool:<span class="text-success">{{grp.bonus}}</span>VOTEIT&nbsp&nbspLeg1:<i class="text-primary">{{grp.leg1}}</i>&nbsp&nbsp Winner:{{grp.winner}}&nbsp&nbsp
+                 Votes:<span class="text-secondary">{{grp.votes}}</span>&nbsp&nbsp&nbsp Pool:<span class="text-success">{{grp.bonus}}</span>VOTEIT&nbsp&nbspLeg1:<i class="text-primary">{{grp.leg1}}</i>&nbsp&nbsp <span class="text-success" style="text-shadow:1px 1px 0 #444">Winner:{{grp.winner}}</span>&nbsp&nbsp
                  <button class="btn btn-warning" v-if="grp.canClaimWin" v-on:click="claimWin(grp.cid)">
                  Claim Win<span v-if="claimingCids[grp.cid]" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
               </p>
@@ -254,7 +254,7 @@
                  <img :src="'./img/'+itemImg(grp.items[0])" :title="itemName(grp.items[0])"><br>
                  <h4>{{itemName(grp.items[0])}}</h4>
                  <p>Votes:{{items[grp.items[0]].uvotes}}/{{items[grp.items[0]].votes}}</p>
-                 <p>Left time:{{items[grp.items[0]].ltStr}}</p>
+                 <p>Time left:{{items[grp.items[0]].ltStr}}</p>
                  <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[0]].active}' v-on:click="voteItem(grp.items[0])">Vote</button>
               </div>
               <div class="col">
@@ -264,7 +264,7 @@
                  <img :src="'./img/'+itemImg(grp.items[1])" :title="itemName(grp.items[1])"><br>
                  <h4>{{itemName(grp.items[1])}}</h4>
                  <p>Votes:{{items[grp.items[1]].uvotes}}/{{items[grp.items[1]].votes}}</p>
-                 <p>Left time:{{items[grp.items[1]].ltStr}}</p>
+                 <p>Time left:{{items[grp.items[1]].ltStr}}</p>
                  <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[1]].active}' v-on:click="voteItem(grp.items[1])">Vote</button>
               </div>
            </div>
