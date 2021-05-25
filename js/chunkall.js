@@ -2468,7 +2468,17 @@ vue_pets = new Vue({
               }
 	  } 
           return "";
-	}
+	},
+        totalPetPower:function()
+        {
+           let tp = 0;
+           for(let i=0;i<rankingPets.length;i++)
+           {
+               tp += rankingPets[i].power;
+           }
+           return tp;
+        }
+        
     },
     methods: {
         //pick pets randomly
