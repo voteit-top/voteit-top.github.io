@@ -3912,11 +3912,13 @@ function showEle(eleid, show) {
 function clickSellItem(e) {
     let si = Number(e.getAttribute('idx'));
     vue_dex.buyPrice = vue_dex.sellorders[si].price / 1000000;
+    vue_dex.buyAmount= vue_dex.sellorders[si].amount;
 }
 
 function clickBuyItem(e) {
     let bi = Number(e.getAttribute('idx'));
     vue_dex.sellPrice = vue_dex.buyorders[bi].price / 1000000;
+    vue_dex.sellAmount= vue_dex.buyorders[bi].amount;
 }
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
