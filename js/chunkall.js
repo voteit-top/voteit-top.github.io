@@ -3232,7 +3232,7 @@ uefa_vue = new Vue(
 	el:'#uefa2021',
         data:
 	{
-        desc:"UEFA Champion League Final",
+        desc:"NBA Playoffs 2021(coming soon)",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'},9:{name:'Real Madrid',img:'hm.png'},10:{name:'Chelsea',img:'qex.png'},
              11:{name:'Paris',img:'bl.png'},
              12:{name:'Man. City',img:'mc.png'},
@@ -3246,8 +3246,8 @@ uefa_vue = new Vue(
                 {title:"Quater-Final 2",cid:2, leg1:"3-1",leg2:"0-0",winner:"Real Madrid", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[3,4]},
                 {title:"Quater-Final 3",cid:3,leg1:"2-3",leg2:"1-0",winner:"Paris", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[5,6]},
                 {title:"Quater-Final 4",cid:4,leg1:"0-2",leg2:"1-0",winner:"Chelsea",bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[7,8]}],
-	groups:[
                 {title:"Final",cid:7,leg1:"0-1",leg2:"",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[13,14]},
+	groups:[
            ],
     claimingCids:{}, 
 	},
