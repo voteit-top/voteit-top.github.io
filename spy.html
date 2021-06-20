@@ -258,10 +258,10 @@
                  <button class="btn btn-primary" v-bind:class='{disabled:!items[grp.items[0]].active}' v-on:click="voteItem(grp.items[0])">Vote</button>
               </div>
               <div class="col">
-                 <img src="./img/vs.png" width=100px height=100px>
+                 <img src="./img/vs.png" width=150px height=150px>
               </div>
               <div class="col">
-                 <img :src="'./img/'+itemImg(grp.items[1])" :title="itemName(grp.items[1])"><br>
+                 <img :src="'./img/'+itemImg(grp.items[1])" width="150px" height="150px" :title="itemName(grp.items[1])"><br>
                  <h4>{{itemName(grp.items[1])}}</h4>
                  <p>Votes:{{items[grp.items[1]].uvotes}}/{{items[grp.items[1]].votes}}</p>
                  <p>Time left:{{items[grp.items[1]].ltStr}}</p>
