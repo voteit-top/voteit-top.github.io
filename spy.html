@@ -251,7 +251,7 @@
                  Claim Win<span v-if="claimingCids[grp.cid]" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
               </p>
               <div class="col">
-                 <img :src="'./img/'+itemImg(grp.items[0])" :title="itemName(grp.items[0])"><br>
+                 <img :src="'./img/'+itemImg(grp.items[0])" width="150px" height="150px" :title="itemName(grp.items[0])"><br>
                  <h4>{{itemName(grp.items[0])}}</h4>
                  <p>Votes:{{items[grp.items[0]].uvotes}}/{{items[grp.items[0]].votes}}</p>
                  <p>Time left:{{items[grp.items[0]].ltStr}}</p>
