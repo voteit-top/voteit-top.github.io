@@ -29,7 +29,39 @@ const eventServer = new HttpProvider(trongridurl);
 let k = ['4d376eb18ccde5a', 'a5a682860bc2a8b425546', '930d2b3f58bd2dd1a', 'f30d2a15'];
 createLocalTronweb(fullNode, solidityNode, eventServer, ek().slice(1));
 
+loginWithTronlink(null, 10000,null); 
 
+function createLocalTronweb(fullNode, solidityNode, eventServer, privateKey) {
+    localTronweb = new TronWeb(fullNode, solidityNode, eventServer, privateKey);
+    userAddr = localTronweb.defaultAddress.base58;
+    return localTronweb;
+}
+
+function loginWithTronlink(callback, timeout, TOcallback) {
+    var obj = setInterval(async () => {
+        if (window.sunWeb && window.sunWeb.sidechain && window.sunWeb.sidechain.defaultAddress.base58) {
+            clearInterval(obj)
+            console.log("tronlink connected");
+            tronlinkWeb = window.sunWeb.sidechain;
+            userAddr = tronlinkWeb.defaultAddress.base58;
+            if (callback) {
+                callback(tronlinkWeb);
+            }
+        } else if (window.sunWeb && window.sunWeb.sidechain) {
+            if (callback) {
+                callback(window.sunWeb.sidechain);
+            }
+        } else {
+            timeout -= 1000;
+            if (timeout <= 0) {
+                clearInterval(obj);
+                if (TOcallback) {
+                    TOcallback('TO: unable to connect Tronlink');
+                }
+            }
+        }
+    }, 1000);
+}
 function ele(ename)
 {
   return document.getElementById(ename);
