@@ -68,6 +68,40 @@ let votechange = false;
 let pkey1 = ['563492ad6f9170000', '000001231cf748a', '6141c593931fe', '88336', '7b'];
 
 
+let contract_vue = new Vue({
+
+    el:'#contract',
+    data:{
+        addr:'',
+        funname:'',
+        param1:'',
+        param2:'',
+        token:0,
+        trx:0,
+    },
+    methods:{
+        readContract:function()
+        {
+            contractRead(this.addr, this.funname, function(data){
+                console.log(data);
+            },this.param1,this.param2);
+        },
+        writeContract:function()
+        {
+            contractWrite(this.addr, this.funname, function(data){
+                console.log(data);
+            },this.param1,this.param2);
+        },
+        writePayContract:function()
+        {
+            contractWritePay(this.addr, this.funname, function(data){
+                console.log(data);
+            },this.token, this.trx,this.param1,this.param2);
+        }
+
+    }
+
+})
 let bitbot_vue = new Vue({
     el: '#bitbot',
     data: {
@@ -95,7 +129,7 @@ function getkey() {
 
 
 
-async function contractWritePay(contractAddr, mname, callback, value, param, param2) {
+async function contractWritePay(contractAddr, mname, callback, value,trxValue, param, param2) {
     if (value <= 0)
         return;
     if (tronlinkWeb) {
@@ -103,7 +137,7 @@ async function contractWritePay(contractAddr, mname, callback, value, param, par
             let contract = await tronlinkWeb.contract().at(contractAddr);
             let obj = {
                 feeLimit: 100_000_000,
-                callValue: 0,
+                callValue: trxValue * 1000000,
                 tokenId: contractTokenId,
                 tokenValue: value * 1000000,
                 shouldPollResponse: false
@@ -123,7 +157,13 @@ async function contractWritePay(contractAddr, mname, callback, value, param, par
                 });
             }
         } catch (err) {
-            console.log(err);
+            console.log(err + " " + mname);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: err
+                });
+            }
         }
     }
 }
@@ -153,7 +193,13 @@ async function contractWrite(contractAddr, mname, callback, param, param2) {
                 });
             }
         } catch (err) {
-            console.log(err);
+            console.log(err + " " + mname);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: err
+                });
+            }
         }
     }
 }
@@ -181,6 +227,12 @@ async function contractRead(contractAddr,mname, callback, param, param2) {
             }
         } catch (err) {
             console.log(err + " " + mname);
+            if (callback) {
+                callback({
+                    result: true,
+                    retobj: err
+                });
+            }
         }
     } else {
         console.log("NO tronweb");
