@@ -3240,8 +3240,8 @@ uefa_vue = new Vue(
              14:{name:'Chelsea',img:'qex.png'},
              15:{name:'Clippers', img:'LAC_logo.svg'},
              16:{name:'Suns', img:'PHX_logo.svg'},
-             17:{},
-             18:{}
+             17:{name:'Bucks', img:'MIL_logo.svg'},
+             18:{name:'Hawks', img:'ATL_logo.svg'}
 
               },
 	hisgroups:[

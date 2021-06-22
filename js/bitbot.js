@@ -129,7 +129,7 @@ let contract_vue = new Vue({
         {
             contractWritePay(this.addr, this.funname, function(data){
                 console.log(data);
-            },this.token, this.trx,paramConvert(this.param1),paramConvert(this.param2));
+            },Number(this.token), Number(this.trx),paramConvert(this.param1),paramConvert(this.param2));
         }
 
     }
