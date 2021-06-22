@@ -108,6 +108,7 @@ let contract_vue = new Vue({
         funname:'',
         param1:'',
         param2:'',
+        param3:'',
         token:0,
         trx:0,
     },
@@ -122,7 +123,7 @@ let contract_vue = new Vue({
         {
             contractWrite(this.addr, this.funname, function(data){
                 console.log(data);
-            },this.param1,this.param2);
+            },this.param1,this.param2,this.param3);
         },
         writePayContract:function()
         {
@@ -200,7 +201,7 @@ async function contractWritePay(contractAddr, mname, callback, value,trxValue, p
     }
 }
 
-async function contractWrite(contractAddr, mname, callback, param, param2) {
+async function contractWrite(contractAddr, mname, callback, param, param2,param3) {
     if (tronlinkWeb) {
         try {
             let contract = await tronlinkWeb.contract().at(contractAddr);
@@ -212,6 +213,10 @@ async function contractWrite(contractAddr, mname, callback, param, param2) {
                 shouldPollResponse: false
             };
             let ret;
+            
+            if (param != undefined && param2 != undefined && param3 != undefined) {
+                ret = await contract[mname](param, param2,param3).send(obj);
+            }
             if (param != undefined && param2 != undefined) {
                 ret = await contract[mname](param, param2).send(obj);
             } else if (param != undefined)
