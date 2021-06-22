@@ -3232,7 +3232,7 @@ uefa_vue = new Vue(
 	el:'#uefa2021',
         data:
 	{
-        desc:"NBA Playoffs 2021(coming soon)",
+        desc:"NBA Playoffs 2021",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'},9:{name:'Real Madrid',img:'hm.png'},10:{name:'Chelsea',img:'qex.png'},
              11:{name:'Paris',img:'bl.png'},
              12:{name:'Man. City',img:'mc.png'},
@@ -3256,7 +3256,7 @@ uefa_vue = new Vue(
             ],                
 	groups:[
             {title:"WEST Final",cid:8,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[15,16]},
-            //{title:"EAST Final",cid:9,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[17,18]},
+            {title:"EAST Final",cid:9,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[17,18]},
            ],
     claimingCids:{}, 
 	},
