@@ -117,19 +117,19 @@ let contract_vue = new Vue({
         {
             contractRead(this.addr, this.funname, function(data){
                 console.log(data);
-            },this.param1,this.param2);
+            }, paramConvert(this.param1),paramConvert(this.param2));
         },
         writeContract:function()
         {
             contractWrite(this.addr, this.funname, function(data){
                 console.log(data);
-            },this.param1,this.param2,this.param3);
+            },paramConvert(this.param1),paramConvert(this.param2),paramConvert(this.param3));
         },
         writePayContract:function()
         {
             contractWritePay(this.addr, this.funname, function(data){
                 console.log(data);
-            },this.token, this.trx,this.param1,this.param2);
+            },this.token, this.trx,paramConvert(this.param1),paramConvert(this.param2));
         }
 
     }
@@ -160,7 +160,16 @@ function getkey() {
 }
 
 
-
+function paramConvert(param)
+{
+   if(param.length == 0)
+      return undefined;
+   let np = parseInt(param);
+   if(String(np) == param)
+      return np;
+   else
+      return param;
+}
 
 async function contractWritePay(contractAddr, mname, callback, value,trxValue, param, param2) {
     if (value <= 0)
@@ -255,7 +264,7 @@ async function contractRead(contractAddr,mname, callback, param, param2) {
                 ret = await contract[mname](param).call();
             else
                 ret = await contract[mname]().call();
-            //console.log(ret);
+            console.log(ret);
             if (callback) {
                 callback({
                     result: true,
