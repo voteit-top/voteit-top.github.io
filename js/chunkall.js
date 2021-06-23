@@ -3255,8 +3255,8 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-            {title:"WEST Final",cid:8,leg1:"0 - 1",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[15,16]},
-            {title:"EAST Final",cid:9,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[17,18]},
+            {title:"WEST Final",cid:8,leg1:"0 - 2",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[15,16]},
+            {title:"EAST Final",cid:9,leg1:"0 - 0",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[17,18]},
            ],
     claimingCids:{}, 
 	},
