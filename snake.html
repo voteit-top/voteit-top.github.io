@@ -10,12 +10,12 @@
 <body>
 <div id="snakesplit" class="container">
 	<div class="input-group">
-	  <span class="input-group-text">源数据(按行分割�)</span>
+	  <span class="input-group-text">源数据(按行分�隔�)</span>
 	  <textarea id="allusers" class="form-control" rows="15" v-model="allusers" aria-label="With textarea"></textarea>
 	</div>
 	<div class="input-group mb-3">
 	  <input type="text" class="form-control" placeholder="Recipient's username" v-model="groupcnt" aria-label="Recipient's username" aria-describedby="button-addon2">
-	  <button class="btn btn-outline-primary" v-on:click="snakeSplit"  type="button" id="button-addon2">Button</button>
+	  <button class="btn btn-outline-primary" v-on:click="snakeSplit"  type="button" id="button-addon2">Snake Split</button>
 	</div>
     <div class="container">
     <div v-for="s in splits"  v-html="s.content">
@@ -59,7 +59,7 @@
                    cnt ++;
                    split.push(allusersArr[start]);
                    if(cnt%2 == 1)
-                      start += (d-2*i-1);   		
+                      tart += (d-2*i-1);   		
                    else
                       start += (2*i + 1);
                 }      
