@@ -16,8 +16,7 @@
 	  <button class="btn btn-outline-primary" v-on:click="snakeSplit"  type="button" id="button-addon2">Button</button>
 	</div>
     <div class="container">
-    <div v-for="s in splits">
-       {{s.content}}
+    <div v-for="s in splits"  v-html="s.content">
     </div>
     </div>
 </div>
@@ -52,12 +51,13 @@
                 let split = [];
                 let start = i;
                 let cnt = 0;
+                let d = this.groupcnd*2;
                 while(start < tlen)
                 {
                    cnt ++;
                    split.push(allusersArr[start]);
                    if(cnt%2 == 1)
-                      start += (this.groupcnt*2-i);   		
+                      start += (d-i-1);   		
                    else
                       start = (start + i + 1);
                 }      
