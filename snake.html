@@ -10,7 +10,7 @@
 <body>
 <div id="snakesplit" class="container">
 	<div class="input-group">
-	  <span class="input-group-text">源数据(按行分�隔�)</span>
+	  <span class="input-group-text">源数据(按行分隔)</span>
 	  <textarea id="allusers" class="form-control" rows="15" v-model="allusers" aria-label="With textarea"></textarea>
 	</div>
 	<div class="input-group mb-3">
@@ -59,7 +59,7 @@
                    cnt ++;
                    split.push(allusersArr[start]);
                    if(cnt%2 == 1)
-                      tart += (d-2*i-1);   		
+                      start += (d-2*i-1);   		
                    else
                       start += (2*i + 1);
                 }      
