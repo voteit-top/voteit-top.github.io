@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="snakesplit" class="container">
-    <textarea id="allusers" rows="150" cols="100" v-model="allusers">
+    <textarea id="allusers" rows="30" cols="100" v-model="allusers">
     </textarea>
 	<div class="input-group mb-3">
 	  <input type="text" class="form-control" placeholder="Recipient's username" v-model="groupcnt" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -46,7 +46,7 @@
              }
              let allusersArr = this.allusers.split('\n');
              let tlen = this.allusers.length;
-	     
+	     this.splits=[]; 
              for(let i=0;i<this.groupcnt;i++)
              {
                 let split = [];
@@ -61,7 +61,7 @@
                    else
                       start += 1; 
                 }      
-                this.splits[i] = {'count':cnt, 'content':split.join('\n')}; 
+                this.splits.push({'count':cnt, 'content':split.join('\n')}); 
                 
              }
          }
