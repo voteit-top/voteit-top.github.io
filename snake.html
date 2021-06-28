@@ -51,15 +51,15 @@
                 let split = [];
                 let start = i;
                 let cnt = 0;
-                let d = this.groupcnd*2;
+                let d = this.groupcnt*2;
                 while(start < tlen)
                 {
                    cnt ++;
                    split.push(allusersArr[start]);
                    if(cnt%2 == 1)
-                      start += (d-i-1);   		
+                      start += (d-2*i-1);   		
                    else
-                      start = (start + i + 1);
+                      start += (2*i + 1);
                 }      
                 let cont = split.join('<br>');
                 this.splits.push({'count':cnt, 'content':cont}); 
