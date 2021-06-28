@@ -57,11 +57,12 @@
                    cnt ++;
                    split.push(allusersArr[start]);
                    if(cnt%2 == 1)
-                      start += (this.groupcnt*2-1);    		
+                      start = (this.groupcnt*2-i);    		
                    else
-                      start += 1; 
+                      start = (start + i + 1) 
                 }      
-                this.splits.push({'count':cnt, 'content':split.join('\n')}); 
+                let cont = split.join('<br>');
+                this.splits.push({'count':cnt, 'content':cont}); 
                 
              }
          }
