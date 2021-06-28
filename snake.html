@@ -9,17 +9,12 @@
 </head>
 <body>
 <div id="snakesplit" class="container">
-    <textarea id="allusers" rows="150" cols="100" v-model="allusers" style="display:none">
+    <textarea id="allusers" rows="150" cols="100" v-model="allusers">
     </textarea>
-    <div id='snake' class="container">
-       <div class="card">
- 	 <h5 class="card-header">Contract operator</h5>
-	 <div class="card-body">
-	   <input type="text" class="form-control" v-model="groupcnt" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">					
-	   <a href="#" v-on:click="snakeSplit"  class="btn btn-primary">Split</a>
-	 </div>
-       </div>
-    </div>
+	<div class="input-group mb-3">
+	  <input type="text" class="form-control" placeholder="Recipient's username" v-model="groupcnt" aria-label="Recipient's username" aria-describedby="button-addon2">
+	  <button class="btn btn-outline-primary" v-on:click="snakeSplit"  type="button" id="button-addon2">Button</button>
+	</div>
     <div class="container">
     <div v-for="s in splits">
        {{s.content}}
@@ -34,7 +29,7 @@
 
 <script>
     let snakes = new Vue({
-      el:#snakesplit,
+      el:'#snakesplit',
       data:{
          allusers:'',
          groupcnt:8,

@@ -139,7 +139,7 @@ let bitbot_vue = new Vue({
     el: '#bitbot',
     data: {
         showType: 1,
-        apis: [],
+        apis: [{kid:1, key:'key1', secret:'secret1', password:'password1'}],
         params:[],
         bots:[],
 
