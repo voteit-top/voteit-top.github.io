@@ -113,122 +113,6 @@
           </div>
 </nav>
 <div class="">
-  <div id="sec_vote" class="bg_b3 container-fluid" style="padding-top:55px;padding-bottom:5px">
-   <div class="container">
-    <h3><span class="badge bg-info">VOTE</span>&nbsp&nbsp<span class="text-muted">No Vote, No Reward</span></h3>
-         <div  class="row">
-            <div class="col-sm-9">
-		<div class="btn-group text-center">
-		<button type="button" onclick="createRanksOfCate(1)" class="btn btn-outline-primary">Country/Region</button>
-		<button type="button" onclick="createRanksOfCate(2)" class="btn btn-outline-primary">Person</button>
-		<button type="button" onclick="createRanksOfCate(6)" class="btn btn-outline-primary">Crypto</button>
-		<button type="button" onclick="createRanksOfCate(7)" class="btn btn-outline-primary">Universe</button>
-		<button type="button" onclick="createRanksOfCate(3)" class="btn btn-outline-primary">City</button>
-		<button type="button" onclick="createRanksOfCate(4)" class="btn btn-outline-primary">Resort</button>
-		<button type="button" onclick="createRanksOfCate(5)" class="btn btn-outline-primary">Brand</button>
-		</div>    
-               <div  id='v_ranks' class="container">
-                  <div class="input-group mb-3">
-                     <span class="input-group-text bg-info">{{cateName}} rankings</span>
-                     <input type="text" class="form-control" id="rankFilterInput" placeholder="Search for names.." onkeyup="rankFilter()">
-                     <span><a class="btn btn-lg btn-primary" href="#" onclick="createNew()" title="creator can get rewards per block" role="button">Create</a></span>
-                  </div>
-                  <div class="row align-items-center">
-                     <div class="border-bottom col-2 rankh">
-                        <b>Rank</b>
-                     </div>
-                     <div class="border-bottom col-4 rankh">
-                        <b>Name</b>
-                     </div>
-                     <div class="border-bottom col-2 rankh">
-                        <b>Votes</b>
-                     </div>
-                     <div class="border-bottom text-center col-4 rankh">
-                        <b>Operate</b>
-                     </div>
-                  </div>
-                  <rankitem v-for="(item,index) in items" v-bind:rank="index+1+(curPage-1)*pageSize" v-bind:cid="item.cateId" v-bind:gsbase="gbase" v-bind:rkitem="item" v-bind:rkid="item.id" v-bind:voting="item.voting" v-bind:unvoting="item.unvoting"></rankitem>
-                  <nav aria-label="Page navigation example" v-if="allItems.length>pageSize">
-                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#" v-on:click="previousPage" v-bind:class='{disabled:!hasPrePage}'>Previous</a></li>
-                        <li class="page-item active" aria-current="page">
-                           <a class="page-link" href="#">{{curPage}}</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#" v-on:click="nextPage" v-bind:class='{disabled:!hasNextPage}'>Next</a></li>
-                     </ul>
-                  </nav>
-                  <div>
-                     <h5 class="text-center text-muted">Vote For Great {{cateName}}s Around The World!!</h5>
-                  </div>
-               </div>
-               <div id="v_itemdetail" class="vhide">
-                  <h2 style="position:relative" class="text-center">{{name}}<button type="button" :itemid="itemId" onclick="backFromItemDetail(this)" style="position:absolute;left:2px;top:2px" class="btn btn-info">Back</button></h2>
-                  <table class="table">
-                     <tbody>
-                        <tr>
-                           <th scope="row" class="text-muted">Ranking</th>
-                           <td class="fs-4 text-success" >{{rank}}</td>
-                        </tr>
-                        <tr>
-                           <th scope="row" class="text-muted">Votes</th>
-                           <td class="fs-4 text-info">{{vote}}</td>
-                        </tr>
-                        <tr>
-                           <th scope="row" class="text-muted">Votes to rise ranking</th>
-                           <td class="fs-3 text-secondary">{{vote2rise}}</td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <div class="text-center">
-                     <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                     <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                  </div>
-                  <div>
-                     <div class="border-bottom">
-                        {{desc}}
-                        <div class="row">
-                           <div class="col-4">
-                              <a v-if="(desc.length==0)" :href="googleurl" target="_blank">Google {{name}}</a>
-                           </div>
-                           <div class="col-4">
-                              <a v-if="(desc.length==0)" :href="wikiurl" target="_blank">Wiki {{name}}</a>
-                           </div>
-                           <div class="col-4">
-                              <a v-if="(desc.length==0)" href="https://github.com/voteit-top/voteitimgs" target="_blank">Add description for {{name}}({{itemId}})</a>
-                           </div>
-                        </div>
-                     </div>
-                     <div>
-                        <a v-if="(imgs.length==0)" href="https://github.com/voteit-top/voteitimgs" target="_blank">Add images for {{name}}({{itemId}})</a>
-                        <img v-for="img in imgs" :src="img" class="img-fluid" :alt="name">
-                     </div>
-                  </div>
-                  <div v-if="(imgs.length>0)" class="text-center">
-                     <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                     <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-                  </div>
-               </div>
-            </div>
-            <div class="col-sm-3">
-            <div  id="v_tongji">
-               <div class="card text-white mb-1 bg-light">
-                  <div class="card-body">
-                     <p class="fs-6 mb-1 text-dark">Total Votes:{{totalvotes}}</p>
-                     <p class="fs-6 mb-1 text-dark">My Votes:{{myvotes}}</p>
-                     <p class="fs-6 mb-1 text-dark">Total Items:{{totalitems}}</p>
-                     <p class="fs-6 mb-1 text-dark">Total Rewards:{{totalrewards}}</p>
-                     <p class="fs-6 mb-1 text-dark">Rewards(1Vote/day): ~{{estimateReward}}</p>
-                     <p class="fs-6 mb-1 text-dark">APY: ~{{estimateApy}}%</p>
-                     <button type="button" onclick="btnClaimReward()" class="btn btn-primary">Claim Rewards</button>
-                     <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  </div>
-               </div>
-            </div>
-            </div>
-        </div>
-        </div>
-  </div>
-
   <div id="sec_bet" class="container-fluid bg_b2" style="padding-top:25px;padding-bottom:5px">
    <div class="container">
     <h3><span class="badge bg-info">BET</span>&nbsp&nbsp<span class="text-muted">Bet One, Win More</span></h3>
@@ -390,7 +274,126 @@
      </div>
    </div>
   </div>
-  <div id="sec_pet" class="container-fluid bg_b3" style="padding-top:25px;padding-bottom:5px">
+ 
+
+
+  <div id="sec_vote" class="bg_b3 container-fluid" style="padding-top:55px;padding-bottom:5px">
+   <div class="container">
+    <h3><span class="badge bg-info">VOTE</span>&nbsp&nbsp<span class="text-muted">No Vote, No Reward</span></h3>
+         <div  class="row">
+            <div class="col-sm-9">
+		<div class="btn-group text-center">
+		<button type="button" onclick="createRanksOfCate(1)" class="btn btn-outline-primary">Country/Region</button>
+		<button type="button" onclick="createRanksOfCate(2)" class="btn btn-outline-primary">Person</button>
+		<button type="button" onclick="createRanksOfCate(6)" class="btn btn-outline-primary">Crypto</button>
+		<button type="button" onclick="createRanksOfCate(7)" class="btn btn-outline-primary">Universe</button>
+		<button type="button" onclick="createRanksOfCate(3)" class="btn btn-outline-primary">City</button>
+		<button type="button" onclick="createRanksOfCate(4)" class="btn btn-outline-primary">Resort</button>
+		<button type="button" onclick="createRanksOfCate(5)" class="btn btn-outline-primary">Brand</button>
+		</div>    
+               <div  id='v_ranks' class="container">
+                  <div class="input-group mb-3">
+                     <span class="input-group-text bg-info">{{cateName}} rankings</span>
+                     <input type="text" class="form-control" id="rankFilterInput" placeholder="Search for names.." onkeyup="rankFilter()">
+                     <span><a class="btn btn-lg btn-primary" href="#" onclick="createNew()" title="creator can get rewards per block" role="button">Create</a></span>
+                  </div>
+                  <div class="row align-items-center">
+                     <div class="border-bottom col-2 rankh">
+                        <b>Rank</b>
+                     </div>
+                     <div class="border-bottom col-4 rankh">
+                        <b>Name</b>
+                     </div>
+                     <div class="border-bottom col-2 rankh">
+                        <b>Votes</b>
+                     </div>
+                     <div class="border-bottom text-center col-4 rankh">
+                        <b>Operate</b>
+                     </div>
+                  </div>
+                  <rankitem v-for="(item,index) in items" v-bind:rank="index+1+(curPage-1)*pageSize" v-bind:cid="item.cateId" v-bind:gsbase="gbase" v-bind:rkitem="item" v-bind:rkid="item.id" v-bind:voting="item.voting" v-bind:unvoting="item.unvoting"></rankitem>
+                  <nav aria-label="Page navigation example" v-if="allItems.length>pageSize">
+                     <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#" v-on:click="previousPage" v-bind:class='{disabled:!hasPrePage}'>Previous</a></li>
+                        <li class="page-item active" aria-current="page">
+                           <a class="page-link" href="#">{{curPage}}</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#" v-on:click="nextPage" v-bind:class='{disabled:!hasNextPage}'>Next</a></li>
+                     </ul>
+                  </nav>
+                  <div>
+                     <h5 class="text-center text-muted">Vote For Great {{cateName}}s Around The World!!</h5>
+                  </div>
+               </div>
+               <div id="v_itemdetail" class="vhide">
+                  <h2 style="position:relative" class="text-center">{{name}}<button type="button" :itemid="itemId" onclick="backFromItemDetail(this)" style="position:absolute;left:2px;top:2px" class="btn btn-info">Back</button></h2>
+                  <table class="table">
+                     <tbody>
+                        <tr>
+                           <th scope="row" class="text-muted">Ranking</th>
+                           <td class="fs-4 text-success" >{{rank}}</td>
+                        </tr>
+                        <tr>
+                           <th scope="row" class="text-muted">Votes</th>
+                           <td class="fs-4 text-info">{{vote}}</td>
+                        </tr>
+                        <tr>
+                           <th scope="row" class="text-muted">Votes to rise ranking</th>
+                           <td class="fs-3 text-secondary">{{vote2rise}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="text-center">
+                     <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                     <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                  </div>
+                  <div>
+                     <div class="border-bottom">
+                        {{desc}}
+                        <div class="row">
+                           <div class="col-4">
+                              <a v-if="(desc.length==0)" :href="googleurl" target="_blank">Google {{name}}</a>
+                           </div>
+                           <div class="col-4">
+                              <a v-if="(desc.length==0)" :href="wikiurl" target="_blank">Wiki {{name}}</a>
+                           </div>
+                           <div class="col-4">
+                              <a v-if="(desc.length==0)" href="https://github.com/voteit-top/voteitimgs" target="_blank">Add description for {{name}}({{itemId}})</a>
+                           </div>
+                        </div>
+                     </div>
+                     <div>
+                        <a v-if="(imgs.length==0)" href="https://github.com/voteit-top/voteitimgs" target="_blank">Add images for {{name}}({{itemId}})</a>
+                        <img v-for="img in imgs" :src="img" class="img-fluid" :alt="name">
+                     </div>
+                  </div>
+                  <div v-if="(imgs.length>0)" class="text-center">
+                     <button type="button" :itemid="itemId" onclick="voteItem(this)" class="btn btn-success">Vote<span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                     <button type="button" :itemid="itemId" onclick="unVoteItem(this)" class="btn btn-warning">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-3">
+            <div  id="v_tongji">
+               <div class="card text-white mb-1 bg-light">
+                  <div class="card-body">
+                     <p class="fs-6 mb-1 text-dark">Total Votes:{{totalvotes}}</p>
+                     <p class="fs-6 mb-1 text-dark">My Votes:{{myvotes}}</p>
+                     <p class="fs-6 mb-1 text-dark">Total Items:{{totalitems}}</p>
+                     <p class="fs-6 mb-1 text-dark">Total Rewards:{{totalrewards}}</p>
+                     <p class="fs-6 mb-1 text-dark">Rewards(1Vote/day): ~{{estimateReward}}</p>
+                     <p class="fs-6 mb-1 text-dark">APY: ~{{estimateApy}}%</p>
+                     <button type="button" onclick="btnClaimReward()" class="btn btn-primary">Claim Rewards</button>
+                     <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  </div>
+               </div>
+            </div>
+            </div>
+        </div>
+        </div>
+  </div>
+
+ <div id="sec_pet" class="container-fluid bg_b3" style="padding-top:25px;padding-bottom:5px">
    <div class="container">
     <h3><span class="badge bg-info">PET</span>&nbsp&nbsp<span class="text-muted" >Powered Pet Can Farm</span></h3>
      <div  id="v_pets">

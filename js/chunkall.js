@@ -3241,10 +3241,14 @@ uefa_vue = new Vue(
              15:{name:'Clippers', img:'LAC_logo.svg'},
              16:{name:'Suns', img:'PHX_logo.svg'},
              17:{name:'Bucks', img:'MIL_logo.svg'},
-             18:{name:'Hawks', img:'ATL_logo.svg'}
+             18:{name:'Hawks', img:'ATL_logo.svg'},
+             19:{name:'Bucks', img:'MIL_logo.svg'},
+             20:{name:'Suns', img:'PHX_logo.svg'}
 
               },
 	hisgroups:[
+                {title:"WEST Final",cid:8,leg1:"2 - 4",leg2:"",winner:"Suns", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[15,16]},
+                {title:"EAST Final",cid:9,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[17,18]},
                 {title:"Final",cid:7,leg1:"0-1",leg2:"",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[13,14]},
                 {title:"Semi-Final 1",cid:5,leg1:"1-1",leg2:"0-2",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[9,10]},
                 {title:"Semi-Final 2",cid:6,leg1:"1-2",leg2:"0-2",winner:"Man. City", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[11,12]},
@@ -3255,8 +3259,7 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-            {title:"WEST Final",cid:8,leg1:"2 - 4",leg2:"",winner:"Suns", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[15,16]},
-            {title:"EAST Final",cid:9,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[17,18]},
+            {title:"NBA Playoffs 2021 Final",cid:10,leg1:"0 - 0",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[19,20]},
            ],
     claimingCids:{}, 
 	},
