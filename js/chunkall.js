@@ -3259,7 +3259,7 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-            {title:"NBA Playoffs 2021 Final",cid:10,leg1:"0 - 1",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[19,20]},
+            {title:"NBA Playoffs 2021 Final",cid:10,leg1:"0 - 2",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[19,20]},
            ],
     claimingCids:{}, 
 	},
