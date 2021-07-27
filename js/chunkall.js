@@ -3243,10 +3243,16 @@ uefa_vue = new Vue(
              17:{name:'Bucks', img:'MIL_logo.svg'},
              18:{name:'Hawks', img:'ATL_logo.svg'},
              19:{name:'Bucks', img:'MIL_logo.svg'},
-             20:{name:'Suns', img:'PHX_logo.svg'}
+             20:{name:'Suns', img:'PHX_logo.svg'},
+             21:{name:'JAPAN', img:'https://olympics.com/tokyo-2020/olympic-games/resCOMMON/img/flags/JPN.png'},
+             22:{name:'USA', img:'https://olympics.com/tokyo-2020/olympic-games/resCOMMON/img/flags/USA.png'},
+             23:{name:'CHINA', img:'https://olympics.com/tokyo-2020/olympic-games/resCOMMON/img/flags/CHN.png'},
+             24:{name:'OTHER', img:'https://olympics.com/images/static/navigation-satellite/navigation-menu-logo.svg'}
+    
 
               },
 	hisgroups:[
+                {title:"NBA Playoffs 2021 Final",cid:10,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[19,20]},
                 {title:"WEST Final",cid:8,leg1:"2 - 4",leg2:"",winner:"Suns", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[15,16]},
                 {title:"EAST Final",cid:9,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[17,18]},
                 {title:"Final",cid:7,leg1:"0-1",leg2:"",winner:"Chelsea", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[13,14]},
@@ -3259,7 +3265,7 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-            {title:"NBA Playoffs 2021 Final",cid:10,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[19,20]},
+                {title:"TOKYO 2020 Most Gold Medal",cid:11,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[21,22,23,24]},
            ],
     claimingCids:{}, 
 	},
