@@ -118,6 +118,8 @@ let contract_vue = new Vue({
         {
             contractRead(this.addr, this.funname, function(data){
                 console.log(data);
+                ele('result').innerHTML=JSON.stringify(data);
+
             }, paramConvert(this.param1),paramConvert(this.param2));
         },
         writeContract:function()
