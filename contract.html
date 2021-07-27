@@ -25,6 +25,9 @@
 				  </div>
 				  <div class="input-group mb-3">
 					<span class="input-group-text" id="input_apisecret">Function</span>
+                                        <select id="betTypeselect" v-model="funname" class="form-select" aria-label="contract function">
+                                            <option v-for='item in functions' :value="item">{{item}}</option>
+                                        </select>
 					<input type="text" class="form-control" v-model="funname" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 				  </div>			
 				  <div class="input-group mb-3">
