@@ -3232,7 +3232,7 @@ uefa_vue = new Vue(
 	el:'#uefa2021',
         data:
 	{
-        desc:"NBA Playoffs 2021",
+        desc:"KING OF GOLD MEDALS",
         items:{1:{name:'Man. City',img:'mc.png'},2:{name:'Dortmund',img:'dtmd.png'},3:{name:'Real Madrid',img:'hm.png'},4:{name:'Liverpool',img:'lwp.png'},5:{name:'Bayern',img:'br.png'},6:{name:'Paris',img:'bl.png'},7:{name:'Porto',img:'bet.png'},8:{name:'Chelsea',img:'qex.png'},9:{name:'Real Madrid',img:'hm.png'},10:{name:'Chelsea',img:'qex.png'},
              11:{name:'Paris',img:'bl.png'},
              12:{name:'Man. City',img:'mc.png'},
@@ -3244,10 +3244,10 @@ uefa_vue = new Vue(
              18:{name:'Hawks', img:'ATL_logo.svg'},
              19:{name:'Bucks', img:'MIL_logo.svg'},
              20:{name:'Suns', img:'PHX_logo.svg'},
-             21:{name:'JAPAN', img:'https://olympics.com/tokyo-2020/olympic-games/resCOMMON/img/flags/JPN.png'},
-             22:{name:'USA', img:'https://olympics.com/tokyo-2020/olympic-games/resCOMMON/img/flags/USA.png'},
-             23:{name:'CHINA', img:'https://olympics.com/tokyo-2020/olympic-games/resCOMMON/img/flags/CHN.png'},
-             24:{name:'OTHER', img:'https://olympics.com/images/static/navigation-satellite/navigation-menu-logo.svg'}
+             21:{name:'JAPAN', img:'JPN.png'},
+             22:{name:'USA', img:'USA.png'},
+             23:{name:'CHINA', img:'CHN.png'},
+             24:{name:'OTHER', img:'navigation-menu-logo.svg'}
     
 
               },
