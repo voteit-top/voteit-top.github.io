@@ -3247,7 +3247,7 @@ uefa_vue = new Vue(
              21:{name:'JAPAN', img:'JPN.png'},
              22:{name:'USA', img:'USA.png'},
              23:{name:'CHINA', img:'CHN.png'},
-             24:{name:'OTHER', img:'navigation-menu-logo.svg'}
+             24:{name:'NONE OF (JPN/USA/CHN)', img:'navigation-menu-logo.svg'}
     
 
               },
