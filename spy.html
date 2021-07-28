@@ -129,11 +129,11 @@
            <p class="text-info">Which country will win most gold medals? .<a href="https://olympics.com/tokyo-2020/olympic-games/en/results/all-sports/medal-standings.htm" target="_blank">Olympic Medal Count</a></p>
            <div class="border border-2 border-muted row bg-light" v-for="grp in groups">
               <h3>{{grp.title}}</h3>
-              <p>
+              <h4>
                  Votes:<span class="text-secondary">{{grp.votes}}</span>&nbsp&nbsp&nbsp Pool:<span class="text-success">{{grp.bonus}}</span>VOTEIT&nbsp&nbspSeries:<i class="text-primary">{{grp.leg1}}</i>&nbsp&nbsp <span class="badge bg-danger">Winner:{{grp.winner}}</span>&nbsp&nbsp
                  <button class="btn btn-warning" v-if="grp.canClaimWin" v-on:click="claimWin(grp.cid)">
                  Claim Win<span v-if="claimingCids[grp.cid]" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button>
-              </p>
+              </h4>
               <div class="col" v-for="item in grp.items">
                  <img :src="'./img/'+itemImg(item)" width="150px" height="100px" :title="itemName(item)"><br>
                  <h4>{{itemName(item)}}</h4>
