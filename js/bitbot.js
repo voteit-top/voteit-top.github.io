@@ -104,7 +104,7 @@ let contract_vue = new Vue({
 
     el:'#contract',
     data:{
-        functions:['deposit', 'createCate', 'createOption','getCateDetails', 'getItemDetails'],
+        functions:['deposit', 'createCate', 'createOption','getCateDetails', 'getItemDetails', 'setCateWin'],
         addr:'TLysE9cYxfsDUrU25SZWpuNW5o6sF1gL3H',
         funname:'',
         param1:'',
