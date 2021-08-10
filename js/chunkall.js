@@ -3265,7 +3265,7 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-                {title:"TOKYO 2020 Most Gold Medal",cid:11,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[21,22,23,24]},
+                {title:"TOKYO 2020 Most Gold Medal",cid:11,leg1:"",leg2:"",winner:"USA", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[21,22,23,24]},
            ],
     claimingCids:{}, 
 	},
