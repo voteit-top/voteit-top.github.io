@@ -2,6 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>等额本息还款法计算器</title>
 <script language="javascript">
@@ -130,10 +132,9 @@ input {color:#000; }
 </style>		
 </head>
 <body id="contractPage">
-<div id="container">
+<div class="container" id="container">
     <div id="wrapper">
 		<div id="content">
-			<div style="clear:both">&nbsp;<span class="style1">等额本息还款法计算器</span> </div>
 			<form name="estateborrow" action="counter-aa">
 				
 			
@@ -186,13 +187,46 @@ input {color:#000; }
 				</table>
 			
         </td></tr>
+        <tr>
+        <td>
+         <table id="tztable">
+         <tr><td colspan='2'><strong>touzi</strong></td></tr>
+         <tr><td>init value:</td><td><input v-model="tzvalue" type="text"></td>
+         <tr><td>rate:</td><td><input v-model='tzrate' type="text">%</td>
+         <tr><td>years:</td><td><input v-model='tzyears' type="text"></td>
+         <tr><td><input v-on:click="calTz" type="button" value="calculate"></td> <td>{{ tzresult }} </td></tr>
+         </table>
+        </td>
+        <td>
+        
+        </td>
 </table>
-
-          
 			
-		</div>
-	</div>
 </div>
+</div>
+</div>
+<script>
+var app = new Vue({
+  el: '#tztable',
+  data: {
+    tzvalue: 0,
+    tzrate: 0,
+    tzyears:0,
+    tzresult:0 
+  },
+  methods:
+  {
+    calTz:function()
+    {
+       this.tzresult = this.tzvalue;
+       for(let y=0;y<this.tzyears;y++)
+       {
+          this.tzresult *= (1 + this.tzrate/100);
+       }
+    }
+  }
+}) 
+</script>
 </body>
 </html>
 
