@@ -198,6 +198,13 @@ input {color:#000; }
          </table>
         </td>
         <td>
+         <table id="dctable">
+         <tr><td colspan='2'><strong>ding cun</strong></td></tr>
+         <tr><td>value:</td><td><input v-model="dcvalue" type="text"></td>
+         <tr><td>rate:</td><td><input v-model='dcrate' type="text">%</td>
+         <tr><td>years:</td><td><input v-model='dcyears' type="text"></td>
+         <tr><td><input v-on:click="calDc" type="button" value="calculate"></td> <td>{{ dcresult }} </td></tr>
+         </table>
         
         </td>
 </table>
@@ -212,7 +219,12 @@ var app = new Vue({
     tzvalue: 0,
     tzrate: 0,
     tzyears:0,
-    tzresult:0 
+    tzresult:0,
+ 
+    dcvalue:0,
+    dcrate:0,
+    dcyears:0,
+    dcresult:0 
   },
   methods:
   {
@@ -222,6 +234,14 @@ var app = new Vue({
        for(let y=0;y<this.tzyears;y++)
        {
           this.tzresult *= (1 + this.tzrate/100);
+       }
+    },
+    calDc:function()
+    {
+       this.dcresult = 0;
+       for(let y=0;y<this.dcyears;y++)
+       {
+          this.dcresult= (this.dcresult+this.dcvalue)(1+this.dcrate/100);
        }
     }
   }
