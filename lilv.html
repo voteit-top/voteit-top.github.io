@@ -239,9 +239,9 @@ var app = new Vue({
     calDc:function()
     {
        this.dcresult = 0;
-       for(let y=0;y<this.dcyears;y++)
+       for(let y=0;y<Number(this.dcyears);y++)
        {
-          this.dcresult= (this.dcresult+this.dcvalue)(1+this.dcrate/100);
+          this.dcresult= (this.dcresult+Number(this.dcvalue))*(1+Number(this.dcrate)/100);
        }
     }
   }
