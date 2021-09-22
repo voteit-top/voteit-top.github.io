@@ -1152,7 +1152,8 @@ function showItem(id) {
 const contractOwner = "TCbLNGcJy1SzmoVrZvE1H1oY5mZbuzHhuM";
 let defaultCateId = 0;
 let curItemId = 0;
-let cateNames = ['', 'Country/Region', 'Person', 'City', 'Resort', 'Brand', 'Crypto'];
+let cateNames = ['', 'Country/Region', 'Person', 'City', 'Resort', 'Brand', 'Crypto','Universe'];
+//, 'Exchanges'
 //let presetranks=JSON.parse(allRanks);
 let maxItemId = presetranks.length - 1;
 const PAGESIZE = 55;
@@ -1558,7 +1559,7 @@ var createmodalv = new Vue({
 
 Vue.component('rankitem', {
     props: ['rank', 'rkitem', 'rkid', 'voting', 'unvoting', 'gsbase', 'cid'],
-    template: '<div class="row align-items-center text-secondary" :id="\'p_rank_\'+rkid"><div class="border-bottom col-2 rankh">{{rank}}</div><div class="border-bottom col-4 rankh" :id="\'rank_\'+rkid" :ttitle="rkitem.creator"><a :href="\'#item=\'+rkid">{{rkitem.name}}</a></div><div class="border-bottom col-2 rankh  text-dark">{{rkitem.votes}}</div><div class="text-center border-bottom col-4 rankh"><div class="btn-group"><button type="button" :itemid="rkid" onclick="voteItem(this)" class="btn btn-sm btn-outline-primary" v-bind:class="{disabled: voting}"><span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Vote</button><button type="button" :itemid="rkid" onclick="unVoteItem(this)" class="btn btn-sm btn-outline-danger" v-bind:class="{disabled: unvoting}">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div></div></div>'
+    template: '<div class="row align-items-center text-secondary" :id="\'p_rank_\'+rkid"><div class="border-bottom col-2 rankh">{{rank}}</div><div class="border-bottom col-4 rankh" :id="\'rank_\'+rkid" :ttitle="rkitem.creator"><a :href="\'#item=\'+rkid">{{rkitem.name}}</a></div><div class="border-bottom mobile col-2 rankh  text-dark">{{rkitem.votes}}</div><div class="text-center border-bottom col-4 rankh"><div class="btn-group"><button type="button" :itemid="rkid" onclick="voteItem(this)" class="btn btn-sm btn-outline-primary" v-bind:class="{disabled: voting}"><span v-if="voting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Vote</button><button type="button" :itemid="rkid" onclick="unVoteItem(this)" class="btn btn-sm btn-outline-danger" v-bind:class="{disabled: unvoting}">UnVote<span v-if="unvoting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></button></div></div></div>'
 });
 
 var tongjiv = new Vue({
