@@ -1152,8 +1152,7 @@ function showItem(id) {
 const contractOwner = "TCbLNGcJy1SzmoVrZvE1H1oY5mZbuzHhuM";
 let defaultCateId = 0;
 let curItemId = 0;
-let cateNames = ['', 'Country/Region', 'Person', 'City', 'Resort', 'Brand', 'Crypto','Universe'];
-//, 'Exchanges'
+let cateNames = ['', 'Country/Region', 'Person', 'City', 'Resort', 'Brand', 'Crypto','Universe','Exchanges'];
 //let presetranks=JSON.parse(allRanks);
 let maxItemId = presetranks.length - 1;
 const PAGESIZE = 55;
@@ -1530,7 +1529,10 @@ var createmodalv = new Vue({
             name: 'Crypto'
         }, {
             id: 7,
-            name: 'Star'
+            name: 'Universe'
+        }, {
+            id: 8,
+            name: 'Exchanges'
         }]
     },
     methods: {
