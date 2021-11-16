@@ -3251,11 +3251,15 @@ uefa_vue = new Vue(
              21:{name:'JAPAN', img:'JPN.png'},
              22:{name:'USA', img:'USA.png'},
              23:{name:'CHINA', img:'CHN.png'},
-             24:{name:'NONE OF (JPN/USA/CHN)', img:'navigation-menu-logo.svg'}
-    
-
+             24:{name:'NONE OF (JPN/USA/CHN)', img:'navigation-menu-logo.svg'},
+             25:{name:'Lionel Messi', img:'mx.png'},
+             26:{name:'Cristiano Ronaldo', img:'cl.png'},
+             27:{name:'Robert Lewandowski', img:'lw.png'},
+             28:{name:'KARIM BENZEMA', img:'bzm.png'},
+             29:{name:'Someone else', img:'other.png'}
               },
 	hisgroups:[
+                {title:"TOKYO 2020 Most Gold Medal",cid:11,leg1:"",leg2:"",winner:"USA", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[21,22,23,24]},
                 {title:"NBA Playoffs 2021 Final",cid:10,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[19,20]},
                 {title:"WEST Final",cid:8,leg1:"2 - 4",leg2:"",winner:"Suns", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[15,16]},
                 {title:"EAST Final",cid:9,leg1:"4 - 2",leg2:"",winner:"Bucks", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[17,18]},
@@ -3269,7 +3273,7 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-                {title:"TOKYO 2020 Most Gold Medal",cid:11,leg1:"",leg2:"",winner:"USA", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[21,22,23,24]},
+                {title:"Ballon d’Or 2021",cid:12,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[25,26,27,28,29]},
            ],
     claimingCids:{}, 
 	},
