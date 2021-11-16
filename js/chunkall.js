@@ -2408,7 +2408,8 @@ setInterval(async () => {
     vue_betgame.tokenBalance = walletv.tokenBalance;
     vue_pets.tokenBalance = walletv.tokenBalance;
 }, 3000);
-vue_allbets.showBlockbet();
+//vue_allbets.showBlockbet();
+vue_allbets.showUefa2021Cur();
 readBuyPrices();
 readSellPrices();
 
