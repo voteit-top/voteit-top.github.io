@@ -3274,7 +3274,7 @@ uefa_vue = new Vue(
                 
             ],                
 	groups:[
-                {title:"Ballon d’Or 2021",cid:12,leg1:"",leg2:"",winner:"", bonus:0, votes:0, winItemId:0,canClaimWin:false, items:[25,26,27,28,29]},
+                {title:"Ballon d’Or 2021",cid:12,leg1:"",leg2:"",winner:"Messi", bonus:0, votes:0, winItemId:0,canClaimWin:true, items:[25,26,27,28,29]},
            ],
     claimingCids:{}, 
 	},
